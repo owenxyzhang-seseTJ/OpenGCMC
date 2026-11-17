@@ -107,6 +107,7 @@ from poremc.batching import evaluate_requests, run_native_replicas
 | [`benchmarks/`](benchmarks) | 再現用入力、各測定値、比較ソフトウェアの生出力 |
 | [`tools/`](tools) | 直接比較、数値再生、データ処理ツール |
 | [`figures/`](figures) | 編集可能な描画ソース、図の元データ、キャプション |
+| [`docs/`](docs) | [技術レポート](docs/OpenGCMC_Technical_Report.pdf)：数学的基礎、物理モデル、アルゴリズムと実装（PDF、36 ページ） |
 | [`tests/`](tests) | 数値 fixture とアルゴリズムテスト |
 
 ## ライセンス・参考資料

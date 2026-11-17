@@ -107,6 +107,7 @@ from poremc.batching import evaluate_requests, run_native_replicas
 | [`benchmarks/`](benchmarks) | Reproducible inputs, individual measurements and raw reference outputs |
 | [`tools/`](tools) | Direct comparisons, numerical replay and data processing |
 | [`figures/`](figures) | Editable plotting source, source data and captions |
+| [`docs/`](docs) | [Technical report](docs/OpenGCMC_Technical_Report.pdf): mathematics, physics, algorithms and implementation (PDF, 36 pages) |
 | [`tests/`](tests) | Numerical fixtures and algorithm tests |
 
 ## License and references

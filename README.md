@@ -107,6 +107,7 @@ from poremc.batching import evaluate_requests, run_native_replicas
 | [`benchmarks/`](benchmarks) | 可复现输入、逐次测量与上游原始输出 |
 | [`tools/`](tools) | 性能对照、数值回放和数据整理工具 |
 | [`figures/`](figures) | 绘图源码、源数据及图注 |
+| [`docs/`](docs) | [技术报告](docs/OpenGCMC_Technical_Report.pdf)：数学基础、物理模型、算法与实现（PDF，36 页） |
 | [`tests/`](tests) | 数值 fixture 与算法测试 |
 
 ## 协议与参考
