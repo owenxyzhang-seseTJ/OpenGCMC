@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "confirmation": "User approved the two-panel performance and three-layer architecture plan; in-figure test conditions omitted as requested.",
+  "dropped_rows": 0,
+  "input_rows": 12,
+  "output_rows": 12,
+  "formulas": {
+    "attempts_per_second": "scheduled_attempts / sampling_seconds",
+    "paired_rate_ratio": "(OpenGCMC attempts / seconds) / (reference attempts / seconds)",
+    "bar": "median of three per-engine attempt rates",
+    "callout": "median of three paired rate ratios"
+  },
+  "units": {
+    "length": "angstrom",
+    "energy": "U/kB in K",
+    "rate": "scheduled attempts per second",
+    "time": "seconds"
+  },
+  "source_files": [
+    "benchmarks/results/raspa3_comparison.json",
+    "benchmarks/results/graspa_comparison.json"
+  ],
+  "font_family": "Arial",
+  "validation": [
+    "three unique seed pairs per experiment",
+    "positive finite times",
+    "matching scheduled counts within each pair",
+    "matched 4992-site neutral probe model",
+    "raw timing scopes retained",
+    "stored and recomputed ratios agree",
+    "no rows discarded",
+    "no simulation executed"
+  ]
+}

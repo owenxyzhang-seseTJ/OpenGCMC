@@ -1,0 +1,188 @@
+[
+  {
+    "grid_cold": {
+      "kind": "periodic_trilinear_host_grid",
+      "shape": [
+        24,
+        24,
+        24
+      ],
+      "clip_kelvin": [
+        -50000,
+        50000
+      ],
+      "site_types": 1,
+      "setup_seconds": 0.02365054599999894,
+      "frozen": true,
+      "requires_target_correction": true,
+      "cache_hit": false,
+      "cache_key": "b085d5d6de0529e0194dfbd146e38c59062a16d9a06249803200a45feee85aa0"
+    },
+    "grid_disk_hit": {
+      "kind": "periodic_trilinear_host_grid",
+      "shape": [
+        24,
+        24,
+        24
+      ],
+      "clip_kelvin": [
+        -50000,
+        50000
+      ],
+      "site_types": 1,
+      "setup_seconds": 0.002216100999930859,
+      "frozen": true,
+      "requires_target_correction": true,
+      "cache_hit": true,
+      "cache_key": "b085d5d6de0529e0194dfbd146e38c59062a16d9a06249803200a45feee85aa0"
+    },
+    "root_cold": {
+      "kind": "full_support_alias",
+      "cache_hit": false,
+      "cache_key": "ce04af3f89d0f07788ae96e3495a4771e519a0ac5650c9dab6a427393b53b7d4",
+      "shape": [
+        24,
+        24,
+        24
+      ],
+      "uniform_fraction": 0.05,
+      "setup_seconds": 0.02258429299990894
+    },
+    "root_reweight_other_T": {
+      "kind": "full_support_alias",
+      "cache_hit": true,
+      "cache_key": "ce04af3f89d0f07788ae96e3495a4771e519a0ac5650c9dab6a427393b53b7d4",
+      "shape": [
+        24,
+        24,
+        24
+      ],
+      "uniform_fraction": 0.05,
+      "setup_seconds": 0.013317541000105848
+    }
+  },
+  {
+    "grid_cold": {
+      "kind": "periodic_trilinear_host_grid",
+      "shape": [
+        24,
+        24,
+        24
+      ],
+      "clip_kelvin": [
+        -50000,
+        50000
+      ],
+      "site_types": 1,
+      "setup_seconds": 0.016757422000182487,
+      "frozen": true,
+      "requires_target_correction": true,
+      "cache_hit": false,
+      "cache_key": "b085d5d6de0529e0194dfbd146e38c59062a16d9a06249803200a45feee85aa0"
+    },
+    "grid_disk_hit": {
+      "kind": "periodic_trilinear_host_grid",
+      "shape": [
+        24,
+        24,
+        24
+      ],
+      "clip_kelvin": [
+        -50000,
+        50000
+      ],
+      "site_types": 1,
+      "setup_seconds": 0.0016729949998079974,
+      "frozen": true,
+      "requires_target_correction": true,
+      "cache_hit": true,
+      "cache_key": "b085d5d6de0529e0194dfbd146e38c59062a16d9a06249803200a45feee85aa0"
+    },
+    "root_cold": {
+      "kind": "full_support_alias",
+      "cache_hit": false,
+      "cache_key": "ce04af3f89d0f07788ae96e3495a4771e519a0ac5650c9dab6a427393b53b7d4",
+      "shape": [
+        24,
+        24,
+        24
+      ],
+      "uniform_fraction": 0.05,
+      "setup_seconds": 0.021168635000094582
+    },
+    "root_reweight_other_T": {
+      "kind": "full_support_alias",
+      "cache_hit": true,
+      "cache_key": "ce04af3f89d0f07788ae96e3495a4771e519a0ac5650c9dab6a427393b53b7d4",
+      "shape": [
+        24,
+        24,
+        24
+      ],
+      "uniform_fraction": 0.05,
+      "setup_seconds": 0.012669587000118554
+    }
+  },
+  {
+    "grid_cold": {
+      "kind": "periodic_trilinear_host_grid",
+      "shape": [
+        24,
+        24,
+        24
+      ],
+      "clip_kelvin": [
+        -50000,
+        50000
+      ],
+      "site_types": 1,
+      "setup_seconds": 0.014629173000002993,
+      "frozen": true,
+      "requires_target_correction": true,
+      "cache_hit": false,
+      "cache_key": "b085d5d6de0529e0194dfbd146e38c59062a16d9a06249803200a45feee85aa0"
+    },
+    "grid_disk_hit": {
+      "kind": "periodic_trilinear_host_grid",
+      "shape": [
+        24,
+        24,
+        24
+      ],
+      "clip_kelvin": [
+        -50000,
+        50000
+      ],
+      "site_types": 1,
+      "setup_seconds": 0.0016736460001993692,
+      "frozen": true,
+      "requires_target_correction": true,
+      "cache_hit": true,
+      "cache_key": "b085d5d6de0529e0194dfbd146e38c59062a16d9a06249803200a45feee85aa0"
+    },
+    "root_cold": {
+      "kind": "full_support_alias",
+      "cache_hit": false,
+      "cache_key": "ce04af3f89d0f07788ae96e3495a4771e519a0ac5650c9dab6a427393b53b7d4",
+      "shape": [
+        24,
+        24,
+        24
+      ],
+      "uniform_fraction": 0.05,
+      "setup_seconds": 0.02019101500013676
+    },
+    "root_reweight_other_T": {
+      "kind": "full_support_alias",
+      "cache_hit": true,
+      "cache_key": "ce04af3f89d0f07788ae96e3495a4771e519a0ac5650c9dab6a427393b53b7d4",
+      "shape": [
+        24,
+        24,
+        24
+      ],
+      "uniform_fraction": 0.05,
+      "setup_seconds": 0.013319054000021424
+    }
+  }
+]

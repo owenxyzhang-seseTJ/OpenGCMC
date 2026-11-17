@@ -1,0 +1,15 @@
+id,label,source
+host,Periodic host and site parameters,poremc/kernels.py; native/kernels.cpp
+csr,Exact fractional-cell CSR neighbours,native/kernels.cpp: Environment; poremc_environment_export_plan
+pairs,Bound mixed-parameter rows,native/kernels.cpp: bind; BoundQuery
+alias,Frozen full-support voxel alias proposal,poremc/proposals.py: VoxelProposal; build_host_proposal
+trials,Trial batch,poremc/batching.py: evaluate_requests; poremc/cbmc.py: grow
+energy,Exact energies and index exclusion,native/fast_mc.cpp: external; native/kernels.cpp
+cbmc,Forward and retraced CBMC with 1/(Vq),poremc/cbmc.py: grow; retrace; native/fast_mc.cpp: grow
+decision,Exact acceptance decision,native/fast_mc.cpp: step; poremc/engine.py: _accept_candidate
+state,Accepted guest state,native/fast_mc.cpp: cached_environment; step
+guest,Reusable guest environment,native/fast_mc.cpp: cached_environment; external
+native,C++ native CPU sampler; single component LJ/DSF,poremc/fast.py: FastGCMC
+python,"Python general sampler; mixtures, Ewald, delayed acceptance",poremc/engine.py: GCMC; poremc/electrostatics.py; poremc/accelerators.py
+cuda,Optional CUDA energy backend,poremc/cuda.py: CudaEnvironment; poremc/cached_cuda.cu
+replicas,"Shared host, independent state and RNG",poremc/batching.py: run_native_replicas

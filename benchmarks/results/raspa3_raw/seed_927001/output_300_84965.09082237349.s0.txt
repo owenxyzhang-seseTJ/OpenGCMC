@@ -1,0 +1,1398 @@
+Compiler and run-time data
+===============================================================================
+RASPA 3.1.0
+
+Random seed: 927001
+
+Compiled as a 64-bits application
+Compiler: gcc Clang 22.1.8
+Compile Date = Jun 22 2026, Compile Time = 17:19:09
+
+2026-11-17 12:14:16.317708
+Simulation started on Tue, Nov 17
+The start time was 12:14:00
+
+Cpu data:    arm64
+Cpu Model:   Mac17,3
+Host name:  XiaoyudeMacBook-Air.locals
+OS release:  25.5.0
+OS type:     Darwin
+OS version:  25F71
+
+
+
+Mutual consistent basic set of units:
+===============================================================================
+
+Unit of temperature: 1 [K]
+Unit of length:      1e-10 [m]
+Unit of time:        1e-12 [s]
+Unit of mass:        1.6605402e-27 [kg]
+Unit of charge:      1.60217733e-19 [C/particle]
+
+
+Boltzmann constant (internal units):          0.8314464919307584 [-]
+represents conversion from energy (internal units) to temperature (in Kelvin)
+
+Derived units and their conversion factors:
+===============================================================================
+
+Unit of energy:                           1.6605402000000002e-23 [J]
+Unit of energy:                           10.000008872307538 [J.mol⁻¹]
+Unit of velocity:                         100 [m.s⁻¹]
+Unit of force:                            1.6605402000000002e-13 [N]
+Unit of diffusion:                        1.0000000000000002e-08 [m².s⁻¹]
+Unit of acceleration:                     1.0000000000000002e-08 [m².s⁻¹]
+Unit of torque:                           1.6605402000000002e-23 [N.m]
+Unit of pressure:                         16605402 [Pa]
+Unit of volume:                           1e-30 [m³]
+Unit of density:                          1660.5402 [kg.m⁻³]
+Unit of dynamic viscosity:                1.6605401999999997e-05 [N.s.m⁻²]
+Unit of enthalpy:                         1.6605402000000002e-23 [J]
+Unit of polarizability:                   1.5458657349975198e-35 [-]
+Unit of Coulomb potential:                167101.08000665612 [K]
+Unit of dielectric constant:              1.5458657349975193e-05 [s².C².kg⁻¹.m⁻³]
+Unit of dipole moment:                    1.60217733e-29 [C.m]
+Unit of Debye:                            4.803206799099162 [C.m]
+Unit of electric potential:               0.00010364272224473431 [V]
+Unit of electric field:                   1036427.222447343 [V.m⁻¹]
+Unit of isothermal compressibility:       6.02213665167516e-08 [Pa⁻¹]
+Unit of heat capacity:                    10.000008872307538 [J.mol⁻¹.K⁻¹]
+Unit of volumetric expansion coefficient: 1 [K⁻¹]
+
+
+Internal conversion factors:
+===============================================================================
+
+Energy (internal units) to Kelvin:      1.202724284692786 [-]
+Kelvin to energy (internal units):      0.8314457542157567 [-]
+
+
+System definitions
+===============================================================================
+
+Temperature:          300 [K]
+Beta:                 0.004009077391850886 [-]
+Pressure:             84965.09082237349 [Pa]
+Helium void fraction: 1 [-]
+
+Box:      52.68600   0.00000   0.00000
+           0.00000  52.68600   0.00000
+           0.00000   0.00000  52.68600
+Lengths:  52.68600  52.68600  52.68600
+Angles:   90.00000  90.00000  90.00000
+Rectangular boundary conditions
+Perpendicular widths:   52.68600  52.68600  52.68600
+
+
+
+
+Property measurement settings
+===============================================================================
+
+
+
+
+Pseudo-atoms
+===============================================================================
+
+  0 - Cu       framework-atom: true
+  1 - O        framework-atom: true
+  2 - C        framework-atom: true
+  3 - H        framework-atom: true
+  4 - Probe    framework-atom: false
+
+  0 - Cu       mass: 15.50954, charge:  0.00000
+  1 - O        mass: 15.50954, charge:  0.00000
+  2 - C        mass: 15.50954, charge:  0.00000
+  3 - H        mass: 15.50954, charge:  0.00000
+  4 - Probe    mass: 39.94800, charge:  0.00000
+
+  0 - Cu       polarizability:  0.00000
+  1 - O        polarizability:  0.00000
+  2 - C        polarizability:  0.00000
+  3 - H        polarizability:  0.00000
+  4 - Probe    polarizability:  0.00000
+
+
+Force field status
+===============================================================================
+
+Cutoff Framework-Molecule VDW:  12.00000 [Å]
+Cutoff Molecule-Molecule VDW:   12.00000 [Å]
+Cutoff Coulomb:                 auto
+Overlap-criteria VDW:           1.000000e+06 [K]
+
+Mixing-rule: Lorentz-Berthelot
+Cu       - Cu       Lennard-Jones  p₀/kʙ:   2.51610 [K], p₁:  3.11369 [Å]
+                                   shift:  -0.00307 [K], tailcorrections: false
+Cu       - O        Lennard-Jones  p₀/kʙ:  11.00775 [K], p₁:  3.07342 [Å]
+                                   shift:  -0.01242 [K], tailcorrections: false
+Cu       - C        Lennard-Jones  p₀/kʙ:  10.97319 [K], p₁:  3.29334 [Å]
+                                   shift:  -0.01875 [K], tailcorrections: false
+Cu       - H        Lennard-Jones  p₀/kʙ:   4.38697 [K], p₁:  2.98006 [Å]
+                                   shift:  -0.00412 [K], tailcorrections: false
+Cu       - Probe    Lennard-Jones  p₀/kʙ:   3.54690 [K], p₁:  3.05685 [Å]
+                                   shift:  -0.00388 [K], tailcorrections: false
+O        - O        Lennard-Jones  p₀/kʙ:  48.15810 [K], p₁:  3.03315 [Å]
+                                   shift:  -0.05022 [K], tailcorrections: false
+O        - C        Lennard-Jones  p₀/kʙ:  48.00691 [K], p₁:  3.25307 [Å]
+                                   shift:  -0.07618 [K], tailcorrections: false
+O        - H        Lennard-Jones  p₀/kʙ:  19.19265 [K], p₁:  2.93979 [Å]
+                                   shift:  -0.01659 [K], tailcorrections: false
+O        - Probe    Lennard-Jones  p₀/kʙ:  15.51743 [K], p₁:  3.01658 [Å]
+                                   shift:  -0.01566 [K], tailcorrections: false
+C        - C        Lennard-Jones  p₀/kʙ:  47.85620 [K], p₁:  3.47299 [Å]
+                                   shift:  -0.11243 [K], tailcorrections: false
+C        - H        Lennard-Jones  p₀/kʙ:  19.13240 [K], p₁:  3.15970 [Å]
+                                   shift:  -0.02550 [K], tailcorrections: false
+C        - Probe    Lennard-Jones  p₀/kʙ:  15.46871 [K], p₁:  3.23649 [Å]
+                                   shift:  -0.02381 [K], tailcorrections: false
+H        - H        Lennard-Jones  p₀/kʙ:   7.64893 [K], p₁:  2.84642 [Å]
+                                   shift:  -0.00545 [K], tailcorrections: false
+H        - Probe    Lennard-Jones  p₀/kʙ:   6.18423 [K], p₁:  2.92321 [Å]
+                                   shift:  -0.00517 [K], tailcorrections: false
+Probe    - Probe    Lennard-Jones  p₀/kʙ:   5.00000 [K], p₁:  3.00000 [Å]
+                                   shift:  -0.00488 [K], tailcorrections: false
+
+Ewald precision: 1e-06
+Ewald alpha: 0.11617796949976875
+Ewald k-vectors: 7 7 7
+
+
+Component definitions
+===============================================================================
+
+Framework 0 [ControlledCuBTC]
+
+    Box:      26.34300   0.00000   0.00000
+               0.00000  26.34300   0.00000
+               0.00000   0.00000  26.34300
+    Lengths:  26.34300  26.34300  26.34300
+    Angles:   90.00000  90.00000  90.00000
+    Perpendicular widths:   26.34300  26.34300  26.34300
+
+    number Of Atoms:                   624 [-]
+    mass:                      77423.59923 [amu]
+      0: Cu     position  0.28530  0.28530  0.00000, charge  0.00000
+      1: Cu     position  0.71470  0.71470  0.00000, charge  0.00000
+      2: Cu     position  0.71470  0.28530  0.00000, charge  0.00000
+      3: Cu     position  0.28530  0.71470  0.00000, charge  0.00000
+      4: Cu     position  0.00000  0.28530  0.28530, charge  0.00000
+      5: Cu     position  0.00000  0.71470  0.71470, charge  0.00000
+      6: Cu     position  0.00000  0.71470  0.28530, charge  0.00000
+      7: Cu     position  0.00000  0.28530  0.71470, charge  0.00000
+      8: Cu     position  0.28530  0.00000  0.28530, charge  0.00000
+      9: Cu     position  0.71470  0.00000  0.71470, charge  0.00000
+     10: Cu     position  0.28530  0.00000  0.71470, charge  0.00000
+     11: Cu     position  0.71470  0.00000  0.28530, charge  0.00000
+     12: Cu     position  0.28530  0.78530  0.50000, charge  0.00000
+     13: Cu     position  0.71470  0.21470  0.50000, charge  0.00000
+     14: Cu     position  0.71470  0.78530  0.50000, charge  0.00000
+     15: Cu     position  0.28530  0.21470  0.50000, charge  0.00000
+     16: Cu     position  0.00000  0.78530  0.78530, charge  0.00000
+     17: Cu     position  0.00000  0.21470  0.21470, charge  0.00000
+     18: Cu     position  0.00000  0.21470  0.78530, charge  0.00000
+     19: Cu     position  0.00000  0.78530  0.21470, charge  0.00000
+     20: Cu     position  0.28530  0.50000  0.78530, charge  0.00000
+     21: Cu     position  0.71470  0.50000  0.21470, charge  0.00000
+     22: Cu     position  0.28530  0.50000  0.21470, charge  0.00000
+     23: Cu     position  0.71470  0.50000  0.78530, charge  0.00000
+     24: Cu     position  0.78530  0.28530  0.50000, charge  0.00000
+     25: Cu     position  0.21470  0.71470  0.50000, charge  0.00000
+     26: Cu     position  0.21470  0.28530  0.50000, charge  0.00000
+     27: Cu     position  0.78530  0.71470  0.50000, charge  0.00000
+     28: Cu     position  0.50000  0.28530  0.78530, charge  0.00000
+     29: Cu     position  0.50000  0.71470  0.21470, charge  0.00000
+     30: Cu     position  0.50000  0.71470  0.78530, charge  0.00000
+     31: Cu     position  0.50000  0.28530  0.21470, charge  0.00000
+     32: Cu     position  0.78530  0.00000  0.78530, charge  0.00000
+     33: Cu     position  0.21470  0.00000  0.21470, charge  0.00000
+     34: Cu     position  0.78530  0.00000  0.21470, charge  0.00000
+     35: Cu     position  0.21470  0.00000  0.78530, charge  0.00000
+     36: Cu     position  0.78530  0.78530  0.00000, charge  0.00000
+     37: Cu     position  0.21470  0.21470  0.00000, charge  0.00000
+     38: Cu     position  0.21470  0.78530  0.00000, charge  0.00000
+     39: Cu     position  0.78530  0.21470  0.00000, charge  0.00000
+     40: Cu     position  0.50000  0.78530  0.28530, charge  0.00000
+     41: Cu     position  0.50000  0.21470  0.71470, charge  0.00000
+     42: Cu     position  0.50000  0.21470  0.28530, charge  0.00000
+     43: Cu     position  0.50000  0.78530  0.71470, charge  0.00000
+     44: Cu     position  0.78530  0.50000  0.28530, charge  0.00000
+     45: Cu     position  0.21470  0.50000  0.71470, charge  0.00000
+     46: Cu     position  0.78530  0.50000  0.71470, charge  0.00000
+     47: Cu     position  0.21470  0.50000  0.28530, charge  0.00000
+     48: O      position  0.31660  0.24310  0.94780, charge  0.00000
+     49: O      position  0.68340  0.75690  0.94780, charge  0.00000
+     50: O      position  0.68340  0.24310  0.05220, charge  0.00000
+     51: O      position  0.31660  0.75690  0.05220, charge  0.00000
+     52: O      position  0.94780  0.31660  0.24310, charge  0.00000
+     53: O      position  0.94780  0.68340  0.75690, charge  0.00000
+     54: O      position  0.05220  0.68340  0.24310, charge  0.00000
+     55: O      position  0.05220  0.31660  0.75690, charge  0.00000
+     56: O      position  0.24310  0.94780  0.31660, charge  0.00000
+     57: O      position  0.75690  0.94780  0.68340, charge  0.00000
+     58: O      position  0.24310  0.05220  0.68340, charge  0.00000
+     59: O      position  0.75690  0.05220  0.31660, charge  0.00000
+     60: O      position  0.24310  0.31660  0.05220, charge  0.00000
+     61: O      position  0.75690  0.68340  0.05220, charge  0.00000
+     62: O      position  0.24310  0.68340  0.94780, charge  0.00000
+     63: O      position  0.75690  0.31660  0.94780, charge  0.00000
+     64: O      position  0.31660  0.94780  0.75690, charge  0.00000
+     65: O      position  0.68340  0.94780  0.24310, charge  0.00000
+     66: O      position  0.68340  0.05220  0.75690, charge  0.00000
+     67: O      position  0.31660  0.05220  0.24310, charge  0.00000
+     68: O      position  0.94780  0.24310  0.68340, charge  0.00000
+     69: O      position  0.94780  0.75690  0.31660, charge  0.00000
+     70: O      position  0.05220  0.24310  0.31660, charge  0.00000
+     71: O      position  0.05220  0.75690  0.68340, charge  0.00000
+     72: O      position  0.68340  0.75690  0.05220, charge  0.00000
+     73: O      position  0.31660  0.24310  0.05220, charge  0.00000
+     74: O      position  0.31660  0.75690  0.94780, charge  0.00000
+     75: O      position  0.68340  0.24310  0.94780, charge  0.00000
+     76: O      position  0.05220  0.68340  0.75690, charge  0.00000
+     77: O      position  0.05220  0.31660  0.24310, charge  0.00000
+     78: O      position  0.94780  0.31660  0.75690, charge  0.00000
+     79: O      position  0.94780  0.68340  0.24310, charge  0.00000
+     80: O      position  0.75690  0.05220  0.68340, charge  0.00000
+     81: O      position  0.24310  0.05220  0.31660, charge  0.00000
+     82: O      position  0.75690  0.94780  0.31660, charge  0.00000
+     83: O      position  0.24310  0.94780  0.68340, charge  0.00000
+     84: O      position  0.75690  0.68340  0.94780, charge  0.00000
+     85: O      position  0.24310  0.31660  0.94780, charge  0.00000
+     86: O      position  0.75690  0.31660  0.05220, charge  0.00000
+     87: O      position  0.24310  0.68340  0.05220, charge  0.00000
+     88: O      position  0.68340  0.05220  0.24310, charge  0.00000
+     89: O      position  0.31660  0.05220  0.75690, charge  0.00000
+     90: O      position  0.31660  0.94780  0.24310, charge  0.00000
+     91: O      position  0.68340  0.94780  0.75690, charge  0.00000
+     92: O      position  0.05220  0.75690  0.31660, charge  0.00000
+     93: O      position  0.05220  0.24310  0.68340, charge  0.00000
+     94: O      position  0.94780  0.75690  0.68340, charge  0.00000
+     95: O      position  0.94780  0.24310  0.31660, charge  0.00000
+     96: O      position  0.31660  0.74310  0.44780, charge  0.00000
+     97: O      position  0.68340  0.25690  0.44780, charge  0.00000
+     98: O      position  0.68340  0.74310  0.55220, charge  0.00000
+     99: O      position  0.31660  0.25690  0.55220, charge  0.00000
+    100: O      position  0.94780  0.81660  0.74310, charge  0.00000
+    101: O      position  0.94780  0.18340  0.25690, charge  0.00000
+    102: O      position  0.05220  0.18340  0.74310, charge  0.00000
+    103: O      position  0.05220  0.81660  0.25690, charge  0.00000
+    104: O      position  0.24310  0.44780  0.81660, charge  0.00000
+    105: O      position  0.75690  0.44780  0.18340, charge  0.00000
+    106: O      position  0.24310  0.55220  0.18340, charge  0.00000
+    107: O      position  0.75690  0.55220  0.81660, charge  0.00000
+    108: O      position  0.24310  0.81660  0.55220, charge  0.00000
+    109: O      position  0.75690  0.18340  0.55220, charge  0.00000
+    110: O      position  0.24310  0.18340  0.44780, charge  0.00000
+    111: O      position  0.75690  0.81660  0.44780, charge  0.00000
+    112: O      position  0.31660  0.44780  0.25690, charge  0.00000
+    113: O      position  0.68340  0.44780  0.74310, charge  0.00000
+    114: O      position  0.68340  0.55220  0.25690, charge  0.00000
+    115: O      position  0.31660  0.55220  0.74310, charge  0.00000
+    116: O      position  0.94780  0.74310  0.18340, charge  0.00000
+    117: O      position  0.94780  0.25690  0.81660, charge  0.00000
+    118: O      position  0.05220  0.74310  0.81660, charge  0.00000
+    119: O      position  0.05220  0.25690  0.18340, charge  0.00000
+    120: O      position  0.68340  0.25690  0.55220, charge  0.00000
+    121: O      position  0.31660  0.74310  0.55220, charge  0.00000
+    122: O      position  0.31660  0.25690  0.44780, charge  0.00000
+    123: O      position  0.68340  0.74310  0.44780, charge  0.00000
+    124: O      position  0.05220  0.18340  0.25690, charge  0.00000
+    125: O      position  0.05220  0.81660  0.74310, charge  0.00000
+    126: O      position  0.94780  0.81660  0.25690, charge  0.00000
+    127: O      position  0.94780  0.18340  0.74310, charge  0.00000
+    128: O      position  0.75690  0.55220  0.18340, charge  0.00000
+    129: O      position  0.24310  0.55220  0.81660, charge  0.00000
+    130: O      position  0.75690  0.44780  0.81660, charge  0.00000
+    131: O      position  0.24310  0.44780  0.18340, charge  0.00000
+    132: O      position  0.75690  0.18340  0.44780, charge  0.00000
+    133: O      position  0.24310  0.81660  0.44780, charge  0.00000
+    134: O      position  0.75690  0.81660  0.55220, charge  0.00000
+    135: O      position  0.24310  0.18340  0.55220, charge  0.00000
+    136: O      position  0.68340  0.55220  0.74310, charge  0.00000
+    137: O      position  0.31660  0.55220  0.25690, charge  0.00000
+    138: O      position  0.31660  0.44780  0.74310, charge  0.00000
+    139: O      position  0.68340  0.44780  0.25690, charge  0.00000
+    140: O      position  0.05220  0.25690  0.81660, charge  0.00000
+    141: O      position  0.05220  0.74310  0.18340, charge  0.00000
+    142: O      position  0.94780  0.25690  0.18340, charge  0.00000
+    143: O      position  0.94780  0.74310  0.81660, charge  0.00000
+    144: O      position  0.81660  0.24310  0.44780, charge  0.00000
+    145: O      position  0.18340  0.75690  0.44780, charge  0.00000
+    146: O      position  0.18340  0.24310  0.55220, charge  0.00000
+    147: O      position  0.81660  0.75690  0.55220, charge  0.00000
+    148: O      position  0.44780  0.31660  0.74310, charge  0.00000
+    149: O      position  0.44780  0.68340  0.25690, charge  0.00000
+    150: O      position  0.55220  0.68340  0.74310, charge  0.00000
+    151: O      position  0.55220  0.31660  0.25690, charge  0.00000
+    152: O      position  0.74310  0.94780  0.81660, charge  0.00000
+    153: O      position  0.25690  0.94780  0.18340, charge  0.00000
+    154: O      position  0.74310  0.05220  0.18340, charge  0.00000
+    155: O      position  0.25690  0.05220  0.81660, charge  0.00000
+    156: O      position  0.74310  0.31660  0.55220, charge  0.00000
+    157: O      position  0.25690  0.68340  0.55220, charge  0.00000
+    158: O      position  0.74310  0.68340  0.44780, charge  0.00000
+    159: O      position  0.25690  0.31660  0.44780, charge  0.00000
+    160: O      position  0.81660  0.94780  0.25690, charge  0.00000
+    161: O      position  0.18340  0.94780  0.74310, charge  0.00000
+    162: O      position  0.18340  0.05220  0.25690, charge  0.00000
+    163: O      position  0.81660  0.05220  0.74310, charge  0.00000
+    164: O      position  0.44780  0.24310  0.18340, charge  0.00000
+    165: O      position  0.44780  0.75690  0.81660, charge  0.00000
+    166: O      position  0.55220  0.24310  0.81660, charge  0.00000
+    167: O      position  0.55220  0.75690  0.18340, charge  0.00000
+    168: O      position  0.18340  0.75690  0.55220, charge  0.00000
+    169: O      position  0.81660  0.24310  0.55220, charge  0.00000
+    170: O      position  0.81660  0.75690  0.44780, charge  0.00000
+    171: O      position  0.18340  0.24310  0.44780, charge  0.00000
+    172: O      position  0.55220  0.68340  0.25690, charge  0.00000
+    173: O      position  0.55220  0.31660  0.74310, charge  0.00000
+    174: O      position  0.44780  0.31660  0.25690, charge  0.00000
+    175: O      position  0.44780  0.68340  0.74310, charge  0.00000
+    176: O      position  0.25690  0.05220  0.18340, charge  0.00000
+    177: O      position  0.74310  0.05220  0.81660, charge  0.00000
+    178: O      position  0.25690  0.94780  0.81660, charge  0.00000
+    179: O      position  0.74310  0.94780  0.18340, charge  0.00000
+    180: O      position  0.25690  0.68340  0.44780, charge  0.00000
+    181: O      position  0.74310  0.31660  0.44780, charge  0.00000
+    182: O      position  0.25690  0.31660  0.55220, charge  0.00000
+    183: O      position  0.74310  0.68340  0.55220, charge  0.00000
+    184: O      position  0.18340  0.05220  0.74310, charge  0.00000
+    185: O      position  0.81660  0.05220  0.25690, charge  0.00000
+    186: O      position  0.81660  0.94780  0.74310, charge  0.00000
+    187: O      position  0.18340  0.94780  0.25690, charge  0.00000
+    188: O      position  0.55220  0.75690  0.81660, charge  0.00000
+    189: O      position  0.55220  0.24310  0.18340, charge  0.00000
+    190: O      position  0.44780  0.75690  0.18340, charge  0.00000
+    191: O      position  0.44780  0.24310  0.81660, charge  0.00000
+    192: O      position  0.81660  0.74310  0.94780, charge  0.00000
+    193: O      position  0.18340  0.25690  0.94780, charge  0.00000
+    194: O      position  0.18340  0.74310  0.05220, charge  0.00000
+    195: O      position  0.81660  0.25690  0.05220, charge  0.00000
+    196: O      position  0.44780  0.81660  0.24310, charge  0.00000
+    197: O      position  0.44780  0.18340  0.75690, charge  0.00000
+    198: O      position  0.55220  0.18340  0.24310, charge  0.00000
+    199: O      position  0.55220  0.81660  0.75690, charge  0.00000
+    200: O      position  0.74310  0.44780  0.31660, charge  0.00000
+    201: O      position  0.25690  0.44780  0.68340, charge  0.00000
+    202: O      position  0.74310  0.55220  0.68340, charge  0.00000
+    203: O      position  0.25690  0.55220  0.31660, charge  0.00000
+    204: O      position  0.74310  0.81660  0.05220, charge  0.00000
+    205: O      position  0.25690  0.18340  0.05220, charge  0.00000
+    206: O      position  0.74310  0.18340  0.94780, charge  0.00000
+    207: O      position  0.25690  0.81660  0.94780, charge  0.00000
+    208: O      position  0.81660  0.44780  0.75690, charge  0.00000
+    209: O      position  0.18340  0.44780  0.24310, charge  0.00000
+    210: O      position  0.18340  0.55220  0.75690, charge  0.00000
+    211: O      position  0.81660  0.55220  0.24310, charge  0.00000
+    212: O      position  0.44780  0.74310  0.68340, charge  0.00000
+    213: O      position  0.44780  0.25690  0.31660, charge  0.00000
+    214: O      position  0.55220  0.74310  0.31660, charge  0.00000
+    215: O      position  0.55220  0.25690  0.68340, charge  0.00000
+    216: O      position  0.18340  0.25690  0.05220, charge  0.00000
+    217: O      position  0.81660  0.74310  0.05220, charge  0.00000
+    218: O      position  0.81660  0.25690  0.94780, charge  0.00000
+    219: O      position  0.18340  0.74310  0.94780, charge  0.00000
+    220: O      position  0.55220  0.18340  0.75690, charge  0.00000
+    221: O      position  0.55220  0.81660  0.24310, charge  0.00000
+    222: O      position  0.44780  0.81660  0.75690, charge  0.00000
+    223: O      position  0.44780  0.18340  0.24310, charge  0.00000
+    224: O      position  0.25690  0.55220  0.68340, charge  0.00000
+    225: O      position  0.74310  0.55220  0.31660, charge  0.00000
+    226: O      position  0.25690  0.44780  0.31660, charge  0.00000
+    227: O      position  0.74310  0.44780  0.68340, charge  0.00000
+    228: O      position  0.25690  0.18340  0.94780, charge  0.00000
+    229: O      position  0.74310  0.81660  0.94780, charge  0.00000
+    230: O      position  0.25690  0.81660  0.05220, charge  0.00000
+    231: O      position  0.74310  0.18340  0.05220, charge  0.00000
+    232: O      position  0.18340  0.55220  0.24310, charge  0.00000
+    233: O      position  0.81660  0.55220  0.75690, charge  0.00000
+    234: O      position  0.81660  0.44780  0.24310, charge  0.00000
+    235: O      position  0.18340  0.44780  0.75690, charge  0.00000
+    236: O      position  0.55220  0.25690  0.31660, charge  0.00000
+    237: O      position  0.55220  0.74310  0.68340, charge  0.00000
+    238: O      position  0.44780  0.25690  0.68340, charge  0.00000
+    239: O      position  0.44780  0.74310  0.31660, charge  0.00000
+    240: C      position  0.29680  0.20320  0.93130, charge  0.00000
+    241: C      position  0.70320  0.79680  0.93130, charge  0.00000
+    242: C      position  0.70320  0.20320  0.06870, charge  0.00000
+    243: C      position  0.29680  0.79680  0.06870, charge  0.00000
+    244: C      position  0.93130  0.29680  0.20320, charge  0.00000
+    245: C      position  0.93130  0.70320  0.79680, charge  0.00000
+    246: C      position  0.06870  0.70320  0.20320, charge  0.00000
+    247: C      position  0.06870  0.29680  0.79680, charge  0.00000
+    248: C      position  0.20320  0.93130  0.29680, charge  0.00000
+    249: C      position  0.79680  0.93130  0.70320, charge  0.00000
+    250: C      position  0.20320  0.06870  0.70320, charge  0.00000
+    251: C      position  0.79680  0.06870  0.29680, charge  0.00000
+    252: C      position  0.20320  0.29680  0.06870, charge  0.00000
+    253: C      position  0.79680  0.70320  0.06870, charge  0.00000
+    254: C      position  0.20320  0.70320  0.93130, charge  0.00000
+    255: C      position  0.79680  0.29680  0.93130, charge  0.00000
+    256: C      position  0.29680  0.93130  0.79680, charge  0.00000
+    257: C      position  0.70320  0.93130  0.20320, charge  0.00000
+    258: C      position  0.70320  0.06870  0.79680, charge  0.00000
+    259: C      position  0.29680  0.06870  0.20320, charge  0.00000
+    260: C      position  0.93130  0.20320  0.70320, charge  0.00000
+    261: C      position  0.93130  0.79680  0.29680, charge  0.00000
+    262: C      position  0.06870  0.20320  0.29680, charge  0.00000
+    263: C      position  0.06870  0.79680  0.70320, charge  0.00000
+    264: C      position  0.70320  0.79680  0.06870, charge  0.00000
+    265: C      position  0.29680  0.20320  0.06870, charge  0.00000
+    266: C      position  0.29680  0.79680  0.93130, charge  0.00000
+    267: C      position  0.70320  0.20320  0.93130, charge  0.00000
+    268: C      position  0.06870  0.70320  0.79680, charge  0.00000
+    269: C      position  0.06870  0.29680  0.20320, charge  0.00000
+    270: C      position  0.93130  0.29680  0.79680, charge  0.00000
+    271: C      position  0.93130  0.70320  0.20320, charge  0.00000
+    272: C      position  0.79680  0.06870  0.70320, charge  0.00000
+    273: C      position  0.20320  0.06870  0.29680, charge  0.00000
+    274: C      position  0.79680  0.93130  0.29680, charge  0.00000
+    275: C      position  0.20320  0.93130  0.70320, charge  0.00000
+    276: C      position  0.79680  0.70320  0.93130, charge  0.00000
+    277: C      position  0.20320  0.29680  0.93130, charge  0.00000
+    278: C      position  0.79680  0.29680  0.06870, charge  0.00000
+    279: C      position  0.20320  0.70320  0.06870, charge  0.00000
+    280: C      position  0.70320  0.06870  0.20320, charge  0.00000
+    281: C      position  0.29680  0.06870  0.79680, charge  0.00000
+    282: C      position  0.29680  0.93130  0.20320, charge  0.00000
+    283: C      position  0.70320  0.93130  0.79680, charge  0.00000
+    284: C      position  0.06870  0.79680  0.29680, charge  0.00000
+    285: C      position  0.06870  0.20320  0.70320, charge  0.00000
+    286: C      position  0.93130  0.79680  0.70320, charge  0.00000
+    287: C      position  0.93130  0.20320  0.29680, charge  0.00000
+    288: C      position  0.29680  0.70320  0.43130, charge  0.00000
+    289: C      position  0.70320  0.29680  0.43130, charge  0.00000
+    290: C      position  0.70320  0.70320  0.56870, charge  0.00000
+    291: C      position  0.29680  0.29680  0.56870, charge  0.00000
+    292: C      position  0.20320  0.43130  0.79680, charge  0.00000
+    293: C      position  0.79680  0.43130  0.20320, charge  0.00000
+    294: C      position  0.20320  0.56870  0.20320, charge  0.00000
+    295: C      position  0.79680  0.56870  0.79680, charge  0.00000
+    296: C      position  0.20320  0.79680  0.56870, charge  0.00000
+    297: C      position  0.79680  0.20320  0.56870, charge  0.00000
+    298: C      position  0.20320  0.20320  0.43130, charge  0.00000
+    299: C      position  0.79680  0.79680  0.43130, charge  0.00000
+    300: C      position  0.29680  0.43130  0.29680, charge  0.00000
+    301: C      position  0.70320  0.43130  0.70320, charge  0.00000
+    302: C      position  0.70320  0.56870  0.29680, charge  0.00000
+    303: C      position  0.29680  0.56870  0.70320, charge  0.00000
+    304: C      position  0.70320  0.29680  0.56870, charge  0.00000
+    305: C      position  0.29680  0.70320  0.56870, charge  0.00000
+    306: C      position  0.29680  0.29680  0.43130, charge  0.00000
+    307: C      position  0.70320  0.70320  0.43130, charge  0.00000
+    308: C      position  0.79680  0.56870  0.20320, charge  0.00000
+    309: C      position  0.20320  0.56870  0.79680, charge  0.00000
+    310: C      position  0.79680  0.43130  0.79680, charge  0.00000
+    311: C      position  0.20320  0.43130  0.20320, charge  0.00000
+    312: C      position  0.79680  0.20320  0.43130, charge  0.00000
+    313: C      position  0.20320  0.79680  0.43130, charge  0.00000
+    314: C      position  0.79680  0.79680  0.56870, charge  0.00000
+    315: C      position  0.20320  0.20320  0.56870, charge  0.00000
+    316: C      position  0.70320  0.56870  0.70320, charge  0.00000
+    317: C      position  0.29680  0.56870  0.29680, charge  0.00000
+    318: C      position  0.29680  0.43130  0.70320, charge  0.00000
+    319: C      position  0.70320  0.43130  0.29680, charge  0.00000
+    320: C      position  0.43130  0.29680  0.70320, charge  0.00000
+    321: C      position  0.43130  0.70320  0.29680, charge  0.00000
+    322: C      position  0.56870  0.70320  0.70320, charge  0.00000
+    323: C      position  0.56870  0.29680  0.29680, charge  0.00000
+    324: C      position  0.43130  0.20320  0.20320, charge  0.00000
+    325: C      position  0.43130  0.79680  0.79680, charge  0.00000
+    326: C      position  0.56870  0.20320  0.79680, charge  0.00000
+    327: C      position  0.56870  0.79680  0.20320, charge  0.00000
+    328: C      position  0.56870  0.70320  0.29680, charge  0.00000
+    329: C      position  0.56870  0.29680  0.70320, charge  0.00000
+    330: C      position  0.43130  0.29680  0.29680, charge  0.00000
+    331: C      position  0.43130  0.70320  0.70320, charge  0.00000
+    332: C      position  0.56870  0.79680  0.79680, charge  0.00000
+    333: C      position  0.56870  0.20320  0.20320, charge  0.00000
+    334: C      position  0.43130  0.79680  0.20320, charge  0.00000
+    335: C      position  0.43130  0.20320  0.79680, charge  0.00000
+    336: C      position  0.32200  0.17800  0.88700, charge  0.00000
+    337: C      position  0.67800  0.82200  0.88700, charge  0.00000
+    338: C      position  0.67800  0.17800  0.11300, charge  0.00000
+    339: C      position  0.32200  0.82200  0.11300, charge  0.00000
+    340: C      position  0.88700  0.32200  0.17800, charge  0.00000
+    341: C      position  0.88700  0.67800  0.82200, charge  0.00000
+    342: C      position  0.11300  0.67800  0.17800, charge  0.00000
+    343: C      position  0.11300  0.32200  0.82200, charge  0.00000
+    344: C      position  0.17800  0.88700  0.32200, charge  0.00000
+    345: C      position  0.82200  0.88700  0.67800, charge  0.00000
+    346: C      position  0.17800  0.11300  0.67800, charge  0.00000
+    347: C      position  0.82200  0.11300  0.32200, charge  0.00000
+    348: C      position  0.17800  0.32200  0.11300, charge  0.00000
+    349: C      position  0.82200  0.67800  0.11300, charge  0.00000
+    350: C      position  0.17800  0.67800  0.88700, charge  0.00000
+    351: C      position  0.82200  0.32200  0.88700, charge  0.00000
+    352: C      position  0.32200  0.88700  0.82200, charge  0.00000
+    353: C      position  0.67800  0.88700  0.17800, charge  0.00000
+    354: C      position  0.67800  0.11300  0.82200, charge  0.00000
+    355: C      position  0.32200  0.11300  0.17800, charge  0.00000
+    356: C      position  0.88700  0.17800  0.67800, charge  0.00000
+    357: C      position  0.88700  0.82200  0.32200, charge  0.00000
+    358: C      position  0.11300  0.17800  0.32200, charge  0.00000
+    359: C      position  0.11300  0.82200  0.67800, charge  0.00000
+    360: C      position  0.67800  0.82200  0.11300, charge  0.00000
+    361: C      position  0.32200  0.17800  0.11300, charge  0.00000
+    362: C      position  0.32200  0.82200  0.88700, charge  0.00000
+    363: C      position  0.67800  0.17800  0.88700, charge  0.00000
+    364: C      position  0.11300  0.67800  0.82200, charge  0.00000
+    365: C      position  0.11300  0.32200  0.17800, charge  0.00000
+    366: C      position  0.88700  0.32200  0.82200, charge  0.00000
+    367: C      position  0.88700  0.67800  0.17800, charge  0.00000
+    368: C      position  0.82200  0.11300  0.67800, charge  0.00000
+    369: C      position  0.17800  0.11300  0.32200, charge  0.00000
+    370: C      position  0.82200  0.88700  0.32200, charge  0.00000
+    371: C      position  0.17800  0.88700  0.67800, charge  0.00000
+    372: C      position  0.82200  0.67800  0.88700, charge  0.00000
+    373: C      position  0.17800  0.32200  0.88700, charge  0.00000
+    374: C      position  0.82200  0.32200  0.11300, charge  0.00000
+    375: C      position  0.17800  0.67800  0.11300, charge  0.00000
+    376: C      position  0.67800  0.11300  0.17800, charge  0.00000
+    377: C      position  0.32200  0.11300  0.82200, charge  0.00000
+    378: C      position  0.32200  0.88700  0.17800, charge  0.00000
+    379: C      position  0.67800  0.88700  0.82200, charge  0.00000
+    380: C      position  0.11300  0.82200  0.32200, charge  0.00000
+    381: C      position  0.11300  0.17800  0.67800, charge  0.00000
+    382: C      position  0.88700  0.82200  0.67800, charge  0.00000
+    383: C      position  0.88700  0.17800  0.32200, charge  0.00000
+    384: C      position  0.32200  0.67800  0.38700, charge  0.00000
+    385: C      position  0.67800  0.32200  0.38700, charge  0.00000
+    386: C      position  0.67800  0.67800  0.61300, charge  0.00000
+    387: C      position  0.32200  0.32200  0.61300, charge  0.00000
+    388: C      position  0.17800  0.38700  0.82200, charge  0.00000
+    389: C      position  0.82200  0.38700  0.17800, charge  0.00000
+    390: C      position  0.17800  0.61300  0.17800, charge  0.00000
+    391: C      position  0.82200  0.61300  0.82200, charge  0.00000
+    392: C      position  0.17800  0.82200  0.61300, charge  0.00000
+    393: C      position  0.82200  0.17800  0.61300, charge  0.00000
+    394: C      position  0.17800  0.17800  0.38700, charge  0.00000
+    395: C      position  0.82200  0.82200  0.38700, charge  0.00000
+    396: C      position  0.32200  0.38700  0.32200, charge  0.00000
+    397: C      position  0.67800  0.38700  0.67800, charge  0.00000
+    398: C      position  0.67800  0.61300  0.32200, charge  0.00000
+    399: C      position  0.32200  0.61300  0.67800, charge  0.00000
+    400: C      position  0.67800  0.32200  0.61300, charge  0.00000
+    401: C      position  0.32200  0.67800  0.61300, charge  0.00000
+    402: C      position  0.32200  0.32200  0.38700, charge  0.00000
+    403: C      position  0.67800  0.67800  0.38700, charge  0.00000
+    404: C      position  0.82200  0.61300  0.17800, charge  0.00000
+    405: C      position  0.17800  0.61300  0.82200, charge  0.00000
+    406: C      position  0.82200  0.38700  0.82200, charge  0.00000
+    407: C      position  0.17800  0.38700  0.17800, charge  0.00000
+    408: C      position  0.82200  0.17800  0.38700, charge  0.00000
+    409: C      position  0.17800  0.82200  0.38700, charge  0.00000
+    410: C      position  0.82200  0.82200  0.61300, charge  0.00000
+    411: C      position  0.17800  0.17800  0.61300, charge  0.00000
+    412: C      position  0.67800  0.61300  0.67800, charge  0.00000
+    413: C      position  0.32200  0.61300  0.32200, charge  0.00000
+    414: C      position  0.32200  0.38700  0.67800, charge  0.00000
+    415: C      position  0.67800  0.38700  0.32200, charge  0.00000
+    416: C      position  0.38700  0.32200  0.67800, charge  0.00000
+    417: C      position  0.38700  0.67800  0.32200, charge  0.00000
+    418: C      position  0.61300  0.67800  0.67800, charge  0.00000
+    419: C      position  0.61300  0.32200  0.32200, charge  0.00000
+    420: C      position  0.38700  0.17800  0.17800, charge  0.00000
+    421: C      position  0.38700  0.82200  0.82200, charge  0.00000
+    422: C      position  0.61300  0.17800  0.82200, charge  0.00000
+    423: C      position  0.61300  0.82200  0.17800, charge  0.00000
+    424: C      position  0.61300  0.67800  0.32200, charge  0.00000
+    425: C      position  0.61300  0.32200  0.67800, charge  0.00000
+    426: C      position  0.38700  0.32200  0.32200, charge  0.00000
+    427: C      position  0.38700  0.67800  0.67800, charge  0.00000
+    428: C      position  0.61300  0.82200  0.82200, charge  0.00000
+    429: C      position  0.61300  0.17800  0.17800, charge  0.00000
+    430: C      position  0.38700  0.82200  0.17800, charge  0.00000
+    431: C      position  0.38700  0.17800  0.82200, charge  0.00000
+    432: C      position  0.36550  0.19940  0.86550, charge  0.00000
+    433: C      position  0.63450  0.80060  0.86550, charge  0.00000
+    434: C      position  0.63450  0.19940  0.13450, charge  0.00000
+    435: C      position  0.36550  0.80060  0.13450, charge  0.00000
+    436: C      position  0.86550  0.36550  0.19940, charge  0.00000
+    437: C      position  0.86550  0.63450  0.80060, charge  0.00000
+    438: C      position  0.13450  0.63450  0.19940, charge  0.00000
+    439: C      position  0.13450  0.36550  0.80060, charge  0.00000
+    440: C      position  0.19940  0.86550  0.36550, charge  0.00000
+    441: C      position  0.80060  0.86550  0.63450, charge  0.00000
+    442: C      position  0.19940  0.13450  0.63450, charge  0.00000
+    443: C      position  0.80060  0.13450  0.36550, charge  0.00000
+    444: C      position  0.19940  0.36550  0.13450, charge  0.00000
+    445: C      position  0.80060  0.63450  0.13450, charge  0.00000
+    446: C      position  0.19940  0.63450  0.86550, charge  0.00000
+    447: C      position  0.80060  0.36550  0.86550, charge  0.00000
+    448: C      position  0.36550  0.86550  0.80060, charge  0.00000
+    449: C      position  0.63450  0.86550  0.19940, charge  0.00000
+    450: C      position  0.63450  0.13450  0.80060, charge  0.00000
+    451: C      position  0.36550  0.13450  0.19940, charge  0.00000
+    452: C      position  0.86550  0.19940  0.63450, charge  0.00000
+    453: C      position  0.86550  0.80060  0.36550, charge  0.00000
+    454: C      position  0.13450  0.19940  0.36550, charge  0.00000
+    455: C      position  0.13450  0.80060  0.63450, charge  0.00000
+    456: C      position  0.63450  0.80060  0.13450, charge  0.00000
+    457: C      position  0.36550  0.19940  0.13450, charge  0.00000
+    458: C      position  0.36550  0.80060  0.86550, charge  0.00000
+    459: C      position  0.63450  0.19940  0.86550, charge  0.00000
+    460: C      position  0.13450  0.63450  0.80060, charge  0.00000
+    461: C      position  0.13450  0.36550  0.19940, charge  0.00000
+    462: C      position  0.86550  0.36550  0.80060, charge  0.00000
+    463: C      position  0.86550  0.63450  0.19940, charge  0.00000
+    464: C      position  0.80060  0.13450  0.63450, charge  0.00000
+    465: C      position  0.19940  0.13450  0.36550, charge  0.00000
+    466: C      position  0.80060  0.86550  0.36550, charge  0.00000
+    467: C      position  0.19940  0.86550  0.63450, charge  0.00000
+    468: C      position  0.80060  0.63450  0.86550, charge  0.00000
+    469: C      position  0.19940  0.36550  0.86550, charge  0.00000
+    470: C      position  0.80060  0.36550  0.13450, charge  0.00000
+    471: C      position  0.19940  0.63450  0.13450, charge  0.00000
+    472: C      position  0.63450  0.13450  0.19940, charge  0.00000
+    473: C      position  0.36550  0.13450  0.80060, charge  0.00000
+    474: C      position  0.36550  0.86550  0.19940, charge  0.00000
+    475: C      position  0.63450  0.86550  0.80060, charge  0.00000
+    476: C      position  0.13450  0.80060  0.36550, charge  0.00000
+    477: C      position  0.13450  0.19940  0.63450, charge  0.00000
+    478: C      position  0.86550  0.80060  0.63450, charge  0.00000
+    479: C      position  0.86550  0.19940  0.36550, charge  0.00000
+    480: C      position  0.36550  0.69940  0.36550, charge  0.00000
+    481: C      position  0.63450  0.30060  0.36550, charge  0.00000
+    482: C      position  0.63450  0.69940  0.63450, charge  0.00000
+    483: C      position  0.36550  0.30060  0.63450, charge  0.00000
+    484: C      position  0.86550  0.86550  0.69940, charge  0.00000
+    485: C      position  0.86550  0.13450  0.30060, charge  0.00000
+    486: C      position  0.13450  0.13450  0.69940, charge  0.00000
+    487: C      position  0.13450  0.86550  0.30060, charge  0.00000
+    488: C      position  0.36550  0.36550  0.30060, charge  0.00000
+    489: C      position  0.63450  0.36550  0.69940, charge  0.00000
+    490: C      position  0.63450  0.63450  0.30060, charge  0.00000
+    491: C      position  0.36550  0.63450  0.69940, charge  0.00000
+    492: C      position  0.86550  0.69940  0.13450, charge  0.00000
+    493: C      position  0.86550  0.30060  0.86550, charge  0.00000
+    494: C      position  0.13450  0.69940  0.86550, charge  0.00000
+    495: C      position  0.13450  0.30060  0.13450, charge  0.00000
+    496: C      position  0.63450  0.30060  0.63450, charge  0.00000
+    497: C      position  0.36550  0.69940  0.63450, charge  0.00000
+    498: C      position  0.36550  0.30060  0.36550, charge  0.00000
+    499: C      position  0.63450  0.69940  0.36550, charge  0.00000
+    500: C      position  0.13450  0.13450  0.30060, charge  0.00000
+    501: C      position  0.13450  0.86550  0.69940, charge  0.00000
+    502: C      position  0.86550  0.86550  0.30060, charge  0.00000
+    503: C      position  0.86550  0.13450  0.69940, charge  0.00000
+    504: C      position  0.63450  0.63450  0.69940, charge  0.00000
+    505: C      position  0.36550  0.63450  0.30060, charge  0.00000
+    506: C      position  0.36550  0.36550  0.69940, charge  0.00000
+    507: C      position  0.63450  0.36550  0.30060, charge  0.00000
+    508: C      position  0.13450  0.30060  0.86550, charge  0.00000
+    509: C      position  0.13450  0.69940  0.13450, charge  0.00000
+    510: C      position  0.86550  0.30060  0.13450, charge  0.00000
+    511: C      position  0.86550  0.69940  0.86550, charge  0.00000
+    512: C      position  0.69940  0.86550  0.86550, charge  0.00000
+    513: C      position  0.30060  0.86550  0.13450, charge  0.00000
+    514: C      position  0.69940  0.13450  0.13450, charge  0.00000
+    515: C      position  0.30060  0.13450  0.86550, charge  0.00000
+    516: C      position  0.69940  0.36550  0.63450, charge  0.00000
+    517: C      position  0.30060  0.63450  0.63450, charge  0.00000
+    518: C      position  0.69940  0.63450  0.36550, charge  0.00000
+    519: C      position  0.30060  0.36550  0.36550, charge  0.00000
+    520: C      position  0.30060  0.13450  0.13450, charge  0.00000
+    521: C      position  0.69940  0.13450  0.86550, charge  0.00000
+    522: C      position  0.30060  0.86550  0.86550, charge  0.00000
+    523: C      position  0.69940  0.86550  0.13450, charge  0.00000
+    524: C      position  0.30060  0.63450  0.36550, charge  0.00000
+    525: C      position  0.69940  0.36550  0.36550, charge  0.00000
+    526: C      position  0.30060  0.36550  0.63450, charge  0.00000
+    527: C      position  0.69940  0.63450  0.63450, charge  0.00000
+    528: H      position  0.38020  0.22800  0.88020, charge  0.00000
+    529: H      position  0.61980  0.77200  0.88020, charge  0.00000
+    530: H      position  0.61980  0.22800  0.11980, charge  0.00000
+    531: H      position  0.38020  0.77200  0.11980, charge  0.00000
+    532: H      position  0.88020  0.38020  0.22800, charge  0.00000
+    533: H      position  0.88020  0.61980  0.77200, charge  0.00000
+    534: H      position  0.11980  0.61980  0.22800, charge  0.00000
+    535: H      position  0.11980  0.38020  0.77200, charge  0.00000
+    536: H      position  0.22800  0.88020  0.38020, charge  0.00000
+    537: H      position  0.77200  0.88020  0.61980, charge  0.00000
+    538: H      position  0.22800  0.11980  0.61980, charge  0.00000
+    539: H      position  0.77200  0.11980  0.38020, charge  0.00000
+    540: H      position  0.22800  0.38020  0.11980, charge  0.00000
+    541: H      position  0.77200  0.61980  0.11980, charge  0.00000
+    542: H      position  0.22800  0.61980  0.88020, charge  0.00000
+    543: H      position  0.77200  0.38020  0.88020, charge  0.00000
+    544: H      position  0.38020  0.88020  0.77200, charge  0.00000
+    545: H      position  0.61980  0.88020  0.22800, charge  0.00000
+    546: H      position  0.61980  0.11980  0.77200, charge  0.00000
+    547: H      position  0.38020  0.11980  0.22800, charge  0.00000
+    548: H      position  0.88020  0.22800  0.61980, charge  0.00000
+    549: H      position  0.88020  0.77200  0.38020, charge  0.00000
+    550: H      position  0.11980  0.22800  0.38020, charge  0.00000
+    551: H      position  0.11980  0.77200  0.61980, charge  0.00000
+    552: H      position  0.61980  0.77200  0.11980, charge  0.00000
+    553: H      position  0.38020  0.22800  0.11980, charge  0.00000
+    554: H      position  0.38020  0.77200  0.88020, charge  0.00000
+    555: H      position  0.61980  0.22800  0.88020, charge  0.00000
+    556: H      position  0.11980  0.61980  0.77200, charge  0.00000
+    557: H      position  0.11980  0.38020  0.22800, charge  0.00000
+    558: H      position  0.88020  0.38020  0.77200, charge  0.00000
+    559: H      position  0.88020  0.61980  0.22800, charge  0.00000
+    560: H      position  0.77200  0.11980  0.61980, charge  0.00000
+    561: H      position  0.22800  0.11980  0.38020, charge  0.00000
+    562: H      position  0.77200  0.88020  0.38020, charge  0.00000
+    563: H      position  0.22800  0.88020  0.61980, charge  0.00000
+    564: H      position  0.77200  0.61980  0.88020, charge  0.00000
+    565: H      position  0.22800  0.38020  0.88020, charge  0.00000
+    566: H      position  0.77200  0.38020  0.11980, charge  0.00000
+    567: H      position  0.22800  0.61980  0.11980, charge  0.00000
+    568: H      position  0.61980  0.11980  0.22800, charge  0.00000
+    569: H      position  0.38020  0.11980  0.77200, charge  0.00000
+    570: H      position  0.38020  0.88020  0.22800, charge  0.00000
+    571: H      position  0.61980  0.88020  0.77200, charge  0.00000
+    572: H      position  0.11980  0.77200  0.38020, charge  0.00000
+    573: H      position  0.11980  0.22800  0.61980, charge  0.00000
+    574: H      position  0.88020  0.77200  0.61980, charge  0.00000
+    575: H      position  0.88020  0.22800  0.38020, charge  0.00000
+    576: H      position  0.38020  0.72800  0.38020, charge  0.00000
+    577: H      position  0.61980  0.27200  0.38020, charge  0.00000
+    578: H      position  0.61980  0.72800  0.61980, charge  0.00000
+    579: H      position  0.38020  0.27200  0.61980, charge  0.00000
+    580: H      position  0.88020  0.88020  0.72800, charge  0.00000
+    581: H      position  0.88020  0.11980  0.27200, charge  0.00000
+    582: H      position  0.11980  0.11980  0.72800, charge  0.00000
+    583: H      position  0.11980  0.88020  0.27200, charge  0.00000
+    584: H      position  0.38020  0.38020  0.27200, charge  0.00000
+    585: H      position  0.61980  0.38020  0.72800, charge  0.00000
+    586: H      position  0.61980  0.61980  0.27200, charge  0.00000
+    587: H      position  0.38020  0.61980  0.72800, charge  0.00000
+    588: H      position  0.88020  0.72800  0.11980, charge  0.00000
+    589: H      position  0.88020  0.27200  0.88020, charge  0.00000
+    590: H      position  0.11980  0.72800  0.88020, charge  0.00000
+    591: H      position  0.11980  0.27200  0.11980, charge  0.00000
+    592: H      position  0.61980  0.27200  0.61980, charge  0.00000
+    593: H      position  0.38020  0.72800  0.61980, charge  0.00000
+    594: H      position  0.38020  0.27200  0.38020, charge  0.00000
+    595: H      position  0.61980  0.72800  0.38020, charge  0.00000
+    596: H      position  0.11980  0.11980  0.27200, charge  0.00000
+    597: H      position  0.11980  0.88020  0.72800, charge  0.00000
+    598: H      position  0.88020  0.88020  0.27200, charge  0.00000
+    599: H      position  0.88020  0.11980  0.72800, charge  0.00000
+    600: H      position  0.61980  0.61980  0.72800, charge  0.00000
+    601: H      position  0.38020  0.61980  0.27200, charge  0.00000
+    602: H      position  0.38020  0.38020  0.72800, charge  0.00000
+    603: H      position  0.61980  0.38020  0.27200, charge  0.00000
+    604: H      position  0.11980  0.27200  0.88020, charge  0.00000
+    605: H      position  0.11980  0.72800  0.11980, charge  0.00000
+    606: H      position  0.88020  0.27200  0.11980, charge  0.00000
+    607: H      position  0.88020  0.72800  0.88020, charge  0.00000
+    608: H      position  0.72800  0.88020  0.88020, charge  0.00000
+    609: H      position  0.27200  0.88020  0.11980, charge  0.00000
+    610: H      position  0.72800  0.11980  0.11980, charge  0.00000
+    611: H      position  0.27200  0.11980  0.88020, charge  0.00000
+    612: H      position  0.72800  0.38020  0.61980, charge  0.00000
+    613: H      position  0.27200  0.61980  0.61980, charge  0.00000
+    614: H      position  0.72800  0.61980  0.38020, charge  0.00000
+    615: H      position  0.27200  0.38020  0.38020, charge  0.00000
+    616: H      position  0.27200  0.11980  0.11980, charge  0.00000
+    617: H      position  0.72800  0.11980  0.88020, charge  0.00000
+    618: H      position  0.27200  0.88020  0.88020, charge  0.00000
+    619: H      position  0.72800  0.88020  0.11980, charge  0.00000
+    620: H      position  0.27200  0.61980  0.38020, charge  0.00000
+    621: H      position  0.72800  0.38020  0.38020, charge  0.00000
+    622: H      position  0.27200  0.38020  0.61980, charge  0.00000
+    623: H      position  0.72800  0.61980  0.61980, charge  0.00000
+    net charge:                      0.00000 [e]
+    smallest charge:                 0.00000 [e]
+    largest charge:                  0.00000 [e]
+    number of bonds: 0
+
+Component 0 [probe]
+
+    Type: Adsorbate
+
+    Critical temperature:  150.687 [K]
+    Critical pressure:     4863000 [Pa]
+    Acentric factor:       -0.00219 [-]
+
+    Mol-fraction:                 1 [-]
+    Swappable:                   true
+
+    Mass:                         39.948 [-]
+    Fugacity:                     84965.09082237349 [Pa]
+    Fugacity coefficient:         1 [-]
+    Bulk fluid density:           1.3617939371188927 [-]
+    Compressibility:              0.9992372394687574 [-]
+    Excess molecules:             3.0022926921720683 [-]
+
+    Number Of Atoms:              1
+    CBMC starting bead:           0
+    Ideal gas Rosenbluth weight:  1.00000000
+      0: Probe  position  0.00000 -0.00000  0.00000, charge  0.00000
+    Diagonalized inertia-vector:      0.00000000 0.00000000 0.00000000
+    Translational degrees of freedom: 3
+    Rotational degrees of freedom:    0
+    Net-charge:        0.00000000 [e]
+
+    Move probabilities:
+    Translation:                   0.000000 [-]
+    Random translation:            0.000000 [-]
+    Rotation:                      0.000000 [-]
+    Random rotation:               0.000000 [-]
+    Volume change:                 0.000000 [-]
+    Reinsertion (CBMC):            0.000000 [-]
+    Partial reinsertion (CBMC):    0.000000 [-]
+    Identity change (CBMC):        0.000000 [-]
+    Swap:                          1.000000 [-]
+    Swap (CBMC):                   0.000000 [-]
+    Swap (CFCMC):                  0.000000 [-]
+    Swap (CB/CFCMC):               0.000000 [-]
+    Gibbs volume:                  0.000000 [-]
+    Gibbs swap (CBMC):             0.000000 [-]
+    Gibbs swap (CFCMC):            0.000000 [-]
+    Widom:                         0.000000 [-]
+    Widom (CFCMC):                 0.000000 [-]
+    Widom (CB/CFCMC):              0.000000 [-]
+    Parallel tempering:            0.000000 [-]
+    Hybrid MC:                     0.000000 [-]
+
+    number of blocking-pockets: 0
+
+    molecule is modelled as 'rigid'
+
+
+
+
+
+Number of pseudo-atoms
+===============================================================================
+
+Component   0 (probe)
+-------------------------------------------------------------------------------
+    index   0 (Cu): 0 atoms
+    index   1 (O): 0 atoms
+    index   2 (C): 0 atoms
+    index   3 (H): 0 atoms
+    index   4 (Probe): 0 atoms
+
+Total number of pseudo-atoms:
+-------------------------------------------------------------------------------
+    index   0 (Cu): 0 atoms
+    index   1 (O): 0 atoms
+    index   2 (C): 0 atoms
+    index   3 (H): 0 atoms
+    index   4 (Probe): 0 atoms
+
+
+
+
+Energy status Recomputed from scratch
+===============================================================================
+
+Total potential energy/kʙ        0.000000e+00 [K]
+    external field VDW/kʙ        0.000000e+00 [K]
+    external field Real/kʙ       0.000000e+00 [K]
+    framework-molecule VDW/kʙ    0.000000e+00 [K]
+    framework-molecule Real/kʙ   0.000000e+00 [K]
+    molecule-molecule VDW/kʙ     0.000000e+00 [K]
+    molecule-molecule Real/kʙ    0.000000e+00 [K]
+    Van der Waals (Tail)/kʙ      0.000000e+00 [K]
+    Ewald Fourier/kʙ             0.000000e+00 [K]
+    Ewald self/kʙ                0.000000e+00 [K]
+    Ewald exclusion/kʙ           0.000000e+00 [K]
+    bond/kʙ                      0.000000e+00 [K]
+    Urey-Bradley/kʙ              0.000000e+00 [K]
+    bend/kʙ                      0.000000e+00 [K]
+    inversion bend/kʙ            0.000000e+00 [K]
+    out-of-plane bend/kʙ         0.000000e+00 [K]
+    torsion/kʙ                   0.000000e+00 [K]
+    improper torsion/kʙ          0.000000e+00 [K]
+    bond-bond/kʙ                 0.000000e+00 [K]
+    bond-bend/kʙ                 0.000000e+00 [K]
+    bond-torsion/kʙ              0.000000e+00 [K]
+    bend-bend/kʙ                 0.000000e+00 [K]
+    bend-torsion/kʙ              0.000000e+00 [K]
+    intra VDW/kʙ                 0.000000e+00 [K]
+    intra Coulombic/kʙ           0.000000e+00 [K]
+    polarization/kʙ              0.000000e+00 [K]
+    dU/dlambda VDW/kʙ            0.000000e+00 [K]
+    dU/dlambda Real/kʙ           0.000000e+00 [K]
+    dU/dlambda Ewald/kʙ          0.000000e+00 [K]
+
+
+
+
+
+Initialization: Current cycle: 0 out of 500
+===============================================================================
+
+Box:      52.68600   0.00000   0.00000
+           0.00000  52.68600   0.00000
+           0.00000   0.00000  52.68600
+Lengths:  52.68600  52.68600  52.68600
+Angles:   90.00000  90.00000  90.00000
+Rectangular boundary conditions
+Perpendicular widths:   52.68600  52.68600  52.68600
+
+
+Net charge:   0.00000000
+Cutoff Coulomb:  26.34300 [Å]
+Ewald alpha: 0.11617796949976875
+Ewald k-vectors: 7 7 7
+
+
+component   0 (probe) lambda:  0 occupancy:  1 (1.000000)
+    net charge:   0.00000000 [e]
+
+Amount of molecules per component:
+-------------------------------------------------------------------------------
+Component 0 (probe)
+    absolute adsorption:  0.000000e+00 molecules
+                          0.000000e+00 molecules/uc
+                          0.000000e+00 mol/kg-framework
+                          0.000000e+00 mg/g-framework
+    excess adsorption:   -3.002293e+00 molecules
+                         -3.752866e-01 molecules/uc
+                         -3.877749e-02 mol/kg-framework
+                         -1.549083e+00 mg/g-framework
+
+Total potential energy/kʙ        6.112705e+02 [K]
+-------------------------------------------------------------------------------
+    external field VDW/kʙ        0.000000e+00 [K]
+    external field Real/kʙ       0.000000e+00 [K]
+    framework-molecule VDW/kʙ    6.112705e+02 [K]
+    framework-molecule Real/kʙ   0.000000e+00 [K]
+    molecule-molecule VDW/kʙ     0.000000e+00 [K]
+    molecule-molecule Real/kʙ    0.000000e+00 [K]
+    Van der Waals (Tail)/kʙ      0.000000e+00 [K]
+    Ewald Fourier/kʙ             0.000000e+00 [K]
+    Ewald self/kʙ                0.000000e+00 [K]
+    Ewald exclusion/kʙ           0.000000e+00 [K]
+    polarization/kʙ              0.000000e+00 [K]
+    dU/dlambda VDW/kʙ            0.000000e+00 [K]
+    dU/dlambda Real/kʙ           0.000000e+00 [K]
+    dU/dlambda Ewald/kʙ          0.000000e+00 [K]
+
+
+Current cycle: 0 out of 2000
+===============================================================================
+
+Box:      52.68600   0.00000   0.00000  Average:  52.68600   0.00000   0.00000
+           0.00000  52.68600   0.00000             0.00000  52.68600   0.00000
+           0.00000   0.00000  52.68600             0.00000   0.00000  52.68600
+Lengths:  52.68600  52.68600  52.68600  Average:  52.68600  52.68600  52.68600
+Angles:   90.00000  90.00000  90.00000  Average:  90.00000  90.00000  90.00000
+Rectangular boundary conditions
+
+Net charge:   0.00000000
+Cutoff Coulomb:  26.34300 [Å]
+Ewald alpha: 0.11617796949976875
+Ewald k-vectors: 7 7 7
+
+
+component 0 (probe) lambda:  0 occupancy:  1 (1.000000)
+    net charge:   0.00000000 [e]
+
+Amount of molecules per component:
+-------------------------------------------------------------------------------
+Component 0 (probe)
+    absolute adsorption: 1.000000e+00 molecules (1.000000e+00 +/- 0.000000e+00)
+                         1.250000e-01 molec./uc (1.250000e-01 +/- 0.000000e+00)
+                         1.291596e-02 mol/kg    (1.291596e-02 +/- 0.000000e+00)
+                         5.159667e-01 mg/g      (5.159667e-01 +/- 0.000000e+00)
+    excess adsorption:   -2.002293e+00 molecules (-2.002293e+00 +/- 0.000000e+00)
+                         -2.502866e-01 molec./uc (-2.502866e-01 +/- 0.000000e+00)
+                         -2.586153e-02 mol/kg    (-2.586153e-02 +/- 0.000000e+00)
+                         -1.033116e+00 mg/g      (-1.033116e+00 +/- 0.000000e+00)
+
+Total potential energy/kʙ  -1.282123e+02 (-1.282123e+02 +/- 0.000000e+00) [K]
+-------------------------------------------------------------------------------
+ExternalField-molecule
+    Van der Waals/kʙ        0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+Framework-molecule
+    Van der Waals/kʙ       -1.282123e+02 (-1.282123e+02 +/- 0.000000e+00) [K]
+    Van der Waals (Tail)/kʙ 0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Real/kʙ       0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Fourier/kʙ    0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+Molecule-molecule
+    Van der Waals/kʙ        0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Van der Waals (Tail)/kʙ 0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Real/kʙ       0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Fourier/kʙ    0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Molecule Intra/kʙ       0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+Polarization energy/kʙ      0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+
+
+===============================================================================
+                             Simulation finished!
+===============================================================================
+
+Final state after 2000 cycles
+===============================================================================
+
+Box:      52.68600   0.00000   0.00000  Average:  52.68600   0.00000   0.00000
+           0.00000  52.68600   0.00000             0.00000  52.68600   0.00000
+           0.00000   0.00000  52.68600             0.00000   0.00000  52.68600
+Lengths:  52.68600  52.68600  52.68600  Average:  52.68600  52.68600  52.68600
+Angles:   90.00000  90.00000  90.00000  Average:  90.00000  90.00000  90.00000
+Rectangular boundary conditions
+
+Net charge:   0.00000000
+Cutoff Coulomb:  26.34300 [Å]
+Ewald alpha: 0.11617796949976875
+Ewald k-vectors: 7 7 7
+
+
+component 0 (probe) lambda:  0 occupancy:  1 (1.000000)
+    net charge:   0.00000000 [e]
+
+Amount of molecules per component:
+-------------------------------------------------------------------------------
+Component 0 (probe)
+    absolute adsorption: 0.000000e+00 molecules (1.843000e+00 +/- 9.519191e-02)
+                         0.000000e+00 molec./uc (2.303750e-01 +/- 1.189899e-02)
+                         0.000000e+00 mol/kg    (2.380411e-02 +/- 1.229495e-03)
+                         0.000000e+00 mg/g      (9.509267e-01 +/- 4.911586e-02)
+    excess adsorption:   -3.002293e+00 molecules (-1.159293e+00 +/- 9.519191e-02)
+                         -3.752866e-01 molec./uc (-1.449116e-01 +/- 1.189899e-02)
+                         -3.877749e-02 mol/kg    (-1.497338e-02 +/- 1.229495e-03)
+                         -1.549083e+00 mg/g      (-5.981564e-01 +/- 4.911586e-02)
+
+Total potential energy/kʙ   0.000000e+00 (-2.009092e+02 +/- 3.892187e+01) [K]
+-------------------------------------------------------------------------------
+ExternalField-molecule
+    Van der Waals/kʙ        0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+Framework-molecule
+    Van der Waals/kʙ        0.000000e+00 (-2.009034e+02 +/- 3.891961e+01) [K]
+    Van der Waals (Tail)/kʙ 0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Real/kʙ       0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Fourier/kʙ    0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+Molecule-molecule
+    Van der Waals/kʙ        0.000000e+00 (-5.783092e-03 +/- 1.059692e-02) [K]
+    Van der Waals (Tail)/kʙ 0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Real/kʙ       0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Fourier/kʙ    0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Molecule Intra/kʙ       0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+Polarization energy/kʙ      0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+
+
+Energy statistics             |  Energy [K]   | Recomputed [K]|  Drift [K]    |
+===============================================================================
+Total potential energy/kʙ     | -2.734678e-13 |  0.000000e+00 | -2.734678e-13 |
+    external field VDW/kʙ     |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    external field Real/kʙ    |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    framework-molecule VDW/kʙ | -2.734678e-13 |  0.000000e+00 | -2.734678e-13 |
+    framework-molecule Real/kʙ|  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    molecule-molecule VDW/kʙ  |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    molecule-molecule Real/kʙ |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    Van der Waals (Tail)/kʙ   |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    Ewald Fourier/kʙ          |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    Ewald self/kʙ             |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    Ewald exclusion/kʙ        |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    bond/kʙ                   |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    Urey-Bradley/kʙ           |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    bend/kʙ                   |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    inversion bend/kʙ         |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    out-of-plane bend/kʙ      |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    torsion/kʙ                |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    improper torsion/kʙ       |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    bond-bond/kʙ              |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    bond-bend/kʙ              |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    bond-torsion/kʙ           |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    bend-bend/kʙ              |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    bend-torsion/kʙ           |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    intra VDW/kʙ              |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    intra Coulombic/kʙ        |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    polarization/kʙ           |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    dU/dlambda VDW/kʙ         |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    dU/dlambda Real/kʙ        |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    dU/dlambda Ewald/kʙ       |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+-------------------------------------------------------------------------------
+
+
+Monte-Carlo moves statistics
+===============================================================================
+
+Component 0 [probe]
+    Swap                 all:               40000
+    Swap                 total:             19936      20064          0
+    Swap                 constructed:       19936      16949          0
+    Swap                 accepted:           8611       8611          0
+    Swap                 fraction:       0.431932   0.429177   0.000000
+    Swap                 max-change:     0.000000   0.000000   0.000000
+
+
+
+Production run counting of the MC moves summed over systems and components
+===============================================================================
+
+Swap                                  40000 (100.0000 [%])
+
+Production count MC-steps:            40000 [-]
+               All summed:            40000 [-]
+               difference:                0 [-]
+
+
+Production run CPU timings of the MC moves
+===============================================================================
+
+Component 0 probe
+
+Swap                                  1.023965 [s]
+    Deletion-Total                    0.489305 [s]
+    Ewald                             0.000740 [s]
+    Insertion-Total                   0.533563 [s]
+    NonEwald                          0.000000 [s]
+    Tail                              0.159317 [s]
+    Overhead                          0.863908 [s]
+
+
+
+Property sampling                     0.010444 [s]
+Energy/pressure sampling:             1.347269 [s]
+
+
+Production run CPU timings of the MC moves summed over systems and components
+===============================================================================
+
+
+Swap                                  1.023965 [s]
+    Deletion-Total                    0.489305 [s]
+    Ewald                             0.000740 [s]
+    Insertion-Total                   0.533563 [s]
+    NonEwald                          0.000000 [s]
+    Tail                              0.159317 [s]
+    Overhead                          0.863908 [s]
+
+Property sampling:                    0.010444 [s]
+Energy/pressure sampling:             1.347269 [s]
+
+Production simulation time:           2.393013 [s]
+                All summed:           2.381678 [s]
+                  Overhead:           0.011335 [s]
+
+
+Initalization simulation time:        0.261467 [s]
+Equilibration simulation time:        0.000000 [s]
+Production simulation time:           2.393013 [s]
+Total simulation time:                2.654480 [s]
+
+
+Energy averages and statistics:
+===============================================================================
+
+Framework-molecule energy:
+-------------------------------------------------------------------------------
+
+    Framework-molecule energy/kʙ 0-0 [probe]:
+    ---------------------------------------------------------------------------
+        Block[  0] -2.433410e+02
+        Block[  1] -1.922783e+02
+        Block[  2] -2.156078e+02
+        Block[  3] -1.584416e+02
+        Block[  4] -1.948483e+02
+        -----------------------------------------------------------------------
+        Average  -2.009034e+02 +/-  3.891961e+01 [K]
+
+
+
+Framework-molecule energy contributions per energy type:
+-------------------------------------------------------------------------------
+
+    Van der Waals energy/kʙ 0-0 [probe]:
+    ---------------------------------------------------------------------------
+        Block[  0] -2.433410e+02
+        Block[  1] -1.922783e+02
+        Block[  2] -2.156078e+02
+        Block[  3] -1.584416e+02
+        Block[  4] -1.948483e+02
+        -----------------------------------------------------------------------
+        Average  -2.009034e+02 +/-  3.891961e+01 [K]
+
+    VDW Tail-Correction energy/kʙ 0-0 [probe]:
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+    Coulomb Real energy/kʙ 0-0 [probe]:
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+    Coulomb Fourier energy/kʙ 0-0 [probe]:
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+
+
+Inter-molecular energy:
+-------------------------------------------------------------------------------
+
+    Inter-molecular energy/kʙ 0-0 [probe-probe]:
+    ---------------------------------------------------------------------------
+        Block[  0] -1.630983e-03
+        Block[  1] -3.001027e-05
+        Block[  2] -2.086963e-02
+        Block[  3] -2.997034e-03
+        Block[  4] -3.387804e-03
+        -----------------------------------------------------------------------
+        Average  -5.783092e-03 +/-  1.059692e-02 [K]
+
+
+
+Inter-molecular energy contributions per energy type:
+-------------------------------------------------------------------------------
+
+    Van der Waals energy/kʙ 0-0 [probe-probe]:
+    ---------------------------------------------------------------------------
+        Block[  0] -1.630983e-03
+        Block[  1] -3.001027e-05
+        Block[  2] -2.086963e-02
+        Block[  3] -2.997034e-03
+        Block[  4] -3.387804e-03
+        -----------------------------------------------------------------------
+        Average  -5.783092e-03 +/-  1.059692e-02 [K]
+
+    VDW Tail-Correction energy/kʙ 0-0 [probe-probe]:
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+    Coulomb Real energy/kʙ 0-0 [probe-probe]:
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+    Coulomb Fourier energy/kʙ 0-0 [probe-probe]:
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+Intra-molecular energies per energy type:
+-------------------------------------------------------------------------------
+
+
+Kinetic Energies:
+-------------------------------------------------------------------------------
+
+    Translational Kinetic energy/kʙ
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+    Rotational Kinetic energy/kʙ
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+    Nose Hoover energy/kʙ
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+Polarization energy/kʙ
+-------------------------------------------------------------------------------
+    Block[  0]  0.000000e+00
+    Block[  1]  0.000000e+00
+    Block[  2]  0.000000e+00
+    Block[  3]  0.000000e+00
+    Block[  4]  0.000000e+00
+    ---------------------------------------------------------------------------
+    Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+Total energy/kʙ
+-------------------------------------------------------------------------------
+    Block[  0] -2.433426e+02
+    Block[  1] -1.922783e+02
+    Block[  2] -2.156287e+02
+    Block[  3] -1.584446e+02
+    Block[  4] -1.948517e+02
+    ---------------------------------------------------------------------------
+    Average  -2.009092e+02 +/-  3.892187e+01 [K]
+
+Enthalpy of adsorption
+===============================================================================
+
+Component 0 [probe]
+-------------------------------------------------------------------------------
+    Block[  0] -4.149416e+02
+    Block[  1] -4.040151e+02
+    Block[  2] -4.167443e+02
+    Block[  3] -3.848494e+02
+    Block[  4] -4.092713e+02
+    ---------------------------------------------------------------------------
+    Enthalpy of adsorption: -4.059643e+02 +/-  1.591518e+01 [K]
+                            -3.375376e+00 +/-  1.323262e-01 [kJ/mol]
+    Note: need to subtract the ideal-gas energy.
+
+
+LoadingData
+===============================================================================
+
+Component 0 (probe)
+    Block[  0]  1.870000e+00
+    Block[  1]  1.767500e+00
+    Block[  2]  1.907500e+00
+    Block[  3]  1.915000e+00
+    Block[  4]  1.755000e+00
+    ---------------------------------------------------------------------------
+    Abs. loading average   1.843000e+00 +/-  9.519191e-02 [molecules/cell]
+    Abs. loading average   2.303750e-01 +/-  1.189899e-02 [molecules/uc]
+    Abs. loading average   2.380411e-02 +/-  1.229495e-03 [mol/kg-framework]
+    Abs. loading average   9.509267e-01 +/-  4.911586e-02 [mg/g-framework]
+
+    Block[  0] -1.132293e+00
+    Block[  1] -1.234793e+00
+    Block[  2] -1.094793e+00
+    Block[  3] -1.087293e+00
+    Block[  4] -1.247293e+00
+    ---------------------------------------------------------------------------
+    Excess loading average  -1.159293e+00 +/-  9.519191e-02 [molecules/cell]
+    Excess loading average  -1.449116e-01 +/-  1.189899e-02 [molecules/uc]
+    Excess loading average  -1.497338e-02 +/-  1.229495e-03 [mol/kg-framework]
+    Excess loading average  -5.981564e-01 +/-  4.911586e-02 [mg/g-framework]
+
+
+

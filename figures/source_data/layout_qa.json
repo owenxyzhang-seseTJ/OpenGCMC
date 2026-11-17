@@ -1,0 +1,14 @@
+[
+  {
+    "figure": "opengcmc_performance",
+    "status": "PASS",
+    "text_items": 22,
+    "issues": []
+  },
+  {
+    "figure": "opengcmc_architecture",
+    "status": "PASS",
+    "text_items": 32,
+    "issues": []
+  }
+]

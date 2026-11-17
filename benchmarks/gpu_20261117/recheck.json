@@ -1,0 +1,2238 @@
+{
+  "schema": "poremc-v02-shared-RTX-cached-kernel-recheck-v1",
+  "checked_at_Asia_Shanghai": "2026-11-17T19:37:57.597345+08:00",
+  "hostname": "athena-wsl",
+  "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "numpy": "2.4.6",
+  "cpu_model": "12th Gen Intel(R) Core(TM) i7-12700H",
+  "cases": [
+    {
+      "fixture": 0,
+      "supplied_test_status": "PASS",
+      "B": 9,
+      "A": 1,
+      "M": 1,
+      "coulomb": "none",
+      "preprocessing": {
+        "plan_setup_seconds": 0.005385871976613998,
+        "profile": {
+          "energy_calls": 0,
+          "pair_cache_hits": 0,
+          "pair_cache_misses": 0,
+          "pair_cache_bytes": 0,
+          "spatial_plan_bytes": 0,
+          "neighbour_entries": 0,
+          "query_cells": 0,
+          "expanded_plan": 0
+        },
+        "plan_bytes": 116
+      },
+      "comparison": {
+        "original_vs_numpy": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 2372.0465793023996
+        },
+        "cached_vs_numpy": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 2372.0465793023996
+        },
+        "cpu_cell_vs_numpy": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 2372.0465793023996
+        },
+        "cpu_cached_vs_numpy": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 2372.0465793023996
+        },
+        "saved_baseline_vs_numpy": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 2372.0465793023996
+        },
+        "cached_vs_original_now": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 2372.0465793023996
+        }
+      },
+      "cpu": {},
+      "candidate_visits": {
+        "direct_pair_visits": 9,
+        "cached_candidate_visits": 9,
+        "candidate_visit_ratio": 1.0,
+        "indexed": false,
+        "bins": [
+          8,
+          8,
+          8
+        ],
+        "expanded_neighbour_entries": 0
+      },
+      "status": "PASS",
+      "gpu_timing": {
+        "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "compute_major": 8,
+        "compute_minor": 6,
+        "driver": 13000,
+        "runtime": 12080,
+        "setup_ms": 3.906994,
+        "indexed": 0,
+        "original_kernel_ms": [],
+        "cached_kernel_ms": [],
+        "original_coordinate_transfer_call_ms": [],
+        "cached_coordinate_transfer_call_ms": []
+      },
+      "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 42, 195, 48.39",
+      "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 44, 195, 47.88"
+    },
+    {
+      "fixture": 1,
+      "supplied_test_status": "PASS",
+      "B": 9,
+      "A": 1,
+      "M": 1,
+      "coulomb": "dsf",
+      "preprocessing": {
+        "plan_setup_seconds": 0.002861255081370473,
+        "profile": {
+          "energy_calls": 0,
+          "pair_cache_hits": 0,
+          "pair_cache_misses": 0,
+          "pair_cache_bytes": 0,
+          "spatial_plan_bytes": 0,
+          "neighbour_entries": 0,
+          "query_cells": 0,
+          "expanded_plan": 0
+        },
+        "plan_bytes": 116
+      },
+      "comparison": {
+        "original_vs_numpy": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 9.094947017729282e-13,
+          "max_scaled_error": 1.775477854584779e-14,
+          "max_abs_reference_K": 7156.9627822729535
+        },
+        "cached_vs_numpy": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 9.094947017729282e-13,
+          "max_scaled_error": 1.775477854584779e-14,
+          "max_abs_reference_K": 7156.9627822729535
+        },
+        "cpu_cell_vs_numpy": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 7156.9627822729535
+        },
+        "cpu_cached_vs_numpy": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 7156.9627822729535
+        },
+        "saved_baseline_vs_numpy": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 9.094947017729282e-13,
+          "max_scaled_error": 1.7754778667194103e-14,
+          "max_abs_reference_K": 7156.9627822729535
+        },
+        "cached_vs_original_now": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 7156.9627822729535
+        }
+      },
+      "cpu": {},
+      "candidate_visits": {
+        "direct_pair_visits": 9,
+        "cached_candidate_visits": 9,
+        "candidate_visit_ratio": 1.0,
+        "indexed": false,
+        "bins": [
+          8,
+          8,
+          8
+        ],
+        "expanded_neighbour_entries": 0
+      },
+      "status": "PASS",
+      "gpu_timing": {
+        "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "compute_major": 8,
+        "compute_minor": 6,
+        "driver": 13000,
+        "runtime": 12080,
+        "setup_ms": 3.195392,
+        "indexed": 0,
+        "original_kernel_ms": [],
+        "cached_kernel_ms": [],
+        "original_coordinate_transfer_call_ms": [],
+        "cached_coordinate_transfer_call_ms": []
+      },
+      "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 44, 195, 47.78",
+      "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 50, 195, 47.89"
+    },
+    {
+      "fixture": 2,
+      "supplied_test_status": "PASS",
+      "B": 9,
+      "A": 1,
+      "M": 1,
+      "coulomb": "ewald-real",
+      "preprocessing": {
+        "plan_setup_seconds": 0.001903965137898922,
+        "profile": {
+          "energy_calls": 0,
+          "pair_cache_hits": 0,
+          "pair_cache_misses": 0,
+          "pair_cache_bytes": 0,
+          "spatial_plan_bytes": 0,
+          "neighbour_entries": 0,
+          "query_cells": 0,
+          "expanded_plan": 0
+        },
+        "plan_bytes": 116
+      },
+      "comparison": {
+        "original_vs_numpy": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 9.094947017729282e-13,
+          "max_scaled_error": 2.1945969972077248e-16,
+          "max_abs_reference_K": 7852.242596617872
+        },
+        "cached_vs_numpy": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 9.094947017729282e-13,
+          "max_scaled_error": 2.1945969972077248e-16,
+          "max_abs_reference_K": 7852.242596617872
+        },
+        "cpu_cell_vs_numpy": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 7852.242596617872
+        },
+        "cpu_cached_vs_numpy": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 7852.242596617872
+        },
+        "saved_baseline_vs_numpy": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 9.094947017729282e-13,
+          "max_scaled_error": 2.1945969972077248e-16,
+          "max_abs_reference_K": 7852.242596617872
+        },
+        "cached_vs_original_now": {
+          "passed": true,
+          "count": 9,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 7852.242596617872
+        }
+      },
+      "cpu": {},
+      "candidate_visits": {
+        "direct_pair_visits": 9,
+        "cached_candidate_visits": 9,
+        "candidate_visit_ratio": 1.0,
+        "indexed": false,
+        "bins": [
+          8,
+          8,
+          8
+        ],
+        "expanded_neighbour_entries": 0
+      },
+      "status": "PASS",
+      "gpu_timing": {
+        "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "compute_major": 8,
+        "compute_minor": 6,
+        "driver": 13000,
+        "runtime": 12080,
+        "setup_ms": 3.06748,
+        "indexed": 0,
+        "original_kernel_ms": [],
+        "cached_kernel_ms": [],
+        "original_coordinate_transfer_call_ms": [],
+        "cached_coordinate_transfer_call_ms": []
+      },
+      "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 42, 195, 48.00",
+      "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 42, 195, 47.96"
+    },
+    {
+      "fixture": 3,
+      "supplied_test_status": "PASS",
+      "B": 17,
+      "A": 4,
+      "M": 257,
+      "coulomb": "none",
+      "preprocessing": {
+        "plan_setup_seconds": 0.01192664890550077,
+        "profile": {
+          "energy_calls": 0,
+          "pair_cache_hits": 0,
+          "pair_cache_misses": 0,
+          "pair_cache_bytes": 0,
+          "spatial_plan_bytes": 161276,
+          "neighbour_entries": 32125,
+          "query_cells": 4096,
+          "expanded_plan": 1
+        },
+        "plan_bytes": 175732
+      },
+      "comparison": {
+        "original_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 6.821210263296962e-12,
+          "max_scaled_error": 2.1690110828379057e-15,
+          "max_abs_reference_K": 3144.8480449312315
+        },
+        "cached_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 6.821210263296962e-12,
+          "max_scaled_error": 2.1690110828379057e-15,
+          "max_abs_reference_K": 3144.8480449312315
+        },
+        "cpu_cell_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 6.821210263296962e-12,
+          "max_scaled_error": 2.1690110828379057e-15,
+          "max_abs_reference_K": 3144.8480449312315
+        },
+        "cpu_cached_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 6.821210263296962e-12,
+          "max_scaled_error": 2.1690110828379057e-15,
+          "max_abs_reference_K": 3144.8480449312315
+        },
+        "saved_baseline_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 6.821210263296962e-12,
+          "max_scaled_error": 2.1690110828379057e-15,
+          "max_abs_reference_K": 3144.8480449312315
+        },
+        "cached_vs_original_now": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 2.2737367544323206e-13,
+          "max_scaled_error": 2.643854912505028e-16,
+          "max_abs_reference_K": 3144.8480449312383
+        }
+      },
+      "cpu": {},
+      "candidate_visits": {
+        "direct_pair_visits": 17476,
+        "cached_candidate_visits": 566,
+        "candidate_visit_ratio": 30.87632508833922,
+        "indexed": true,
+        "bins": [
+          16,
+          16,
+          16
+        ],
+        "expanded_neighbour_entries": 32125
+      },
+      "status": "PASS",
+      "gpu_timing": {
+        "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "compute_major": 8,
+        "compute_minor": 6,
+        "driver": 13000,
+        "runtime": 12080,
+        "setup_ms": 3.223918,
+        "indexed": 1,
+        "original_kernel_ms": [],
+        "cached_kernel_ms": [],
+        "original_coordinate_transfer_call_ms": [],
+        "cached_coordinate_transfer_call_ms": []
+      },
+      "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 39, 195, 47.66",
+      "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 48, 195, 47.86"
+    },
+    {
+      "fixture": 4,
+      "supplied_test_status": "PASS",
+      "B": 17,
+      "A": 4,
+      "M": 257,
+      "coulomb": "dsf",
+      "preprocessing": {
+        "plan_setup_seconds": 0.011025283951312304,
+        "profile": {
+          "energy_calls": 0,
+          "pair_cache_hits": 0,
+          "pair_cache_misses": 0,
+          "pair_cache_bytes": 0,
+          "spatial_plan_bytes": 161276,
+          "neighbour_entries": 32125,
+          "query_cells": 4096,
+          "expanded_plan": 1
+        },
+        "plan_bytes": 175732
+      },
+      "comparison": {
+        "original_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 7.275957614183426e-12,
+          "max_scaled_error": 2.371593506356145e-15,
+          "max_abs_reference_K": 3067.961518145086
+        },
+        "cached_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 6.821210263296962e-12,
+          "max_scaled_error": 2.2233689122088857e-15,
+          "max_abs_reference_K": 3067.961518145086
+        },
+        "cpu_cell_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 6.821210263296962e-12,
+          "max_scaled_error": 2.2233689122088857e-15,
+          "max_abs_reference_K": 3067.961518145086
+        },
+        "cpu_cached_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 6.821210263296962e-12,
+          "max_scaled_error": 2.2233689122088857e-15,
+          "max_abs_reference_K": 3067.961518145086
+        },
+        "saved_baseline_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 7.275957614183426e-12,
+          "max_scaled_error": 8.726797590179322e-15,
+          "max_abs_reference_K": 3067.961518145086
+        },
+        "cached_vs_original_now": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 4.547473508864641e-13,
+          "max_scaled_error": 2.624907689780319e-16,
+          "max_abs_reference_K": 3067.961518145093
+        }
+      },
+      "cpu": {},
+      "candidate_visits": {
+        "direct_pair_visits": 17476,
+        "cached_candidate_visits": 566,
+        "candidate_visit_ratio": 30.87632508833922,
+        "indexed": true,
+        "bins": [
+          16,
+          16,
+          16
+        ],
+        "expanded_neighbour_entries": 32125
+      },
+      "status": "PASS",
+      "gpu_timing": {
+        "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "compute_major": 8,
+        "compute_minor": 6,
+        "driver": 13000,
+        "runtime": 12080,
+        "setup_ms": 2.736574,
+        "indexed": 1,
+        "original_kernel_ms": [],
+        "cached_kernel_ms": [],
+        "original_coordinate_transfer_call_ms": [],
+        "cached_coordinate_transfer_call_ms": []
+      },
+      "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 45, 195, 48.01",
+      "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 48, 195, 48.38"
+    },
+    {
+      "fixture": 5,
+      "supplied_test_status": "PASS",
+      "B": 17,
+      "A": 4,
+      "M": 257,
+      "coulomb": "ewald-real",
+      "preprocessing": {
+        "plan_setup_seconds": 0.007491750875487924,
+        "profile": {
+          "energy_calls": 0,
+          "pair_cache_hits": 0,
+          "pair_cache_misses": 0,
+          "pair_cache_bytes": 0,
+          "spatial_plan_bytes": 161276,
+          "neighbour_entries": 32125,
+          "query_cells": 4096,
+          "expanded_plan": 1
+        },
+        "plan_bytes": 175732
+      },
+      "comparison": {
+        "original_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 6.821210263296962e-12,
+          "max_scaled_error": 2.2186235278918007e-15,
+          "max_abs_reference_K": 3074.523540178387
+        },
+        "cached_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 7.275957614183426e-12,
+          "max_scaled_error": 2.3665317630845876e-15,
+          "max_abs_reference_K": 3074.523540178387
+        },
+        "cpu_cell_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 6.821210263296962e-12,
+          "max_scaled_error": 2.2186235278918007e-15,
+          "max_abs_reference_K": 3074.523540178387
+        },
+        "cpu_cached_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 6.821210263296962e-12,
+          "max_scaled_error": 2.2186235278918007e-15,
+          "max_abs_reference_K": 3074.523540178387
+        },
+        "saved_baseline_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 6.821210263296962e-12,
+          "max_scaled_error": 2.2186235278918007e-15,
+          "max_abs_reference_K": 3074.523540178387
+        },
+        "cached_vs_original_now": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 4.547473508864641e-13,
+          "max_scaled_error": 6.488818937961432e-16,
+          "max_abs_reference_K": 3074.523540178394
+        }
+      },
+      "cpu": {},
+      "candidate_visits": {
+        "direct_pair_visits": 17476,
+        "cached_candidate_visits": 566,
+        "candidate_visit_ratio": 30.87632508833922,
+        "indexed": true,
+        "bins": [
+          16,
+          16,
+          16
+        ],
+        "expanded_neighbour_entries": 32125
+      },
+      "status": "PASS",
+      "gpu_timing": {
+        "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "compute_major": 8,
+        "compute_minor": 6,
+        "driver": 13000,
+        "runtime": 12080,
+        "setup_ms": 3.558672,
+        "indexed": 1,
+        "original_kernel_ms": [],
+        "cached_kernel_ms": [],
+        "original_coordinate_transfer_call_ms": [],
+        "cached_coordinate_transfer_call_ms": []
+      },
+      "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 46, 195, 49.10",
+      "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 45, 195, 48.28"
+    },
+    {
+      "fixture": 6,
+      "supplied_test_status": "PASS",
+      "B": 17,
+      "A": 4,
+      "M": 257,
+      "coulomb": "none",
+      "preprocessing": {
+        "plan_setup_seconds": 0.006454463116824627,
+        "profile": {
+          "energy_calls": 0,
+          "pair_cache_hits": 0,
+          "pair_cache_misses": 0,
+          "pair_cache_bytes": 0,
+          "spatial_plan_bytes": 155388,
+          "neighbour_entries": 32125,
+          "query_cells": 3360,
+          "expanded_plan": 1
+        },
+        "plan_bytes": 169844
+      },
+      "comparison": {
+        "original_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 1.7053025658242404e-13,
+          "max_scaled_error": 4.057184941976231e-15,
+          "max_abs_reference_K": 161.05566958114787
+        },
+        "cached_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 1.7053025658242404e-13,
+          "max_scaled_error": 2.497037287207075e-15,
+          "max_abs_reference_K": 161.05566958114787
+        },
+        "cpu_cell_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 1.2789769243681803e-13,
+          "max_scaled_error": 3.7565605843301415e-15,
+          "max_abs_reference_K": 161.05566958114787
+        },
+        "cpu_cached_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 1.2789769243681803e-13,
+          "max_scaled_error": 3.7565605843301415e-15,
+          "max_abs_reference_K": 161.05566958114787
+        },
+        "saved_baseline_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 5.8832938520936295e-12,
+          "max_scaled_error": 6.543586321161838e-14,
+          "max_abs_reference_K": 161.05566958114787
+        },
+        "cached_vs_original_now": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 2.1316282072803006e-13,
+          "max_scaled_error": 3.71908619681156e-15,
+          "max_abs_reference_K": 161.05566958114787
+        }
+      },
+      "cpu": {},
+      "candidate_visits": {
+        "direct_pair_visits": 17476,
+        "cached_candidate_visits": 691,
+        "candidate_visit_ratio": 25.290882778581764,
+        "indexed": true,
+        "bins": [
+          14,
+          15,
+          16
+        ],
+        "expanded_neighbour_entries": 32125
+      },
+      "status": "PASS",
+      "gpu_timing": {
+        "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "compute_major": 8,
+        "compute_minor": 6,
+        "driver": 13000,
+        "runtime": 12080,
+        "setup_ms": 9.770239,
+        "indexed": 1,
+        "original_kernel_ms": [],
+        "cached_kernel_ms": [],
+        "original_coordinate_transfer_call_ms": [],
+        "cached_coordinate_transfer_call_ms": []
+      },
+      "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 41, 195, 46.91",
+      "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 50, 195, 48.35"
+    },
+    {
+      "fixture": 7,
+      "supplied_test_status": "PASS",
+      "B": 17,
+      "A": 4,
+      "M": 257,
+      "coulomb": "dsf",
+      "preprocessing": {
+        "plan_setup_seconds": 0.006221188930794597,
+        "profile": {
+          "energy_calls": 0,
+          "pair_cache_hits": 0,
+          "pair_cache_misses": 0,
+          "pair_cache_bytes": 0,
+          "spatial_plan_bytes": 155388,
+          "neighbour_entries": 32125,
+          "query_cells": 3360,
+          "expanded_plan": 1
+        },
+        "plan_bytes": 169844
+      },
+      "comparison": {
+        "original_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 5.400124791776761e-13,
+          "max_scaled_error": 8.745960979023839e-15,
+          "max_abs_reference_K": 246.90257051398004
+        },
+        "cached_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 7.105427357601002e-14,
+          "max_scaled_error": 1.3366013061548307e-15,
+          "max_abs_reference_K": 246.90257051398004
+        },
+        "cpu_cell_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 2.1316282072803006e-13,
+          "max_scaled_error": 1.269771240847089e-14,
+          "max_abs_reference_K": 246.90257051398004
+        },
+        "cpu_cached_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 2.1316282072803006e-13,
+          "max_scaled_error": 1.269771240847089e-14,
+          "max_abs_reference_K": 246.90257051398004
+        },
+        "saved_baseline_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 5.6559201766503975e-12,
+          "max_scaled_error": 1.6135598807672226e-13,
+          "max_abs_reference_K": 246.90257051398004
+        },
+        "cached_vs_original_now": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 5.400124791776761e-13,
+          "max_scaled_error": 9.047545840369567e-15,
+          "max_abs_reference_K": 246.90257051398058
+        }
+      },
+      "cpu": {},
+      "candidate_visits": {
+        "direct_pair_visits": 17476,
+        "cached_candidate_visits": 691,
+        "candidate_visit_ratio": 25.290882778581764,
+        "indexed": true,
+        "bins": [
+          14,
+          15,
+          16
+        ],
+        "expanded_neighbour_entries": 32125
+      },
+      "status": "PASS",
+      "gpu_timing": {
+        "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "compute_major": 8,
+        "compute_minor": 6,
+        "driver": 13000,
+        "runtime": 12080,
+        "setup_ms": 7.545462,
+        "indexed": 1,
+        "original_kernel_ms": [],
+        "cached_kernel_ms": [],
+        "original_coordinate_transfer_call_ms": [],
+        "cached_coordinate_transfer_call_ms": []
+      },
+      "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 45, 195, 48.60",
+      "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 80, 46, 195, 47.65"
+    },
+    {
+      "fixture": 8,
+      "supplied_test_status": "PASS",
+      "B": 17,
+      "A": 4,
+      "M": 257,
+      "coulomb": "ewald-real",
+      "preprocessing": {
+        "plan_setup_seconds": 0.008086459012702107,
+        "profile": {
+          "energy_calls": 0,
+          "pair_cache_hits": 0,
+          "pair_cache_misses": 0,
+          "pair_cache_bytes": 0,
+          "spatial_plan_bytes": 155388,
+          "neighbour_entries": 32125,
+          "query_cells": 3360,
+          "expanded_plan": 1
+        },
+        "plan_bytes": 169844
+      },
+      "comparison": {
+        "original_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 4.547473508864641e-13,
+          "max_scaled_error": 1.2168044349891716e-13,
+          "max_abs_reference_K": 293.9865834638917
+        },
+        "cached_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 5.684341886080802e-14,
+          "max_scaled_error": 2.1316282072803006e-14,
+          "max_abs_reference_K": 293.9865834638917
+        },
+        "cpu_cell_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 2.5579538487363607e-13,
+          "max_scaled_error": 4.0368313540781635e-14,
+          "max_abs_reference_K": 293.9865834638917
+        },
+        "cpu_cached_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 2.5579538487363607e-13,
+          "max_scaled_error": 4.0368313540781635e-14,
+          "max_abs_reference_K": 293.9865834638917
+        },
+        "saved_baseline_vs_numpy": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 5.6772364587232005e-12,
+          "max_scaled_error": 1.6650205895751636e-13,
+          "max_abs_reference_K": 293.9865834638917
+        },
+        "cached_vs_original_now": {
+          "passed": true,
+          "count": 17,
+          "finite_count": 17,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 5.115907697472721e-13,
+          "max_scaled_error": 1.4299672557172016e-13,
+          "max_abs_reference_K": 293.98658346389215
+        }
+      },
+      "cpu": {},
+      "candidate_visits": {
+        "direct_pair_visits": 17476,
+        "cached_candidate_visits": 691,
+        "candidate_visit_ratio": 25.290882778581764,
+        "indexed": true,
+        "bins": [
+          14,
+          15,
+          16
+        ],
+        "expanded_neighbour_entries": 32125
+      },
+      "status": "PASS",
+      "gpu_timing": {
+        "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "compute_major": 8,
+        "compute_minor": 6,
+        "driver": 13000,
+        "runtime": 12080,
+        "setup_ms": 3.706837,
+        "indexed": 1,
+        "original_kernel_ms": [],
+        "cached_kernel_ms": [],
+        "original_coordinate_transfer_call_ms": [],
+        "cached_coordinate_transfer_call_ms": []
+      },
+      "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 80, 46, 195, 48.28",
+      "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 50, 195, 48.93"
+    },
+    {
+      "fixture": 9,
+      "supplied_test_status": "PASS",
+      "B": 7,
+      "A": 4,
+      "M": 0,
+      "coulomb": "none",
+      "preprocessing": {
+        "plan_setup_seconds": 0.001639041118323803,
+        "profile": {
+          "energy_calls": 0,
+          "pair_cache_hits": 0,
+          "pair_cache_misses": 0,
+          "pair_cache_bytes": 0,
+          "spatial_plan_bytes": 0,
+          "neighbour_entries": 0,
+          "query_cells": 0,
+          "expanded_plan": 0
+        },
+        "plan_bytes": 72
+      },
+      "comparison": {
+        "original_vs_numpy": {
+          "passed": true,
+          "count": 7,
+          "finite_count": 7,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        },
+        "cached_vs_numpy": {
+          "passed": true,
+          "count": 7,
+          "finite_count": 7,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        },
+        "cpu_cell_vs_numpy": {
+          "passed": true,
+          "count": 7,
+          "finite_count": 7,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        },
+        "cpu_cached_vs_numpy": {
+          "passed": true,
+          "count": 7,
+          "finite_count": 7,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        },
+        "saved_baseline_vs_numpy": {
+          "passed": true,
+          "count": 7,
+          "finite_count": 7,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        },
+        "cached_vs_original_now": {
+          "passed": true,
+          "count": 7,
+          "finite_count": 7,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        }
+      },
+      "cpu": {},
+      "candidate_visits": {
+        "direct_pair_visits": 0,
+        "cached_candidate_visits": 0,
+        "candidate_visit_ratio": null,
+        "indexed": false,
+        "bins": [
+          16,
+          16,
+          16
+        ],
+        "expanded_neighbour_entries": 0
+      },
+      "status": "PASS",
+      "gpu_timing": {
+        "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "compute_major": 8,
+        "compute_minor": 6,
+        "driver": 13000,
+        "runtime": 12080,
+        "setup_ms": 3.970477,
+        "indexed": 0,
+        "original_kernel_ms": [],
+        "cached_kernel_ms": [],
+        "original_coordinate_transfer_call_ms": [],
+        "cached_coordinate_transfer_call_ms": []
+      },
+      "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 45, 195, 48.74",
+      "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 45, 195, 49.46"
+    },
+    {
+      "fixture": 10,
+      "supplied_test_status": "PASS",
+      "B": 0,
+      "A": 4,
+      "M": 3,
+      "coulomb": "none",
+      "preprocessing": {
+        "plan_setup_seconds": 0.0018886008765548468,
+        "profile": {
+          "energy_calls": 0,
+          "pair_cache_hits": 0,
+          "pair_cache_misses": 0,
+          "pair_cache_bytes": 0,
+          "spatial_plan_bytes": 0,
+          "neighbour_entries": 0,
+          "query_cells": 0,
+          "expanded_plan": 0
+        },
+        "plan_bytes": 240
+      },
+      "comparison": {
+        "original_vs_numpy": {
+          "passed": true,
+          "count": 0,
+          "finite_count": 0,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        },
+        "cached_vs_numpy": {
+          "passed": true,
+          "count": 0,
+          "finite_count": 0,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        },
+        "cpu_cell_vs_numpy": {
+          "passed": true,
+          "count": 0,
+          "finite_count": 0,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        },
+        "cpu_cached_vs_numpy": {
+          "passed": true,
+          "count": 0,
+          "finite_count": 0,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        },
+        "saved_baseline_vs_numpy": {
+          "passed": true,
+          "count": 0,
+          "finite_count": 0,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        },
+        "cached_vs_original_now": {
+          "passed": true,
+          "count": 0,
+          "finite_count": 0,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        }
+      },
+      "cpu": {},
+      "candidate_visits": {
+        "direct_pair_visits": 0,
+        "cached_candidate_visits": 0,
+        "candidate_visit_ratio": null,
+        "indexed": false,
+        "bins": [
+          16,
+          16,
+          16
+        ],
+        "expanded_neighbour_entries": 0
+      },
+      "status": "PASS",
+      "gpu_timing": {
+        "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "compute_major": 8,
+        "compute_minor": 6,
+        "driver": 13000,
+        "runtime": 12080,
+        "setup_ms": 4.693119,
+        "indexed": 0,
+        "original_kernel_ms": [],
+        "cached_kernel_ms": [],
+        "original_coordinate_transfer_call_ms": [],
+        "cached_coordinate_transfer_call_ms": []
+      },
+      "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 45, 195, 48.08",
+      "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 41, 195, 47.34"
+    },
+    {
+      "fixture": 11,
+      "supplied_test_status": "PASS",
+      "B": 7,
+      "A": 0,
+      "M": 3,
+      "coulomb": "none",
+      "preprocessing": {
+        "plan_setup_seconds": 0.004895304096862674,
+        "profile": {
+          "energy_calls": 0,
+          "pair_cache_hits": 0,
+          "pair_cache_misses": 0,
+          "pair_cache_bytes": 0,
+          "spatial_plan_bytes": 0,
+          "neighbour_entries": 0,
+          "query_cells": 0,
+          "expanded_plan": 0
+        },
+        "plan_bytes": 128
+      },
+      "comparison": {
+        "original_vs_numpy": {
+          "passed": true,
+          "count": 7,
+          "finite_count": 7,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        },
+        "cached_vs_numpy": {
+          "passed": true,
+          "count": 7,
+          "finite_count": 7,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        },
+        "cpu_cell_vs_numpy": {
+          "passed": true,
+          "count": 7,
+          "finite_count": 7,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        },
+        "cpu_cached_vs_numpy": {
+          "passed": true,
+          "count": 7,
+          "finite_count": 7,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        },
+        "saved_baseline_vs_numpy": {
+          "passed": true,
+          "count": 7,
+          "finite_count": 7,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        },
+        "cached_vs_original_now": {
+          "passed": true,
+          "count": 7,
+          "finite_count": 7,
+          "mismatches": 0,
+          "rtol": 2e-11,
+          "atol_K": 1e-07,
+          "max_abs_error_K": 0.0,
+          "max_scaled_error": 0.0,
+          "max_abs_reference_K": 0.0
+        }
+      },
+      "cpu": {},
+      "candidate_visits": {
+        "direct_pair_visits": 0,
+        "cached_candidate_visits": 0,
+        "candidate_visit_ratio": null,
+        "indexed": false,
+        "bins": [
+          16,
+          16,
+          16
+        ],
+        "expanded_neighbour_entries": 0
+      },
+      "status": "PASS",
+      "gpu_timing": {
+        "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "compute_major": 8,
+        "compute_minor": 6,
+        "driver": 13000,
+        "runtime": 12080,
+        "setup_ms": 1.808927,
+        "indexed": 0,
+        "original_kernel_ms": [],
+        "cached_kernel_ms": [],
+        "original_coordinate_transfer_call_ms": [],
+        "cached_coordinate_transfer_call_ms": []
+      },
+      "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 41, 195, 48.77",
+      "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 45, 195, 47.88"
+    },
+    {
+      "fixture": 12,
+      "supplied_test_status": "PASS",
+      "B": 8,
+      "A": 4,
+      "M": 2500,
+      "coulomb": "none",
+      "preprocessing": {
+        "plan_setup_seconds": 0.025574343977496028,
+        "profile": {
+          "energy_calls": 0,
+          "pair_cache_hits": 0,
+          "pair_cache_misses": 0,
+          "pair_cache_bytes": 0,
+          "spatial_plan_bytes": 1277008,
+          "neighbour_entries": 312500,
+          "query_cells": 3375,
+          "expanded_plan": 1
+        },
+        "plan_bytes": 1417072
+      },
+      "comparison": {
+        "original_vs_numpy": {
+          "passed": true,
+          "count": 8,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 3.725290298461914e-09,
+          "max_scaled_error": 1.5207450825090223e-14,
+          "max_abs_reference_K": 30698120.376920536
+        },
+        "cached_vs_numpy": {
+          "passed": true,
+          "count": 8,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 3.725290298461914e-09,
+          "max_scaled_error": 4.192613589950584e-16,
+          "max_abs_reference_K": 30698120.376920536
+        },
+        "cpu_cell_vs_numpy": {
+          "passed": true,
+          "count": 8,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 1.862645149230957e-09,
+          "max_scaled_error": 5.590151453267446e-16,
+          "max_abs_reference_K": 30698120.376920536
+        },
+        "cpu_cached_vs_numpy": {
+          "passed": true,
+          "count": 8,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 7.450580596923828e-09,
+          "max_scaled_error": 5.590151453267446e-16,
+          "max_abs_reference_K": 30698120.376920536
+        },
+        "saved_baseline_vs_numpy": {
+          "passed": true,
+          "count": 8,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 3.725290298461914e-09,
+          "max_scaled_error": 1.50796571206777e-14,
+          "max_abs_reference_K": 30698120.376920536
+        },
+        "cached_vs_original_now": {
+          "passed": true,
+          "count": 8,
+          "finite_count": 8,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 4.256435204297304e-10,
+          "max_scaled_error": 1.495186341626495e-14,
+          "max_abs_reference_K": 30698120.37692054
+        }
+      },
+      "cpu": {
+        "cell": {
+          "setup_ms": 0.8980040438473225,
+          "samples_ms": [
+            0.22096000611782074,
+            0.21117203868925571,
+            0.22639194503426552
+          ],
+          "median_ms": 0.22096000611782074,
+          "profile_after_first": {
+            "energy_calls": 1,
+            "pair_cache_hits": 0,
+            "pair_cache_misses": 0,
+            "pair_cache_bytes": 0,
+            "spatial_plan_bytes": 0,
+            "neighbour_entries": 0,
+            "query_cells": 0,
+            "expanded_plan": 0
+          },
+          "profile_after_repeated_calls": {
+            "energy_calls": 4,
+            "pair_cache_hits": 0,
+            "pair_cache_misses": 0,
+            "pair_cache_bytes": 0,
+            "spatial_plan_bytes": 0,
+            "neighbour_entries": 0,
+            "query_cells": 0,
+            "expanded_plan": 0
+          }
+        },
+        "cached": {
+          "setup_ms": 14.766611158847809,
+          "samples_ms": [
+            0.1974380575120449,
+            0.17543905414640903,
+            0.19154604524374008
+          ],
+          "median_ms": 0.19154604524374008,
+          "profile_after_first": {
+            "energy_calls": 1,
+            "pair_cache_hits": 3,
+            "pair_cache_misses": 1,
+            "pair_cache_bytes": 80000,
+            "spatial_plan_bytes": 1277008,
+            "neighbour_entries": 312500,
+            "query_cells": 3375,
+            "expanded_plan": 1
+          },
+          "profile_after_repeated_calls": {
+            "energy_calls": 4,
+            "pair_cache_hits": 15,
+            "pair_cache_misses": 1,
+            "pair_cache_bytes": 80000,
+            "spatial_plan_bytes": 1277008,
+            "neighbour_entries": 312500,
+            "query_cells": 3375,
+            "expanded_plan": 1
+          }
+        }
+      },
+      "candidate_visits": {
+        "direct_pair_visits": 80000,
+        "cached_candidate_visits": 2931,
+        "candidate_visit_ratio": 27.294438758103038,
+        "indexed": true,
+        "bins": [
+          15,
+          15,
+          15
+        ],
+        "expanded_neighbour_entries": 312500
+      },
+      "status": "PASS",
+      "gpu_timing": {
+        "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "compute_major": 8,
+        "compute_minor": 6,
+        "driver": 13000,
+        "runtime": 12080,
+        "setup_ms": 6.256276,
+        "indexed": 1,
+        "original_kernel_ms": [
+          0.358271986246109,
+          0.23244799673557281,
+          0.35603201389312744
+        ],
+        "cached_kernel_ms": [
+          0.013311999849975109,
+          0.2155199944972992,
+          0.013311999849975109
+        ],
+        "original_coordinate_transfer_call_ms": [
+          0.566436,
+          0.460437,
+          0.865724
+        ],
+        "cached_coordinate_transfer_call_ms": [
+          0.56005,
+          0.332023,
+          0.675248
+        ],
+        "original_kernel_ms_median": 0.35603201389312744,
+        "cached_kernel_ms_median": 0.013311999849975109,
+        "original_coordinate_transfer_call_ms_median": 0.566436,
+        "cached_coordinate_transfer_call_ms_median": 0.56005
+      },
+      "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 42, 195, 48.00",
+      "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 45, 195, 47.74"
+    },
+    {
+      "fixture": 13,
+      "supplied_test_status": "PASS",
+      "B": 64,
+      "A": 4,
+      "M": 2500,
+      "coulomb": "none",
+      "preprocessing": {
+        "plan_setup_seconds": 0.02468157303519547,
+        "profile": {
+          "energy_calls": 0,
+          "pair_cache_hits": 0,
+          "pair_cache_misses": 0,
+          "pair_cache_bytes": 0,
+          "spatial_plan_bytes": 1277008,
+          "neighbour_entries": 312500,
+          "query_cells": 3375,
+          "expanded_plan": 1
+        },
+        "plan_bytes": 1417072
+      },
+      "comparison": {
+        "original_vs_numpy": {
+          "passed": true,
+          "count": 64,
+          "finite_count": 64,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 0.09375,
+          "max_scaled_error": 3.778227253726778e-14,
+          "max_abs_reference_K": 187619666411946.3
+        },
+        "cached_vs_numpy": {
+          "passed": true,
+          "count": 64,
+          "finite_count": 64,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 0.0625,
+          "max_scaled_error": 1.655133639518357e-15,
+          "max_abs_reference_K": 187619666411946.3
+        },
+        "cpu_cell_vs_numpy": {
+          "passed": true,
+          "count": 64,
+          "finite_count": 64,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 0.125,
+          "max_scaled_error": 1.4186859767300202e-15,
+          "max_abs_reference_K": 187619666411946.3
+        },
+        "cpu_cached_vs_numpy": {
+          "passed": true,
+          "count": 64,
+          "finite_count": 64,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 0.0625,
+          "max_scaled_error": 1.602831255214494e-15,
+          "max_abs_reference_K": 187619666411946.3
+        },
+        "saved_baseline_vs_numpy": {
+          "passed": true,
+          "count": 64,
+          "finite_count": 64,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 0.09375,
+          "max_scaled_error": 3.778227253726778e-14,
+          "max_abs_reference_K": 187619666411946.3
+        },
+        "cached_vs_original_now": {
+          "passed": true,
+          "count": 64,
+          "finite_count": 64,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 0.03125,
+          "max_scaled_error": 3.812574774215347e-14,
+          "max_abs_reference_K": 187619666411946.4
+        }
+      },
+      "cpu": {
+        "cell": {
+          "setup_ms": 0.7898830808699131,
+          "samples_ms": [
+            1.0705138556659222,
+            2.077943878248334,
+            3.3925860188901424
+          ],
+          "median_ms": 2.077943878248334,
+          "profile_after_first": {
+            "energy_calls": 1,
+            "pair_cache_hits": 0,
+            "pair_cache_misses": 0,
+            "pair_cache_bytes": 0,
+            "spatial_plan_bytes": 0,
+            "neighbour_entries": 0,
+            "query_cells": 0,
+            "expanded_plan": 0
+          },
+          "profile_after_repeated_calls": {
+            "energy_calls": 4,
+            "pair_cache_hits": 0,
+            "pair_cache_misses": 0,
+            "pair_cache_bytes": 0,
+            "spatial_plan_bytes": 0,
+            "neighbour_entries": 0,
+            "query_cells": 0,
+            "expanded_plan": 0
+          }
+        },
+        "cached": {
+          "setup_ms": 17.758555011823773,
+          "samples_ms": [
+            0.975404167547822,
+            1.2896270491182804,
+            1.0421040933579206
+          ],
+          "median_ms": 1.0421040933579206,
+          "profile_after_first": {
+            "energy_calls": 1,
+            "pair_cache_hits": 3,
+            "pair_cache_misses": 1,
+            "pair_cache_bytes": 80000,
+            "spatial_plan_bytes": 1277008,
+            "neighbour_entries": 312500,
+            "query_cells": 3375,
+            "expanded_plan": 1
+          },
+          "profile_after_repeated_calls": {
+            "energy_calls": 4,
+            "pair_cache_hits": 15,
+            "pair_cache_misses": 1,
+            "pair_cache_bytes": 80000,
+            "spatial_plan_bytes": 1277008,
+            "neighbour_entries": 312500,
+            "query_cells": 3375,
+            "expanded_plan": 1
+          }
+        }
+      },
+      "candidate_visits": {
+        "direct_pair_visits": 640000,
+        "cached_candidate_visits": 23518,
+        "candidate_visit_ratio": 27.213198401224595,
+        "indexed": true,
+        "bins": [
+          15,
+          15,
+          15
+        ],
+        "expanded_neighbour_entries": 312500
+      },
+      "status": "PASS",
+      "gpu_timing": {
+        "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "compute_major": 8,
+        "compute_minor": 6,
+        "driver": 13000,
+        "runtime": 12080,
+        "setup_ms": 3.716869,
+        "indexed": 1,
+        "original_kernel_ms": [
+          0.8637760281562805,
+          0.7680000066757202,
+          1.0249919891357422
+        ],
+        "cached_kernel_ms": [
+          0.02969600073993206,
+          0.2094080001115799,
+          0.028672000393271446
+        ],
+        "original_coordinate_transfer_call_ms": [
+          0.997977,
+          1.01523,
+          1.242604
+        ],
+        "cached_coordinate_transfer_call_ms": [
+          0.748053,
+          0.335722,
+          0.252188
+        ],
+        "original_kernel_ms_median": 0.8637760281562805,
+        "cached_kernel_ms_median": 0.02969600073993206,
+        "original_coordinate_transfer_call_ms_median": 1.01523,
+        "cached_coordinate_transfer_call_ms_median": 0.335722
+      },
+      "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 41, 195, 47.83",
+      "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 50, 195, 48.36"
+    },
+    {
+      "fixture": 14,
+      "supplied_test_status": "PASS",
+      "B": 128,
+      "A": 4,
+      "M": 32000,
+      "coulomb": "none",
+      "preprocessing": {
+        "plan_setup_seconds": 0.2729301070794463,
+        "profile": {
+          "energy_calls": 0,
+          "pair_cache_hits": 0,
+          "pair_cache_misses": 0,
+          "pair_cache_bytes": 0,
+          "spatial_plan_bytes": 16512008,
+          "neighbour_entries": 4000000,
+          "query_cells": 64000,
+          "expanded_plan": 1
+        },
+        "plan_bytes": 18304072
+      },
+      "comparison": {
+        "original_vs_numpy": {
+          "passed": true,
+          "count": 128,
+          "finite_count": 128,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 7.62939453125e-05,
+          "max_scaled_error": 1.2402572733394117e-13,
+          "max_abs_reference_K": 91027275215.88202
+        },
+        "cached_vs_numpy": {
+          "passed": true,
+          "count": 128,
+          "finite_count": 128,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 6.103515625e-05,
+          "max_scaled_error": 6.24781863878779e-15,
+          "max_abs_reference_K": 91027275215.88202
+        },
+        "cpu_cell_vs_numpy": {
+          "passed": true,
+          "count": 128,
+          "finite_count": 128,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 7.62939453125e-05,
+          "max_scaled_error": 6.24781863878779e-15,
+          "max_abs_reference_K": 91027275215.88202
+        },
+        "cpu_cached_vs_numpy": {
+          "passed": true,
+          "count": 128,
+          "finite_count": 128,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 7.62939453125e-05,
+          "max_scaled_error": 6.24781863878779e-15,
+          "max_abs_reference_K": 91027275215.88202
+        },
+        "saved_baseline_vs_numpy": {
+          "passed": true,
+          "count": 128,
+          "finite_count": 128,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 7.62939453125e-05,
+          "max_scaled_error": 1.2402572733394117e-13,
+          "max_abs_reference_K": 91027275215.88202
+        },
+        "cached_vs_original_now": {
+          "passed": true,
+          "count": 128,
+          "finite_count": 128,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 1.52587890625e-05,
+          "max_scaled_error": 1.2402572733395657e-13,
+          "max_abs_reference_K": 91027275215.88194
+        }
+      },
+      "cpu": {
+        "cell": {
+          "setup_ms": 14.148676069453359,
+          "samples_ms": [
+            2.0685710478574038,
+            1.9860051106661558,
+            1.8221081700176
+          ],
+          "median_ms": 1.9860051106661558,
+          "profile_after_first": {
+            "energy_calls": 1,
+            "pair_cache_hits": 0,
+            "pair_cache_misses": 0,
+            "pair_cache_bytes": 0,
+            "spatial_plan_bytes": 0,
+            "neighbour_entries": 0,
+            "query_cells": 0,
+            "expanded_plan": 0
+          },
+          "profile_after_repeated_calls": {
+            "energy_calls": 4,
+            "pair_cache_hits": 0,
+            "pair_cache_misses": 0,
+            "pair_cache_bytes": 0,
+            "spatial_plan_bytes": 0,
+            "neighbour_entries": 0,
+            "query_cells": 0,
+            "expanded_plan": 0
+          }
+        },
+        "cached": {
+          "setup_ms": 257.93323409743607,
+          "samples_ms": [
+            1.6901080962270498,
+            1.8366819713264704,
+            1.6642999835312366
+          ],
+          "median_ms": 1.6901080962270498,
+          "profile_after_first": {
+            "energy_calls": 1,
+            "pair_cache_hits": 3,
+            "pair_cache_misses": 1,
+            "pair_cache_bytes": 1024000,
+            "spatial_plan_bytes": 16512008,
+            "neighbour_entries": 4000000,
+            "query_cells": 64000,
+            "expanded_plan": 1
+          },
+          "profile_after_repeated_calls": {
+            "energy_calls": 4,
+            "pair_cache_hits": 15,
+            "pair_cache_misses": 1,
+            "pair_cache_bytes": 1024000,
+            "spatial_plan_bytes": 16512008,
+            "neighbour_entries": 4000000,
+            "query_cells": 64000,
+            "expanded_plan": 1
+          }
+        }
+      },
+      "candidate_visits": {
+        "direct_pair_visits": 16384000,
+        "cached_candidate_visits": 31769,
+        "candidate_visit_ratio": 515.722874500299,
+        "indexed": true,
+        "bins": [
+          40,
+          40,
+          40
+        ],
+        "expanded_neighbour_entries": 4000000
+      },
+      "status": "PASS",
+      "gpu_timing": {
+        "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "compute_major": 8,
+        "compute_minor": 6,
+        "driver": 13000,
+        "runtime": 12080,
+        "setup_ms": 9.090782,
+        "indexed": 1,
+        "original_kernel_ms": [
+          11.5731840133667,
+          13.25875186920166,
+          13.326016426086426
+        ],
+        "cached_kernel_ms": [
+          0.04198399931192398,
+          0.17510400712490082,
+          0.04095999896526337
+        ],
+        "original_coordinate_transfer_call_ms": [
+          12.072748,
+          12.109621,
+          12.968738
+        ],
+        "cached_coordinate_transfer_call_ms": [
+          0.343168,
+          0.511521,
+          0.58384
+        ],
+        "original_kernel_ms_median": 13.25875186920166,
+        "cached_kernel_ms_median": 0.04198399931192398,
+        "original_coordinate_transfer_call_ms_median": 12.109621,
+        "cached_coordinate_transfer_call_ms_median": 0.511521
+      },
+      "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 47, 195, 48.73",
+      "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 43, 195, 49.18"
+    },
+    {
+      "fixture": 15,
+      "supplied_test_status": "PASS",
+      "B": 128,
+      "A": 4,
+      "M": 8000,
+      "coulomb": "dsf",
+      "preprocessing": {
+        "plan_setup_seconds": 0.06308834883384407,
+        "profile": {
+          "energy_calls": 0,
+          "pair_cache_hits": 0,
+          "pair_cache_misses": 0,
+          "pair_cache_bytes": 0,
+          "spatial_plan_bytes": 4125008,
+          "neighbour_entries": 1000000,
+          "query_cells": 15625,
+          "expanded_plan": 1
+        },
+        "plan_bytes": 4573072
+      },
+      "comparison": {
+        "original_vs_numpy": {
+          "passed": true,
+          "count": 128,
+          "finite_count": 128,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 0.00390625,
+          "max_scaled_error": 5.684341886080802e-14,
+          "max_abs_reference_K": 7874136698828.857
+        },
+        "cached_vs_numpy": {
+          "passed": true,
+          "count": 128,
+          "finite_count": 128,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 0.0048828125,
+          "max_scaled_error": 5.684341886080802e-14,
+          "max_abs_reference_K": 7874136698828.857
+        },
+        "cpu_cell_vs_numpy": {
+          "passed": true,
+          "count": 128,
+          "finite_count": 128,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 0.0048828125,
+          "max_scaled_error": 5.684341886080802e-14,
+          "max_abs_reference_K": 7874136698828.857
+        },
+        "cpu_cached_vs_numpy": {
+          "passed": true,
+          "count": 128,
+          "finite_count": 128,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 0.0048828125,
+          "max_scaled_error": 4.624945672932846e-15,
+          "max_abs_reference_K": 7874136698828.857
+        },
+        "saved_baseline_vs_numpy": {
+          "passed": true,
+          "count": 128,
+          "finite_count": 128,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 0.00390625,
+          "max_scaled_error": 2.3273214189537445e-14,
+          "max_abs_reference_K": 7874136698828.857
+        },
+        "cached_vs_original_now": {
+          "passed": true,
+          "count": 128,
+          "finite_count": 128,
+          "mismatches": 0,
+          "rtol": 1e-09,
+          "atol_K": 1e-06,
+          "max_abs_error_K": 0.0009765625,
+          "max_scaled_error": 1.1368683772161603e-13,
+          "max_abs_reference_K": 7874136698828.854
+        }
+      },
+      "cpu": {
+        "cell": {
+          "setup_ms": 2.011226024478674,
+          "samples_ms": [
+            3.170883050188422,
+            3.3406398724764585,
+            2.056594006717205
+          ],
+          "median_ms": 3.170883050188422,
+          "profile_after_first": {
+            "energy_calls": 1,
+            "pair_cache_hits": 0,
+            "pair_cache_misses": 0,
+            "pair_cache_bytes": 0,
+            "spatial_plan_bytes": 0,
+            "neighbour_entries": 0,
+            "query_cells": 0,
+            "expanded_plan": 0
+          },
+          "profile_after_repeated_calls": {
+            "energy_calls": 4,
+            "pair_cache_hits": 0,
+            "pair_cache_misses": 0,
+            "pair_cache_bytes": 0,
+            "spatial_plan_bytes": 0,
+            "neighbour_entries": 0,
+            "query_cells": 0,
+            "expanded_plan": 0
+          }
+        },
+        "cached": {
+          "setup_ms": 60.564932180568576,
+          "samples_ms": [
+            2.6087691076099873,
+            3.139941953122616,
+            2.543943002820015
+          ],
+          "median_ms": 2.6087691076099873,
+          "profile_after_first": {
+            "energy_calls": 1,
+            "pair_cache_hits": 3,
+            "pair_cache_misses": 1,
+            "pair_cache_bytes": 256000,
+            "spatial_plan_bytes": 4125008,
+            "neighbour_entries": 1000000,
+            "query_cells": 15625,
+            "expanded_plan": 1
+          },
+          "profile_after_repeated_calls": {
+            "energy_calls": 4,
+            "pair_cache_hits": 15,
+            "pair_cache_misses": 1,
+            "pair_cache_bytes": 256000,
+            "spatial_plan_bytes": 4125008,
+            "neighbour_entries": 1000000,
+            "query_cells": 15625,
+            "expanded_plan": 1
+          }
+        }
+      },
+      "candidate_visits": {
+        "direct_pair_visits": 4096000,
+        "cached_candidate_visits": 32757,
+        "candidate_visit_ratio": 125.04197576090607,
+        "indexed": true,
+        "bins": [
+          25,
+          25,
+          25
+        ],
+        "expanded_neighbour_entries": 1000000
+      },
+      "status": "PASS",
+      "gpu_timing": {
+        "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+        "compute_major": 8,
+        "compute_minor": 6,
+        "driver": 13000,
+        "runtime": 12080,
+        "setup_ms": 5.204115,
+        "indexed": 1,
+        "original_kernel_ms": [
+          2.4296960830688477,
+          3.4600958824157715,
+          3.9382400512695312
+        ],
+        "cached_kernel_ms": [
+          0.07168000191450119,
+          0.5874559879302979,
+          0.07168000191450119
+        ],
+        "original_coordinate_transfer_call_ms": [
+          3.916596,
+          4.325958,
+          4.558649
+        ],
+        "cached_coordinate_transfer_call_ms": [
+          0.317766,
+          0.845366,
+          0.366202
+        ],
+        "original_kernel_ms_median": 3.4600958824157715,
+        "cached_kernel_ms_median": 0.07168000191450119,
+        "original_coordinate_transfer_call_ms_median": 4.325958,
+        "cached_coordinate_transfer_call_ms_median": 0.366202
+      },
+      "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 43, 195, 49.01",
+      "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 50, 195, 48.74"
+    }
+  ],
+  "summary": {
+    "PASS": 16,
+    "FAIL": 0,
+    "SKIPPED_TEMPERATURE": 0,
+    "total": 16
+  },
+  "scope": "Unmodified supplied CUDA kernels, same fixtures, paired on the same device with --fmad=false; original CuPy adapter and optional selection kernel are not executed."
+}

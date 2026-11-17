@@ -1,0 +1,14 @@
+# potential convention
+shifted
+# tail corrections
+no
+# types
+5
+# name interaction epsilon/K sigma/A
+Cu lennard-jones 2.5160999999999998 3.1136900000000001
+O lennard-jones 48.158099999999997 3.03315
+C lennard-jones 47.856200000000001 3.4729899999999998
+H lennard-jones 7.64893 2.8464200000000002
+Probe lennard-jones 5 3
+# mixing rule
+Lorentz-Berthelot

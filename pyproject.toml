@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "opengcmc"
+version = "0.2.0"
+description = "Cache-first grand canonical Monte Carlo for porous materials and flexible guests"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24", "scipy>=1.10"]
+license = {text = "MIT"}
+[project.optional-dependencies]
+report = ["matplotlib>=3.7", "scipy>=1.10"]
+cuda = ["cupy-cuda12x>=13"]
+ml = ["torch>=2.2"]
+[project.scripts]
+opengcmc = "poremc.cli:main"
+poremc = "poremc.cli:main"
+[project.urls]
+Homepage = "https://github.com/owenxyzhang-seseTJ/OpenGCMC"
+Repository = "https://github.com/owenxyzhang-seseTJ/OpenGCMC"
+Issues = "https://github.com/owenxyzhang-seseTJ/OpenGCMC/issues"
+
+[tool.setuptools]
+packages = ["poremc"]
+[tool.setuptools.package-data]
+poremc = ["*.so", "*.dylib", "*.dll", "*.cu"]

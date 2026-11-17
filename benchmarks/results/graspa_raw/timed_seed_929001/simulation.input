@@ -1,0 +1,33 @@
+NumberOfInitializationCycles 0
+NumberOfEquilibrationCycles 0
+NumberOfProductionCycles 1000
+UseMaxStep yes
+MaxStepPerCycle 1
+UseChargesFromCIFFile yes
+RestartFile no
+RandomSeed 929001
+NumberOfTrialPositions 1
+NumberOfTrialOrientations 1
+NumberOfBlocks 1
+AdsorbateAllocateSpace 1024
+NumberOfSimulations 1
+SingleSimulation yes
+InputFileType cif
+FrameworkName ControlledCuBTC
+UnitCells 0 2 2 2
+ChargeMethod None
+Temperature 300
+Pressure 84965.090822373488
+OverlapCriteria 1e100
+CutOffVDW 12.0
+CutOffCoulomb 12.0
+EwaldPrecision 1e-6
+PrintEvery 1000000
+Component 0 MoleculeName probe
+            IdealGasRosenbluthWeight 1.0
+            FugacityCoefficient 1.0
+            TranslationProbability 0.0
+            RotationProbability 0.0
+            ReinsertionProbability 0.0
+            SwapProbability 1.0
+            CreateNumberOfMolecules 0

@@ -1,0 +1,23 @@
+[
+  {
+    "seed": 927001,
+    "gRASPA_sampling_seconds": 0.8448,
+    "steps": 1000,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 82, 40 %, 195 MiB",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 82, 33 %, 195 MiB"
+  },
+  {
+    "seed": 928001,
+    "gRASPA_sampling_seconds": 0.893087,
+    "steps": 1000,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 82, 42 %, 195 MiB",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 82, 40 %, 195 MiB"
+  },
+  {
+    "seed": 929001,
+    "gRASPA_sampling_seconds": 0.769737,
+    "steps": 1000,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 45 %, 195 MiB",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 82, 41 %, 195 MiB"
+  }
+]

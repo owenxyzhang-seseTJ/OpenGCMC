@@ -1,0 +1,16 @@
+source,target,relation,code_source
+host,csr,build once,native/kernels.cpp
+host,pairs,bind parameters,native/kernels.cpp
+host,alias,optional proposal field,poremc/proposals.py
+csr,energy,exact candidates,native/kernels.cpp
+pairs,energy,reuse mixed rows,native/kernels.cpp
+alias,cbmc,optional forward/retrace density correction,poremc/cbmc.py; native/fast_mc.cpp
+trials,energy,evaluate batch,poremc/batching.py
+energy,cbmc,trial energies,poremc/cbmc.py
+cbmc,decision,weights,native/fast_mc.cpp
+decision,state,accept commits and invalidates guest cache,native/fast_mc.cpp
+state,guest,lazy rebuild on change,native/fast_mc.cpp
+decision,guest,reject reuses accepted environment,native/fast_mc.cpp
+guest,energy,exclude moved molecule by original index,native/fast_mc.cpp
+python,cuda,optional energy call only,poremc/potentials.py; poremc/cuda.py
+host,replicas,share immutable host only,poremc/batching.py

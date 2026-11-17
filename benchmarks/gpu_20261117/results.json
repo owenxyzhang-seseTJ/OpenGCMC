@@ -1,0 +1,754 @@
+[
+  {
+    "fixture": 0,
+    "plan_setup_seconds": 0.005385871976613998,
+    "profile": {
+      "energy_calls": 0,
+      "pair_cache_hits": 0,
+      "pair_cache_misses": 0,
+      "pair_cache_bytes": 0,
+      "spatial_plan_bytes": 0,
+      "neighbour_entries": 0,
+      "query_cells": 0,
+      "expanded_plan": 0
+    },
+    "plan_bytes": 116,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 42, 195, 48.39",
+    "timing": {
+      "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "compute_major": 8,
+      "compute_minor": 6,
+      "driver": 13000,
+      "runtime": 12080,
+      "setup_ms": 3.906994,
+      "indexed": 0,
+      "original_kernel_ms": [],
+      "cached_kernel_ms": [],
+      "original_coordinate_transfer_call_ms": [],
+      "cached_coordinate_transfer_call_ms": []
+    },
+    "comparisons": {
+      "original": {
+        "passed": true,
+        "count": 9,
+        "max_scaled_error": 0.0
+      },
+      "cached": {
+        "passed": true,
+        "count": 9,
+        "max_scaled_error": 0.0
+      }
+    },
+    "status": "PASS",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 44, 195, 47.88"
+  },
+  {
+    "fixture": 1,
+    "plan_setup_seconds": 0.002861255081370473,
+    "profile": {
+      "energy_calls": 0,
+      "pair_cache_hits": 0,
+      "pair_cache_misses": 0,
+      "pair_cache_bytes": 0,
+      "spatial_plan_bytes": 0,
+      "neighbour_entries": 0,
+      "query_cells": 0,
+      "expanded_plan": 0
+    },
+    "plan_bytes": 116,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 44, 195, 47.78",
+    "timing": {
+      "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "compute_major": 8,
+      "compute_minor": 6,
+      "driver": 13000,
+      "runtime": 12080,
+      "setup_ms": 3.195392,
+      "indexed": 0,
+      "original_kernel_ms": [],
+      "cached_kernel_ms": [],
+      "original_coordinate_transfer_call_ms": [],
+      "cached_coordinate_transfer_call_ms": []
+    },
+    "comparisons": {
+      "original": {
+        "passed": true,
+        "count": 9,
+        "max_scaled_error": 1.2835107578262798e-16
+      },
+      "cached": {
+        "passed": true,
+        "count": 9,
+        "max_scaled_error": 1.2835107578262798e-16
+      }
+    },
+    "status": "PASS",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 50, 195, 47.89"
+  },
+  {
+    "fixture": 2,
+    "plan_setup_seconds": 0.001903965137898922,
+    "profile": {
+      "energy_calls": 0,
+      "pair_cache_hits": 0,
+      "pair_cache_misses": 0,
+      "pair_cache_bytes": 0,
+      "spatial_plan_bytes": 0,
+      "neighbour_entries": 0,
+      "query_cells": 0,
+      "expanded_plan": 0
+    },
+    "plan_bytes": 116,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 42, 195, 48.00",
+    "timing": {
+      "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "compute_major": 8,
+      "compute_minor": 6,
+      "driver": 13000,
+      "runtime": 12080,
+      "setup_ms": 3.06748,
+      "indexed": 0,
+      "original_kernel_ms": [],
+      "cached_kernel_ms": [],
+      "original_coordinate_transfer_call_ms": [],
+      "cached_coordinate_transfer_call_ms": []
+    },
+    "comparisons": {
+      "original": {
+        "passed": true,
+        "count": 9,
+        "max_scaled_error": 0.0
+      },
+      "cached": {
+        "passed": true,
+        "count": 9,
+        "max_scaled_error": 0.0
+      }
+    },
+    "status": "PASS",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 42, 195, 47.96"
+  },
+  {
+    "fixture": 3,
+    "plan_setup_seconds": 0.01192664890550077,
+    "profile": {
+      "energy_calls": 0,
+      "pair_cache_hits": 0,
+      "pair_cache_misses": 0,
+      "pair_cache_bytes": 0,
+      "spatial_plan_bytes": 161276,
+      "neighbour_entries": 32125,
+      "query_cells": 4096,
+      "expanded_plan": 1
+    },
+    "plan_bytes": 175732,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 39, 195, 47.66",
+    "timing": {
+      "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "compute_major": 8,
+      "compute_minor": 6,
+      "driver": 13000,
+      "runtime": 12080,
+      "setup_ms": 3.223918,
+      "indexed": 1,
+      "original_kernel_ms": [],
+      "cached_kernel_ms": [],
+      "original_coordinate_transfer_call_ms": [],
+      "cached_coordinate_transfer_call_ms": []
+    },
+    "comparisons": {
+      "original": {
+        "passed": true,
+        "count": 17,
+        "max_scaled_error": 1.4718841552563033e-15
+      },
+      "cached": {
+        "passed": true,
+        "count": 17,
+        "max_scaled_error": 1.3380765047784574e-15
+      }
+    },
+    "status": "PASS",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 48, 195, 47.86"
+  },
+  {
+    "fixture": 4,
+    "plan_setup_seconds": 0.011025283951312304,
+    "profile": {
+      "energy_calls": 0,
+      "pair_cache_hits": 0,
+      "pair_cache_misses": 0,
+      "pair_cache_bytes": 0,
+      "spatial_plan_bytes": 161276,
+      "neighbour_entries": 32125,
+      "query_cells": 4096,
+      "expanded_plan": 1
+    },
+    "plan_bytes": 175732,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 45, 195, 48.01",
+    "timing": {
+      "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "compute_major": 8,
+      "compute_minor": 6,
+      "driver": 13000,
+      "runtime": 12080,
+      "setup_ms": 2.736574,
+      "indexed": 1,
+      "original_kernel_ms": [],
+      "cached_kernel_ms": [],
+      "original_coordinate_transfer_call_ms": [],
+      "cached_coordinate_transfer_call_ms": []
+    },
+    "comparisons": {
+      "original": {
+        "passed": true,
+        "count": 17,
+        "max_scaled_error": 8.037839885691551e-15
+      },
+      "cached": {
+        "passed": true,
+        "count": 17,
+        "max_scaled_error": 7.808187317528936e-15
+      }
+    },
+    "status": "PASS",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 48, 195, 48.38"
+  },
+  {
+    "fixture": 5,
+    "plan_setup_seconds": 0.007491750875487924,
+    "profile": {
+      "energy_calls": 0,
+      "pair_cache_hits": 0,
+      "pair_cache_misses": 0,
+      "pair_cache_bytes": 0,
+      "spatial_plan_bytes": 161276,
+      "neighbour_entries": 32125,
+      "query_cells": 4096,
+      "expanded_plan": 1
+    },
+    "plan_bytes": 175732,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 46, 195, 49.10",
+    "timing": {
+      "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "compute_major": 8,
+      "compute_minor": 6,
+      "driver": 13000,
+      "runtime": 12080,
+      "setup_ms": 3.558672,
+      "indexed": 1,
+      "original_kernel_ms": [],
+      "cached_kernel_ms": [],
+      "original_coordinate_transfer_call_ms": [],
+      "cached_coordinate_transfer_call_ms": []
+    },
+    "comparisons": {
+      "original": {
+        "passed": true,
+        "count": 17,
+        "max_scaled_error": 2.2270370333659793e-15
+      },
+      "cached": {
+        "passed": true,
+        "count": 17,
+        "max_scaled_error": 2.055726492337827e-15
+      }
+    },
+    "status": "PASS",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 45, 195, 48.28"
+  },
+  {
+    "fixture": 6,
+    "plan_setup_seconds": 0.006454463116824627,
+    "profile": {
+      "energy_calls": 0,
+      "pair_cache_hits": 0,
+      "pair_cache_misses": 0,
+      "pair_cache_bytes": 0,
+      "spatial_plan_bytes": 155388,
+      "neighbour_entries": 32125,
+      "query_cells": 3360,
+      "expanded_plan": 1
+    },
+    "plan_bytes": 169844,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 41, 195, 46.91",
+    "timing": {
+      "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "compute_major": 8,
+      "compute_minor": 6,
+      "driver": 13000,
+      "runtime": 12080,
+      "setup_ms": 9.770239,
+      "indexed": 1,
+      "original_kernel_ms": [],
+      "cached_kernel_ms": [],
+      "original_coordinate_transfer_call_ms": [],
+      "cached_coordinate_transfer_call_ms": []
+    },
+    "comparisons": {
+      "original": {
+        "passed": true,
+        "count": 17,
+        "max_scaled_error": 6.559392085222186e-14
+      },
+      "cached": {
+        "passed": true,
+        "count": 17,
+        "max_scaled_error": 6.559392085222186e-14
+      }
+    },
+    "status": "PASS",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 50, 195, 48.35"
+  },
+  {
+    "fixture": 7,
+    "plan_setup_seconds": 0.006221188930794597,
+    "profile": {
+      "energy_calls": 0,
+      "pair_cache_hits": 0,
+      "pair_cache_misses": 0,
+      "pair_cache_bytes": 0,
+      "spatial_plan_bytes": 155388,
+      "neighbour_entries": 32125,
+      "query_cells": 3360,
+      "expanded_plan": 1
+    },
+    "plan_bytes": 169844,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 45, 195, 48.60",
+    "timing": {
+      "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "compute_major": 8,
+      "compute_minor": 6,
+      "driver": 13000,
+      "runtime": 12080,
+      "setup_ms": 7.545462,
+      "indexed": 1,
+      "original_kernel_ms": [],
+      "cached_kernel_ms": [],
+      "original_coordinate_transfer_call_ms": [],
+      "cached_coordinate_transfer_call_ms": []
+    },
+    "comparisons": {
+      "original": {
+        "passed": true,
+        "count": 17,
+        "max_scaled_error": 1.6095057102122714e-13
+      },
+      "cached": {
+        "passed": true,
+        "count": 17,
+        "max_scaled_error": 1.6095057102122714e-13
+      }
+    },
+    "status": "PASS",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 80, 46, 195, 47.65"
+  },
+  {
+    "fixture": 8,
+    "plan_setup_seconds": 0.008086459012702107,
+    "profile": {
+      "energy_calls": 0,
+      "pair_cache_hits": 0,
+      "pair_cache_misses": 0,
+      "pair_cache_bytes": 0,
+      "spatial_plan_bytes": 155388,
+      "neighbour_entries": 32125,
+      "query_cells": 3360,
+      "expanded_plan": 1
+    },
+    "plan_bytes": 169844,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 80, 46, 195, 48.28",
+    "timing": {
+      "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "compute_major": 8,
+      "compute_minor": 6,
+      "driver": 13000,
+      "runtime": 12080,
+      "setup_ms": 3.706837,
+      "indexed": 1,
+      "original_kernel_ms": [],
+      "cached_kernel_ms": [],
+      "original_coordinate_transfer_call_ms": [],
+      "cached_coordinate_transfer_call_ms": []
+    },
+    "comparisons": {
+      "original": {
+        "passed": true,
+        "count": 17,
+        "max_scaled_error": 1.66085282839948e-13
+      },
+      "cached": {
+        "passed": true,
+        "count": 17,
+        "max_scaled_error": 1.6587689478117766e-13
+      }
+    },
+    "status": "PASS",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 50, 195, 48.93"
+  },
+  {
+    "fixture": 9,
+    "plan_setup_seconds": 0.001639041118323803,
+    "profile": {
+      "energy_calls": 0,
+      "pair_cache_hits": 0,
+      "pair_cache_misses": 0,
+      "pair_cache_bytes": 0,
+      "spatial_plan_bytes": 0,
+      "neighbour_entries": 0,
+      "query_cells": 0,
+      "expanded_plan": 0
+    },
+    "plan_bytes": 72,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 45, 195, 48.74",
+    "timing": {
+      "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "compute_major": 8,
+      "compute_minor": 6,
+      "driver": 13000,
+      "runtime": 12080,
+      "setup_ms": 3.970477,
+      "indexed": 0,
+      "original_kernel_ms": [],
+      "cached_kernel_ms": [],
+      "original_coordinate_transfer_call_ms": [],
+      "cached_coordinate_transfer_call_ms": []
+    },
+    "comparisons": {
+      "original": {
+        "passed": true,
+        "count": 7,
+        "max_scaled_error": 0.0
+      },
+      "cached": {
+        "passed": true,
+        "count": 7,
+        "max_scaled_error": 0.0
+      }
+    },
+    "status": "PASS",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 45, 195, 49.46"
+  },
+  {
+    "fixture": 10,
+    "plan_setup_seconds": 0.0018886008765548468,
+    "profile": {
+      "energy_calls": 0,
+      "pair_cache_hits": 0,
+      "pair_cache_misses": 0,
+      "pair_cache_bytes": 0,
+      "spatial_plan_bytes": 0,
+      "neighbour_entries": 0,
+      "query_cells": 0,
+      "expanded_plan": 0
+    },
+    "plan_bytes": 240,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 45, 195, 48.08",
+    "timing": {
+      "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "compute_major": 8,
+      "compute_minor": 6,
+      "driver": 13000,
+      "runtime": 12080,
+      "setup_ms": 4.693119,
+      "indexed": 0,
+      "original_kernel_ms": [],
+      "cached_kernel_ms": [],
+      "original_coordinate_transfer_call_ms": [],
+      "cached_coordinate_transfer_call_ms": []
+    },
+    "comparisons": {
+      "original": {
+        "passed": true,
+        "count": 0,
+        "max_scaled_error": 0.0
+      },
+      "cached": {
+        "passed": true,
+        "count": 0,
+        "max_scaled_error": 0.0
+      }
+    },
+    "status": "PASS",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 41, 195, 47.34"
+  },
+  {
+    "fixture": 11,
+    "plan_setup_seconds": 0.004895304096862674,
+    "profile": {
+      "energy_calls": 0,
+      "pair_cache_hits": 0,
+      "pair_cache_misses": 0,
+      "pair_cache_bytes": 0,
+      "spatial_plan_bytes": 0,
+      "neighbour_entries": 0,
+      "query_cells": 0,
+      "expanded_plan": 0
+    },
+    "plan_bytes": 128,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 41, 195, 48.77",
+    "timing": {
+      "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "compute_major": 8,
+      "compute_minor": 6,
+      "driver": 13000,
+      "runtime": 12080,
+      "setup_ms": 1.808927,
+      "indexed": 0,
+      "original_kernel_ms": [],
+      "cached_kernel_ms": [],
+      "original_coordinate_transfer_call_ms": [],
+      "cached_coordinate_transfer_call_ms": []
+    },
+    "comparisons": {
+      "original": {
+        "passed": true,
+        "count": 7,
+        "max_scaled_error": 0.0
+      },
+      "cached": {
+        "passed": true,
+        "count": 7,
+        "max_scaled_error": 0.0
+      }
+    },
+    "status": "PASS",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 45, 195, 47.88"
+  },
+  {
+    "fixture": 12,
+    "plan_setup_seconds": 0.025574343977496028,
+    "profile": {
+      "energy_calls": 0,
+      "pair_cache_hits": 0,
+      "pair_cache_misses": 0,
+      "pair_cache_bytes": 0,
+      "spatial_plan_bytes": 1277008,
+      "neighbour_entries": 312500,
+      "query_cells": 3375,
+      "expanded_plan": 1
+    },
+    "plan_bytes": 1417072,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 42, 195, 48.00",
+    "timing": {
+      "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "compute_major": 8,
+      "compute_minor": 6,
+      "driver": 13000,
+      "runtime": 12080,
+      "setup_ms": 6.256276,
+      "indexed": 1,
+      "original_kernel_ms": [
+        0.358271986246109,
+        0.23244799673557281,
+        0.35603201389312744
+      ],
+      "cached_kernel_ms": [
+        0.013311999849975109,
+        0.2155199944972992,
+        0.013311999849975109
+      ],
+      "original_coordinate_transfer_call_ms": [
+        0.566436,
+        0.460437,
+        0.865724
+      ],
+      "cached_coordinate_transfer_call_ms": [
+        0.56005,
+        0.332023,
+        0.675248
+      ]
+    },
+    "comparisons": {
+      "original": {
+        "passed": true,
+        "count": 8,
+        "max_scaled_error": 1.1180302906534907e-15
+      },
+      "cached": {
+        "passed": true,
+        "count": 8,
+        "max_scaled_error": 1.482406971185243e-14
+      }
+    },
+    "status": "PASS",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 45, 195, 47.74"
+  },
+  {
+    "fixture": 13,
+    "plan_setup_seconds": 0.02468157303519547,
+    "profile": {
+      "energy_calls": 0,
+      "pair_cache_hits": 0,
+      "pair_cache_misses": 0,
+      "pair_cache_bytes": 0,
+      "spatial_plan_bytes": 1277008,
+      "neighbour_entries": 312500,
+      "query_cells": 3375,
+      "expanded_plan": 1
+    },
+    "plan_bytes": 1417072,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 41, 195, 47.83",
+    "timing": {
+      "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "compute_major": 8,
+      "compute_minor": 6,
+      "driver": 13000,
+      "runtime": 12080,
+      "setup_ms": 3.716869,
+      "indexed": 1,
+      "original_kernel_ms": [
+        0.8637760281562805,
+        0.7680000066757202,
+        1.0249919891357422
+      ],
+      "cached_kernel_ms": [
+        0.02969600073993206,
+        0.2094080001115799,
+        0.028672000393271446
+      ],
+      "original_coordinate_transfer_call_ms": [
+        0.997977,
+        1.01523,
+        1.242604
+      ],
+      "cached_coordinate_transfer_call_ms": [
+        0.748053,
+        0.335722,
+        0.252188
+      ]
+    },
+    "comparisons": {
+      "original": {
+        "passed": true,
+        "count": 64,
+        "max_scaled_error": 1.4186859767300202e-15
+      },
+      "cached": {
+        "passed": true,
+        "count": 64,
+        "max_scaled_error": 3.812574774215347e-14
+      }
+    },
+    "status": "PASS",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 50, 195, 48.36"
+  },
+  {
+    "fixture": 14,
+    "plan_setup_seconds": 0.2729301070794463,
+    "profile": {
+      "energy_calls": 0,
+      "pair_cache_hits": 0,
+      "pair_cache_misses": 0,
+      "pair_cache_bytes": 0,
+      "spatial_plan_bytes": 16512008,
+      "neighbour_entries": 4000000,
+      "query_cells": 64000,
+      "expanded_plan": 1
+    },
+    "plan_bytes": 18304072,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 47, 195, 48.73",
+    "timing": {
+      "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "compute_major": 8,
+      "compute_minor": 6,
+      "driver": 13000,
+      "runtime": 12080,
+      "setup_ms": 9.090782,
+      "indexed": 1,
+      "original_kernel_ms": [
+        11.5731840133667,
+        13.25875186920166,
+        13.326016426086426
+      ],
+      "cached_kernel_ms": [
+        0.04198399931192398,
+        0.17510400712490082,
+        0.04095999896526337
+      ],
+      "original_coordinate_transfer_call_ms": [
+        12.072748,
+        12.109621,
+        12.968738
+      ],
+      "cached_coordinate_transfer_call_ms": [
+        0.343168,
+        0.511521,
+        0.58384
+      ]
+    },
+    "comparisons": {
+      "original": {
+        "passed": true,
+        "count": 128,
+        "max_scaled_error": 4.0427061780391265e-15
+      },
+      "cached": {
+        "passed": true,
+        "count": 128,
+        "max_scaled_error": 1.2402572733395657e-13
+      }
+    },
+    "status": "PASS",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 43, 195, 49.18"
+  },
+  {
+    "fixture": 15,
+    "plan_setup_seconds": 0.06308834883384407,
+    "profile": {
+      "energy_calls": 0,
+      "pair_cache_hits": 0,
+      "pair_cache_misses": 0,
+      "pair_cache_bytes": 0,
+      "spatial_plan_bytes": 4125008,
+      "neighbour_entries": 1000000,
+      "query_cells": 15625,
+      "expanded_plan": 1
+    },
+    "plan_bytes": 4573072,
+    "device_before": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 43, 195, 49.01",
+    "timing": {
+      "device": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+      "compute_major": 8,
+      "compute_minor": 6,
+      "driver": 13000,
+      "runtime": 12080,
+      "setup_ms": 5.204115,
+      "indexed": 1,
+      "original_kernel_ms": [
+        2.4296960830688477,
+        3.4600958824157715,
+        3.9382400512695312
+      ],
+      "cached_kernel_ms": [
+        0.07168000191450119,
+        0.5874559879302979,
+        0.07168000191450119
+      ],
+      "original_coordinate_transfer_call_ms": [
+        3.916596,
+        4.325958,
+        4.558649
+      ],
+      "cached_coordinate_transfer_call_ms": [
+        0.317766,
+        0.845366,
+        0.366202
+      ]
+    },
+    "comparisons": {
+      "original": {
+        "passed": true,
+        "count": 128,
+        "max_scaled_error": 7.105427357601002e-14
+      },
+      "cached": {
+        "passed": true,
+        "count": 128,
+        "max_scaled_error": 4.263256414560601e-14
+      }
+    },
+    "status": "PASS",
+    "device_after": "NVIDIA GeForce RTX 3070 Ti Laptop GPU, 81, 50, 195, 48.74"
+  }
+]

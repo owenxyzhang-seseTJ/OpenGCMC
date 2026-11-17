@@ -1,0 +1,33 @@
+{
+  "SimulationType": "MonteCarlo",
+  "NumberOfCycles": 2000,
+  "NumberOfInitializationCycles": 500,
+  "RandomSeed": 928001,
+  "PrintEvery": 1000000,
+  "WriteBinaryRestartEvery": 1000000,
+  "OptimizeMCMovesEvery": 1000000,
+  "Systems": [
+    {
+      "Type": "Framework",
+      "Name": "ControlledCuBTC",
+      "NumberOfUnitCells": [
+        2,
+        2,
+        2
+      ],
+      "ExternalTemperature": 300.0,
+      "ExternalPressure": 84965.09082237349,
+      "ChargeMethod": "None",
+      "ComputeNumberOfMoleculesEvolution": true
+    }
+  ],
+  "Components": [
+    {
+      "Name": "probe",
+      "FugacityCoefficient": 1.0,
+      "IdealGasRosenbluthWeight": 1.0,
+      "CreateNumberOfMolecules": 0,
+      "SwapConventionalProbability": 1.0
+    }
+  ]
+}

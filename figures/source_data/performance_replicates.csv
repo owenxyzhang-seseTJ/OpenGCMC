@@ -1,0 +1,13 @@
+experiment,seed,engine,scheduled_attempts,sampling_seconds,attempts_per_second,backend,protocol_id
+raspa3,927001,RASPA3,40000,2.3930129999999985,16715.329168709082,CPU,raspa3_controlled_lj
+raspa3,927001,OpenGCMC,40000,0.110809708,360979.2022915537,CPU cached native,raspa3_controlled_lj
+raspa3,928001,RASPA3,40000,2.238937999999998,17865.61307191179,CPU,raspa3_controlled_lj
+raspa3,928001,OpenGCMC,40000,0.111622333,358351.22707926197,CPU cached native,raspa3_controlled_lj
+raspa3,929001,RASPA3,40000,2.581463,15495.08941247657,CPU,raspa3_controlled_lj
+raspa3,929001,OpenGCMC,40000,0.110930459,360586.26603176683,CPU cached native,raspa3_controlled_lj
+graspa,927001,gRASPA,1000,0.8448,1183.7121212121212,GPU,graspa_controlled_lj
+graspa,927001,OpenGCMC,1000,0.029808438,33547.547845345,CPU cached native,graspa_controlled_lj
+graspa,928001,gRASPA,1000,0.893087,1119.7117414092916,GPU,graspa_controlled_lj
+graspa,928001,OpenGCMC,1000,0.029523914,33870.8478828383,CPU cached native,graspa_controlled_lj
+graspa,929001,gRASPA,1000,0.769737,1299.1450326540105,GPU,graspa_controlled_lj
+graspa,929001,OpenGCMC,1000,0.02551151,39197.99337632308,CPU cached native,graspa_controlled_lj
