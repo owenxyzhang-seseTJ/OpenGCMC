@@ -149,36 +149,42 @@ def export(fig, stem):
 
 
 def draw_performance(experiments):
-    fig = plt.figure(figsize=(7.2, 3.3), facecolor="white")  # 采用双栏宽度与紧凑横向画布
+    fig = plt.figure(figsize=(7.2, 3.4), facecolor="white")  # 采用双栏宽度与竖向柱状图所需的高度
     for j, e in enumerate(experiments):  # 按预定几何位置组织面板或示意元素
-        x0 = .178 + j * .493  # 给每栏的软件标签保留足够左边距
-        ax = fig.add_axes((x0, .25, .287, .48))  # 固定两栏独立坐标轴的位置和大小
-        top = 420 if j == 0 else 45  # 每栏独立线性范围，均从零开始
+        x0 = .135 + j * .48  # 给每栏的数值刻度标签保留左边距
+        ax = fig.add_axes((x0, .17, .30, .66))  # 固定两栏独立坐标轴的位置和大小
+        top = 430 if j == 0 else 46  # 每栏独立线性范围，均从零开始，并在柱顶上方留出倍数标签空间
         ticks = [0, 100, 200, 300, 400] if j == 0 else [0, 10, 20, 30, 40]  # 两栏按各自量级设置易读刻度
-        for i in range(3):  # 按固定图示数量组织可编辑的视觉元素
-            ax.plot([e["rates"][e["reference"]][i] / 1000, e["rates"]["OpenGCMC"][i] / 1000], [1 + [-.07, 0, .07][i], [-.07, 0, .07][i]], color=PALETTE["teal"], lw=.7, alpha=.24, zorder=.5)  # 用淡线连接同一配对测量的两个真实点
-        for y, engine in [(1, e["reference"]), (0, "OpenGCMC")]:  # 按预定几何位置组织面板或示意元素
-            values = np.asarray(e["rates"][engine]) / 1000
+        offsets = np.array([-.12, 0, .12])  # 三次重复测量在同一柱宽内的固定横向偏移
+        medians = {}  # 保存中位吞吐量，供箭头端点与柱高保持一致
+        for i in range(3):  # 用淡线连接同一配对测量的两个真实点
+            ax.plot([offsets[i], 1 + offsets[i]], [e["rates"][e["reference"]][i] / 1000, e["rates"]["OpenGCMC"][i] / 1000], color=PALETTE["teal"], lw=.7, alpha=.18, zorder=.5)  # 配对线置于柱体之下，避免压住数据点
+        for x, engine in [(0, e["reference"]), (1, "OpenGCMC")]:  # 每栏两根竖向柱：参照软件与 OpenGCMC
+            values = np.asarray(e["rates"][engine]) / 1000  # 换算为 10³ 次/秒，与坐标刻度一致
+            medians[engine] = statistics.median(values)  # 柱高取三次测量的中位数
             open_engine = engine == "OpenGCMC"
             fill = PALETTE["pale_teal"] if open_engine else PALETTE["pale_slate"]  # 按方法身份而非数值大小分配稳定颜色
             edge = PALETTE["teal"] if open_engine else PALETTE["slate"]  # 深色点与轮廓保持清晰
-            ax.barh(y, statistics.median(values), height=.37, color=fill, edgecolor=edge, linewidth=.7, zorder=1)  # 实色条从零表示中位吞吐量
-            ax.scatter(values, y + np.array([-.07, 0, .07]), s=18, color=edge, edgecolors="white", linewidths=.55, zorder=3)  # 显示全部三个测量点并使用固定纵向偏移
-        ax.set_xlim(0, top)  # 保留真实零基线，避免视觉夸大
-        ax.set_ylim(-.58, 1.58)  # 让两条水平条周围留有呼吸空间
-        ax.set_xticks(ticks)  # 使用各栏独立、等间隔的线性刻度
-        ax.set_yticks([1, 0], [e["reference"], "OpenGCMC"])  # 直接标注软件，无需额外图例
-        ax.set_xlabel("Move attempts (10³ / s)", labelpad=8)  # 给出吞吐量单位，不加入测试条件
-        ax.tick_params(axis="y", length=0, pad=9)  # 去除类别刻度线并保持标签间距
-        ax.tick_params(axis="x", length=3, width=.7, pad=4)  # 克制地显示数值轴刻度
-        for side in ("left", "right", "top"):  # 按固定图示数量组织可编辑的视觉元素
-            ax.spines[side].set_visible(False)  # 删除多余边框，突出真实数据条
-        ax.spines["bottom"].set_color(PALETTE["slate"])  # 保留较轻的基线作为数值参照
-        ax.get_yticklabels()[1].set_color(PALETTE["teal"])  # 用主色突出OpenGCMC类别名
-        ax.get_yticklabels()[1].set_fontweight("bold")  # 使用字重强化方法身份
-        fig.text(.035 + j * .493, .92, "ab"[j], fontsize=11, fontweight="bold", va="center")  # 将面板字母放在数据区外左上方
-        fig.text(x0 + .12, .845, f"{e['median_paired_ratio']:.2f}×", fontsize=25, fontweight="bold", color=PALETTE["teal"], ha="center")  # 让配对中位加速倍数成为第一视觉重点
-        fig.text(x0 + .12, .765, "median paired rate ratio", fontsize=8.5, color=PALETTE["muted"], ha="center")  # 精确说明倍数的统计含义
+            ax.bar(x, medians[engine], width=.52, color=fill, edgecolor=edge, linewidth=.7, zorder=1)  # 实色柱从零基线表示中位吞吐量
+            ax.scatter(x + offsets, values, s=18, color=edge, edgecolors="white", linewidths=.55, zorder=3)  # 显示全部三个测量点并使用固定横向偏移
+        y0, y1 = medians[e["reference"]], medians["OpenGCMC"]  # 箭头从参照中位值指向 OpenGCMC 中位值
+        ax.plot([.26, .5], [y0, y0], color=PALETTE["slate"], lw=.7, ls=(0, (2, 2)), zorder=.6)  # 虚线把参照柱顶水平引到箭头起点，明确箭头的起算高度
+        ax.add_patch(FancyArrowPatch((.5, y0), (.5, y1), arrowstyle="-|>", mutation_scale=14, linewidth=1.7, color=PALETTE["teal"], shrinkA=0, shrinkB=0, zorder=2))  # 竖向上升箭头直接表达性能提升方向
+        ax.text(.5, y1 + top * .022, f"{e['median_paired_ratio']:.2f}×", fontsize=17, fontweight="bold", color=PALETTE["teal"], ha="center", va="bottom", zorder=4, bbox=dict(boxstyle="round,pad=.16", facecolor="white", edgecolor="none"))  # 倍数标注紧贴箭头尖端，白底避免配对线穿过文字
+        ax.set_xlim(-.55, 1.55)  # 让两根柱居中并保留标签宽度
+        ax.set_ylim(0, top)  # 保留真实零基线，避免视觉夸大
+        ax.set_xticks([0, 1], [e["reference"], "OpenGCMC"])  # 直接标注软件，无需额外图例
+        ax.set_yticks(ticks)  # 使用各栏独立、等间隔的线性刻度
+        ax.set_ylabel("Move attempts (10³ / s)", labelpad=6)  # 给出吞吐量单位，不加入测试条件
+        ax.tick_params(axis="x", length=0, pad=8)  # 去除类别刻度线并保持标签间距
+        ax.tick_params(axis="y", length=3, width=.7, pad=4)  # 克制地显示数值轴刻度
+        for side in ("right", "top"):  # 按固定图示数量组织可编辑的视觉元素
+            ax.spines[side].set_visible(False)  # 删除多余边框，突出真实数据柱
+        for side in ("left", "bottom"):  # 保留较淡的坐标轴线作为数值参照
+            ax.spines[side].set_color(PALETTE["slate"])
+        ax.get_xticklabels()[1].set_color(PALETTE["teal"])  # 用主色突出 OpenGCMC 类别名
+        ax.get_xticklabels()[1].set_fontweight("bold")  # 使用字重强化方法身份
+        fig.text(.035 + j * .48, .95, "ab"[j], fontsize=11, fontweight="bold", va="center")  # 将面板字母放在数据区外左上方
     qa = audit_text(fig, "opengcmc_performance")
     export(fig, "opengcmc_performance")  # 同步导出当前画布的全部交付格式
     plt.close(fig)  # 导出后释放画布

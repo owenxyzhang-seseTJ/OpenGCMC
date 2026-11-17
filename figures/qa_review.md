@@ -38,12 +38,14 @@ The architecture's native physical width is 9 in. For a future 183 mm print plac
 
 ## 7. export_check
 
-**PASS.** SVG, PDF and 600 dpi PNG files are present for both figures. SVG has native editable text (22 text elements for performance; 37 for architecture). Both PDFs contain one page and use Arial regular/bold from one font family. Measured minimum PDF font sizes are **8.5 pt** for performance and **9.0 pt** for architecture.
+**PASS.** SVG, PDF and 600 dpi PNG files are present for both figures. Text stays native and editable in both SVGs. Both PDFs contain one page and use Arial regular/bold from one font family. Measured minimum PDF font sizes are **9.0 pt** for performance and **9.0 pt** for architecture.
 
 | Figure | Physical dimensions | PNG dimensions |
 |---|---|---|
-| `opengcmc_performance` | 7.2 × 3.3 in | 4,320 × 1,980 px |
-| `opengcmc_architecture` | 9 × 6.2 in | 5,400 × 3,720 px |
+| `opengcmc_performance` | 7.2 × 3.4 in | 4,320 × 2,040 px |
+| `opengcmc_architecture` | 183 × 144.1 mm | 4,323 × 3,404 px |
+
+Updated on 2026-11-17: the performance figure was redrawn with vertical bars and a rising arrow, and the architecture figure now ships as a hand-edited SVG exported through a browser rather than from `plot_figures.py`.
 
 ## 8. final_image_audit_handoff
 
