@@ -14,6 +14,17 @@ OpenGCMC moves repeated neighbour searches, parameter mixing and environment con
 
 [Electrochemical models and usage](docs/electrochemistry.md)
 
+## Scientific case analyses
+
+OpenGCMC has been exercised end to end on charged-MOF mixture adsorption, constant-potential electrolyte interfaces, explicit-water reaction free energies, and diffusion electrochemistry:
+
+- **Competitive CO2/CH4 adsorption in charged IRMOF-1.** The case uses the CIF, site charges, and force field from the official RASPA3 example. Three independent OpenGCMC chains give 2.647 and 4.257 molecules per cell, compared with 2.615 and 4.246 for RASPA3, together with a chemical-potential response matrix and an MBAR free-energy landscape.
+- **NaCl in SPC/E water at a constant-potential interface.** Two Gaussian electrodes, 62 explicit water molecules, and one ion pair are sampled in one workflow. Independent electrode-charge agreement is 1.1×10⁻¹⁵ e, full molecular-energy recomputation agrees to 1.95×10⁻⁷ K, and Na-O/Cl-O coordination is reported directly.
+- **Ferricyanide/ferrocyanide diffusion electrochemistry.** Experimental diffusivities drive chronoamperometry and cyclic voltammetry. The maximum chronoamperometry difference from the Cottrell limit is 0.108%, and both scan rates agree with Randles-Sevcik peak-current predictions.
+- **Explicit-water reactions and alchemical free energies.** Rigid SPC/E water, fixed-topology reaction states, NCMC, and seven-window MBAR run in one path with overlap and charge-response diagnostics.
+
+The cases connect real crystal inputs, experimental parameters, or standard physical limits to reproducible numerical outputs across structure preparation, sampling, free energy, and current analysis. [Read the detailed case analyses](docs/scientific_cases.md).
+
 ![OpenGCMC adsorption sampler architecture](docs/assets/opengcmc_architecture.svg)
 
 ## Performance
