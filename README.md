@@ -6,11 +6,15 @@
 
 OpenGCMC 把重复的邻域搜索、参数混合和环境构建移出试探循环，将精确能量计算与柔性分子构象偏置采样（CBMC）结合。项目提供 C++ 原生采样器、Python 通用采样接口，以及可选的 CUDA 能量后端。
 
-### 即将推出
+### 热力学与电化学
 
-我们正在积极开发**化学势响应矩阵、自由能图谱、电解质巨正则采样和电化学界面 GCMC**。这些功能将于近日更新。
+- **化学势响应与自由能图谱。** 从占据涨落得到响应矩阵，用 MBAR 合并固定偏置窗口，构建占据数和电极电荷的自由能分布。
+- **电解质与恒电势界面。** 以化学计量交换盐，求解约束下的 Gaussian 电极电荷。显式 SPC/E 水支持固定拓扑的质子化、氧化还原和质子耦合电子转移。
+- **校准与电流。** 用炼金窗口估计反应态的自由能差，以给定的速率或扩散参数计算物理时间内的电流、计时安培曲线和循环伏安曲线。
 
-![OpenGCMC 算法架构](docs/assets/opengcmc_architecture.svg)
+[电化学模型与用法](docs/electrochemistry.md)
+
+![OpenGCMC 吸附采样器架构](docs/assets/opengcmc_architecture.svg)
 
 ## 性能
 
@@ -87,6 +91,13 @@ opengcmc run examples/flexible_cuda.json -o output/cuda
 
 # 网格提议与精确目标校正
 opengcmc run examples/grid_delayed_acceptance.json -o output/corrected
+
+# 恒电势电解质 GCMC
+opengcmc-thermo run examples/thermodynamics/interface_constant_potential.json -o output/interface
+
+# 显式水反应态采样与循环伏安
+opengcmc-reactive run examples/electrochemistry/hydrated_interface.json -o output/hydrated
+opengcmc-reactive transport examples/electrochemistry/diffusion_voltammetry.json -o output/cv
 ```
 
 输出包含统计结果、输入副本、检查点及最终构型。示例使用显式给定的演示参数；实际体系在 JSON 中指定框架、客体、力场、电荷、温度与储库。
@@ -103,7 +114,7 @@ from poremc.batching import evaluate_requests, run_native_replicas
 |---|---|
 | [`poremc/`](poremc) | Python API、CBMC、势能、CUDA 接口、统计与输入输出 |
 | [`native/`](native) | C++17 精确能量内核与完整原生采样循环 |
-| [`examples/`](examples) | 缓存、偏置、CUDA 与精确校正输入 |
+| [`examples/`](examples) | 吸附、电解质、恒电势界面、反应校准与电流输入 |
 | [`benchmarks/`](benchmarks) | 可复现输入、逐次测量与上游原始输出 |
 | [`tools/`](tools) | 性能对照、数值回放和数据整理工具 |
 | [`figures/`](figures) | 绘图源码、源数据及图注 |

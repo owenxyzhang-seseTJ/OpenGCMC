@@ -1,7 +1,7 @@
 include LICENSE README.md README.en.md README.ja.md
 recursive-include native *.py *.cpp *.h *.cu
 recursive-include examples *.json
-recursive-include tools *.py *.cu
+recursive-include tools *.py *.cu *.sh
 recursive-include docs *.md *.bib *.svg *.png *.pdf
 recursive-include figures *.py *.md *.csv *.json
 recursive-include tests *.py *.bin *.gpu

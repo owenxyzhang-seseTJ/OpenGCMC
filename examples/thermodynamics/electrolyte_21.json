@@ -1,0 +1,48 @@
+{
+  "temperature": 300,
+  "cell": [
+    24,
+    24,
+    24
+  ],
+  "species": [
+    {
+      "name": "C2",
+      "valence": 2,
+      "sigma": 3,
+      "epsilon": 50
+    },
+    {
+      "name": "A",
+      "valence": -1,
+      "sigma": 3,
+      "epsilon": 50
+    }
+  ],
+  "log_activities": [
+    -9.9,
+    -9.2
+  ],
+  "forcefield": {
+    "cutoff": 8,
+    "alpha": 0.3,
+    "kmax": 4,
+    "dielectric": 78.4,
+    "coulomb": "ewald"
+  },
+  "channels": [
+    {
+      "name": "salt_2_1",
+      "stoichiometry": [
+        1,
+        2
+      ]
+    }
+  ],
+  "run": {
+    "steps": 3000,
+    "burnin": 500,
+    "sample_every": 5
+  },
+  "seed": 27
+}

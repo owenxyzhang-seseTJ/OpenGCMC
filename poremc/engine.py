@@ -43,7 +43,8 @@ class GCMC:
     def __init__(self, species, potential, cell, temperature, activities,
                  seed=12345, trials=8, move_weights=None,
                  species_probabilities=None, max_translation=1.0,
-                 max_rotation=0.5, target_potential=None, max_particles=100000, root_proposal=None):
+                 max_rotation=0.5, target_potential=None, max_particles=100000, root_proposal=None, count_bias=None):
+        self.count_bias = count_bias
         self.species = list(species)
         if not self.species:
             raise ValueError("at least one molecular species is required")
@@ -150,6 +151,19 @@ class GCMC:
         return math.log(max(float(self.rng.random()), np.finfo(float).tiny)) < min(0.0, log_ratio)
 
     def _accept_candidate(self, move, first_log_ratio, molecule, old, new, entries, env, surrogate_delta=None):
+        if self.count_bias is not None:
+            before = self.counts
+            after = before.copy()
+            if move in ("insert", "delete"):
+                sid = next(i for i, m in enumerate(self.species) if m is molecule)
+                after[sid] += 1 if move == "insert" else -1
+            old_bias = float(self.count_bias(before))
+            new_bias = float(self.count_bias(after))
+            if not math.isfinite(old_bias):
+                raise ValueError("current state is outside the frozen bias window")
+            if not math.isfinite(new_bias):
+                return False
+            first_log_ratio -= new_bias - old_bias
         if not self._accept_log(first_log_ratio):
             return False
         self.counters[move]["stage1_passed"] += 1
@@ -319,7 +333,10 @@ class GCMC:
         return result
 
     def checkpoint(self):
-        return {"schema": "poremc-gcmc-checkpoint-v1", "root_proposal":self.root_proposal.to_dict() if self.root_proposal is not None else None, "species": [s.to_dict() for s in self.species],
+        from .free_energy import HarmonicCountBias
+        if self.count_bias is not None and not isinstance(self.count_bias, HarmonicCountBias):
+            raise TypeError("checkpoint requires a serializable HarmonicCountBias")
+        return {"count_bias": None if self.count_bias is None else self.count_bias.__dict__, "schema": "poremc-gcmc-checkpoint-v1", "root_proposal":self.root_proposal.to_dict() if self.root_proposal is not None else None, "species": [s.to_dict() for s in self.species],
                 "cell": self.cell.tolist(), "temperature": self.temperature, "activities": self.activities.tolist(),
                 "trials": self.trials, "move_weights": dict(zip(self.MOVE_NAMES, self.move_probabilities.tolist())),
                 "species_probabilities": self.species_probabilities.tolist(),
@@ -346,11 +363,14 @@ class GCMC:
         if data["requires_target_potential"] != (target_potential is not None):
             raise ValueError("checkpoint target-potential mode differs")
         from .proposals import VoxelProposal
+        from .free_energy import HarmonicCountBias
+        bias_data = data.get("count_bias")
         obj = cls([Molecule.from_dict(d) for d in data["species"]], potential, data["cell"],
                   data["temperature"], data["activities"], trials=data["trials"],
                   move_weights=data["move_weights"], species_probabilities=data["species_probabilities"],
                   max_translation=data["max_translation"], max_rotation=data["max_rotation"],
-                  target_potential=target_potential, max_particles=data["max_particles"],root_proposal=VoxelProposal.from_dict(data.get("root_proposal")))
+                  target_potential=target_potential, max_particles=data["max_particles"],root_proposal=VoxelProposal.from_dict(data.get("root_proposal")),
+                  count_bias=None if bias_data is None else HarmonicCountBias(**bias_data))
         obj.particles = [Particle(int(p["species"]), np.asarray(p["positions"],float)) for p in data["particles"]]
         if len(obj.particles) > obj.max_particles:
             raise ValueError("checkpoint exceeds max_particles")

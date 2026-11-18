@@ -209,9 +209,15 @@ def main(argv=None):
                 'multicomponent CBMC','two-stage target correction','native cell-list LJ/DSF/Ewald',
                 'CIF explicit symmetry','exact checkpoint','CPU replica parallelism','full C++ one-component LJ/DSF sampler'],
                 'python_api':['NPT bulk','Gibbs bulk','replica exchange','TMMC controller','TorchScript total-energy adapter'],
+                'thermodynamics':['chemical-potential response matrices','occupancy and charge free-energy landscapes',
+                    'stoichiometric electrolyte GCMC','Gaussian constant-potential electrodes'],
+                'electrochemistry':['explicit SPC/E hydration','fixed-topology protonation, redox and PCET sampling',
+                    'staged NCMC and alchemical calibration','reaction networks and finite-volume diffusion currents'],
+                'entry_points':{'molecular':'opengcmc','thermodynamics':'opengcmc-thermo','electrochemistry':'opengcmc-reactive'},
                 'gpu_status':'Optional CUDA energy backend with resident neighbour and parameter tables; Python sampling driver',
-                'not_implemented':['ring-closure CBMC','flexible framework','CFCMC','reactive MC','MD/transport',
-                    'polarization/QEq','general RASPA/gRASPA input compatibility','PME']} ,indent=2)); return 0
+                'not_implemented':['ring-closure CBMC','flexible framework','CFCMC','molecular dynamics',
+                    'arbitrary reactive topology changes','general bulk polarization/QEq',
+                    'general RASPA/gRASPA input compatibility','PME']} ,indent=2)); return 0
         if args.command=='import-raspa3':
             from .raspa_adapter import import_raspa3
             converted=import_raspa3(args.input,args.steps,args.burnin)

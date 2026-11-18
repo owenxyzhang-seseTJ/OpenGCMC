@@ -1,0 +1,78 @@
+{
+  "description": "Exactly solvable two-contact redox kinetic model. Rates are illustrative per-site values, not predictions for the hydration example.",
+  "states": [
+    {
+      "name": "Ox"
+    },
+    {
+      "name": "Red",
+      "bound_electrons": 1
+    }
+  ],
+  "edges": [
+    {
+      "source": 0,
+      "target": 1,
+      "electrode": 0,
+      "name": "left_ET",
+      "model": "butler_volmer",
+      "k0_per_s": 20.0
+    },
+    {
+      "source": 0,
+      "target": 1,
+      "electrode": 1,
+      "name": "right_ET",
+      "model": "butler_volmer",
+      "k0_per_s": 20.0
+    }
+  ],
+  "network": {
+    "temperature": 300.0,
+    "electrodes": 2,
+    "state_electrode_charge_e": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.5,
+        0.5
+      ]
+    ],
+    "capacitance_F": [
+      [
+        2e-20,
+        -2e-20
+      ],
+      [
+        -2e-20,
+        2e-20
+      ]
+    ]
+  },
+  "task": "ramp",
+  "ramp": {
+    "times_s": [
+      0,
+      0.2,
+      0.4
+    ],
+    "potentials_V": [
+      [
+        -0.12,
+        0
+      ],
+      [
+        0.12,
+        0
+      ],
+      [
+        -0.12,
+        0
+      ]
+    ],
+    "samples": 401,
+    "site_count": 1.0
+  }
+}

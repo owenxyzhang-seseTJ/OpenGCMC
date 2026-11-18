@@ -1,0 +1,87 @@
+{
+  "temperature": 300,
+  "cell": [
+    24,
+    24,
+    48
+  ],
+  "species": [
+    {
+      "name": "C",
+      "valence": 1,
+      "sigma": 3,
+      "epsilon": 50
+    },
+    {
+      "name": "A",
+      "valence": -1,
+      "sigma": 3,
+      "epsilon": 50
+    }
+  ],
+  "log_activities": [
+    -9.21,
+    -9.21
+  ],
+  "forcefield": {
+    "cutoff": 8,
+    "alpha": 0.3,
+    "kmax": 4,
+    "dielectric": 78.4,
+    "coulomb": "ewald",
+    "slab": true
+  },
+  "channels": [
+    {
+      "name": "cation",
+      "stoichiometry": [
+        1,
+        0
+      ]
+    },
+    {
+      "name": "anion",
+      "stoichiometry": [
+        0,
+        1
+      ]
+    }
+  ],
+  "run": {
+    "steps": 4000,
+    "burnin": 1000,
+    "sample_every": 10,
+    "record_positions": true
+  },
+  "seed": 27,
+  "moves": {
+    "allow_single_ion": true,
+    "exchange_probability": 0.6
+  },
+  "region": {
+    "lower": [
+      0,
+      0,
+      0.2916666666666667
+    ],
+    "upper": [
+      1,
+      1,
+      0.7083333333333334
+    ]
+  },
+  "electrodes": {
+    "plane_grid": {
+      "shape": [
+        3,
+        3
+      ],
+      "z": [
+        12,
+        36
+      ]
+    },
+    "voltage_difference": 0.1,
+    "width": 1.0
+  }
+}

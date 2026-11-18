@@ -1,0 +1,144 @@
+{
+  "description": "Analytic four-state PCET cycle: state-energy construction ensures cycle closure. No explicit solvent in this minimal test.",
+  "seed": 31,
+  "cell": [
+    24,
+    24,
+    24
+  ],
+  "templates": [
+    {
+      "kind": "custom",
+      "name": "PCET_site",
+      "geometry": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "states": [
+        {
+          "name": "Ox",
+          "charges": [
+            1.0
+          ],
+          "sigma": [
+            0.0
+          ],
+          "epsilon": [
+            0.0
+          ]
+        },
+        {
+          "name": "OxH",
+          "charges": [
+            2.0
+          ],
+          "sigma": [
+            0.0
+          ],
+          "epsilon": [
+            0.0
+          ],
+          "bound_protons": 1,
+          "intrinsic_dimensionless": -16.11809565095832
+        },
+        {
+          "name": "Red",
+          "charges": [
+            0.0
+          ],
+          "sigma": [
+            0.0
+          ],
+          "epsilon": [
+            0.0
+          ],
+          "bound_electrons": 1
+        },
+        {
+          "name": "RedH",
+          "charges": [
+            1.0
+          ],
+          "sigma": [
+            0.0
+          ],
+          "epsilon": [
+            0.0
+          ],
+          "bound_electrons": 1,
+          "bound_protons": 1,
+          "intrinsic_dimensionless": -20.723265836946414
+        }
+      ]
+    }
+  ],
+  "forcefield": {
+    "cutoff": 8.0,
+    "coulomb": "none"
+  },
+  "initial": [
+    {
+      "template": 0,
+      "state": 0,
+      "anchor_A": [
+        12,
+        12,
+        12
+      ],
+      "mobile": false,
+      "exchangeable": false
+    }
+  ],
+  "reservoirs": {
+    "temperature": 300.0,
+    "pH": 8.0,
+    "electron_potential_V": 0.04
+  },
+  "reactions": [
+    {
+      "template": 0,
+      "state_a": 0,
+      "state_b": 1,
+      "name": "Ox protonation"
+    },
+    {
+      "template": 0,
+      "state_a": 2,
+      "state_b": 3,
+      "name": "Red protonation"
+    },
+    {
+      "template": 0,
+      "state_a": 0,
+      "state_b": 2,
+      "name": "unprotonated ET"
+    },
+    {
+      "template": 0,
+      "state_a": 1,
+      "state_b": 3,
+      "name": "protonated ET"
+    },
+    {
+      "template": 0,
+      "state_a": 0,
+      "state_b": 3,
+      "name": "concerted PCET"
+    }
+  ],
+  "moves": {
+    "move_weights": [
+      0.1,
+      0,
+      0.9
+    ]
+  },
+  "run": {
+    "steps": 20000,
+    "burnin": 1000,
+    "sample_every": 2
+  }
+}

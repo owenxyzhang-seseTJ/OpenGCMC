@@ -6,11 +6,15 @@
 
 OpenGCMC は、繰り返し発生する近傍探索、相互作用パラメータの混合、環境の再構築を試行評価から切り離します。厳密なエネルギー評価と柔軟分子の配置バイアス Monte Carlo（CBMC）を組み合わせ、C++ ネイティブサンプラー、汎用 Python インターフェース、オプションの CUDA エネルギーバックエンドを提供します。
 
-### 近日公開
+### 熱力学と電気化学
 
-現在、**化学ポテンシャル応答行列、自由エネルギーマップ、電解質のグランドカノニカルサンプリング、電気化学界面 GCMC**の開発を積極的に進めています。これらの機能は近日公開予定です。
+- **化学ポテンシャル応答と自由エネルギー。** 粒子数の揺らぎから応答行列を求め、固定バイアス窓を MBAR で統合して粒子数と電極電荷の自由エネルギー地形を計算します。
+- **電解質と定電位界面。** 化学量論に従って塩を交換し、電荷制約の下で Gaussian 電極の電荷を求めます。陽に扱う SPC/E 水中で、固定分子トポロジーのプロトン化、酸化還元、プロトン共役電子移動をサンプリングします。
+- **較正と電流。** アルケミカル窓から反応状態間の自由エネルギー差を推定し、指定した速度定数や拡散係数から実時間の電流応答、クロノアンペロメトリー、サイクリックボルタンメトリーを計算します。
 
-![OpenGCMC のアルゴリズム構成](docs/assets/opengcmc_architecture.svg)
+[電気化学モデルと使用方法](docs/electrochemistry.md)
+
+![OpenGCMC の吸着サンプラー構成](docs/assets/opengcmc_architecture.svg)
 
 ## 性能
 
@@ -87,6 +91,13 @@ opengcmc run examples/flexible_cuda.json -o output/cuda
 
 # グリッド提案と厳密な目標補正
 opengcmc run examples/grid_delayed_acceptance.json -o output/corrected
+
+# 定電位電解質 GCMC
+opengcmc-thermo run examples/thermodynamics/interface_constant_potential.json -o output/interface
+
+# 陽な水を含む反応状態のサンプリングとサイクリックボルタンメトリー
+opengcmc-reactive run examples/electrochemistry/hydrated_interface.json -o output/hydrated
+opengcmc-reactive transport examples/electrochemistry/diffusion_voltammetry.json -o output/cv
 ```
 
 出力には統計、入力設定、チェックポイント、最終座標が含まれます。例では明示的なデモ用パラメータを使用しています。対象系に合わせて骨格、ゲスト、力場、電荷、温度、リザーバーを JSON で指定します。
@@ -103,7 +114,7 @@ from poremc.batching import evaluate_requests, run_native_replicas
 |---|---|
 | [`poremc/`](poremc) | Python API、CBMC、ポテンシャル、CUDA、統計、入出力 |
 | [`native/`](native) | 厳密な C++17 エネルギーカーネルとネイティブサンプリングループ |
-| [`examples/`](examples) | キャッシュ、バイアス、CUDA、厳密補正の入力例 |
+| [`examples/`](examples) | 吸着、電解質、定電位界面、反応較正、電流計算の入力例 |
 | [`benchmarks/`](benchmarks) | 再現用入力、各測定値、比較ソフトウェアの生出力 |
 | [`tools/`](tools) | 直接比較、数値再生、データ処理ツール |
 | [`figures/`](figures) | 編集可能な描画ソース、図の元データ、キャプション |

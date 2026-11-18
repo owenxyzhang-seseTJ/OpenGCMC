@@ -1,2 +1,2 @@
-"""PoreMC: transparent molecular Monte Carlo with batched flexible growth."""
-__version__ = "0.2.0"
+"""OpenGCMC: molecular Monte Carlo, thermodynamics and electrochemical sampling."""
+__version__ = "0.4.1"

@@ -6,11 +6,15 @@
 
 OpenGCMC moves repeated neighbour searches, parameter mixing and environment construction out of trial evaluation. It combines exact energy evaluation with configurational-bias Monte Carlo (CBMC) for flexible molecules, through a native C++ sampler, a general Python interface and an optional CUDA energy backend.
 
-### Coming soon
+### Thermodynamics and electrochemistry
 
-We are actively developing **chemical-potential response matrices, free-energy maps, grand canonical sampling of electrolytes, and GCMC for electrochemical interfaces**. These features will be released in the coming days.
+- **Chemical potential response and free energy.** Estimate response matrices from occupancy fluctuations and combine fixed bias windows with MBAR to map occupancy and electrode charge.
+- **Electrolytes and constant potential.** Exchange salts by stoichiometry and solve for constrained Gaussian electrode charges. Explicit SPC/E water supports protonation, redox and proton-coupled electron transfer with a fixed molecular topology.
+- **Calibration and current.** Estimate reaction state free energies from alchemical windows. Use supplied kinetic rates or diffusivities to calculate current in physical time, including chronoamperometry and cyclic voltammetry.
 
-![OpenGCMC algorithm architecture](docs/assets/opengcmc_architecture.svg)
+[Electrochemical models and usage](docs/electrochemistry.md)
+
+![OpenGCMC adsorption sampler architecture](docs/assets/opengcmc_architecture.svg)
 
 ## Performance
 
@@ -87,6 +91,13 @@ opengcmc run examples/flexible_cuda.json -o output/cuda
 
 # Grid proposals with exact target correction
 opengcmc run examples/grid_delayed_acceptance.json -o output/corrected
+
+# Constant-potential electrolyte GCMC
+opengcmc-thermo run examples/thermodynamics/interface_constant_potential.json -o output/interface
+
+# Explicit-water reaction sampling and cyclic voltammetry
+opengcmc-reactive run examples/electrochemistry/hydrated_interface.json -o output/hydrated
+opengcmc-reactive transport examples/electrochemistry/diffusion_voltammetry.json -o output/cv
 ```
 
 Outputs include statistics, the input configuration, a checkpoint and final coordinates. Examples use explicit demonstration parameters. Specify the framework, guest, force field, charges, temperature and reservoir in JSON for a chosen system.
@@ -103,7 +114,7 @@ from poremc.batching import evaluate_requests, run_native_replicas
 |---|---|
 | [`poremc/`](poremc) | Python API, CBMC, potentials, CUDA interfaces, statistics and I/O |
 | [`native/`](native) | Exact C++17 energy kernels and the complete native sampling loop |
-| [`examples/`](examples) | Inputs for caching, biasing, CUDA and exact correction |
+| [`examples/`](examples) | Adsorption, electrolytes, constant-potential interfaces, calibration and current |
 | [`benchmarks/`](benchmarks) | Reproducible inputs, individual measurements and raw reference outputs |
 | [`tools/`](tools) | Direct comparisons, numerical replay and data processing |
 | [`figures/`](figures) | Editable plotting source, source data and captions |
