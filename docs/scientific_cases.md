@@ -57,9 +57,11 @@ The peak-current ratio between the two scan rates is 1.41404, consistent with th
 
 This case demonstrates finite-volume diffusion, physical-time current integration, chronoamperometry, cyclic voltammetry, and validation against analytical electrochemical limits.
 
-## 4. Explicit-water reaction and alchemical free energies
+## 4. Explicit-water reactions and alchemical free-energy calculations
 
 The reaction workflow samples protonation, redox, and proton-coupled electron-transfer states with rigid SPC/E water, ions, and a fixed molecular topology. A seven-window alchemical calculation with 35 retained frames per window gives an overlap spectral gap of 0.0249. A fixed-snapshot seven-state charge calculation agrees with direct state-by-state evaluation to within \(1.17\times10^{-10}\,K\).
+
+Here, *alchemical* describes a nonphysical but thermodynamically well-defined path between fixed-topology end states. It is a computational method for obtaining a free-energy difference, not a separate thermodynamic quantity or a proposed reaction mechanism.
 
 The runnable inputs expose the required molecular topology, reaction edges, reservoir conventions, charge compensation, and calibration fields. The example parameters are controls for workflow and numerical validation; physical pKa or formal-potential prediction requires a calibrated molecular model, converged reservoir activities, and independent reference states.
 
