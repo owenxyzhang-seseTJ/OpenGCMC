@@ -6,9 +6,9 @@ OpenGCMC has been exercised end to end on charged-MOF mixture adsorption, consta
 
 ## 1. 带电 IRMOF-1 中的 CO₂/CH₄ 混合吸附 / CO₂/CH₄ Mixture Adsorption in Charged IRMOF-1
 
-本案例采用 RASPA3 官方二元混合物示例中的带电 IRMOF-1 CIF、位点电荷、客体模型和力场约定。框架包含 424 个原子，净电荷约为 \(-5.3\times10^{-15}\,e\)。在 300 K 下，CO₂ 和 CH₄ 的储库逸度分别为 0.5 bar 和 1.5 bar。计算使用 12 Å 截断、平移 Lennard-Jones 势、无尾部修正和 Ewald 静电。
+本案例采用 RASPA3 官方二元混合物示例中的带电 IRMOF-1 CIF、位点电荷、客体模型和力场约定。框架包含 424 个原子，净电荷约为 $-5.3\times10^{-15}\,e$。在 300 K 下，CO₂ 和 CH₄ 的储库逸度分别为 0.5 bar 和 1.5 bar。计算使用 12 Å 截断、平移 Lennard-Jones 势、无尾部修正和 Ewald 静电。
 
-This case uses the charged IRMOF-1 CIF, site charges, guest models, and force-field conventions from the official RASPA3 binary-mixture example. The framework contains 424 atoms with a net charge of approximately \(-5.3\times10^{-15}\,e\). At 300 K, the reservoir fugacities are 0.5 bar for CO₂ and 1.5 bar for CH₄. The calculation uses a 12 Å cutoff, shifted Lennard-Jones interactions, no tail correction, and Ewald electrostatics.
+This case uses the charged IRMOF-1 CIF, site charges, guest models, and force-field conventions from the official RASPA3 binary-mixture example. The framework contains 424 atoms with a net charge of approximately $-5.3\times10^{-15}\,e$. At 300 K, the reservoir fugacities are 0.5 bar for CO₂ and 1.5 bar for CH₄. The calculation uses a 12 Å cutoff, shifted Lennard-Jones interactions, no tail correction, and Ewald electrostatics.
 
 三条独立 OpenGCMC 链分别执行 8,000 次预热尝试和 50,000 次生产尝试。RASPA3 3.1.0 使用 3,000 个预热循环和 20,000 个生产循环。
 
@@ -19,17 +19,17 @@ Three independent OpenGCMC chains each use 8,000 warm-up attempts followed by 50
 | CO₂ / CO2 | 2.647，95% 分块区间<br>95% block interval [2.529, 2.768] | 2.615 ± 0.027 |
 | CH₄ / CH4 | 4.257，95% 分块区间<br>95% block interval [4.128, 4.388] | 4.246 ± 0.033 |
 
-三条链的 split \(\hat R\) 对 CO₂ 和 CH₄ 分别为 1.0061 和 1.0005。以 CO₂、CH₄ 为行，以施加的 \(\ln z\) 扰动为列，涨落响应矩阵为：
+三条链的 split $\hat R$ 对 CO₂ 和 CH₄ 分别为 1.0061 和 1.0005。以 CO₂、CH₄ 为行，以施加的 $\ln z$ 扰动为列，涨落响应矩阵为：
 
-The three-chain split \(\hat R\) values are 1.0061 for CO₂ and 1.0005 for CH₄. With CO₂ and CH₄ ordered as rows and applied \(\ln z\) perturbations as columns, the fluctuation response matrix is
+The three-chain split $\hat R$ values are 1.0061 for CO₂ and 1.0005 for CH₄. With CO₂ and CH₄ ordered as rows and applied $\ln z$ perturbations as columns, the fluctuation response matrix is
 
-\[
+$$
 \chi =
 \begin{bmatrix}
 2.642 & 0.069\\
 0.069 & 4.301
 \end{bmatrix}.
-\]
+$$
 
 三个偏置窗口的总占据中心分别为 3、8 和 13，每窗保留 4,500 帧。所得自由能图谱在总占据数为 6 时达到最小值。MBAR 结果与独立无偏轨迹的总变差距离为 0.0217，窗口重叠谱隙为 0.435。
 
@@ -45,9 +45,9 @@ This case demonstrates charged-framework GCMC, binary competitive adsorption, re
 
 Two ideal Gaussian electrodes are separated by 16 Å and held at a 0.10 V potential difference. The cell contains 62 rigid SPC/E water molecules and one Na⁺/Cl⁻ pair at 298.15 K. The ions use Joung–Cheatham parameters for SPC/E water, and the electrodes compensate the total water and ion charge.
 
-两个独立种子均执行 8,000 步预热和 16,000 步生产。电极电荷与独立求解的差不超过 \(1.1\times10^{-15}\,e\)，末态分子能量与完整重算的差不超过 \(1.95\times10^{-7}\,K\)。
+两个独立种子均执行 8,000 步预热和 16,000 步生产。电极电荷与独立求解的差不超过 $1.1\times10^{-15}\,e$，末态分子能量与完整重算的差不超过 $1.95\times10^{-7}\,K$。
 
-Two independent seeds each use 8,000 warm-up steps and 16,000 production steps. The electrode charge agrees with an independent solve to within \(1.1\times10^{-15}\,e\). The final molecular energy agrees with a complete recomputation to within \(1.95\times10^{-7}\,K\).
+Two independent seeds each use 8,000 warm-up steps and 16,000 production steps. The electrode charge agrees with an independent solve to within $1.1\times10^{-15}\,e$. The final molecular energy agrees with a complete recomputation to within $1.95\times10^{-7}\,K$.
 
 | 物理量<br>Quantity | 种子 1774<br>Seed 1774 | 种子 6231<br>Seed 6231 |
 |---|---:|---:|
@@ -65,9 +65,9 @@ This case demonstrates explicit-solvent ion sampling, constrained Gaussian elect
 
 ## 3. 铁氰化物/亚铁氰化物扩散电化学 / Ferricyanide/Ferrocyanide Diffusion Electrochemistry
 
-输运工作流采用 25 °C 的文献扩散系数 \(D_{\mathrm{ox}}=7.26\times10^{-10}\,\mathrm{m^2\,s^{-1}}\) 和 \(D_{\mathrm{red}}=6.67\times10^{-10}\,\mathrm{m^2\,s^{-1}}\)，氧化态浓度为 1 mM，平面电极直径为 3 mm。形式电势作为零点，并采用较快的异相动力学检验可逆扩散极限。
+输运工作流采用 25 °C 的文献扩散系数 $D_{\mathrm{ox}} = 7.26\times10^{-10}\ \mathrm{m^2\,s^{-1}}$ 和 $D_{\mathrm{red}} = 6.67\times10^{-10}\ \mathrm{m^2\,s^{-1}}$，氧化态浓度为 1 mM，平面电极直径为 3 mm。形式电势作为零点，并采用较快的异相动力学检验可逆扩散极限。
 
-The transport workflow uses literature diffusion coefficients at 25 °C, \(D_{\mathrm{ox}}=7.26\times10^{-10}\,\mathrm{m^2\,s^{-1}}\) and \(D_{\mathrm{red}}=6.67\times10^{-10}\,\mathrm{m^2\,s^{-1}}\), 1 mM oxidized species, and a 3 mm planar electrode. The formal potential is used as the zero, and fast heterogeneous kinetics test the reversible diffusion limit.
+The transport workflow uses literature diffusion coefficients at 25 °C, $D_{\mathrm{ox}} = 7.26\times10^{-10}\ \mathrm{m^2\,s^{-1}}$ and $D_{\mathrm{red}} = 6.67\times10^{-10}\ \mathrm{m^2\,s^{-1}}$, 1 mM oxidized species, and a 3 mm planar electrode. The formal potential is used as the zero, and fast heterogeneous kinetics test the reversible diffusion limit.
 
 | 计算<br>Calculation | OpenGCMC 结果<br>result | 解析对照<br>Analytical comparison |
 |---|---|---:|
@@ -75,9 +75,9 @@ The transport workflow uses literature diffusion coefficients at 25 °C, \(D_{\m
 | 100 mV/s CV 阴极峰<br>cathodic peak | −16.1747 µA | Randles–Ševčík 绝对值<br>magnitude 16.1802 µA |
 | 200 mV/s CV 阴极峰<br>cathodic peak | −22.8718 µA | Randles–Ševčík 绝对值<br>magnitude 22.8823 µA |
 
-两档扫描速度的峰电流比为 1.41404，与 \(\sqrt{2}\) 一致；两条伏安曲线的峰间距均为 58.5 mV。
+两档扫描速度的峰电流比为 1.41404，与 $\sqrt{2}$ 一致；两条伏安曲线的峰间距均为 58.5 mV。
 
-The peak-current ratio between the two scan rates is 1.41404, consistent with \(\sqrt{2}\). Both voltammograms have a 58.5 mV peak separation.
+The peak-current ratio between the two scan rates is 1.41404, consistent with $\sqrt{2}$. Both voltammograms have a 58.5 mV peak separation.
 
 该案例验证有限体积扩散、物理时间电流积分、计时安培、循环伏安以及与电化学解析极限的对照。
 
@@ -85,9 +85,9 @@ This case demonstrates finite-volume diffusion, physical-time current integratio
 
 ## 4. 显式水反应与多状态自由能计算 / Explicit-Water Reactions and Multistate Free-Energy Calculations
 
-反应工作流使用刚性 SPC/E 水、离子和固定分子拓扑，采样质子化、氧化还原和质子耦合电子转移状态。七窗口自由能计算每窗保留 35 帧，窗口重叠谱隙为 0.0249。固定快照的七状态电荷计算与逐状态直接计算的差不超过 \(1.17\times10^{-10}\,K\)。
+反应工作流使用刚性 SPC/E 水、离子和固定分子拓扑，采样质子化、氧化还原和质子耦合电子转移状态。七窗口自由能计算每窗保留 35 帧，窗口重叠谱隙为 0.0249。固定快照的七状态电荷计算与逐状态直接计算的差不超过 $1.17\times10^{-10}\,K$。
 
-The reaction workflow samples protonation, redox, and proton-coupled electron-transfer states with rigid SPC/E water, ions, and a fixed molecular topology. A seven-window free-energy calculation with 35 retained frames per window gives an overlap spectral gap of 0.0249. A fixed-snapshot seven-state charge calculation agrees with direct state-by-state evaluation to within \(1.17\times10^{-10}\,K\).
+The reaction workflow samples protonation, redox, and proton-coupled electron-transfer states with rigid SPC/E water, ions, and a fixed molecular topology. A seven-window free-energy calculation with 35 retained frames per window gives an overlap spectral gap of 0.0249. A fixed-snapshot seven-state charge calculation agrees with direct state-by-state evaluation to within $1.17\times10^{-10}\,K$.
 
 可运行输入明确给出分子拓扑、反应边、储库约定、电荷补偿和校准字段。示例参数用于工作流和数值验证；若要预测物理 pKa 或形式电势，还需要标定的分子模型、收敛的储库活度和独立参考态。
 
