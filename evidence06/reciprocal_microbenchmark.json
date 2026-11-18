@@ -1,0 +1,99 @@
+{
+  "host_atoms": 4416,
+  "candidate_atoms": 12,
+  "candidates": 10,
+  "kmax": [
+    13,
+    13,
+    13
+  ],
+  "threads": 1,
+  "repetitions": 50,
+  "records": [
+    {
+      "repeat": 0,
+      "half_spectrum": false,
+      "stored_modes": 19682,
+      "host_build_s": 0.124565523,
+      "candidate_batch_s": 0.0036919640199999998,
+      "host_fft64_s": 0.031734336,
+      "translation_full_recompute_s": 0.00031824151,
+      "translation_phase_s": 6.043154e-05
+    },
+    {
+      "repeat": 0,
+      "half_spectrum": true,
+      "stored_modes": 9841,
+      "host_build_s": 0.05497789,
+      "candidate_batch_s": 0.00163708498,
+      "host_fft64_s": 0.012645701,
+      "translation_full_recompute_s": 0.000155695345,
+      "translation_phase_s": 3.157792e-05
+    },
+    {
+      "repeat": 1,
+      "half_spectrum": true,
+      "stored_modes": 9841,
+      "host_build_s": 0.054971942,
+      "candidate_batch_s": 0.00181717786,
+      "host_fft64_s": 0.011749871,
+      "translation_full_recompute_s": 0.00015996763,
+      "translation_phase_s": 2.706202e-05
+    },
+    {
+      "repeat": 1,
+      "half_spectrum": false,
+      "stored_modes": 19682,
+      "host_build_s": 0.109672295,
+      "candidate_batch_s": 0.00343741246,
+      "host_fft64_s": 0.01253245,
+      "translation_full_recompute_s": 0.0003082125,
+      "translation_phase_s": 5.82844e-05
+    },
+    {
+      "repeat": 2,
+      "half_spectrum": false,
+      "stored_modes": 19682,
+      "host_build_s": 0.113394342,
+      "candidate_batch_s": 0.00345799146,
+      "host_fft64_s": 0.013631876,
+      "translation_full_recompute_s": 0.00029868269499999997,
+      "translation_phase_s": 5.7894069999999996e-05
+    },
+    {
+      "repeat": 2,
+      "half_spectrum": true,
+      "stored_modes": 9841,
+      "host_build_s": 0.056846446,
+      "candidate_batch_s": 0.00217969628,
+      "host_fft64_s": 0.031598342,
+      "translation_full_recompute_s": 0.000157797315,
+      "translation_phase_s": 3.0097735e-05
+    }
+  ],
+  "checksum": 1223359.9582437146,
+  "summary": {
+    "host_build_s": {
+      "full_median": 0.113394342,
+      "half_median": 0.05497789,
+      "paired_speedup_median": 1.9950594978070813
+    },
+    "candidate_batch_s": {
+      "full_median": 0.00345799146,
+      "half_median": 0.00181717786,
+      "paired_speedup_median": 1.891621362809252
+    },
+    "host_fft64_s": {
+      "full_median": 0.013631876,
+      "half_median": 0.012645701,
+      "paired_speedup_median": 1.0666031993032095
+    },
+    "translation_half_spectrum": {
+      "full_recompute_median_s": 0.000157797315,
+      "phase_median_s": 3.0097735e-05,
+      "paired_speedup_median": 5.242830232906231
+    }
+  },
+  "scope": "Native reciprocal subproblem, not complete MC throughput or RASPA comparison",
+  "compile_command": "g++ -O3 -march=native -std=c++17 -fno-fast-math -ffp-contract=off -I native tools06/benchmark_reciprocal.cpp native/ewald_state.cpp -ldl -o benchmark_reciprocal"
+}

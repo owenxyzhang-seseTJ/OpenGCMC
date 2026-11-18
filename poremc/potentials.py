@@ -41,6 +41,7 @@ class ClassicalPotential:
         self.species=list(species); self.cell,self.inverse,_=validate_cell(cell,cutoff)
         self.cutoff=float(cutoff); self.coulomb=coulomb; self.alpha=float(alpha)
         self.shifted=bool(shifted); self.backend=backend; self.algorithm=algorithm
+        self.allow_charge_background=bool(allow_charge_background)
         self.threads=threads
         hmin=float(1.0 / np.linalg.norm(self.inverse,axis=0).max())
         for m in self.species:
@@ -80,7 +81,9 @@ class ClassicalPotential:
         self.host_evaluator=self._new_evaluator(self.host_positions,self.host_sigma,self.host_epsilon,self.host_charge)
         self._distances={id(m):self._graph_distances(m) for m in self.species}
         self._exclusions={id(m):frozenset(tuple(sorted(pair)) for pair in (m.exclusions or [])) for m in self.species}
-        self._host_snapshot=self.ewald.snapshot(self.host_positions,self.host_charge) if self.ewald is not None else None
+        # FastGCMC builds the host structure factor in native code. Avoid a
+        # duplicate Python construction; only the Python driver needs this copy.
+        self._host_snapshot=None
 
     def _new_evaluator(self,p,s,e,q):
         return self.environment_class(p,s,e,q,self.cell,self.cutoff,
@@ -114,6 +117,8 @@ class ClassicalPotential:
         snap=None
         if self.ewald is not None:
             guest_snap=self.ewald.snapshot(p,q)
+            if self._host_snapshot is None:
+                self._host_snapshot=self.ewald.snapshot(self.host_positions,self.host_charge)
             host_snap=self._host_snapshot
             snap=EwaldSnapshot(np.concatenate([self.host_positions,p]),np.concatenate([self.host_charge,q]),
                                host_snap.structure+guest_snap.structure,host_snap.total_charge+guest_snap.total_charge)

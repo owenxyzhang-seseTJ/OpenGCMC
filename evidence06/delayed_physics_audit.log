@@ -1,0 +1,6 @@
+prefix_and_residual passed
+nonuniform_root_poisson passed
+canonical_quadrature passed
+all_moves_and_restart passed
+cache_identity passed
+/workspace/scratch/8c9afaab7ec9/PoreMC_0.6_hostgrid/evidence06/delayed_physics_audit.json

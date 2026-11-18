@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "analytic_grid_max_errors_K": [
+    0.04569452230855919,
+    0.005364131213707213,
+    0.0006746581848018351
+  ],
+  "node_error_K": 1.1102230246251565e-14,
+  "periodic_error_K": 4.1744385725905886e-14,
+  "batch_error_K": 0,
+  "cache_reuse_and_integrity_passed": true,
+  "linear_overlap_lookups": 100,
+  "maximum_capped_reference_K": 100000.00000000003,
+  "exact_fallbacks": 20,
+  "fallback_max_relative_error": 3.532242526595412e-15,
+  "boltzmann_formula_error_K": 1.9895196601282805e-13,
+  "boltzmann_node_error_K": 0,
+  "boltzmann_lookups": 3,
+  "boltzmann_temperature_values_K": [
+    -1382.8031534708714,
+    220.05403074714377
+  ],
+  "temperature_independent_cache_reuse_passed": true,
+  "verification": "Analytic Fourier field, analytic short-range pair, periodic wrapping, batched site indexing, capped reference, Boltzmann reweighting and zero-weight node limit, temperature-independent lazy disk cache and integrity rebuild",
+  "compile_flags": [
+    "-std=c++17",
+    "-O3",
+    "-fno-fast-math",
+    "-ffp-contract=off",
+    "-fopenmp"
+  ]
+}

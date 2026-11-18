@@ -1,5 +1,5 @@
 // Independent FP64 CUDA direct-pair trial reduction. Requires CuPy/CUDA.
-// Direct traversal reference kernel for paired FP64 energy checks.
+// Delivered but NOT executed in this release's CPU-only validation environment.
 
 #include <math.h>
 

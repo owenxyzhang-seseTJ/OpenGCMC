@@ -16,6 +16,17 @@ struct PoreMCFastConfig {
   const int32_t *torsion_indices, *torsion_periodicity;
   const double *torsion_k, *torsion_phase;
   void *host;
+  // Long-range configuration. Coulomb 2=Ewald, 3=PME; both use unshifted
+  // Ewald real space in the short-range kernel. Method 0=direct, 1=PME.
+  int32_t ewald_kmax[3], pme_mesh[3], reciprocal_method, reciprocal_backend;
+  uint64_t host_atoms;
+  const double *host_positions, *host_charge;
+  const char *cuda_library;
+  // 0.6: exact half-spectrum algebra and optional reference-CBMC screening.
+  int32_t ewald_half_spectrum, sampling_mode, host_grid_mesh[3];
+  double ewald_k_cutoff, host_grid_cap, grid_root_bias;
+  const char *host_grid_cache, *host_grid_key;
+  int32_t host_grid_steep;
 };
 #ifdef __cplusplus
 extern "C" {
@@ -35,6 +46,21 @@ int poremc_fast_run(void* handle,uint64_t burnin,uint64_t steps,uint64_t sample_
 int poremc_fast_total_energy(void* handle,double* energy);
 size_t poremc_fast_rng(void* handle,char* buffer,size_t capacity);
 int poremc_fast_restore_bookkeeping(void* handle,const char* rng,uint64_t steps,const uint64_t* counters);
+size_t poremc_fast_longrange_state(void* handle,char* buffer,size_t capacity);
+int poremc_fast_restore_longrange(void* handle,const char* state);
+size_t poremc_fast_longrange_info(void* handle,char* buffer,size_t capacity);
+// Read-only physical-state probes; exclude=SIZE_MAX means no excluded molecule.
+int poremc_fast_site_energies(void* handle,size_t exclude,size_t prefix_atoms,
+                            const double* prefix,size_t batches,const double* trials,double* energies);
+int poremc_fast_molecule_energies(void* handle,size_t exclude,size_t batches,
+                                const double* trials,double* energies);
+int poremc_fast_surrogate_site_energies(void* handle,size_t exclude,size_t prefix_atoms,
+                                      const double* prefix,size_t batches,const double* trials,double* energies);
+int poremc_fast_surrogate_molecule_energies(void* handle,size_t exclude,size_t batches,
+                                          const double* trials,double* energies);
+size_t poremc_fast_acceleration_info(void* handle,char* buffer,size_t capacity);
+int poremc_fast_acceleration_counters(void* handle,uint64_t* output);
+int poremc_fast_restore_acceleration_counters(void* handle,const uint64_t* input);
 #ifdef __cplusplus
 }
 #endif

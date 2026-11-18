@@ -1,2 +1,2 @@
-"""OpenGCMC: molecular Monte Carlo, thermodynamics and electrochemical sampling."""
-__version__ = "0.4.1"
+"""OpenGCMC: molecular Monte Carlo with native host-grid reference sampling."""
+__version__ = "0.6.0"

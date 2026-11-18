@@ -1,0 +1,13 @@
+baseline05 15306 meanN= 13.162 range= [4, 26]
+baseline05 15307 meanN= 14.19167 range= [4, 28]
+baseline05 15308 meanN= 14.45567 range= [3, 29]
+delayed32 15306 meanN= 14.489 range= [4, 26]
+delayed32 15307 meanN= 14.524 range= [3, 29]
+delayed32 15308 meanN= 12.38267 range= [4, 22]
+delayed64 15306 meanN= 13.55433 range= [3, 26]
+delayed64 15307 meanN= 13.40867 range= [3, 28]
+delayed64 15308 meanN= 12.76367 range= [2, 24]
+biased32 15306 meanN= 14.218 range= [4, 31]
+biased32 15307 meanN= 13.986 range= [4, 26]
+biased32 15308 meanN= 15.14967 range= [6, 29]
+evidence06/occupancy_mixing.json

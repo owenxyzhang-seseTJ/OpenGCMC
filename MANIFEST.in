@@ -1,10 +1,17 @@
-include LICENSE README.md README.en.md README.ja.md
+include LICENSE README.md README.en.md README.ja.md CHANGELOG.md
+include README_0.2.md README_0.3.md README_0.4.md README_0.5.md
 recursive-include native *.py *.cpp *.h *.cu
 recursive-include examples *.json
+recursive-include examples05 *.json
+recursive-include examples06 *.json *.md
 recursive-include tools *.py *.cu *.sh
+recursive-include tools06 *.py *.md
 recursive-include docs *.md *.bib *.svg *.png *.pdf
 recursive-include figures *.py *.md *.csv *.json
 recursive-include tests *.py *.bin *.gpu
+recursive-include tests06 *.py *.cpp
+recursive-include evidence06 *.json *.log *.xml
+recursive-include report_06 *.tex *.py *.pdf
 recursive-include benchmarks *.py *.json *.cif *.def *.input *.txt *.log *.npz *.csv restartfile
 recursive-exclude benchmarks/runs *
 recursive-exclude figures/.mplconfig *

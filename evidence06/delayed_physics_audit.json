@@ -1,0 +1,561 @@
+{
+  "version": "0.6",
+  "energy_unit": "U/k_B in K",
+  "native_library_sha256": "33a08917fa59953dc6c39277c91e1c2861c89f67f1674ffc99ef86cfa312d54d",
+  "checks": {
+    "prefix_and_residual": {
+      "passed": true,
+      "seconds": 0.09956436799984658,
+      "max_exact_reference_error_K": 9.094947017729282e-12,
+      "max_surrogate_prefix_error_K": 0.0,
+      "selected_residuals_K": [
+        -27.574479888044436,
+        -6.381988608987683,
+        -30.56021011331586,
+        -25.37797868544658
+      ]
+    },
+    "nonuniform_root_poisson": {
+      "passed": true,
+      "seconds": 0.21358022399908805,
+      "expected_mean": 2.7,
+      "expected_variance": 2.7,
+      "mean": 2.71625,
+      "variance": 2.7353609375000008,
+      "mean_block_se": 0.024422824549473362,
+      "samples": 16000,
+      "profile": {
+        "guest_environment_builds": 41926,
+        "guest_environment_reuses": 37615,
+        "attempted_moves": 83000,
+        "host": {
+          "energy_calls": 20965,
+          "pair_cache_hits": 0,
+          "pair_cache_misses": 0,
+          "pair_cache_bytes": 0,
+          "spatial_plan_bytes": 0,
+          "neighbour_entries": 0,
+          "query_cells": 0,
+          "expanded_plan": 0
+        },
+        "long_range": {
+          "method": "ewald",
+          "backend": "cpu",
+          "host_builds": 1,
+          "contributions": 20965,
+          "candidate_batches": 0,
+          "candidates": 0,
+          "accepted_commits": 41925,
+          "fft_transforms": 0,
+          "gpu_batches": 0,
+          "modes": 62,
+          "full_modes": 124,
+          "half_spectrum": true,
+          "k_cutoff": 0,
+          "host_grid_builds": 0,
+          "host_field_evaluations": 0,
+          "mesh_points": 0
+        },
+        "acceleration": {
+          "sampling_mode": "delayed",
+          "selected_correction_backend": "cpu",
+          "grid_root_bias": 0,
+          "stages": {
+            "insert": {
+              "stage1_evaluated": 30865,
+              "stage1_passed": 20965,
+              "exact_evaluations": 20965,
+              "stage2_accepted": 20965
+            },
+            "delete": {
+              "stage1_evaluated": 48676,
+              "stage1_passed": 20960,
+              "exact_evaluations": 20960,
+              "stage2_accepted": 20960
+            },
+            "translate": {
+              "stage1_evaluated": 0,
+              "stage1_passed": 0,
+              "exact_evaluations": 0,
+              "stage2_accepted": 0
+            },
+            "rotate": {
+              "stage1_evaluated": 0,
+              "stage1_passed": 0,
+              "exact_evaluations": 0,
+              "stage2_accepted": 0
+            },
+            "regrow": {
+              "stage1_evaluated": 0,
+              "stage1_passed": 0,
+              "exact_evaluations": 0,
+              "stage2_accepted": 0
+            }
+          },
+          "stage1_evaluated": 79541,
+          "stage1_passed": 41925,
+          "exact_evaluations": 41925,
+          "stage2_accepted": 41925,
+          "host_grid": {
+            "builds": 1,
+            "cache_loads": 0,
+            "cache_writes": 0,
+            "lookups": 577752,
+            "cubic_lookups": 577752,
+            "linear_lookups": 0,
+            "boltzmann_lookups": 0,
+            "exact_fallbacks": 0,
+            "steep_interpolation": "boltzmann",
+            "reference_cap_K": 100000,
+            "mesh_points": 512,
+            "lj_fields": 1,
+            "site_types": 1,
+            "bytes": 9728,
+            "steep_cells": 0
+          }
+        }
+      }
+    },
+    "canonical_quadrature": {
+      "passed": true,
+      "seconds": 6.964245613999083,
+      "observables": [
+        "cos(2pi*x/Lx)",
+        "sin(2pi*x/Lx)",
+        "cos(2pi*z/Lz)"
+      ],
+      "quadrature": [
+        -0.024514467509859892,
+        -0.11324491201361615,
+        0.011902791902812352
+      ],
+      "quadrature_refinement_difference": [
+        5.8834278430543174e-06,
+        6.118574493864382e-05,
+        2.131786319659393e-06
+      ],
+      "uncorrected_surrogate_quadrature": [
+        -0.0014670828999183189,
+        -0.007540944458524434,
+        0.003534612515626712
+      ],
+      "sampled_mean": [
+        -0.013030699141708344,
+        -0.10957928393666734,
+        0.009988369363888944
+      ],
+      "block_se": [
+        0.010045023277710402,
+        0.009006347981338264,
+        0.009983405829890582
+      ],
+      "samples": 6000,
+      "residual_range_K": [
+        -570.5023117136062,
+        382.84590993655854
+      ],
+      "profile": {
+        "guest_environment_builds": 76881,
+        "guest_environment_reuses": 15122,
+        "attempted_moves": 92000,
+        "host": {
+          "energy_calls": 91664,
+          "pair_cache_hits": 2,
+          "pair_cache_misses": 3,
+          "pair_cache_bytes": 192,
+          "spatial_plan_bytes": 0,
+          "neighbour_entries": 0,
+          "query_cells": 0,
+          "expanded_plan": 0
+        },
+        "long_range": {
+          "method": "ewald",
+          "backend": "cpu",
+          "host_builds": 1,
+          "contributions": 91660,
+          "candidate_batches": 2,
+          "candidates": 16,
+          "accepted_commits": 76881,
+          "fft_transforms": 1,
+          "gpu_batches": 0,
+          "modes": 171,
+          "full_modes": 342,
+          "half_spectrum": true,
+          "k_cutoff": 0,
+          "host_grid_builds": 1,
+          "host_field_evaluations": 0,
+          "mesh_points": 0
+        },
+        "acceleration": {
+          "sampling_mode": "delayed",
+          "selected_correction_backend": "cpu",
+          "grid_root_bias": 0.8,
+          "stages": {
+            "insert": {
+              "stage1_evaluated": 0,
+              "stage1_passed": 0,
+              "exact_evaluations": 0,
+              "stage2_accepted": 0
+            },
+            "delete": {
+              "stage1_evaluated": 0,
+              "stage1_passed": 0,
+              "exact_evaluations": 0,
+              "stage2_accepted": 0
+            },
+            "translate": {
+              "stage1_evaluated": 0,
+              "stage1_passed": 0,
+              "exact_evaluations": 0,
+              "stage2_accepted": 0
+            },
+            "rotate": {
+              "stage1_evaluated": 0,
+              "stage1_passed": 0,
+              "exact_evaluations": 0,
+              "stage2_accepted": 0
+            },
+            "regrow": {
+              "stage1_evaluated": 92000,
+              "stage1_passed": 91659,
+              "exact_evaluations": 183318,
+              "stage2_accepted": 76880
+            }
+          },
+          "stage1_evaluated": 92000,
+          "stage1_passed": 91659,
+          "exact_evaluations": 183318,
+          "stage2_accepted": 76880,
+          "host_grid": {
+            "builds": 1,
+            "cache_loads": 0,
+            "cache_writes": 0,
+            "lookups": 1044955,
+            "cubic_lookups": 0,
+            "linear_lookups": 0,
+            "boltzmann_lookups": 1044955,
+            "exact_fallbacks": 0,
+            "steep_interpolation": "boltzmann",
+            "reference_cap_K": 50,
+            "mesh_points": 512,
+            "lj_fields": 1,
+            "site_types": 1,
+            "bytes": 9728,
+            "steep_cells": 512
+          }
+        }
+      }
+    },
+    "all_moves_and_restart": {
+      "passed": true,
+      "seconds": 0.15163804999974673,
+      "max_full_energy_error_K": 1.0800249583553523e-12,
+      "moves": {
+        "insert": {
+          "attempted": 150,
+          "accepted": 105
+        },
+        "delete": {
+          "attempted": 150,
+          "accepted": 106
+        },
+        "translate": {
+          "attempted": 300,
+          "accepted": 300
+        },
+        "rotate": {
+          "attempted": 300,
+          "accepted": 300
+        },
+        "regrow": {
+          "attempted": 300,
+          "accepted": 296
+        }
+      },
+      "exact_checkpoint_continuation": true
+    },
+    "cache_identity": {
+      "passed": true,
+      "seconds": 0.015038583000205108,
+      "temperature_reweighting_change_K": 0.0,
+      "unchanged_grid_reuse_error_K": 0.0,
+      "changed_field_error_K": 0.0,
+      "physical_field_change_K": -70.3635500320469,
+      "construction_profiles": [
+        {
+          "guest_environment_builds": 1,
+          "guest_environment_reuses": 0,
+          "attempted_moves": 0,
+          "host": {
+            "energy_calls": 1,
+            "pair_cache_hits": 6,
+            "pair_cache_misses": 4,
+            "pair_cache_bytes": 512,
+            "spatial_plan_bytes": 0,
+            "neighbour_entries": 0,
+            "query_cells": 0,
+            "expanded_plan": 0
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 0,
+            "candidate_batches": 0,
+            "candidates": 0,
+            "accepted_commits": 0,
+            "fft_transforms": 1,
+            "gpu_batches": 0,
+            "modes": 346,
+            "full_modes": 692,
+            "half_spectrum": true,
+            "k_cutoff": 0,
+            "host_grid_builds": 1,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          },
+          "acceleration": {
+            "sampling_mode": "delayed",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0,
+            "stages": {
+              "insert": {
+                "stage1_evaluated": 0,
+                "stage1_passed": 0,
+                "exact_evaluations": 0,
+                "stage2_accepted": 0
+              },
+              "delete": {
+                "stage1_evaluated": 0,
+                "stage1_passed": 0,
+                "exact_evaluations": 0,
+                "stage2_accepted": 0
+              },
+              "translate": {
+                "stage1_evaluated": 0,
+                "stage1_passed": 0,
+                "exact_evaluations": 0,
+                "stage2_accepted": 0
+              },
+              "rotate": {
+                "stage1_evaluated": 0,
+                "stage1_passed": 0,
+                "exact_evaluations": 0,
+                "stage2_accepted": 0
+              },
+              "regrow": {
+                "stage1_evaluated": 0,
+                "stage1_passed": 0,
+                "exact_evaluations": 0,
+                "stage2_accepted": 0
+              }
+            },
+            "stage1_evaluated": 0,
+            "stage1_passed": 0,
+            "exact_evaluations": 0,
+            "stage2_accepted": 0,
+            "host_grid": {
+              "builds": 1,
+              "cache_loads": 0,
+              "cache_writes": 1,
+              "lookups": 3,
+              "cubic_lookups": 3,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 0,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 4096,
+              "lj_fields": 1,
+              "site_types": 2,
+              "bytes": 81920,
+              "steep_cells": 0
+            }
+          }
+        },
+        {
+          "guest_environment_builds": 1,
+          "guest_environment_reuses": 0,
+          "attempted_moves": 0,
+          "host": {
+            "energy_calls": 1,
+            "pair_cache_hits": 14,
+            "pair_cache_misses": 4,
+            "pair_cache_bytes": 512,
+            "spatial_plan_bytes": 0,
+            "neighbour_entries": 0,
+            "query_cells": 0,
+            "expanded_plan": 0
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 0,
+            "candidate_batches": 0,
+            "candidates": 0,
+            "accepted_commits": 0,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "modes": 346,
+            "full_modes": 692,
+            "half_spectrum": true,
+            "k_cutoff": 0,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          },
+          "acceleration": {
+            "sampling_mode": "delayed",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0,
+            "stages": {
+              "insert": {
+                "stage1_evaluated": 0,
+                "stage1_passed": 0,
+                "exact_evaluations": 0,
+                "stage2_accepted": 0
+              },
+              "delete": {
+                "stage1_evaluated": 0,
+                "stage1_passed": 0,
+                "exact_evaluations": 0,
+                "stage2_accepted": 0
+              },
+              "translate": {
+                "stage1_evaluated": 0,
+                "stage1_passed": 0,
+                "exact_evaluations": 0,
+                "stage2_accepted": 0
+              },
+              "rotate": {
+                "stage1_evaluated": 0,
+                "stage1_passed": 0,
+                "exact_evaluations": 0,
+                "stage2_accepted": 0
+              },
+              "regrow": {
+                "stage1_evaluated": 0,
+                "stage1_passed": 0,
+                "exact_evaluations": 0,
+                "stage2_accepted": 0
+              }
+            },
+            "stage1_evaluated": 0,
+            "stage1_passed": 0,
+            "exact_evaluations": 0,
+            "stage2_accepted": 0,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 1,
+              "cache_writes": 0,
+              "lookups": 3,
+              "cubic_lookups": 3,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 0,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 4096,
+              "lj_fields": 1,
+              "site_types": 2,
+              "bytes": 81920,
+              "steep_cells": 0
+            }
+          }
+        },
+        {
+          "guest_environment_builds": 1,
+          "guest_environment_reuses": 0,
+          "attempted_moves": 0,
+          "host": {
+            "energy_calls": 1,
+            "pair_cache_hits": 6,
+            "pair_cache_misses": 4,
+            "pair_cache_bytes": 512,
+            "spatial_plan_bytes": 0,
+            "neighbour_entries": 0,
+            "query_cells": 0,
+            "expanded_plan": 0
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 0,
+            "candidate_batches": 0,
+            "candidates": 0,
+            "accepted_commits": 0,
+            "fft_transforms": 1,
+            "gpu_batches": 0,
+            "modes": 346,
+            "full_modes": 692,
+            "half_spectrum": true,
+            "k_cutoff": 0,
+            "host_grid_builds": 1,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          },
+          "acceleration": {
+            "sampling_mode": "delayed",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0,
+            "stages": {
+              "insert": {
+                "stage1_evaluated": 0,
+                "stage1_passed": 0,
+                "exact_evaluations": 0,
+                "stage2_accepted": 0
+              },
+              "delete": {
+                "stage1_evaluated": 0,
+                "stage1_passed": 0,
+                "exact_evaluations": 0,
+                "stage2_accepted": 0
+              },
+              "translate": {
+                "stage1_evaluated": 0,
+                "stage1_passed": 0,
+                "exact_evaluations": 0,
+                "stage2_accepted": 0
+              },
+              "rotate": {
+                "stage1_evaluated": 0,
+                "stage1_passed": 0,
+                "exact_evaluations": 0,
+                "stage2_accepted": 0
+              },
+              "regrow": {
+                "stage1_evaluated": 0,
+                "stage1_passed": 0,
+                "exact_evaluations": 0,
+                "stage2_accepted": 0
+              }
+            },
+            "stage1_evaluated": 0,
+            "stage1_passed": 0,
+            "exact_evaluations": 0,
+            "stage2_accepted": 0,
+            "host_grid": {
+              "builds": 1,
+              "cache_loads": 0,
+              "cache_writes": 1,
+              "lookups": 3,
+              "cubic_lookups": 3,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 0,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 4096,
+              "lj_fields": 1,
+              "site_types": 2,
+              "bytes": 81920,
+              "steep_cells": 64
+            }
+          }
+        }
+      ]
+    }
+  }
+}

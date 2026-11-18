@@ -1,0 +1,97 @@
+aromatic12 repeat=0 baseline05: 295.24 moves/s, 182.85 accepted/s, meanN=13.79
+aromatic12 repeat=0 native06: 492.58 moves/s, 305.07 accepted/s, meanN=13.79
+aromatic12 repeat=0 delayed32: 4933.15 moves/s, 2428.76 accepted/s, meanN=11.44
+aromatic12 repeat=0 biased32: 4843.94 moves/s, 2405.82 accepted/s, meanN=11.74
+aromatic12 repeat=0 delayed64: 4792.17 moves/s, 2741.12 accepted/s, meanN=11.10
+aromatic12 repeat=1 delayed64: 3597.90 moves/s, 2224.70 accepted/s, meanN=13.70
+aromatic12 repeat=1 biased32: 5359.29 moves/s, 2493.86 accepted/s, meanN=13.71
+aromatic12 repeat=1 delayed32: 5472.25 moves/s, 2679.58 accepted/s, meanN=13.36
+aromatic12 repeat=1 native06: 543.52 moves/s, 376.48 accepted/s, meanN=11.97
+aromatic12 repeat=1 baseline05: 319.22 moves/s, 221.11 accepted/s, meanN=11.97
+aromatic12 repeat=2 baseline05: 316.10 moves/s, 197.14 accepted/s, meanN=14.24
+aromatic12 repeat=2 native06: 523.38 moves/s, 326.42 accepted/s, meanN=14.24
+aromatic12 repeat=2 delayed32: 4909.87 moves/s, 2296.18 accepted/s, meanN=10.58
+aromatic12 repeat=2 biased32: 4972.70 moves/s, 2260.92 accepted/s, meanN=11.17
+aromatic12 repeat=2 delayed64: 4499.63 moves/s, 2507.79 accepted/s, meanN=13.30
+[
+  {
+    "mode": "baseline05",
+    "median_moves_s": 316.10005729640176,
+    "median_accepted_s": 197.14106906718925,
+    "paired_speedups": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "median_speedup": 1.0,
+    "speedup_range": [
+      1.0,
+      1.0
+    ],
+    "max_final_recompute_error_K": 5.513356882147491e-09
+  },
+  {
+    "mode": "native06",
+    "median_moves_s": 523.3806277572749,
+    "median_accepted_s": 326.4150515112871,
+    "paired_speedups": [
+      1.668387487157068,
+      1.7026344411271797,
+      1.655743539668231
+    ],
+    "median_speedup": 1.668387487157068,
+    "speedup_range": [
+      1.655743539668231,
+      1.7026344411271797
+    ],
+    "max_final_recompute_error_K": 4.471075953915715e-09
+  },
+  {
+    "mode": "delayed32",
+    "median_moves_s": 4933.153038429346,
+    "median_accepted_s": 2428.7556792533815,
+    "paired_speedups": [
+      16.708934760535946,
+      17.142515778847134,
+      15.532637197806634
+    ],
+    "median_speedup": 16.708934760535946,
+    "speedup_range": [
+      15.532637197806634,
+      17.142515778847134
+    ],
+    "max_final_recompute_error_K": 4.308276402298361e-09
+  },
+  {
+    "mode": "biased32",
+    "median_moves_s": 4972.704913893894,
+    "median_accepted_s": 2405.822095930735,
+    "paired_speedups": [
+      16.406754150162193,
+      16.788664022699926,
+      15.731426803352557
+    ],
+    "median_speedup": 16.406754150162193,
+    "speedup_range": [
+      15.731426803352557,
+      16.788664022699926
+    ],
+    "max_final_recompute_error_K": 2.507476892787963e-09
+  },
+  {
+    "mode": "delayed64",
+    "median_moves_s": 4499.628076491896,
+    "median_accepted_s": 2507.7927146314832,
+    "paired_speedups": [
+      16.2314232737003,
+      11.270894240173009,
+      14.234822084428378
+    ],
+    "median_speedup": 14.234822084428378,
+    "speedup_range": [
+      11.270894240173009,
+      16.2314232737003
+    ],
+    "max_final_recompute_error_K": 9.285940905101597e-09
+  }
+]

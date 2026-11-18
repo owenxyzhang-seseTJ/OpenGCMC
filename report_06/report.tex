@@ -1,0 +1,187 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\setmainfont{Noto Sans CJK SC}[AutoFakeSlant=0.15]
+\setsansfont{Noto Sans CJK SC}
+\setmonofont{DejaVu Sans Mono}[Scale=0.79]
+\IfFontExistsTF{Arial}{\newfontfamily\latinfont{Arial}}{\newfontfamily\latinfont{Liberation Sans}}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip=0pt plus 1pt
+\usepackage{amsmath,amssymb,unicode-math}
+\setmathfont{Latin Modern Math}
+\usepackage[margin=22mm,headheight=16pt]{geometry}
+\usepackage{booktabs,longtable,array,tabularx,graphicx,xcolor,enumitem,listings,fancyhdr,hyperref,multicol}
+\definecolor{navy}{HTML}{263B63}
+\definecolor{blue}{HTML}{4477AA}
+\definecolor{orange}{HTML}{D55E00}
+\definecolor{soft}{HTML}{F2F5F9}
+\hypersetup{colorlinks=true,linkcolor=navy,urlcolor=blue,citecolor=navy,
+ pdftitle={PoreMC 0.6: Cached Host Fields and Exact Delayed CBMC},
+ pdfauthor={PoreMC research implementation}}
+\setlength{\parindent}{1.7em}
+\setlength{\parskip}{0.35em}
+\setlength{\emergencystretch}{3em}
+\linespread{1.06}
+\setlist{itemsep=3pt,topsep=5pt,leftmargin=1.8em}
+\renewcommand{\contentsname}{目录}
+\renewcommand{\tablename}{表}
+\renewcommand{\figurename}{图}
+\renewcommand{\refname}{参考文献}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small\color{navy}PoreMC 0.6}
+\fancyhead[R]{\small 固定框架场、参考势生长与精确校正}
+\fancyfoot[C]{\small\thepage}
+\lstset{basicstyle=\ttfamily\small,breaklines=true,columns=fullflexible,keepspaces=true,
+ showstringspaces=false,frame=none,backgroundcolor=\color{soft},
+ xleftmargin=6pt,xrightmargin=6pt,aboveskip=7pt,belowskip=7pt}
+\newcommand{\code}[1]{\texttt{\small #1}}
+\input{metrics.tex}
+\begin{document}
+\begin{titlepage}
+\vspace*{18mm}
+{\latinfont\fontsize{44}{50}\selectfont\color{navy}\bfseries PoreMC 0.6\par}
+\vspace{12mm}
+{\fontsize{25}{35}\selectfont 固定框架场与高效巨正则采样\par}
+\vspace{5mm}
+{\Large 缓存、参考势 CBMC、Boltzmann 插值与精确 Ewald 校正\par}
+\vspace{12mm}
+\noindent\color{navy}\rule{\textwidth}{1.1pt}\color{black}
+\vspace{8mm}
+\noindent 从用户给出的 4,416 原子框架与 12 位点客体瓶颈出发，把固定环境的重复计算移出采样循环，把完整倒空间评价移到已选中的候选上。理论推导、原生实现、反例分析和独立测量共同确定最终算法。\par
+\vspace{10mm}
+\begin{tabular}{@{}p{31mm}p{118mm}@{}}\toprule
+固定环境 & LJ 类型场与单位电荷静电场；一次 FFT 建表；二进制缓存跨温度和压力复用。\\[5pt]
+采样流程 & 网格参考势构造 CBMC 权重；两阶段接受率恢复原有限 Ewald 目标。\\[5pt]
+搜索空间 & 陡峭区域 Boltzmann 权重插值；可选全支持 alias 根位点提议。\\[5pt]
+倒空间 & 精确共轭半谱、平移相位更新、接受态与逐分子贡献复用。\\[5pt]
+本轮证据 & 单线程完整循环、接受移动吞吐、长链载量与相关性、独立数值核验。\\\bottomrule
+\end{tabular}
+\vfill
+\noindent\textbf{版本}\quad 0.6.0\qquad\textbf{日期}\quad 2026 年 11 月 18 日\par
+\noindent\textbf{单位}\quad 能量 $u=U/k_{\mathrm B}$：K；坐标：\AA；电荷：$e$。\par
+\end{titlepage}
+
+\section*{实现结果与选择依据}
+\addcontentsline{toc}{section}{实现结果与选择依据}
+\code{FastGCMC} 新增原生 \code{sampling\_mode='delayed'}。候选阶段通过固定框架场和客体短程作用选择构型；只有通过第一阶段的候选才评价精确长程残差。接受后复用已计算的分子贡献。默认保留原矩形 $k_{\max}$ 集合，网格插值仅定义参考势，最终目标 Hamiltonian 保持不变。
+
+本轮同机、同物理输入、单线程完整循环中，12 位点刚性合成算例的 Boltzmann $32^3$ 路径相对原始 0.5 的配对吞吐提升中位数为 \RigidSpeed{} 倍；12 位点柔性链为 \FlexibleSpeed{} 倍。两类均采用 4,416 框架原子、10 个候选、10 个初始分子和 $k_{\max}=(13,13,13)$。接受移动吞吐、载量和混合检验与速度同时报告。
+
+初始的粗网格能量三线性方案虽然计算很快，却使近壁吸附区域难以进入。程序随后改为陡峭区域的 Boltzmann 权重插值，并用独立分布与长链对比检验其效果。该反例说明，网格应服务于更有效的采样，单独增加尝试数并不足以确定最佳参数。
+
+最终构建的 \TotalTests{} 项测试通过。完整源代码包含实际运行的脚本和原始证据，报告表格直接由这些 JSON 和测试日志生成。用户提供的 RASPA2 HPC 数据作为问题背景保留；本轮新速度是 PoreMC 0.5/0.6 的本机配对测量。
+
+\setcounter{tocdepth}{1}
+\begingroup\small\begin{multicols}{2}\tableofcontents\end{multicols}\endgroup
+\clearpage
+
+\section{工作负载与加速目标}
+用户实测体系包含 4,416 个框架原子、12 位点 p-xylene、10 个 CBMC trial，以及插入、删除、平移、旋转和再生长。0.5 direct Ewald 使用 19,682 个完整矩形倒空间模式；用户记录的 RASPA2 使用约 5,685 个有效模式并复用框架网格。输入中的有效模式定义和原始构型未随本轮消息提供，因此本版分别处理模式代数压缩与原物理模型下的采样流程优化。
+
+\begin{center}\small
+\begin{tabular}{@{}lrr@{}}\toprule
+用户 HPC 数据 & 原始吞吐 & 150,000 cycles 的给定折算\\\midrule
+RASPA2，平均约 5.5 分子/晶胞 & 123.7 cycles/s & 20.2 min\\
+RASPA2，平均约 17.6 分子/晶胞 & 75.1 cycles/s & 33.3 min\\
+PoreMC 0.5 direct & 89 attempts/s & 9.36 h\\
+PoreMC 0.5 PME $32^3$ & 151.5 attempts/s & 5.50 h\\\bottomrule
+\end{tabular}\end{center}
+
+上述折算按每循环 20 次尝试，即 $3\times10^6$ 次移动。若循环定义为 $\max(20,N)$，精确工作量应从粒子数轨迹累计，不能只把平均 $N$ 代入。用户表中的两个 RASPA2 点对应约 1,502--2,474 attempts/s 的固定 20 次换算参考。
+
+目标瓶颈可写为 $B\times A\times K$：候选数、客体位点数和倒空间模式数相乘。固定框架场已具有时间不变性，CBMC 又只会保留少数候选。因此本版同时减少每个候选的代价、需要精确评价的候选数，以及精确评价内部的重复项。框架网格与近似接受后精确校正的理论基础分别见文献 \cite{ran2025,christen2005,dubbeldam2013}。
+
+\input{theory.tex}
+\clearpage
+\input{results.tex}
+
+\section{运行与真实 HPC 输入的复测}
+\subsection{构建和直接运行}
+\begin{lstlisting}
+python -m pip install -e ".[test]"
+python native/build.py
+python -m poremc run examples06/small_delayed_ewald.json -o run06
+\end{lstlisting}
+原有输入保持力场、活度与 Ewald 参数，在 \code{sampling} 中加入：
+\begin{lstlisting}
+"driver": "cpp",
+"sampling_mode": "delayed",
+"host_grid_mesh": [64, 64, 64],
+"host_grid_steep": "boltzmann",
+"host_grid_cap": 100000.0,
+"host_grid_cache": "cache/framework-guest-fields.bin",
+"grid_root_bias": 0.0,
+"ewald_half_spectrum": true,
+"ewald_k_cutoff": 0.0,
+"reciprocal_method": "direct",
+"reciprocal_backend": "cpu"
+\end{lstlisting}
+\code{host\_grid\_cache} 相对输入文件所在目录解析。复用同一框架与力场的等温线或温度扫描时，原始网格字段可以直接读取；温度相关的 Boltzmann 插值和根位点概率在当前实例中计算。
+
+\code{grid\_root\_bias=0.95} 启用混合 alias 提议，其中 5\% 保留均匀空间支持；它是可选优化。把 \code{host\_grid\_steep} 设置为 \code{'linear'}，可复现初始三线性参考的粗网格混合反例。
+
+把 \code{sampling\_mode} 设置为 \code{'exact'}，使用逐候选精确能量评价，并保留原 CUDA 批处理入口。新的 delayed 校正当前在原生 CPU 执行；\code{auto} 选择 CPU，显式 \code{cuda} 请求需使用 exact 模式。
+
+\subsection{在用户实际构型上比较版本}
+以下命令读取完整 PoreMC JSON，包括 CIF、分子力场和初始分子，自动编译打包的原始 0.5 对照，按交替顺序测量多个版本：
+\begin{lstlisting}
+python tools06/benchmark_input.py your_hpc_input.json \
+    --steps 3000000 --burnin 10000 --repeats 3 \
+    --modes baseline05,native06,delayed32,biased32,delayed64 \
+    --output hpc_comparison_06.json
+\end{lstlisting}
+该命令的 \code{steps} 表示尝试移动数。所有变体固定单线程，并采用输入的原矩形 direct Ewald 模式集合；记录初始化、生产循环、接受次数、载量、实际后端和末态重算差。程序不把本机倍率乘到用户原 HPC 数值上作为新的实测，也不将 PoreMC 的尝试数自动写成 RASPA cycles。
+
+\subsection{诊断和继续优化的接口}
+\code{simulation.acceleration\_profile} 返回各移动的第一阶段通过数、精确残差评价数、第二阶段接受数，以及网格命中和插值类型。\code{long\_range\_profile} 给出实际存储模式、完整模式、FFT、结构因子构造与 GPU batch 次数。
+
+\code{trial\_molecule\_energies} 与 \code{trial\_site\_energies} 始终返回目标能量；对应 \code{trial\_surrogate\_...} 接口返回参考势，便于研究新的网格、学习势和分子提议。checkpoint v3 保留逐分子结构因子及长程累计状态，使平移相位递推后的轨迹可以逐值恢复。
+
+原生范围仍为单组分刚性 / 树状柔性分子和三维周期静电。现有 0.3/0.4 电解质、恒电位电极、反应与电流接口继续保留；本轮变化集中在 \code{FastGCMC} 的固定框架采样路径。
+
+\section{复现材料}
+\begingroup\small
+\begin{longtable}{@{}p{0.45\linewidth}p{0.49\linewidth}@{}}\toprule
+路径 & 内容\\\midrule
+\code{native/host\_grid.*} & 字段建表、插值、Boltzmann 参考与持久缓存。\\
+\code{native/ewald\_state.*} & 半谱、host FFT 场、平移相位和增量静电。\\
+\code{native/fast\_mc.cpp} & 参考势 CBMC、两阶段接受、残差相消与缓存提交。\\
+\code{tools06/benchmark\_hostgrid.py} & 同规模合成算例的完整循环配对计时。\\
+\code{tools06/benchmark\_input.py} & 用户真实输入的同物理模型版本比较。\\
+\code{tools06/benchmark\_mixing.py} & 多种子长链载量与相关性检验。\\
+\code{tools06/audit\_delayed.py} & 独立物理参考、非均匀提议与分布核验。\\
+\code{tools06/advise\_reciprocal.py} & 给定载量范围和能量界的显式模式建议。\\
+\code{baseline\_05/} & 未修改的 0.5 核心代码与原交付来源。\\
+\code{evidence06/} & 实测 JSON、测试日志、负结果和来源说明。\\\bottomrule
+\end{longtable}
+\endgroup
+\begin{lstlisting}
+python -m pytest -q tests tests_legacy tests03 tests04 tests06
+python tools06/audit_delayed.py
+python tools06/audit_host_grid.py
+python report_06/generate_results.py --require-complete
+python report_06/build_report.py
+\end{lstlisting}
+网格二进制缓存可由模型重新构建，不作为源码依赖打包。源文件与原始证据的哈希保存在发布清单中。
+
+\begingroup\small
+\begin{thebibliography}{9}
+\setlength{\itemsep}{3pt}\setlength{\parskip}{0pt}
+\bibitem{christen2005} J. A. Christen, C. Fox.
+Markov chain Monte Carlo Using an Approximation.
+\textit{J. Comput. Graph. Stat.} \textbf{14}(4), 795--810 (2005).
+\href{https://doi.org/10.1198/106186005X76983}{doi:10.1198/106186005X76983}.
+\bibitem{dubbeldam2013} D. Dubbeldam, A. Torres-Knoop, K. S. Walton.
+On the inner workings of Monte Carlo codes.
+\textit{Mol. Simul.} \textbf{39}(14--15), 1253--1292 (2013).
+\href{https://doi.org/10.1080/08927022.2013.819102}{doi:10.1080/08927022.2013.819102}.
+\bibitem{ran2025} Y. A. Ran et al.
+Implementation of energy and force grids in molecular simulations of porous materials.
+\textit{Mol. Phys.} \textbf{123}(21--22), e2542486 (2025).
+\href{https://doi.org/10.1080/00268976.2025.2542486}{doi:10.1080/00268976.2025.2542486}.
+\bibitem{darden1993} T. Darden, D. York, L. Pedersen.
+Particle mesh Ewald: An $N\log(N)$ method for Ewald sums in large systems.
+\textit{J. Chem. Phys.} \textbf{98}, 10089--10092 (1993).
+\href{https://doi.org/10.1063/1.464397}{doi:10.1063/1.464397}.
+\end{thebibliography}
+\endgroup
+\end{document}

@@ -145,6 +145,12 @@ def construct_case(config,base_directory='.'):
     run_args={k:sample.pop(k) for k in ('steps','burnin','sample_every','adapt','record_energy') if k in sample}
     run_args={'steps':10000,'burnin':1000,'sample_every':10,**run_args}
     allowed_sampling={'seed','trials','move_weights','species_probabilities','max_translation','max_rotation','max_particles'}
+    if driver=='cpp':
+        allowed_sampling|={'reciprocal_method','pme_mesh','reciprocal_backend','cuda_library',
+                           'sampling_mode','host_grid_mesh','host_grid_cap','host_grid_cache',
+                           'grid_root_bias','ewald_half_spectrum','ewald_k_cutoff','host_grid_steep'}
+        if sample.get('cuda_library') is not None:sample['cuda_library']=str((base/sample['cuda_library']).resolve())
+        if sample.get('host_grid_cache') is not None:sample['host_grid_cache']=str((base/sample['host_grid_cache']).resolve())
     if set(sample)-allowed_sampling: raise ValueError(f'unknown sampling options: {sorted(set(sample)-allowed_sampling)}')
     if driver=='cpp':
         from .fast import FastGCMC
@@ -156,6 +162,10 @@ def construct_case(config,base_directory='.'):
              'host':{k:v for k,v in host.to_dict().items() if k not in ('source','labels')},
              'potential':config.get('potential'),'temperature_K':temperature,'activities':list(activities),
              'surrogate':config.get('surrogate'),'root_bias':config.get('root_bias'),'execution_driver':driver}
+    if driver=='cpp':
+        physics['long_range']={'method':simulation.reciprocal_method,
+                              'mesh':simulation.pme_mesh if simulation.reciprocal_method=='pme' else None,
+                              'k_cutoff':simulation.ewald_k_cutoff}
     fingerprint=hashlib.sha256(json.dumps(clean_json(physics),sort_keys=True,allow_nan=False).encode()).hexdigest()
     return simulation,run_args,host,fingerprint,surrogate_info
 
@@ -169,7 +179,8 @@ def run_configuration(config,output_directory,base_directory='.',restart=None):
             raise ValueError('restart physics fingerprint differs: restore the original Hamiltonian/reservoir first')
         if config.get('sampling',{}).get('driver','python')=='cpp':
             from .fast import FastGCMC
-            sim=FastGCMC.from_checkpoint(restart,sim.potential)
+            potential=sim.potential;sim.close()
+            sim=FastGCMC.from_checkpoint(restart,potential)
         else:
             sim=GCMC.from_checkpoint(restart,sim.potential,sim.target_potential)
         run_args['burnin']=0; run_args['adapt']=False
@@ -207,17 +218,18 @@ def main(argv=None):
         if args.command=='capabilities':
             print(json.dumps({'version':__version__,'core':['rigid and tree flexible GCMC','bounded harmonic bond/angle plus torsion',
                 'multicomponent CBMC','two-stage target correction','native cell-list LJ/DSF/Ewald',
-                'CIF explicit symmetry','exact checkpoint','CPU replica parallelism','full C++ one-component LJ/DSF sampler'],
+                'native host-grid delayed sampling','direct Ewald and PME',
+                'CIF explicit symmetry','exact checkpoint','CPU replica parallelism','full C++ one-component sampler'],
                 'python_api':['NPT bulk','Gibbs bulk','replica exchange','TMMC controller','TorchScript total-energy adapter'],
                 'thermodynamics':['chemical-potential response matrices','occupancy and charge free-energy landscapes',
                     'stoichiometric electrolyte GCMC','Gaussian constant-potential electrodes'],
                 'electrochemistry':['explicit SPC/E hydration','fixed-topology protonation, redox and PCET sampling',
                     'staged NCMC and multistate free-energy calibration','reaction networks and finite-volume diffusion currents'],
                 'entry_points':{'molecular':'opengcmc','thermodynamics':'opengcmc-thermo','electrochemistry':'opengcmc-reactive'},
-                'gpu_status':'Optional CUDA energy backend with resident neighbour and parameter tables; Python sampling driver',
+                'gpu_status':'Optional CUDA reciprocal-candidate batches in exact mode; delayed corrections run in native CPU',
                 'not_implemented':['ring-closure CBMC','flexible framework','CFCMC','molecular dynamics',
                     'arbitrary reactive topology changes','general bulk polarization/QEq',
-                    'general RASPA/gRASPA input compatibility','PME']} ,indent=2)); return 0
+                    'general RASPA/gRASPA input compatibility']} ,indent=2)); return 0
         if args.command=='import-raspa3':
             from .raspa_adapter import import_raspa3
             converted=import_raspa3(args.input,args.steps,args.burnin)
