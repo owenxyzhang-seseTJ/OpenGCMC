@@ -3,10 +3,11 @@
 #include "host_grid.h"
 #include <algorithm>
 #include <array>
-#include <chrono>
+#include <cerrno>
+#include <cstdio>
+#include <cstdlib>
 #include <cmath>
 #include <cstring>
-#include <filesystem>
 #include <fstream>
 #include <limits>
 #include <map>
@@ -15,8 +16,12 @@
 #include <utility>
 #include <vector>
 #ifdef _WIN32
-#include <process.h>
+#define NOMINMAX
+#include <filesystem>
+#include <io.h>
+#include <windows.h>
 #else
+#include <sys/stat.h>
 #include <unistd.h>
 #endif
 
@@ -48,16 +53,110 @@ std::uint64_t checksum(const void* ptr,std::size_t bytes,std::uint64_t h=1469598
 template<class T> bool read_scalar(std::istream& s,T& x) {
   return bool(s.read(reinterpret_cast<char*>(&x),sizeof(T)));
 }
-template<class T> void write_scalar(std::ostream& s,const T& x) {
-  s.write(reinterpret_cast<const char*>(&x),sizeof(T));
-}
-int process_id() {
+// The accepted PMCHG061 layout is independent of the C++ stream ABI.  Use
+// an exclusively created sibling file so an incomplete or racing writer
+// never exposes its payload at the requested path.
+class GridCacheWriter {
+ public:
+  explicit GridCacheWriter(const std::string& destination) : path_(destination) {
 #ifdef _WIN32
-  return _getpid();
+    auto target = std::filesystem::u8path(path_);
+    auto parent = target.has_parent_path() ? target.parent_path() : std::filesystem::path(L".");
+    std::filesystem::create_directories(parent);
+    wchar_t name[MAX_PATH];
+    if (!GetTempFileNameW(parent.c_str(), L"phg", 0, name))
+      throw std::runtime_error("cannot create temporary host grid in " + path_);
+    temporary_ = std::filesystem::path(name).u8string();
+    stream_ = _wfopen(name, L"wb");
+    if (!stream_) {
+      const int error = errno;
+      DeleteFileW(name);
+      fail("open", error);
+    }
 #else
-  return getpid();
+    const auto slash = path_.find_last_of('/');
+    const std::string directory = slash == std::string::npos ? "" : path_.substr(0, slash + 1);
+    // Preserve the native API's recursive directory creation.  Avoid
+    // std::filesystem on the Linux HPC path, including the rename step.
+    for (size_t i = 1; i < directory.size(); ++i) {
+      if (directory[i] == '/' && directory[i - 1] != '/') {
+        const std::string component = directory.substr(0, i);
+        if (::mkdir(component.c_str(), 0777) != 0 && errno != EEXIST)
+          fail("create parent directory", errno);
+      }
+    }
+    temporary_ = directory + ".poremc-hg-XXXXXX";
+    int fd = ::mkstemp(temporary_.data());
+    if (fd < 0) fail("create temporary file", errno);
+    stream_ = ::fdopen(fd, "wb");
+    if (!stream_) {
+      const int error = errno;
+      ::close(fd);
+      ::unlink(temporary_.c_str());
+      fail("open", error);
+    }
 #endif
-}
+  }
+
+  GridCacheWriter(const GridCacheWriter&) = delete;
+  GridCacheWriter& operator=(const GridCacheWriter&) = delete;
+
+  ~GridCacheWriter() {
+    if (stream_) std::fclose(stream_);
+    if (!temporary_.empty()) {
+#ifdef _WIN32
+      DeleteFileW(std::filesystem::u8path(temporary_).c_str());
+#else
+      ::unlink(temporary_.c_str());
+#endif
+    }
+  }
+
+  void write(const void* source, size_t bytes, std::uint64_t* hash = nullptr) {
+    const auto* data = static_cast<const unsigned char*>(source);
+    while (bytes) {
+      const size_t n = std::min(bytes, size_t(1) << 20);
+      if (std::fwrite(data, 1, n, stream_) != n) fail("write", errno);
+      if (hash) *hash = checksum(data, n, *hash);
+      data += n;
+      bytes -= n;
+    }
+  }
+
+  template<class T> void scalar(T value) { write(&value, sizeof value); }
+
+  void publish() {
+    if (std::fflush(stream_) != 0) fail("flush", errno);
+#ifdef _WIN32
+    if (::_commit(::_fileno(stream_)) != 0) fail("sync", errno);
+#else
+    int rc;
+    do { rc = ::fsync(::fileno(stream_)); } while (rc != 0 && errno == EINTR);
+    if (rc != 0) fail("sync", errno);
+#endif
+    auto* closing = std::exchange(stream_, nullptr);
+    if (std::fclose(closing) != 0) fail("close", errno);
+#ifdef _WIN32
+    if (!MoveFileExW(std::filesystem::u8path(temporary_).c_str(),
+                     std::filesystem::u8path(path_).c_str(),
+                     MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH))
+      throw std::runtime_error("host grid cache rename failed: " + path_ +
+                               " (Windows error " + std::to_string(GetLastError()) + ")");
+#else
+    if (::rename(temporary_.c_str(), path_.c_str()) != 0) fail("rename", errno);
+#endif
+    temporary_.clear();
+  }
+
+ private:
+  [[noreturn]] void fail(const char* operation, int code) const {
+    throw std::runtime_error("host grid cache " + std::string(operation) + " failed for " +
+                             path_ + ": " + std::strerror(code ? code : EIO));
+  }
+  const std::string& path_;
+  std::string temporary_;
+  std::FILE* stream_ = nullptr;
+};
 }
 
 struct HostGrid::Impl {
@@ -67,6 +166,9 @@ struct HostGrid::Impl {
     std::size_t lj;
     Query exact{nullptr,poremc_query_destroy};
     std::vector<std::uint8_t> steep;
+    // Derived at construction from the shareable raw fields. A one-node
+    // left and two-node right periodic halo make each 4x4x4 stencil contiguous in z.
+    std::vector<double> packed_energy, packed_weight;
   };
   HostGridConfig cfg;
   std::array<double,9> inv{};
@@ -90,7 +192,12 @@ struct HostGrid::Impl {
       throw std::invalid_argument("invalid host grid Boltzmann interpolation configuration");
     if(!cfg.cache_path.empty()&&cfg.cache_key.empty())throw std::invalid_argument("host grid cache requires a physics fingerprint");
     points=1;
-    for(int m:cfg.mesh){if(m<4)throw std::invalid_argument("host grid dimensions must be at least four");points*=std::size_t(m);}
+    for (int m : cfg.mesh) {
+      if (m < 4) throw std::invalid_argument("host grid dimensions must be at least four");
+      if (points > std::vector<double>().max_size() / std::size_t(m))
+        throw std::length_error("host grid mesh exceeds addressable field size");
+      points *= std::size_t(m);
+    }
     const double* h=cfg.cell.data();
     const double v=h[0]*(h[4]*h[8]-h[5]*h[7])-h[1]*(h[3]*h[8]-h[5]*h[6])+h[2]*(h[3]*h[7]-h[4]*h[6]);
     if(!(v>0)||!std::isfinite(v))throw std::invalid_argument("invalid host grid cell");
@@ -123,7 +230,7 @@ struct HostGrid::Impl {
     }
     make_stencils();
     statistics.mesh_points=points;statistics.lj_fields=lj.size();statistics.site_types=types.size();
-    statistics.bytes=std::uint64_t((lj.size()+1)*points*(sizeof(double)+sizeof(std::uint8_t))+
+    statistics.bytes+=std::uint64_t((lj.size()+1)*points*(sizeof(double)+sizeof(std::uint8_t))+
                                    types.size()*points*sizeof(std::uint8_t));
   }
 
@@ -181,11 +288,35 @@ struct HostGrid::Impl {
     return u;
   }
 
+  void pack_stencil_nodes(Type& type) {
+    const std::size_t ny=std::size_t(cfg.mesh[1])+3, nz=std::size_t(cfg.mesh[2])+3;
+    const std::size_t nx=std::size_t(cfg.mesh[0])+3;
+    // An optional in-memory acceleration. Retain the shared raw-field evaluator
+    // if a large grid or a highly diverse species would exceed the cache budget.
+    constexpr std::size_t budget=192*1024*1024;
+    const bool thermal=cfg.steep_interpolation==1 && cfg.surrogate_cap>0 &&
+                       cfg.surrogate_cap/cfg.temperature<=500.;
+    const std::size_t per_node=(thermal?2:1)*sizeof(double);
+    const std::size_t allowed=budget/per_node/types.size();
+    if(nx>allowed/ny/nz)return;
+    type.packed_energy.resize(nx*ny*nz);
+    if(thermal)type.packed_weight.resize(nx*ny*nz);
+    for(std::size_t x=0;x<nx;++x)for(std::size_t y=0;y<ny;++y)for(std::size_t z=0;z<nz;++z){
+      const auto raw=index(periodic(int(x)-1,0),periodic(int(y)-1,1),periodic(int(z)-1,2));
+      const auto here=(x*ny+y)*nz+z;
+      const double u=node(type,raw);
+      type.packed_energy[here]=u;
+      if(thermal)type.packed_weight[here]=std::exp(-u/cfg.temperature);
+    }
+    statistics.bytes+=per_node*nx*ny*nz;
+  }
+
   void make_stencils() {
     // Mark once. Production avoids discovering the same steep stencil on
     // every trial. A positive-weight interpolation is used around the core.
     const double limit=cfg.surrogate_cap>0?std::min(cfg.steep_limit,.1*cfg.surrogate_cap):cfg.steep_limit;
     for(auto& type:types){
+      pack_stencil_nodes(type);
       type.steep.assign(points,0);
       #pragma omp parallel for schedule(static) num_threads(cfg.threads) if(cfg.threads>1)
       for(std::ptrdiff_t c=0;c<static_cast<std::ptrdiff_t>(points);++c){
@@ -221,6 +352,18 @@ struct HostGrid::Impl {
     double result=0.;
     if(steep&&cfg.steep_interpolation==1){
       ++statistics.boltzmann_lookups;
+      if(!type.packed_weight.empty()){
+        // cap/T <= 500 keeps every tabulated weight normal in FP64.
+        const std::size_t ny=std::size_t(cfg.mesh[1])+3,nz=std::size_t(cfg.mesh[2])+3;
+        const std::size_t lower=((std::size_t(base[0])+1)*ny+base[1]+1)*nz+base[2]+1;
+        if(t[0]==0. && t[1]==0. && t[2]==0.)return type.packed_energy[lower];
+        double partition=0.;
+        for(int a=0;a<2;++a)for(int b=0;b<2;++b){
+          const auto* row=type.packed_weight.data()+lower+(a*ny+b)*nz;
+          partition+=(a?t[0]:1.-t[0])*(b?t[1]:1.-t[1])*((1.-t[2])*row[0]+t[2]*row[1]);
+        }
+        return -cfg.temperature*std::log(partition);
+      }
       std::array<double,8> weights{},energies{};
       double minimum=std::numeric_limits<double>::infinity();int n=0;
       for(int a=0;a<2;++a)for(int b=0;b<2;++b)for(int c=0;c<2;++c){
@@ -243,6 +386,19 @@ struct HostGrid::Impl {
     }else{
       ++statistics.cubic_lookups;
       const auto wx=cubic(t[0]),wy=cubic(t[1]),wz=cubic(t[2]);
+      if(!type.packed_energy.empty()){
+        const std::size_t ny=std::size_t(cfg.mesh[1])+3,nz=std::size_t(cfg.mesh[2])+3;
+        const double* start=type.packed_energy.data()+(std::size_t(base[0])*ny+base[1])*nz+base[2];
+        for(int a=0;a<4;++a){
+          double uy=0.;
+          for(int b=0;b<4;++b){
+            const double* row=start+(a*ny+b)*nz;
+            uy+=wy[b]*(wz[0]*row[0]+wz[1]*row[1]+wz[2]*row[2]+wz[3]*row[3]);
+          }
+          result+=wx[a]*uy;
+        }
+        return result;
+      }
       int ix[4],iy[4],iz[4];
       for(int a=0;a<4;++a){ix[a]=periodic(base[0]+a-1,0);iy[a]=periodic(base[1]+a-1,1);iz[a]=periodic(base[2]+a-1,2);}
       for(int a=0;a<4;++a){double uy=0.;for(int b=0;b<4;++b){double uz=0.;
@@ -279,27 +435,29 @@ struct HostGrid::Impl {
   }
 
   void save() const {
-    const std::filesystem::path path(cfg.cache_path);
-    if(path.has_parent_path())std::filesystem::create_directories(path.parent_path());
-    const auto tick=std::chrono::steady_clock::now().time_since_epoch().count();
-    const auto temp=path.string()+".tmp."+std::to_string(process_id())+"."+std::to_string(tick);
-    std::ofstream out(temp,std::ios::binary|std::ios::trunc);
-    if(!out)throw std::runtime_error("cannot create host grid cache: "+temp);
-    out.write("PMCHG061",8);write_scalar(out,std::uint32_t(cfg.cache_key.size()));out.write(cfg.cache_key.data(),cfg.cache_key.size());
-    for(int m:cfg.mesh)write_scalar(out,std::uint32_t(m));
-    write_scalar(out,std::uint64_t(lj.size()));write_scalar(out,std::uint64_t(points));
-    out.write(reinterpret_cast<const char*>(cfg.cell.data()),sizeof(cfg.cell));
-    for(auto p:lj_parameters)out.write(reinterpret_cast<const char*>(p.data()),sizeof(p));
-    std::uint64_t hash=14695981039346656037ull;
-    auto field=[&](const Field& f){
-      out.write(reinterpret_cast<const char*>(f.values.data()),points*sizeof(double));
-      out.write(reinterpret_cast<const char*>(f.bad.data()),points*sizeof(std::uint8_t));
-      hash=checksum(f.values.data(),points*sizeof(double),hash);hash=checksum(f.bad.data(),points*sizeof(std::uint8_t),hash);
+    if (cfg.cache_key.size() > std::numeric_limits<std::uint32_t>::max())
+      throw std::length_error("host grid cache fingerprint exceeds format limit");
+    GridCacheWriter out(cfg.cache_path);
+    out.write("PMCHG061", 8);
+    out.scalar(std::uint32_t(cfg.cache_key.size()));
+    out.write(cfg.cache_key.data(), cfg.cache_key.size());
+    for (int m : cfg.mesh) out.scalar(std::uint32_t(m));
+    out.scalar(std::uint64_t(lj.size()));
+    out.scalar(std::uint64_t(points));
+    out.write(cfg.cell.data(), cfg.cell.size() * sizeof(double));
+    for (const auto& p : lj_parameters) out.write(p.data(), p.size() * sizeof(double));
+
+    std::uint64_t hash = 14695981039346656037ull;
+    auto write_field = [&](const Field& field) {
+      if (field.values.size() != points || field.bad.size() != points)
+        throw std::logic_error("host grid cache field size differs from mesh");
+      out.write(field.values.data(), field.values.size() * sizeof(double), &hash);
+      out.write(field.bad.data(), field.bad.size() * sizeof(std::uint8_t), &hash);
     };
-    for(const auto& f:lj)field(f);field(phi);write_scalar(out,hash);out.close();
-    if(!out){std::filesystem::remove(temp);throw std::runtime_error("host grid cache write failed");}
-    std::error_code error;std::filesystem::rename(temp,path,error);
-    if(error){std::filesystem::remove(temp);throw std::runtime_error("host grid cache commit failed: "+error.message());}
+    for (const auto& field : lj) write_field(field);
+    write_field(phi);
+    out.scalar(hash);
+    out.publish();
   }
 };
 

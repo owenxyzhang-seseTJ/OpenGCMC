@@ -1,0 +1,65 @@
+06 exact 7107  N=5.00  531.5 moves/s
+07 exact 7107  N=5.00  880.2 moves/s
+06 delayed32 7107  N=4.98  6295.8 moves/s
+07 delayed32 7107  N=4.98  10181.3 moves/s
+06 delayed64 7107  N=5.06  4471.2 moves/s
+07 delayed64 7107  N=5.06  9829.1 moves/s
+07 delayed64 7108  N=5.07  9256.7 moves/s
+06 delayed64 7108  N=5.07  5593.8 moves/s
+07 delayed32 7108  N=3.20  9876.7 moves/s
+06 delayed32 7108  N=3.20  6472.4 moves/s
+07 exact 7108  N=4.23  923.4 moves/s
+06 exact 7108  N=4.23  564.0 moves/s
+06 exact 7109  N=4.33  535.8 moves/s
+07 exact 7109  N=4.33  906.2 moves/s
+06 delayed32 7109  N=5.25  6554.0 moves/s
+07 delayed32 7109  N=5.25  9683.6 moves/s
+06 delayed64 7109  N=3.30  5846.2 moves/s
+07 delayed64 7109  N=3.30  9224.8 moves/s
+[
+  {
+    "mode": "exact",
+    "old_attempts_s": 535.7730875281951,
+    "new_attempts_s": 906.2385212855298,
+    "old_accepted_s": 354.279954128019,
+    "new_accepted_s": 588.673264310385,
+    "old_mean_N": 4.518055555555556,
+    "new_mean_N": 4.518055555555556,
+    "paired_speedups": [
+      1.6560166949540644,
+      1.6371141183845206,
+      1.6914595794023322
+    ],
+    "median_speedup": 1.6560166949540644
+  },
+  {
+    "mode": "delayed32",
+    "old_attempts_s": 6472.412505381642,
+    "new_attempts_s": 9876.711439130233,
+    "old_accepted_s": 2885.596336027169,
+    "new_accepted_s": 4567.979040597733,
+    "old_mean_N": 4.475,
+    "new_mean_N": 4.475,
+    "paired_speedups": [
+      1.617140913029152,
+      1.5259706378290945,
+      1.4775005511185695
+    ],
+    "median_speedup": 1.5259706378290945
+  },
+  {
+    "mode": "delayed64",
+    "old_attempts_s": 5593.750525797982,
+    "new_attempts_s": 9256.739476206702,
+    "old_accepted_s": 3008.9716370021647,
+    "new_accepted_s": 5168.482326112576,
+    "old_mean_N": 4.473611111111111,
+    "new_mean_N": 4.473611111111111,
+    "paired_speedups": [
+      2.198321854401658,
+      1.6548359519280085,
+      1.577919194831052
+    ],
+    "median_speedup": 1.6548359519280085
+  }
+]

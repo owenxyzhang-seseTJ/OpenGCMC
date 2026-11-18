@@ -1,0 +1,95 @@
+{
+  "scope": "Cache-writer isolation: untouched 0.6 Python, kernels, Ewald and FastGCMC; replaced only host_grid.cpp. Not the complete final 0.7 sampling binary.",
+  "report": "HPC report identified HostGrid::Impl::save; exact faulting instruction, runtime libraries and original input files were not supplied. A valid long filename reproduced a real 0.6 save failure locally with a C++ exception; the HPC SIGSEGV was not reproduced.",
+  "old_native_sha256": "33a08917fa59953dc6c39277c91e1c2861c89f67f1674ffc99ef86cfa312d54d",
+  "isolated_native_sha256": "681fdf47995f4392292af5281c25628613dedff8de2bb7a3d4be411c5b5e766b",
+  "name_max_test": {
+    "basename_bytes": 255,
+    "old_exit": 1,
+    "new_exit": 0,
+    "old_exception": "cannot create host grid cache",
+    "new_cache_writes": 1
+  },
+  "bidirectional_v061": {
+    "old_write_new_read": true,
+    "new_write_old_read": true,
+    "cache_byte_identity": true,
+    "cache_sha256": "362603c30154a4c7aa88358329e9b6a0c777e412ffa08508156783c7479f3eef",
+    "all_four_trajectory_sha256": "e40b552dba9d61ef6258b29c3cf0af3b88a36efeee57be6c070e74cb1a1f6785"
+  },
+  "old_filesystem_imports": [
+    "U std::filesystem::__cxx11::path::parent_path() const@GLIBCXX_3.4.26",
+    "U std::filesystem::__cxx11::path::has_parent_path() const@GLIBCXX_3.4.26",
+    "U std::filesystem::__cxx11::path::_List::_Impl_deleter::operator()(std::filesystem::__cxx11::path::_List::_Impl*) const@GLIBCXX_3.4.26",
+    "U std::filesystem::create_directories(std::filesystem::__cxx11::path const&)@GLIBCXX_3.4.26",
+    "U std::filesystem::remove(std::filesystem::__cxx11::path const&)@GLIBCXX_3.4.26",
+    "U std::filesystem::rename(std::filesystem::__cxx11::path const&, std::filesystem::__cxx11::path const&, std::error_code&)@GLIBCXX_3.4.26",
+    "U std::filesystem::__cxx11::path::_M_split_cmpts()@GLIBCXX_3.4.26",
+    "U std::filesystem::__cxx11::path::_List::_List()@GLIBCXX_3.4.26"
+  ],
+  "new_filesystem_imports": [],
+  "systems_tested": "Linux x86_64, GCC 14, local filesystem. PMCHG061 is native-endian.",
+  "sanitizer": {
+    "asan": true,
+    "ubsan": true,
+    "leak_detection": false,
+    "reason": "LeakSanitizer does not support the tracing environment; address/UB checking active."
+  },
+  "fault_injection": {
+    "rlimit_fsize_bytes": 512,
+    "signal_xfsz": "ignored in Python worker",
+    "prior_destination_and_cleanup_verified": true
+  },
+  "concurrency": {
+    "synchronized_cold_writers": 8,
+    "unique_physics_fingerprints": 8,
+    "final_cache_warm_loaded_and_verified_against_own_field": true,
+    "sanitizers": "ASan + UBSan",
+    "winner_id_in_this_run": 7
+  },
+  "partial_publication": {
+    "valid_prior_PMCHG061_preserved": true,
+    "original_worker_reloaded_prior_cache": true,
+    "no_temporary_files_after_failure": true,
+    "directory_target_rename_failure_reported_and_contents_preserved": true
+  },
+  "final_release_legacy_compatibility": {
+    "filename": "PMCHG061",
+    "same_raw_field_bytes": true,
+    "sequence": "0.6 write -> 0.7 load, then 0.7 write -> 0.6 load",
+    "rows": [
+      {
+        "builds": 1,
+        "writes": 1,
+        "loads": 0,
+        "energy_K": -1176.3895040620555,
+        "native_sha256": "33a08917fa59953dc6c39277c91e1c2861c89f67f1674ffc99ef86cfa312d54d",
+        "trajectory_sha256": "e40b552dba9d61ef6258b29c3cf0af3b88a36efeee57be6c070e74cb1a1f6785"
+      },
+      {
+        "builds": 0,
+        "writes": 0,
+        "loads": 1,
+        "energy_K": -1176.3895040620555,
+        "native_sha256": "c6e3791f7e2e50962caea4024f1444f3b69b0895a6a858d2635fae0924be4351",
+        "trajectory_sha256": "e40b552dba9d61ef6258b29c3cf0af3b88a36efeee57be6c070e74cb1a1f6785"
+      },
+      {
+        "builds": 1,
+        "writes": 1,
+        "loads": 0,
+        "energy_K": -1176.3895040620555,
+        "native_sha256": "c6e3791f7e2e50962caea4024f1444f3b69b0895a6a858d2635fae0924be4351",
+        "trajectory_sha256": "e40b552dba9d61ef6258b29c3cf0af3b88a36efeee57be6c070e74cb1a1f6785"
+      },
+      {
+        "builds": 0,
+        "writes": 0,
+        "loads": 1,
+        "energy_K": -1176.3895040620555,
+        "native_sha256": "33a08917fa59953dc6c39277c91e1c2861c89f67f1674ffc99ef86cfa312d54d",
+        "trajectory_sha256": "e40b552dba9d61ef6258b29c3cf0af3b88a36efeee57be6c070e74cb1a1f6785"
+      }
+    ]
+  }
+}

@@ -11,7 +11,7 @@
 namespace poremc {
 // All electrostatic energies are U/k_B (kelvin); coordinates angstrom; q in e.
 // Cell lattice vectors are rows. 0=direct Ewald, 1=cubic B-spline PME.
-// Backend: 0=CPU, 1=auto (CUDA if available for direct), 2=required CUDA.
+// Backend: 0=CPU, 1=auto (CUDA if available for direct), 2=required CUDA, 3=required FP64 lattice tensor CUDA.
 struct ReciprocalConfig {
   std::array<double,9> cell{};
   double alpha=0.25;
@@ -35,6 +35,7 @@ struct ReciprocalStats {
   std::uint64_t host_builds=0, contributions=0, candidate_batches=0, candidates=0;
   std::uint64_t accepted_commits=0, fft_transforms=0, gpu_batches=0;
   std::uint64_t modes=0, mesh_points=0;
+  std::uint64_t gpu_selected_structures=0;
   std::uint64_t full_modes=0, host_grid_builds=0, host_field_evaluations=0;
 };
 class EwaldState {
@@ -45,6 +46,8 @@ class EwaldState {
   EwaldState(const EwaldState&)=delete;
   EwaldState& operator=(const EwaldState&)=delete;
   ChargeContribution contribution(std::size_t atoms,const double* positions,const double* charge) const;
+  // FP64 device tensor for a selected delayed trial, CPU unless explicitly requested.
+  ChargeContribution selected_contribution(std::size_t atoms,const double* positions,const double* charge) const;
   // Direct Ewald rigid translation: S_new(k)=S_old(k) exp(i k.d).
   // No atom traversal; preserves charge and charge-square invariants.
   ChargeContribution translated_contribution(const ChargeContribution& old,
@@ -54,6 +57,8 @@ class EwaldState {
   double insertion_energy(const ChargeContribution& added,
                           const ChargeContribution* excluded=nullptr,
                           const ChargeContribution* prefix=nullptr) const;
+  // New minus old energy relative to the current state (it includes removed).
+  double replacement_energy(const ChargeContribution& added, const ChargeContribution& removed) const;
   // Immutable host/guest reciprocal cross term only (no self/background).
   double host_insertion_energy(const ChargeContribution& added) const;
   double host_insertion_energy(std::size_t atoms,const double* positions,
@@ -73,6 +78,7 @@ class EwaldState {
   void restore(const std::string&);
   ReciprocalStats stats() const;
   const char* backend_name() const;
+  const char* device_name() const;
   const ReciprocalConfig& config() const;
  private:
   struct Impl;

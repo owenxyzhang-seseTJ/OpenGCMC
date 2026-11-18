@@ -1,0 +1,39 @@
+{
+  "provenance": "User-provided HPC test-agent feedback, 2026-11-18. Measured PoreMC versions 0.5/0.6 and RASPA2.",
+  "input": "Ni_TPT_TATBA + charged p-xylene",
+  "framework_sites": 4416,
+  "cpu_cores": 1,
+  "threads": 1,
+  "same_move_set": true,
+  "unit": "attempted moves per second unless cycles_per_second is specified",
+  "cache": "PoreMC delayed grid in memory; disk persistence disabled during all reported timings",
+  "low": {
+    "N_approx": 5,
+    "baseline05_exact": 166.5,
+    "v06_exact": 117.0,
+    "v06_delayed32": 2954.0,
+    "v06_delayed64": 3592.0,
+    "raspa2_mean_N": 5.53,
+    "raspa2_cycles_per_second": 125.7,
+    "attempts_per_cycle": 20
+  },
+  "other": {
+    "raspa2_mean_N": 17.63,
+    "raspa2_cycles_per_second": 75.8,
+    "poremc_mean_N_approx": 30,
+    "poremc_reported_moves_s_approx": 1130
+  },
+  "direct_ratios": {
+    "half_vs_05": 0.7027027027027027,
+    "delayed32_vs_05": 17.74174174174174,
+    "delayed64_vs_05": 21.573573573573572,
+    "delayed32_vs_raspa2": 1.1750198886237073,
+    "delayed64_vs_raspa2": 1.4287987271280826
+  },
+  "reported_ratios": {
+    "half_vs_05_approx": 0.8,
+    "delayed32_vs_05_approx": 17.6,
+    "delayed64_vs_05_approx": 21.6
+  },
+  "scope": "HPC exact reported ratio may use a different aggregate/paired denominator. No raw repeats provided. At elevated N, E[max(20,N)] must be computed from actual cycles; 75.8*20=1516 is the nominal conversion."
+}

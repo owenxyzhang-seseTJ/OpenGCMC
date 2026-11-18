@@ -316,7 +316,7 @@ struct Fast {
   if(!cached_reference){*prepared_reference=reference_host_internal_energy(x);cached_reference=prepared_reference;}
   double u=*cached_local-*cached_reference;
   if(longrange){
-   if(!known){*prepared=longrange->contribution(A,x.data(),charge.data());known=prepared;}
+   if(!known){*prepared=longrange->selected_contribution(A,x.data(),charge.data());known=prepared;}
    u+=longrange->insertion_energy(*known,excluded_charge(env));
   }
   return u;
@@ -376,6 +376,10 @@ struct Fast {
   else {V center{0,0,0};for(size_t i=0;i<A;++i)center=add(center,get(old,i));center=mul(center,1./A);V axis=direction();double theta=(2*uniform()-1)*max_rotation,c=std::cos(theta),s=std::sin(theta);for(size_t i=0;i<A;++i){V v=sub(get(old,i),center);V rotated=add(add(mul(v,c),mul(cross(axis,v),s)),mul(axis,(1-c)*dot(axis,v)));put(candidate,i,add(center,rotated));}}
   return candidate;
  }
+ poremc::ChargeContribution translated_charge(size_t index,const std::vector<double>& candidate) const {
+   const V displacement=sub(get(candidate,0),get(particles[index],0));
+   return longrange->translated_contribution(particle_charge[index],{displacement.x,displacement.y,displacement.z});
+ }
  bool step_delayed(size_t move){
   size_t n=particles.size();auto*stats=acceleration_counters.data()+4*move;
   auto stage1=[&](double ratio){++stats[0];if(!accept(ratio))return false;++stats[1];return true;};
@@ -420,16 +424,22 @@ struct Fast {
   }
   if(!stage1(loga))return false;
   wrap(candidate);
-  const poremc::ChargeContribution*new_charge=nullptr;
-  if(move==2&&longrange&&longrange->config().method==0){
-   V d=sub(get(candidate,0),get(old,0));
-   prepared=longrange->translated_contribution(*old_charge,{d.x,d.y,d.z});new_charge=&prepared;
+  stats[2]+=2;  // old/new molecular residuals; the old local terms are cached.
+  double delta=0.;
+  if(longrange && longrange->config().method==0){
+    prepared = move==2 ? translated_charge(index,candidate)
+                       : longrange->selected_contribution(A,candidate.data(),charge.data());
+    prepared_local=host_internal_energy(candidate);
+    prepared_reference=reference_host_internal_energy(candidate);
+    const double old_local=particle_host_internal[index]-particle_reference_local[index];
+    delta=(prepared_local-prepared_reference)-old_local+longrange->replacement_energy(prepared,*old_charge);
+  }else{
+    const double old_residual=selected_residual(env,old,old_charge,&prepared,&particle_host_internal[index],&prepared_local,&particle_reference_local[index],&prepared_reference);
+    const double new_residual=selected_residual(env,candidate,nullptr,&prepared,nullptr,&prepared_local,nullptr,&prepared_reference);
+    if(!std::isfinite(old_residual))throw std::runtime_error("invalid exact current molecule residual");
+    delta=new_residual-old_residual;
   }
-  stats[2]+=2;
-  double old_residual=selected_residual(env,old,old_charge,&prepared,&particle_host_internal[index],&prepared_local,&particle_reference_local[index],&prepared_reference);
-  double new_residual=selected_residual(env,candidate,new_charge,&prepared,nullptr,&prepared_local,nullptr,&prepared_reference);
-  if(!std::isfinite(old_residual))throw std::runtime_error("invalid exact current molecule residual");
-  if(!stage2(-(new_residual-old_residual)/T))return false;
+  if(!stage2(-delta/T))return false;
   commit_replace(index,std::move(candidate),longrange?&prepared:nullptr,&prepared_local,&prepared_reference);return true;
  }
  void step(){double sel=uniform(),sum=0;size_t move=4;for(size_t m=0;m<5;++m){sum+=probability[m];if(sel<sum){move=m;break;}}++steps;++counters[2*move];bool accepted=false;size_t n=particles.size();
@@ -438,9 +448,27 @@ struct Fast {
   else {if(n==0)return;size_t index=std::min(n-1,static_cast<size_t>(uniform()*n));const auto&old=particles[index];void* env=cached_environment(index);
    if(move==1){auto retrace=grow(env,&old);if(!retrace.valid)throw std::runtime_error("cannot retrace invalid current molecule");double ratio=z==0?std::numeric_limits<double>::infinity():std::log(static_cast<double>(n))-std::log(z)-std::log(Vbox)-retrace.logw+std::log(probability[0]/probability[1]);accepted=accept(ratio);if(accepted)commit_erase(index);}
    else if(move==4){auto candidate=grow(env);if(!candidate.valid)return;auto retrace=grow(env,&old);if(!retrace.valid)throw std::runtime_error("invalid old regrowth path");accepted=accept(candidate.logw-retrace.logw);if(accepted){wrap(candidate.x);commit_replace(index,std::move(candidate.x));}}
-   else {auto candidate=old;if(move==2){V d{(2*uniform()-1)*max_translation,(2*uniform()-1)*max_translation,(2*uniform()-1)*max_translation};for(size_t i=0;i<A;++i)put(candidate,i,add(get(old,i),d));}
-    else {if(A==1)return;V center{0,0,0};for(size_t i=0;i<A;++i)center=add(center,get(old,i));center=mul(center,1./A);V axis=direction();double theta=(2*uniform()-1)*max_rotation,c=std::cos(theta),s=std::sin(theta);for(size_t i=0;i<A;++i){V v=sub(get(old,i),center);V rotated=add(add(mul(v,c),mul(cross(axis,v),s)),mul(axis,(1-c)*dot(axis,v)));put(candidate,i,add(center,rotated));}}
-    double old_u=molecule_energy(env,old),new_u=molecule_energy(env,candidate);if(!std::isfinite(old_u))throw std::runtime_error("invalid current molecule energy");accepted=accept(-(new_u-old_u)/T);if(accepted){wrap(candidate);commit_replace(index,std::move(candidate));}
+   else {
+    if(move==3 && A==1)return;
+    auto candidate=local_proposal(old,move);
+    // On CPU the accepted state already contains the old Fourier contribution.
+    // Compute one spectrum and a single dot-product for the entire replacement.
+    if(longrange && longrange->config().method==0 && longrange->config().backend==0){
+      wrap(candidate);
+      auto prepared = move==2 ? translated_charge(index,candidate)
+                              : longrange->contribution(A,candidate.data(),charge.data());
+      const double old_local=molecule_energy(env,old,false);
+      const double new_local=molecule_energy(env,candidate,false);
+      if(!std::isfinite(old_local))throw std::runtime_error("invalid current molecule energy");
+      const double difference=new_local-old_local+longrange->replacement_energy(prepared,particle_charge[index]);
+      accepted=accept(-difference/T);
+      if(accepted)commit_replace(index,std::move(candidate),&prepared);
+    }else{
+      const double old_u=molecule_energy(env,old), new_u=molecule_energy(env,candidate);
+      if(!std::isfinite(old_u))throw std::runtime_error("invalid current molecule energy");
+      accepted=accept(-(new_u-old_u)/T);
+      if(accepted){wrap(candidate);commit_replace(index,std::move(candidate));}
+    }
    }
   }if(accepted){++counters[2*move+1];guest_dirty=true;}
  }
@@ -508,7 +536,7 @@ size_t poremc_fast_longrange_info(void*p,char*buffer,size_t capacity){
     <<",\"host_builds\":"<<st.host_builds<<",\"contributions\":"<<st.contributions
     <<",\"candidate_batches\":"<<st.candidate_batches<<",\"candidates\":"<<st.candidates
     <<",\"accepted_commits\":"<<st.accepted_commits<<",\"fft_transforms\":"<<st.fft_transforms
-    <<",\"gpu_batches\":"<<st.gpu_batches<<",\"modes\":"<<st.modes<<",\"full_modes\":"<<st.full_modes
+    <<",\"gpu_batches\":"<<st.gpu_batches<<",\"gpu_selected_structures\":"<<st.gpu_selected_structures<<",\"device\":"<<std::quoted(s.longrange->device_name())<<",\"modes\":"<<st.modes<<",\"full_modes\":"<<st.full_modes
     <<",\"half_spectrum\":"<<(s.longrange->config().half_spectrum?"true":"false")
     <<",\"k_cutoff\":"<<s.longrange->config().k_cutoff<<",\"host_grid_builds\":"<<st.host_grid_builds
     <<",\"host_field_evaluations\":"<<st.host_field_evaluations<<",\"mesh_points\":"<<st.mesh_points<<"}";
@@ -555,7 +583,8 @@ int poremc_fast_acceleration_counters(void*p,uint64_t*out){if(!p||!out)return -1
 int poremc_fast_restore_acceleration_counters(void*p,const uint64_t*in){if(!p||!in)return -1;auto&s=*static_cast<Fast*>(p);std::copy(in,in+20,s.acceleration_counters.begin());return 0;}
 size_t poremc_fast_acceleration_info(void*p,char*buffer,size_t capacity){
  try{auto&s=*static_cast<Fast*>(p);std::ostringstream out;
-  out<<"{\"sampling_mode\":\""<<(s.delayed?"delayed":"exact")<<"\",\"selected_correction_backend\":\""<<(s.delayed?"cpu":"not_used")<<"\",\"grid_root_bias\":"<<s.root_bias<<",\"stages\":{";
+  const char* selected=s.delayed ? ((s.longrange && std::string(s.longrange->backend_name())=="cuda-tensor") ? "cuda-tensor-sf/cpu-residual" : "cpu") : "not_used";
+  out<<"{\"sampling_mode\":\""<<(s.delayed?"delayed":"exact")<<"\",\"selected_correction_backend\":\""<<selected<<"\",\"grid_root_bias\":"<<s.root_bias<<",\"stages\":{";
   const char*names[5]={"insert","delete","translate","rotate","regrow"};
   uint64_t evaluated=0,passed=0,exact=0,accepted=0;
   for(size_t m=0;m<5;++m){auto*c=s.acceleration_counters.data()+4*m;if(m)out<<',';

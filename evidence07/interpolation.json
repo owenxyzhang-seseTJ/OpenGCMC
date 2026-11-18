@@ -1,0 +1,125 @@
+{
+  "scope": "isolated single-core periodic interpolation, no Markov chain",
+  "results": [
+    {
+      "T_K": 350.0,
+      "max_abs_difference_K": 2.9103830456733704e-11,
+      "paired_speedups": [
+        2.0172172642513035,
+        2.4588144782342525,
+        2.0045828657125417
+      ],
+      "median_speedup": 2.0172172642513035,
+      "rows": [
+        {
+          "06": {
+            "temperature_K": 350,
+            "queries_s": 4738161.669041354,
+            "cubic": 567712,
+            "boltzmann": 218720,
+            "working_bytes": 5505024
+          },
+          "07": {
+            "temperature_K": 350,
+            "queries_s": 9557901.519603992,
+            "cubic": 567712,
+            "boltzmann": 218720,
+            "working_bytes": 19941648
+          }
+        },
+        {
+          "07": {
+            "temperature_K": 350,
+            "queries_s": 11806763.454833891,
+            "cubic": 567712,
+            "boltzmann": 218720,
+            "working_bytes": 19941648
+          },
+          "06": {
+            "temperature_K": 350,
+            "queries_s": 4801811.425525962,
+            "cubic": 567712,
+            "boltzmann": 218720,
+            "working_bytes": 5505024
+          }
+        },
+        {
+          "06": {
+            "temperature_K": 350,
+            "queries_s": 4867056.978631361,
+            "cubic": 567712,
+            "boltzmann": 218720,
+            "working_bytes": 5505024
+          },
+          "07": {
+            "temperature_K": 350,
+            "queries_s": 9756419.02581108,
+            "cubic": 567712,
+            "boltzmann": 218720,
+            "working_bytes": 19941648
+          }
+        }
+      ]
+    },
+    {
+      "T_K": 2.0,
+      "max_abs_difference_K": 0.0,
+      "paired_speedups": [
+        1.5090383653241564,
+        1.5613825079602994,
+        1.4268379971089775
+      ],
+      "median_speedup": 1.5090383653241564,
+      "rows": [
+        {
+          "06": {
+            "temperature_K": 2,
+            "queries_s": 4718950.300458414,
+            "cubic": 567712,
+            "boltzmann": 218720,
+            "working_bytes": 5505024
+          },
+          "07": {
+            "temperature_K": 2,
+            "queries_s": 7121077.047449701,
+            "cubic": 567712,
+            "boltzmann": 218720,
+            "working_bytes": 12723336
+          }
+        },
+        {
+          "07": {
+            "temperature_K": 2,
+            "queries_s": 7376088.998084245,
+            "cubic": 567712,
+            "boltzmann": 218720,
+            "working_bytes": 12723336
+          },
+          "06": {
+            "temperature_K": 2,
+            "queries_s": 4724075.593571203,
+            "cubic": 567712,
+            "boltzmann": 218720,
+            "working_bytes": 5505024
+          }
+        },
+        {
+          "06": {
+            "temperature_K": 2,
+            "queries_s": 4681141.854041032,
+            "cubic": 567712,
+            "boltzmann": 218720,
+            "working_bytes": 5505024
+          },
+          "07": {
+            "temperature_K": 2,
+            "queries_s": 6679231.067202911,
+            "cubic": 567712,
+            "boltzmann": 218720,
+            "working_bytes": 12723336
+          }
+        }
+      ]
+    }
+  ]
+}

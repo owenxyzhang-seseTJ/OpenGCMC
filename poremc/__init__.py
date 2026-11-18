@@ -1,2 +1,2 @@
-"""OpenGCMC: molecular Monte Carlo with native host-grid reference sampling."""
-__version__ = "0.6.0"
+"""OpenGCMC: molecular Monte Carlo with native host-grid and tensor sampling."""
+__version__ = "0.7.0"

@@ -1,0 +1,136 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\setmainfont{Noto Sans CJK SC}[AutoFakeSlant=0.12]
+\setsansfont{Noto Sans CJK SC}
+\setmonofont{DejaVu Sans Mono}[Scale=0.84]
+\IfFontExistsTF{Arial}{\newfontfamily\latinfont{Arial}}{\newfontfamily\latinfont{Liberation Sans}}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip=0pt plus 1pt
+\usepackage{amsmath,amssymb,unicode-math}
+\setmathfont{Latin Modern Math}
+\usepackage[left=20mm,right=20mm,top=21mm,bottom=23mm,headheight=15pt]{geometry}
+\usepackage{booktabs,array,tabularx,xcolor,listings,fancyhdr,hyperref}
+\definecolor{navy}{HTML}{1F3359}\definecolor{blue}{HTML}{385E85}\definecolor{soft}{HTML}{F1F4F8}
+\hypersetup{colorlinks=true,linkcolor=navy,citecolor=navy,urlcolor=blue,pdftitle={PoreMC 0.7: persistent host grids and factored Fourier tensors}}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small\latinfont\color{navy}PoreMC 0.7}
+\fancyhead[R]{\small 固定框架巨正则蒙特卡洛}\fancyfoot[C]{\latinfont\small\thepage}
+\setlength{\parindent}{1.7em}\setlength{\parskip}{.33em}\setlength{\emergencystretch}{3em}
+\renewcommand{\arraystretch}{1.18}\linespread{1.06}
+\newcommand{\code}[1]{\texttt{\small #1}}
+\newcommand{\shead}[1]{\medskip\par\noindent\textbf{\color{navy}#1}\par}
+\newcommand{\source}[1]{\par\noindent{\footnotesize\color{blue}数据来源\quad #1}\par}
+\lstset{basicstyle=\ttfamily\small,columns=fullflexible,keepspaces=true,showstringspaces=false,
+ breaklines=true,frame=none,backgroundcolor=\color{soft},xleftmargin=5pt,xrightmargin=5pt,aboveskip=6pt,belowskip=4pt}
+\begin{document}
+\begin{flushleft}
+{\latinfont\fontsize{36}{43}\selectfont\bfseries\color{navy}PoreMC 0.7}\par\vspace{2mm}
+{\LARGE 固定框架缓存与 Ewald 张量收缩}\par\vspace{1mm}
+{\small\color{blue}技术报告\quad 2026 年 11 月 18 日}
+\end{flushleft}
+\section*{真实材料上的速度基线}
+用户测试团队在同一 HPC 节点对 \code{Ni\_TPT\_TATBA} 与带电对二甲苯进行了配对测试。框架有 4,416 个位点，超胞内平均约 5 个客体，使用单核单线程及相同移动集。RASPA2 实测每秒 125.7 个循环，按团队记录的每循环 20 次尝试折合每秒 2,514 次尝试。下表统一分母后给出原始吞吐。
+\input{hpc_table.tex}
+在这个载量上，两档框架网格使 0.6 的吞吐比 RASPA2 分别高 17.5\% 和 42.9\%。同表原始速率给出半谱逐候选路径 $117/166.5=0.703$。按所列数值重算的 0.703 与反馈中的约 0.80 使用的分母可能不同，原始重复数据可进一步核对。其性能倒退构成 0.7 的 CPU 优化目标。上述 0.6 测量均关闭磁盘缓存，仍在内存中建表并执行两阶段采样。
+\source{用户测试团队反馈。倍率由表中速率重新计算。}
+\shead{载量与计时口径}
+团队另测得 RASPA2 在 $\langle N\rangle=17.63$ 时为 75.8 cycles/s。按 20 次下限折合约 1,516 次/s，精确尝试数按各循环 $\max(20,N)$ 累计。此前 PoreMC 的约 1,130 次/s 来自 $N\approx 30$ 的另一测点。判断高载量交叉点需要相同物理输入、相近载量分布以及实际移动计数。
+\shead{版本变更}
+0.7 重写了 Linux 网格缓存的写入与发布流程，并将精确倒空间评价重排为三个方向的谐波收缩。CPU 复用缓存行上的节点与谐波，CUDA 用一组线程协作评价多个候选。新版本的整循环测速采用工作规模匹配的合成输入，第 5 页列出低、高载量的实际采样数及配对结果。
+
+\clearpage
+\section*{框架网格的持久化与内存布局}
+\shead{缓存写入}
+0.6 的旧实现将原目标文件名、进程号和时间戳拼成临时文件名。本地测试中，合法的 255 字节目标名导致拼接后的临时文件名超过文件系统上限，写入抛出异常。HPC 所报段错误已定位到 \code{HostGrid::Impl::save()}，现有记录没有故障指令、core 或原节点动态库版本。两项故障证据各自保留。
+\par
+0.7 在目标目录中使用 \code{mkstemp} 排他创建短名临时文件。序列化前验证各字段长度，随后按至多 1 MiB 的分块写入数值和标记，并累计负载校验和。写完后依次刷新、同步、关闭、重命名。成功重命名前遇到写满、同步或发布错误，原目标文件保留，异常路径清理临时文件。读取端校验模型指纹、尺寸与负载校验和。该发布流程依赖目标文件系统的同目录重命名语义。
+\par
+测试在同一 Linux 平台上交叉读取 0.6 与 0.7 的 \code{PMCHG061} 缓存，返回完全相同的文件内容和采样轨迹。8 个并发写入方同时完成缓存未命中后分别构建不同指纹的字段，最终发布的是一个字段与指纹一致的完整文件。限制单文件为 512 字节，触发部分写入后，旧文件逐字节保留且仍能读取。目标是现有目录时，发布失败并保留目录内容。
+\shead{关闭、首次写入和复用}
+\input{cache_table.tex}
+三个独立进程使用相同种子和相同 5 个初始客体，各运行 128 次尝试。关闭、首次写入和读取缓存三种情况下，构型、计数、能量与移动计数生成相同的轨迹指纹。这里的热启动耗时包含原生引擎和派生内存表的初始化。
+\shead{查询阶段的计算消除}
+原始字段在磁盘上仍以 LJ 类型和单位电荷静电场共享。载入后按实际客体位点类型预组合节点能量，并在周期边界两侧补齐节点，使三立方插值可以连续读取末维的四个元素。在参考势截幅与温度的比值不超过 500 时，陡峭区域还可缓存 $\exp(-u/T)$。超过该范围时采用局部能量平移后求和。派生数组共享 192 MiB 的总预算，尺寸超出预算的类型直接查询原始字段。\input{interpolation.tex}
+\source{\code{native/host\_grid.cpp}，\code{evidence07/host\_cache\_compatibility.json} 与\par\noindent\hspace*{5em}\code{host\_cache\_final.json}。}
+
+\clearpage
+\section*{CPU 上的有限 Ewald 和}
+位点 $a$ 的分数坐标为 $(f_{ax},f_{ay},f_{az})$，整数组合 $(h,k,l)$ 为保留的倒空间指标。定义三个谐波向量 $X_{ah}=\exp(2\pi i h f_{ax})$，$Y_{ak}$ 和 $Z_{al}$ 同理。候选分子的结构因子为
+\[
+ S_{hkl}=\sum_a q_a X_{ah}Y_{ak}Z_{al}.
+\]
+每个位点贡献一个秩一张量。通过正负谐波的共轭关系和递推，只需沿每个方向建立一张短相位表。内核沿 $(h,k)$ 固定且 $l$ 连续的区段更新输出，在每段累积最多 16 个输入原子的一组贡献，使连续的 $l$ 方向适合 SIMD。全谱在零模处切开，径向掩膜使每段按实际保留波矢缩短。
+\shead{单位点 CBMC 与直接替换}
+一次 CBMC 生长中的已有体系、排除的旧分子及已生长前缀由整批候选共享。对一个新增电荷 $q$，令 $B_{hkl}=c_{hkl}(S_{\rm current}-S_{\rm old}+S_{\rm prefix})_{hkl}$，其中 $c$ 含 Ewald 系数与半谱配对权重。单位点满足 $|q\exp(i\mathbf{k}\cdot\mathbf r)|^2=q^2$。四个及以上试点共用 $B$，逐行将 $\overline B$ 先与 $Z$ 收缩，随后乘 $XY$ 求实部。该步骤省去每个试点完整结构因子的读写。
+\par
+平移、旋转或再生长替换一个旧分子时，令 $D=S_{\rm new}-S_{\rm old}$，当前状态已含旧分子。精确倒空间差可一次归约取得，
+\[
+ \Delta u_{\rm rec}=\sum_{\mathbf k}c_{\mathbf k}
+ \left[2\operatorname{Re}(\overline S_{\rm current}D)+|D|^2\right].
+\]
+自能另按 $\Delta\sum q_i^2$ 更新，均匀背景另按 $2Q\Delta Q+(\Delta Q)^2$ 更新。刚体平移直接将旧分子结构因子乘平移相位。接受后提交已经准备好的分子贡献。这些改变沿用 0.6 两阶段 CBMC 的目标分布和接受比。
+\input{cpu_table.tex}
+\source{\code{evidence07/cpu\_fourier.json}。5 次单核配对，4,416 个框架位点、5 个初始\par\noindent\hspace*{5em}客体、12 位点中 8 个带电，$k_{\max}=13$。倍率取配对比值中位数。}
+
+\clearpage
+\section*{CUDA 的批量谐波张量收缩}
+候选编号为 $b$ 时，将分子结构因子写成
+\[
+ M_{b,hk,a}=q_a X_{b,a,h}Y_{b,a,k},\qquad
+ S_{b,hk,l}=\sum_a M_{b,hk,a} Z_{b,a,l}.
+\]
+对固定的 $b,h,k$，这是一个沿原子指标求和的小向量与小矩阵的乘积。第一道 CUDA 核函数为每个位点的三条坐标轴展开整张谐波表。第二道按候选与波矢行分块，每个 warp 负责同一行最多 32 个模式，线程间通过 shuffle 广播 $M$，每条线程累积一个 $l$ 的实部与虚部。能量路径就地形成 $c_{\mathbf k}(2\operatorname{Re}(\overline S_{\rm env}S)+|S|^2)$ 并逐级归约。这样免去了三维 $[B,K,A]$ 临时数组。候选使用同一有效环境时，设备可复用已上传的环境结构因子。
+\par
+在逐候选直接 Ewald 中，原 CUDA 实现的三角函数调用随 $BKA_{\rm charged}$ 增长，轴分解将基频调用数降为 $3BA$，其余工作转为递推和乘加。以 $B=10$、$A=12$、8 个非零电荷、半谱 $K=9,841$ 为例，两者分别为 787,280 与 360 对 sin/cos。调用数由循环与输入推算，实际耗时还包括调度、内存访问、核函数启动和主机设备间传输。这里使用 FP64 CUDA 线程算术及归约；使用张量表示无需降低 Ewald 能量计算的精度。
+\shead{在两种采样模式中的位置}
+\begin{center}\small\begin{tabularx}{\linewidth}{@{}lX@{}}\toprule
+\code{exact} & 一批候选共用环境，设备计算每个候选的精确倒空间差。下载候选能量后，CPU 计算 Rosenbluth 权重并决定接受。\\
+\code{delayed} & CPU 先用框架参考势筛选。选中的构型可由 CUDA 计算 FP64 结构因子并传回主机，CPU 计算剩余精确能量差并提交。刚体平移可以直接复用接受态结构因子。\\
+\bottomrule\end{tabularx}\end{center}
+\input{gpu_status.tex}
+\shead{设备实测入口}
+\begin{lstlisting}
+python native/build.py --cuda --cuda-arch sm_86
+python tools07/validate_tensor_gpu.py --input real.json --output rtx07.json
+\end{lstlisting}
+输入中设置 \code{reciprocal\_method="direct"} 和 \code{reciprocal\_backend="cuda-tensor"}。将架构参数换为所用设备的型号。两阶段模式的每次精确校正常只产生一个完整分子，传输的数据量和同步延迟也应计入整链测速。本机 CPU 结果及用户先前的 0.6 测量分别保留。
+
+\clearpage
+\section*{同机低、高载量的整链测试}
+合成基准使用 $48$~\AA{} 立方狭缝、4,416 个框架点、12 位点刚性芳香客体、10 个 CBMC 试点及五种移动。以不同活度生成四个载量区间。温度 350 K，实空间截断 10~\AA，$\alpha=0.28$~\AA$^{-1}$，$k_{\max}=13$。全矩形集合含 19,682 个模式，两个版本的直接 Ewald 均存储 9,841 个共轭代表。\code{compare.py} 在独立进程执行各次测量，固定单核单线程，按重复次数交替版本与路径次序。
+\input{chains.tex}
+\shead{独立能量验证与回归}
+\input{validation.tex}
+\shead{如何解读进一步的 RASPA2 对比}
+第 1 页的真实材料测量将 0.6 与 RASPA2 放在相近载量上比较。本页把 0.7 与打包的原始 0.6 放在相同机器和物理输入下比较。两组结果分别衡量了用户原 HPC 的相对水平与本轮代码改动带来的收益。同机合成测试中半谱逐候选路径的内核提速能够解释本机耗时，原 HPC 的性能倒退仍需该节点的分项计时定位。判断真实体系的 0.7/RASPA2 比值，需要在原节点测量相同活度和平均载量，记录接受数、尝试数、实际循环工作量及时间。对吸附量误差有要求时，还需报告粒子数的块均值误差或有效样本数。
+\source{\code{evidence07/low.json}、\code{mid.json}、\code{dense.json}、\code{high.json}、\code{cpu\_fourier\_audit.json} 与\par\noindent\hspace*{5em}\code{tests.log}。}
+
+\clearpage
+\section*{实际计算的复现入口}
+\shead{先核对生产文件系统上的缓存}
+\begin{lstlisting}
+python -m pip install -e ".[test]"
+python native/build.py
+python tools07/audit_host_cache.py --input your_real_system.json \
+    --mesh 64 --workdir /path/to/job/scratch --output cache_check.json
+\end{lstlisting}
+把工作目录指向作业实际使用的文件系统。三种启动方式的计数、能量及最终构型应一致。最终记录同时给出加载次数、写入次数、初始化时间和缓存字节数。常规生产在 \code{sampling} 中设置 \code{host\_grid\_cache}，路径相对输入文件所在目录解析。
+\shead{在同一物理输入上测量两种版本}
+\begin{lstlisting}
+python tools07/compare.py --input your_real_system.json \
+    --steps 10000 --burnin 1000 --repeats 3 --independent \
+    --output version_comparison.json
+\end{lstlisting}
+脚本内含 0.6 和 0.7 的直接 Ewald 与两档 delayed 网格对照。\code{--steps} 是每次生产的尝试数。初始化单列记录，\code{--independent} 在计时外用独立全模式参考重算末态能量。按应用所需的统计精度增加采样长度。机器可用核心由作业调度系统或 \code{taskset} 指定。
+\shead{定位性能变化}
+\begin{center}\small\begin{tabularx}{\linewidth}{@{}p{0.40\linewidth}X@{}}\toprule
+问题 & 对应实现或记录\\\midrule
+保存失败后的文件内容 & \code{native/host\_grid.cpp} 与 \code{tests07/test\_host\_cache.py}\\
+框架插值与温度重用 & 原始磁盘字段、周期补边及派生 Boltzmann 表均在 \code{host\_grid.cpp}\\
+精确长程评价 & \code{native/ewald\_state.cpp} 和 \code{tools07/audit\_cpu\_fourier.cpp}\\
+GPU 批量试点与所选分子 & \code{native/ewald\_cuda.cu} 和 \code{ewald\_cuda\_tensor.h}\\
+接受比和状态提交 & \code{native/fast\_mc.cpp}，CPU 与 GPU 共用接受逻辑\\
+完整轨迹、实际加载与耗时 & \code{tools07/compare.py}，原始记录位于 \code{evidence07/}\\
+\bottomrule\end{tabularx}\end{center}
+\shead{方法资料}
+\noindent\href{https://doi.org/10.1198/106186005X76983}{Christen 与 Fox（2005）} 给出了近似势初筛的详细平衡依据。\par\noindent NVIDIA 的 \href{https://docs.nvidia.com/cuda/cuda-programming-guide/}{CUDA Programming Guide} 说明 SIMT 与 warp 指令的执行方式。\par\noindent 报告可通过 \code{python report\_07/generate\_results.py} 和 \code{python report\_07/build\_report.py} 再生成。
+\end{document}

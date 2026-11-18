@@ -40,7 +40,14 @@ class Ewald:
         p=np.asarray(positions,float).reshape(-1,3); q=np.asarray(charges,float).reshape(-1)
         if len(p)!=len(q) or not np.isfinite(p).all() or not np.isfinite(q).all():
             raise ValueError("invalid Ewald positions/charges")
-        structure=(q[:,None]*np.exp(1j*(p@self.k.T))).sum(axis=0)
+        # Bound temporary phase-array memory for independent reference checks on
+        # large frameworks, retaining the complete rectangular reciprocal set.
+        structure=np.zeros(len(self.k),dtype=np.complex128)
+        block=max(1,(1 << 20)//len(self.k))
+        for start in range(0,len(q),block):
+            end=start+block
+            phase=np.exp(1j*(p[start:end]@self.k.T))
+            structure+=(q[start:end,None]*phase).sum(axis=0)
         return EwaldSnapshot(p,q,structure,float(q.sum()))
 
     def energy(self,positions,charges):

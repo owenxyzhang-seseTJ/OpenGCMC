@@ -218,15 +218,17 @@ def main(argv=None):
         if args.command=='capabilities':
             print(json.dumps({'version':__version__,'core':['rigid and tree flexible GCMC','bounded harmonic bond/angle plus torsion',
                 'multicomponent CBMC','two-stage target correction','native cell-list LJ/DSF/Ewald',
-                'native host-grid delayed sampling','direct Ewald and PME',
-                'CIF explicit symmetry','exact checkpoint','CPU replica parallelism','full C++ one-component sampler'],
+                'native host-grid CBMC with exact residual correction',
+                'CPU harmonic reciprocal contraction','direct Ewald and PME',
+                'CIF explicit symmetry','exact checkpoint','CPU replica parallelism','native single-component sampler'],
                 'python_api':['NPT bulk','Gibbs bulk','replica exchange','TMMC controller','TorchScript total-energy adapter'],
                 'thermodynamics':['chemical-potential response matrices','occupancy and charge free-energy landscapes',
                     'stoichiometric electrolyte GCMC','Gaussian constant-potential electrodes'],
                 'electrochemistry':['explicit SPC/E hydration','fixed-topology protonation, redox and PCET sampling',
                     'staged NCMC and multistate free-energy calibration','reaction networks and finite-volume diffusion currents'],
                 'entry_points':{'molecular':'opengcmc','thermodynamics':'opengcmc-thermo','electrochemistry':'opengcmc-reactive'},
-                'gpu_status':'Optional CUDA reciprocal-candidate batches in exact mode; delayed corrections run in native CPU',
+                'native_reciprocal_backends':['cpu','auto','cuda','cuda-tensor'],
+                'gpu_status':'Direct Ewald CUDA candidate batches and optional FP64 tensor contraction for exact batches and selected delayed structures; delayed corrections support CPU or opted-in tensor CUDA',
                 'not_implemented':['ring-closure CBMC','flexible framework','CFCMC','molecular dynamics',
                     'arbitrary reactive topology changes','general bulk polarization/QEq',
                     'general RASPA/gRASPA input compatibility']} ,indent=2)); return 0
@@ -259,6 +261,6 @@ def main(argv=None):
                  'classical_split_rhat':rhats,'replica_means':[{s:v['mean'] for s,v in r['species_statistics'].items()} for r in results]}
         write_json(Path(args.output)/'replica_summary.json',summary); print(json.dumps(clean_json(summary),indent=2)); return 0
     except (ValueError,KeyError,RuntimeError,FileNotFoundError,FloatingPointError) as exc:
-        print(f'PoreMC: {exc}',file=sys.stderr); return 2
+        print(f'OpenGCMC: {exc}',file=sys.stderr); return 2
 
 if __name__=='__main__': raise SystemExit(main())

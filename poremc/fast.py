@@ -133,10 +133,11 @@ class FastGCMC:
             Path(self.host_grid_cache).parent.mkdir(parents=True,exist_ok=True)
         if reciprocal_method not in ('direct','pme'):
             raise ValueError('reciprocal_method must be direct or pme')
-        if reciprocal_backend not in ('cpu','auto','cuda'):
-            raise ValueError('reciprocal_backend must be cpu, auto or cuda')
-        if sampling_mode=='delayed' and reciprocal_backend=='cuda':
-            raise ValueError('CUDA candidate batches use sampling_mode=exact; delayed selected corrections run in native CPU')
+        if reciprocal_backend not in ('cpu','auto','cuda','cuda-tensor'):
+            raise ValueError('reciprocal_backend must be cpu, auto, cuda or cuda-tensor')
+        backend_code={'cpu':0,'auto':1,'cuda':2,'cuda-tensor':3}[reciprocal_backend]
+        if sampling_mode=='delayed':
+            backend_code=3 if reciprocal_backend in ('cuda','cuda-tensor') else 0
         if potential.coulomb!='ewald' and (reciprocal_method!='direct' or reciprocal_backend!='cpu'):
             raise ValueError('reciprocal options require coulomb=ewald')
         self.reciprocal_method=reciprocal_method
@@ -212,7 +213,7 @@ class FastGCMC:
              torsion_k=dp([t['k'] for t in torsions]),torsion_phase=dp([t.get('phase',0) for t in torsions]),host=self._host._handle,
              ewald_kmax=(C.c_int32*3)(*(map(int,potential.ewald.kmax) if potential.ewald is not None else (1,1,1))),
              pme_mesh=(C.c_int32*3)(*self.pme_mesh),reciprocal_method=int(reciprocal_method=='pme'),
-             reciprocal_backend=0 if sampling_mode=='delayed' else {'cpu':0,'auto':1,'cuda':2}[reciprocal_backend],
+             reciprocal_backend=backend_code,
              host_atoms=len(potential.host_positions),host_positions=dp(potential.host_positions),host_charge=dp(potential.host_charge),
              cuda_library=self.cuda_library.encode(),
              ewald_half_spectrum=int(self.ewald_half_spectrum),sampling_mode=int(self.sampling_mode=='delayed'),

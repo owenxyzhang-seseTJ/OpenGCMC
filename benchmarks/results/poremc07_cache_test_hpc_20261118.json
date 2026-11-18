@@ -1,0 +1,670 @@
+{
+  "scope": "Real input cache OFF/cold/warm; no checksum validation",
+  "platform": "Linux-4.19.91-26.an8.x86_64-x86_64-with-glibc2.28",
+  "records": [
+    {
+      "release": "07",
+      "mode": "delayed64",
+      "seed": 9207,
+      "host_atoms": 4416,
+      "physical_scope": "81b4f16137637a39a0cb2d0582a8df9f2998dd4425471d6df60395f9ce642ddf",
+      "construction_seconds": 19.265637603588402,
+      "production_seconds": 0.049661494,
+      "attempts_per_second": 2577.449643379637,
+      "accepted_per_second": 785.3166882172333,
+      "initial_count": 10,
+      "mean_count": 4.25,
+      "counts": [
+        8,
+        8,
+        8,
+        7,
+        7,
+        7,
+        6,
+        6,
+        3,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "sample_energies_K": [
+        88372440427206.89,
+        88368190954800.95,
+        575120048.3663701,
+        572579623.9275495,
+        31797852.36551381,
+        30095306.98375043,
+        27712725.044497594,
+        27709703.319582563,
+        -12867.67438967553,
+        -8375.616297171464,
+        -5483.534960294085,
+        -5483.534960294085,
+        -5335.4647535530285,
+        -5207.936242820708,
+        -4920.544282794114,
+        -5116.105576127098
+      ],
+      "initial_energy_K": 88399261272543.5,
+      "final_energy_K": -5116.105576127098,
+      "counters": {
+        "insert": {
+          "attempted": 12,
+          "accepted": 0
+        },
+        "delete": {
+          "attempted": 19,
+          "accepted": 9
+        },
+        "translate": {
+          "attempted": 29,
+          "accepted": 11
+        },
+        "rotate": {
+          "attempted": 30,
+          "accepted": 12
+        },
+        "regrow": {
+          "attempted": 38,
+          "accepted": 7
+        }
+      },
+      "acceleration": {
+        "sampling_mode": "delayed",
+        "selected_correction_backend": "cpu",
+        "grid_root_bias": 0,
+        "stages": {
+          "insert": {
+            "stage1_evaluated": 12,
+            "stage1_passed": 2,
+            "exact_evaluations": 2,
+            "stage2_accepted": 0
+          },
+          "delete": {
+            "stage1_evaluated": 19,
+            "stage1_passed": 9,
+            "exact_evaluations": 9,
+            "stage2_accepted": 9
+          },
+          "translate": {
+            "stage1_evaluated": 29,
+            "stage1_passed": 14,
+            "exact_evaluations": 28,
+            "stage2_accepted": 11
+          },
+          "rotate": {
+            "stage1_evaluated": 30,
+            "stage1_passed": 17,
+            "exact_evaluations": 34,
+            "stage2_accepted": 12
+          },
+          "regrow": {
+            "stage1_evaluated": 38,
+            "stage1_passed": 8,
+            "exact_evaluations": 16,
+            "stage2_accepted": 7
+          }
+        },
+        "stage1_evaluated": 128,
+        "stage1_passed": 50,
+        "exact_evaluations": 89,
+        "stage2_accepted": 39,
+        "host_grid": {
+          "builds": 1,
+          "cache_loads": 0,
+          "cache_writes": 0,
+          "lookups": 14868,
+          "cubic_lookups": 2497,
+          "linear_lookups": 0,
+          "boltzmann_lookups": 12371,
+          "exact_fallbacks": 0,
+          "steep_interpolation": "boltzmann",
+          "reference_cap_K": 100000,
+          "mesh_points": 262144,
+          "lj_fields": 3,
+          "site_types": 3,
+          "bytes": 24660240,
+          "steep_cells": 688736
+        }
+      },
+      "long_range": {
+        "method": "ewald",
+        "backend": "cpu",
+        "host_builds": 1,
+        "contributions": 51,
+        "candidate_batches": 10,
+        "candidates": 10,
+        "accepted_commits": 49,
+        "fft_transforms": 1,
+        "gpu_batches": 0,
+        "gpu_selected_structures": 0,
+        "device": "",
+        "modes": 9841,
+        "full_modes": 19682,
+        "half_spectrum": true,
+        "k_cutoff": 0,
+        "host_grid_builds": 1,
+        "host_field_evaluations": 0,
+        "mesh_points": 0
+      },
+      "cache_state": "off",
+      "cache_file_bytes": 0,
+      "cache_builds": 1,
+      "cache_writes": 0,
+      "cache_loads": 0,
+      "final_positions_A": [
+        [
+          [
+            45.048320421745196,
+            4.131223764508868,
+            32.04224177776187
+          ],
+          [
+            45.53456362130971,
+            5.308809720170934,
+            32.62263722855895
+          ],
+          [
+            46.86784052221285,
+            5.383230833003533,
+            33.043153819768946
+          ],
+          [
+            47.71487422355146,
+            4.280065990174062,
+            32.88327496018186
+          ],
+          [
+            47.22863102398694,
+            3.1024800345120003,
+            32.30287950938479
+          ],
+          [
+            45.89535412308381,
+            3.0280589216794,
+            31.882362918174792
+          ],
+          [
+            43.58171583075174,
+            4.049360540393009,
+            31.579673527430877
+          ],
+          [
+            49.18147881454492,
+            4.3619292142899235,
+            33.34584321051286
+          ],
+          [
+            44.881137625034725,
+            6.159822596446188,
+            32.74597234845173
+          ],
+          [
+            47.24294241792994,
+            6.291654281868443,
+            33.490887451937716
+          ],
+          [
+            47.88205702026194,
+            2.251467158236749,
+            32.179544389492
+          ],
+          [
+            45.52025222736672,
+            2.119635472814493,
+            31.43462928600602
+          ]
+        ]
+      ]
+    },
+    {
+      "release": "07",
+      "mode": "delayed64",
+      "seed": 9207,
+      "host_atoms": 4416,
+      "physical_scope": "81b4f16137637a39a0cb2d0582a8df9f2998dd4425471d6df60395f9ce642ddf",
+      "construction_seconds": 18.374551452696323,
+      "production_seconds": 0.058287387,
+      "attempts_per_second": 2196.0154089597463,
+      "accepted_per_second": 669.0984449174226,
+      "initial_count": 10,
+      "mean_count": 4.25,
+      "counts": [
+        8,
+        8,
+        8,
+        7,
+        7,
+        7,
+        6,
+        6,
+        3,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "sample_energies_K": [
+        88372440427206.89,
+        88368190954800.95,
+        575120048.3663701,
+        572579623.9275495,
+        31797852.36551381,
+        30095306.98375043,
+        27712725.044497594,
+        27709703.319582563,
+        -12867.67438967553,
+        -8375.616297171464,
+        -5483.534960294085,
+        -5483.534960294085,
+        -5335.4647535530285,
+        -5207.936242820708,
+        -4920.544282794114,
+        -5116.105576127098
+      ],
+      "initial_energy_K": 88399261272543.5,
+      "final_energy_K": -5116.105576127098,
+      "counters": {
+        "insert": {
+          "attempted": 12,
+          "accepted": 0
+        },
+        "delete": {
+          "attempted": 19,
+          "accepted": 9
+        },
+        "translate": {
+          "attempted": 29,
+          "accepted": 11
+        },
+        "rotate": {
+          "attempted": 30,
+          "accepted": 12
+        },
+        "regrow": {
+          "attempted": 38,
+          "accepted": 7
+        }
+      },
+      "acceleration": {
+        "sampling_mode": "delayed",
+        "selected_correction_backend": "cpu",
+        "grid_root_bias": 0,
+        "stages": {
+          "insert": {
+            "stage1_evaluated": 12,
+            "stage1_passed": 2,
+            "exact_evaluations": 2,
+            "stage2_accepted": 0
+          },
+          "delete": {
+            "stage1_evaluated": 19,
+            "stage1_passed": 9,
+            "exact_evaluations": 9,
+            "stage2_accepted": 9
+          },
+          "translate": {
+            "stage1_evaluated": 29,
+            "stage1_passed": 14,
+            "exact_evaluations": 28,
+            "stage2_accepted": 11
+          },
+          "rotate": {
+            "stage1_evaluated": 30,
+            "stage1_passed": 17,
+            "exact_evaluations": 34,
+            "stage2_accepted": 12
+          },
+          "regrow": {
+            "stage1_evaluated": 38,
+            "stage1_passed": 8,
+            "exact_evaluations": 16,
+            "stage2_accepted": 7
+          }
+        },
+        "stage1_evaluated": 128,
+        "stage1_passed": 50,
+        "exact_evaluations": 89,
+        "stage2_accepted": 39,
+        "host_grid": {
+          "builds": 1,
+          "cache_loads": 0,
+          "cache_writes": 1,
+          "lookups": 14868,
+          "cubic_lookups": 2497,
+          "linear_lookups": 0,
+          "boltzmann_lookups": 12371,
+          "exact_fallbacks": 0,
+          "steep_interpolation": "boltzmann",
+          "reference_cap_K": 100000,
+          "mesh_points": 262144,
+          "lj_fields": 3,
+          "site_types": 3,
+          "bytes": 24660240,
+          "steep_cells": 688736
+        }
+      },
+      "long_range": {
+        "method": "ewald",
+        "backend": "cpu",
+        "host_builds": 1,
+        "contributions": 51,
+        "candidate_batches": 10,
+        "candidates": 10,
+        "accepted_commits": 49,
+        "fft_transforms": 1,
+        "gpu_batches": 0,
+        "gpu_selected_structures": 0,
+        "device": "",
+        "modes": 9841,
+        "full_modes": 19682,
+        "half_spectrum": true,
+        "k_cutoff": 0,
+        "host_grid_builds": 1,
+        "host_field_evaluations": 0,
+        "mesh_points": 0
+      },
+      "cache_state": "cold",
+      "cache_file_bytes": 9437416,
+      "cache_builds": 1,
+      "cache_writes": 1,
+      "cache_loads": 0,
+      "final_positions_A": [
+        [
+          [
+            45.048320421745196,
+            4.131223764508868,
+            32.04224177776187
+          ],
+          [
+            45.53456362130971,
+            5.308809720170934,
+            32.62263722855895
+          ],
+          [
+            46.86784052221285,
+            5.383230833003533,
+            33.043153819768946
+          ],
+          [
+            47.71487422355146,
+            4.280065990174062,
+            32.88327496018186
+          ],
+          [
+            47.22863102398694,
+            3.1024800345120003,
+            32.30287950938479
+          ],
+          [
+            45.89535412308381,
+            3.0280589216794,
+            31.882362918174792
+          ],
+          [
+            43.58171583075174,
+            4.049360540393009,
+            31.579673527430877
+          ],
+          [
+            49.18147881454492,
+            4.3619292142899235,
+            33.34584321051286
+          ],
+          [
+            44.881137625034725,
+            6.159822596446188,
+            32.74597234845173
+          ],
+          [
+            47.24294241792994,
+            6.291654281868443,
+            33.490887451937716
+          ],
+          [
+            47.88205702026194,
+            2.251467158236749,
+            32.179544389492
+          ],
+          [
+            45.52025222736672,
+            2.119635472814493,
+            31.43462928600602
+          ]
+        ]
+      ]
+    },
+    {
+      "release": "07",
+      "mode": "delayed64",
+      "seed": 9207,
+      "host_atoms": 4416,
+      "physical_scope": "81b4f16137637a39a0cb2d0582a8df9f2998dd4425471d6df60395f9ce642ddf",
+      "construction_seconds": 0.24084763042628765,
+      "production_seconds": 0.06141928,
+      "attempts_per_second": 2084.036152817161,
+      "accepted_per_second": 634.9797653114788,
+      "initial_count": 10,
+      "mean_count": 4.25,
+      "counts": [
+        8,
+        8,
+        8,
+        7,
+        7,
+        7,
+        6,
+        6,
+        3,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "sample_energies_K": [
+        88372440427206.89,
+        88368190954800.95,
+        575120048.3663701,
+        572579623.9275495,
+        31797852.36551381,
+        30095306.98375043,
+        27712725.044497594,
+        27709703.319582563,
+        -12867.67438967553,
+        -8375.616297171464,
+        -5483.534960294085,
+        -5483.534960294085,
+        -5335.4647535530285,
+        -5207.936242820708,
+        -4920.544282794114,
+        -5116.105576127098
+      ],
+      "initial_energy_K": 88399261272543.5,
+      "final_energy_K": -5116.105576127098,
+      "counters": {
+        "insert": {
+          "attempted": 12,
+          "accepted": 0
+        },
+        "delete": {
+          "attempted": 19,
+          "accepted": 9
+        },
+        "translate": {
+          "attempted": 29,
+          "accepted": 11
+        },
+        "rotate": {
+          "attempted": 30,
+          "accepted": 12
+        },
+        "regrow": {
+          "attempted": 38,
+          "accepted": 7
+        }
+      },
+      "acceleration": {
+        "sampling_mode": "delayed",
+        "selected_correction_backend": "cpu",
+        "grid_root_bias": 0,
+        "stages": {
+          "insert": {
+            "stage1_evaluated": 12,
+            "stage1_passed": 2,
+            "exact_evaluations": 2,
+            "stage2_accepted": 0
+          },
+          "delete": {
+            "stage1_evaluated": 19,
+            "stage1_passed": 9,
+            "exact_evaluations": 9,
+            "stage2_accepted": 9
+          },
+          "translate": {
+            "stage1_evaluated": 29,
+            "stage1_passed": 14,
+            "exact_evaluations": 28,
+            "stage2_accepted": 11
+          },
+          "rotate": {
+            "stage1_evaluated": 30,
+            "stage1_passed": 17,
+            "exact_evaluations": 34,
+            "stage2_accepted": 12
+          },
+          "regrow": {
+            "stage1_evaluated": 38,
+            "stage1_passed": 8,
+            "exact_evaluations": 16,
+            "stage2_accepted": 7
+          }
+        },
+        "stage1_evaluated": 128,
+        "stage1_passed": 50,
+        "exact_evaluations": 89,
+        "stage2_accepted": 39,
+        "host_grid": {
+          "builds": 0,
+          "cache_loads": 1,
+          "cache_writes": 0,
+          "lookups": 14868,
+          "cubic_lookups": 2497,
+          "linear_lookups": 0,
+          "boltzmann_lookups": 12371,
+          "exact_fallbacks": 0,
+          "steep_interpolation": "boltzmann",
+          "reference_cap_K": 100000,
+          "mesh_points": 262144,
+          "lj_fields": 3,
+          "site_types": 3,
+          "bytes": 24660240,
+          "steep_cells": 688736
+        }
+      },
+      "long_range": {
+        "method": "ewald",
+        "backend": "cpu",
+        "host_builds": 1,
+        "contributions": 51,
+        "candidate_batches": 10,
+        "candidates": 10,
+        "accepted_commits": 49,
+        "fft_transforms": 0,
+        "gpu_batches": 0,
+        "gpu_selected_structures": 0,
+        "device": "",
+        "modes": 9841,
+        "full_modes": 19682,
+        "half_spectrum": true,
+        "k_cutoff": 0,
+        "host_grid_builds": 0,
+        "host_field_evaluations": 0,
+        "mesh_points": 0
+      },
+      "cache_state": "warm",
+      "cache_file_bytes": 9437416,
+      "cache_builds": 0,
+      "cache_writes": 0,
+      "cache_loads": 1,
+      "final_positions_A": [
+        [
+          [
+            45.048320421745196,
+            4.131223764508868,
+            32.04224177776187
+          ],
+          [
+            45.53456362130971,
+            5.308809720170934,
+            32.62263722855895
+          ],
+          [
+            46.86784052221285,
+            5.383230833003533,
+            33.043153819768946
+          ],
+          [
+            47.71487422355146,
+            4.280065990174062,
+            32.88327496018186
+          ],
+          [
+            47.22863102398694,
+            3.1024800345120003,
+            32.30287950938479
+          ],
+          [
+            45.89535412308381,
+            3.0280589216794,
+            31.882362918174792
+          ],
+          [
+            43.58171583075174,
+            4.049360540393009,
+            31.579673527430877
+          ],
+          [
+            49.18147881454492,
+            4.3619292142899235,
+            33.34584321051286
+          ],
+          [
+            44.881137625034725,
+            6.159822596446188,
+            32.74597234845173
+          ],
+          [
+            47.24294241792994,
+            6.291654281868443,
+            33.490887451937716
+          ],
+          [
+            47.88205702026194,
+            2.251467158236749,
+            32.179544389492
+          ],
+          [
+            45.52025222736672,
+            2.119635472814493,
+            31.43462928600602
+          ]
+        ]
+      ]
+    }
+  ],
+  "cold_matches_off": true,
+  "warm_matches_off": true,
+  "cold_write_succeeded": true,
+  "warm_read_succeeded": true
+}
