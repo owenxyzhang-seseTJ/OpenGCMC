@@ -1,5 +1,5 @@
 {
-  "description": "Pipeline demonstration using same-fixture short alchemical reference windows. Offsets are not converged experimental pKa/E0 calibrations. Full solvent GCMC remains uncalibrated in bulk activity.",
+  "description": "Pipeline demonstration using same-fixture short reference free-energy windows. Offsets are not converged experimental pKa/E0 calibrations. Full solvent GCMC remains uncalibrated in bulk activity.",
   "seed": 20261117,
   "cell": [
     12.8,

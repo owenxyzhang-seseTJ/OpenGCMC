@@ -1,5 +1,5 @@
 {
-  "description": "Frozen-composition explicit-water alchemical redox windows for MBAR; use calibrated reference free energies before predicting physical E0/pKa.",
+  "description": "Frozen-composition explicit-water redox free-energy windows for MBAR; use calibrated reference free energies before predicting physical E0/pKa.",
   "seed": 20261117,
   "cell": [
     12.8,

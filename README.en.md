@@ -10,7 +10,7 @@ OpenGCMC moves repeated neighbour searches, parameter mixing and environment con
 
 - **Chemical potential response and free energy.** Estimate response matrices from occupancy fluctuations and combine fixed bias windows with MBAR to map occupancy and electrode charge.
 - **Electrolytes and constant potential.** Exchange salts by stoichiometry and solve for constrained Gaussian electrode charges. Explicit SPC/E water supports protonation, redox and proton-coupled electron transfer with a fixed molecular topology.
-- **Calibration and current.** Estimate reaction state free energies from alchemical windows. Use supplied kinetic rates or diffusivities to calculate current in physical time, including chronoamperometry and cyclic voltammetry.
+- **Calibration and current.** Estimate reaction-state free energies from multistate free-energy windows. Use supplied kinetic rates or diffusivities to calculate current in physical time, including chronoamperometry and cyclic voltammetry.
 
 [Electrochemical models and usage](docs/electrochemistry.md)
 

@@ -53,4 +53,4 @@ def test_calibration_rejects_invalid_reaction_target(tmp_path, edge, uid, messag
         reactive_cli.main(["calibrate", str(path), "-o", str(out)])
     assert json.loads(previous_config.read_text(encoding="utf8")) == {"previous_run": True}
     assert not (out / "calibration.json").exists()
-    assert not (out / "alchemical_windows.npz").exists()
+    assert not (out / "reaction_windows.npz").exists()

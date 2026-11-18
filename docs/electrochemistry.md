@@ -8,7 +8,7 @@ OpenGCMC uses equilibrium Monte Carlo to sample electrolyte composition, molecul
 | Constant potential with electrode-compensated ion exchange | `opengcmc-thermo run` | [Planar interface](../examples/thermodynamics/interface_constant_potential.json) |
 | Chemical-potential response and MBAR | `opengcmc-thermo response`, `opengcmc-thermo mbar` and the [Python API](../poremc/free_energy.py) | [Window and response tools](../tools/thermodynamics) |
 | SPC/E hydration and fixed-topology reaction sampling | `opengcmc-reactive run` | [Hydrated interface](../examples/electrochemistry/hydrated_interface.json) and [PCET control](../examples/electrochemistry/pcet_four_state.json) |
-| Fixed-composition alchemical calibration | `opengcmc-reactive calibrate` | [Hydrated redox windows](../examples/electrochemistry/hydrated_redox_calibration.json) |
+| Fixed-composition multistate free-energy calibration | `opengcmc-reactive calibrate` | [Hydrated redox windows](../examples/electrochemistry/hydrated_redox_calibration.json) |
 | State kinetics and diffusion currents | `opengcmc-reactive kinetics`, `opengcmc-reactive transport` | [Two-contact current](../examples/electrochemistry/two_contact_current.json), [chronoamperometry](../examples/electrochemistry/diffusion_chronoamperometry.json) and [cyclic voltammetry](../examples/electrochemistry/diffusion_voltammetry.json) |
 
 ## Ensembles and units
@@ -30,9 +30,9 @@ For `forcefield.slab: true`, specify the accessible liquid region in fractional 
 
 ## Reaction sampling and calibration
 
-Reaction edges connect states of the same molecular template. Proton and electron counts, intrinsic free energies and the hydrogen and electron reservoirs determine the state weights. A charge-changing move in an Ewald cell needs an explicit compensating electrode or a neutral coupled reaction. Staged NCMC propagates solvent between alchemical bridge states and uses accumulated work for the acceptance decision.
+Reaction edges connect states of the same molecular template. Proton and electron counts, intrinsic free energies and the hydrogen and electron reservoirs determine the state weights. A charge-changing move in an Ewald cell needs an explicit compensating electrode or a neutral coupled reaction. Staged NCMC propagates solvent between intermediate reaction states and uses accumulated work for the acceptance decision.
 
-For calibration, `calibration.edge_index` selects the reaction, and `calibration.uid` identifies an initial molecule of that reaction's template. The solver samples the alchemical states at fixed water and ion counts and evaluates the cross-state reduced-potential matrix. The resulting overlap describes the support between windows. Independent sampling and bulk reference states govern the accuracy and transferability of a calibrated pKa or formal potential.
+For calibration, `calibration.edge_index` selects the reaction, and `calibration.uid` identifies an initial molecule of that reaction's template. The solver samples the intermediate thermodynamic states at fixed water and ion counts and evaluates the cross-state reduced-potential matrix. The resulting overlap describes the support between windows. Independent sampling and bulk reference states govern the accuracy and transferability of a calibrated pKa or formal potential.
 
 ```bash
 opengcmc-reactive calibrate examples/electrochemistry/hydrated_redox_calibration.json -o output/redox_windows

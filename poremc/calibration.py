@@ -1,7 +1,7 @@
 """Bridge atomistic endpoint sampling to calibrated reaction-state free energies.
 
 Vertical gap = U_B(X)-U_A(X) with electrode charges minimized for each endpoint.
-Use two endpoint ensembles or overlapping alchemical windows. Kinetic parameters
+Use two endpoint ensembles or overlapping free-energy windows. Kinetic parameters
 are NOT inferred from equilibrium Monte Carlo step counts.
 """
 from __future__ import annotations
@@ -73,7 +73,7 @@ def export_kinetic_states(template, relative_environment_free_energies_kelvin, *
     records = []
     for state, dg in zip(template.states, g):
         if state.name.startswith('_bridge_'):
-            raise ValueError('export physical endpoints only, not alchemical states')
+            raise ValueError('export physical endpoints only, not intermediate states')
         records.append(KineticState(state.name, state.intrinsic_kelvin + float(dg),
                       state.intrinsic_dimensionless - state.log_degeneracy,
                       int(state.bound_electrons), int(state.bound_protons)))
@@ -83,9 +83,9 @@ def export_kinetic_states(template, relative_environment_free_energies_kelvin, *
             'rate_parameters_supplied': False}
 
 
-def sample_alchemical_windows(simulation, uid, bridge_states, *, samples_per_window=100,
-                              decorrelation_moves=10, burnin_moves=200):
-    """Fixed-composition explicit-solvent alchemical sampling and MBAR.
+def sample_reaction_windows(simulation, uid, bridge_states, *, samples_per_window=100,
+                            decorrelation_moves=10, burnin_moves=200):
+    """Fixed-composition explicit-solvent reaction-window sampling and MBAR.
 
     Random-scan rigid displacements sample each frozen Hamiltonian. This routine
     does not perform grand exchange or reaction moves and has no time units.
@@ -96,7 +96,7 @@ def sample_alchemical_windows(simulation, uid, bridge_states, *, samples_per_win
     h = simulation.h
     states = tuple(int(s) for s in bridge_states)
     if len(states) < 2 or len(set(states)) != len(states):
-        raise ValueError('at least two distinct alchemical states required')
+        raise ValueError('at least two distinct intermediate states required')
     snapshot = h.snapshot()
     all_columns, window_states, electrode_mean = [], [], []
     try:
@@ -114,7 +114,7 @@ def sample_alchemical_windows(simulation, uid, bridge_states, *, samples_per_win
                 i = h.molecule_index(uid)
                 m = h.molecules[i]
                 # One local charge Hessian reuses water/Ewald/electrode response
-                # for all frozen alchemical states at this configuration.
+                # for all frozen intermediate states at this configuration.
                 col = state_energy_differences(h, uid, states) / simulation.temperature
                 all_columns.append(col)
                 window_states.append(state)
@@ -132,14 +132,14 @@ def sample_alchemical_windows(simulation, uid, bridge_states, *, samples_per_win
                 'samples_per_window': samples_per_window,
                 'equilibration_moves_per_window': burnin_moves,
                 'moves_between_samples': decorrelation_moves,
-                'ensemble': 'fixed solvent/ion composition; alchemical state fixed per window'}
+                'ensemble': 'fixed solvent/ion composition; intermediate state fixed per window'}
     finally:
         h.restore(snapshot)
 
 
-def network_from_alchemical(template, calibration, physical_states, edges, *, temperature,
-                            reference_label, electrode_groups=None,
-                            reference_potentials_V=None, capacitance_F=None):
+def network_from_reaction_windows(template, calibration, physical_states, edges, *, temperature,
+                                  reference_label, electrode_groups=None,
+                                  reference_potentials_V=None, capacitance_F=None):
     """Construct an explicitly calibrated coarse-grained kinetic network.
 
     Calibration contains ONLY conditional physical free energies from fixed-state

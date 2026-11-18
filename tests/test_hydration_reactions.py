@@ -246,8 +246,8 @@ def test_vertical_gap_and_windows_constant_environment():
     template = redox_site(sigma=0, epsilon=0)
     sim = ideal_reaction(template, ReactionEdge(0, 0, 1, stages=3), state=0)
     assert abs(vertical_gap(sim.h, 0, 0, 1)) < 1e-12
-    out = sample_alchemical_windows(sim, 0, sim.reactions[0].bridge,
-                                    samples_per_window=3, decorrelation_moves=1, burnin_moves=1)
+    out = sample_reaction_windows(sim, 0, sim.reactions[0].bridge,
+                                  samples_per_window=3, decorrelation_moves=1, burnin_moves=1)
     np.testing.assert_allclose(out['free_energy_kelvin'], 0., atol=1e-10)
     assert sim.h.molecules[0].state == 0
     sim.h.close()
@@ -304,12 +304,12 @@ def test_periodic_molecule_crossing_is_allowed():
     h.close()
 
 
-def test_alchemical_to_current_bridge_no_double_count():
+def test_reaction_windows_to_current_bridge_no_double_count():
     from poremc.kinetics import KineticEdge
     t = redox_site('cal', E0_V=.1, reference_reduction_kelvin=1000.)
     cal={'states':[0,1], 'free_energy_kelvin':[0.,1000.],
          'mean_electrode_charge_e':[[0.,0.],[.4,.6]], 'overlap_spectral_gap':.2}
-    net,meta=network_from_alchemical(t,cal,[0,1],[KineticEdge(0,1,k0_per_s=10)],
+    net,meta=network_from_reaction_windows(t,cal,[0,1],[KineticEdge(0,1,k0_per_s=10)],
         temperature=300,reference_label='exact model',electrode_groups=[0,1],
         reference_potentials_V=[.1,.1])
     r=net.rates([.1,.1])
@@ -318,8 +318,8 @@ def test_alchemical_to_current_bridge_no_double_count():
     assert meta['supplied_rates_not_inferred_from_MC']
 
 
-def test_alchemical_bridge_rejects_missing_endpoint():
+def test_reaction_windows_reject_missing_endpoint():
     from poremc.kinetics import KineticEdge
     with pytest.raises(ValueError,match='occur'):
-        network_from_alchemical(redox_site('x'),{'states':[0],'free_energy_kelvin':[0.]},[0,1],
+        network_from_reaction_windows(redox_site('x'),{'states':[0],'free_energy_kelvin':[0.]},[0,1],
             [KineticEdge(0,1)],temperature=300,reference_label='bad')

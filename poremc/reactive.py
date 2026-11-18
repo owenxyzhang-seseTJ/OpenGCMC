@@ -80,7 +80,7 @@ class ReactionEdge:
 
 
 def prepare_reactions(templates, reactions):
-    """Pre-register alchemical states; no mutable force-field tables in hot loops.
+    """Pre-register intermediate reaction states; no mutable force-field tables in hot loops.
 
     Each edge is selected with a configuration-independent probability. At a
     fixed intermediate lambda, random-scan rigid displacement is reversible.

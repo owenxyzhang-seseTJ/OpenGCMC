@@ -30,7 +30,7 @@ cfg={
  'run':{'steps':2500,'burnin':750,'sample_every':10,'record_positions':True}}
 write('hydrated_interface.json',cfg)
 cal=copy.deepcopy(cfg)
-cal['description']='Frozen-composition explicit-water alchemical redox windows for MBAR; use calibrated reference free energies before predicting physical E0/pKa.'
+cal['description']='Frozen-composition explicit-water redox free-energy windows for MBAR; use calibrated reference free energies before predicting physical E0/pKa.'
 cal['moves']['move_weights']=[1,0,0]
 cal['calibration']={'edge_index':1,'uid':63,'samples_per_window':35,'decorrelation_moves':6,'burnin_moves':100}
 write('hydrated_redox_calibration.json',cal)

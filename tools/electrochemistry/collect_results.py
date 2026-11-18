@@ -8,7 +8,7 @@ from poremc.hydration import MolecularHamiltonian,Molecule
 from poremc.reactive import acid_site,redox_site,ReactionEdge,Reservoirs,prepare_reactions,ReactiveGCMC
 from poremc.reaction_cache import LocalChargeResponse
 from poremc.kinetics import KineticEdge
-from poremc.calibration import network_from_alchemical
+from poremc.calibration import network_from_reaction_windows
 from poremc.electrode import ELEMENTARY_CHARGE,VOLT_TO_K
 from poremc.thermo_cli import jsonable
 from poremc.transport import FARADAY
@@ -89,7 +89,7 @@ def kinetic_curves():
     # Actual hydration-window outputs are mapped to two physical endpoints.
     cal=json.loads((OUT/'hydrated_redox_calibration/calibration.json').read_text())
     c=json.loads((ROOT/'benchmarks/runs/electrochemistry/hydrated_calibrated_pipeline.json').read_text());sim=build(c)
-    net,meta=network_from_alchemical(sim.h.templates[4],cal,[0,1],
+    net,meta=network_from_reaction_windows(sim.h.templates[4],cal,[0,1],
         [KineticEdge(0,1,electrode=i,k0_per_s=20.) for i in (0,1)],temperature=298.15,
         reference_label='same-fixture short seven-window pilot; not a material calibration',
         electrode_groups=[0]*9+[1]*9,reference_potentials_V=[-.05,.05])

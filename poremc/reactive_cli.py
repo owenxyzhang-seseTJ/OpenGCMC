@@ -10,7 +10,7 @@ from .reactive import (Reservoirs, ReactionEdge, MolecularExchange, ReactiveGCMC
 from .electrode import GaussianElectrodes
 from .electrolyte import FractionalRegion
 from .kinetics import KineticState, KineticEdge, ReactionNetwork, bin_current
-from .calibration import sample_alchemical_windows
+from .calibration import sample_reaction_windows
 from .thermo_cli import jsonable
 
 
@@ -130,10 +130,10 @@ def main(argv=None):
                 if molecule.template != edge.template:
                     raise ValueError(f'calibration.uid {uid} belongs to template {molecule.template}; '
                                      f'reaction index {edge_index} requires template {edge.template}')
-                r = sample_alchemical_windows(sim, bridge_states=edge.bridge, **cal)
+                r = sample_reaction_windows(sim, bridge_states=edge.bridge, **cal)
                 out.mkdir(parents=True, exist_ok=True)
                 (out / 'config.json').write_text(json.dumps(cfg, indent=2, ensure_ascii=False), encoding='utf8')
-                np.savez_compressed(out / 'alchemical_windows.npz', **{k: v for k, v in r.items() if isinstance(v, np.ndarray)})
+                np.savez_compressed(out / 'reaction_windows.npz', **{k: v for k, v in r.items() if isinstance(v, np.ndarray)})
                 (out / 'calibration.json').write_text(json.dumps(jsonable(r), indent=2), encoding='utf8')
             else:
                 if args.restart:

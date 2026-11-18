@@ -212,7 +212,7 @@ def main(argv=None):
                 'thermodynamics':['chemical-potential response matrices','occupancy and charge free-energy landscapes',
                     'stoichiometric electrolyte GCMC','Gaussian constant-potential electrodes'],
                 'electrochemistry':['explicit SPC/E hydration','fixed-topology protonation, redox and PCET sampling',
-                    'staged NCMC and alchemical calibration','reaction networks and finite-volume diffusion currents'],
+                    'staged NCMC and multistate free-energy calibration','reaction networks and finite-volume diffusion currents'],
                 'entry_points':{'molecular':'opengcmc','thermodynamics':'opengcmc-thermo','electrochemistry':'opengcmc-reactive'},
                 'gpu_status':'Optional CUDA energy backend with resident neighbour and parameter tables; Python sampling driver',
                 'not_implemented':['ring-closure CBMC','flexible framework','CFCMC','molecular dynamics',
