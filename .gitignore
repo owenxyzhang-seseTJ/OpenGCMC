@@ -5,14 +5,6 @@ __pycache__/
 *.dll
 *.egg-info/
 .poremc_cache/
-report/*.aux
-report/*.bbl
-report/*.blg
-report/*.log
-report/*.out
-report/*.toc
-benchmarks/gpu_new/
-
 .venv/
 build/
 dist/
@@ -25,3 +17,5 @@ run_*/
 native/build_metadata.json
 benchmarks/runs/
 figures/.mplconfig/
+figures/source_data/layout_qa.json
+examples/longrange/cache/

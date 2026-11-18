@@ -42,6 +42,8 @@ Cu-BTC 中の中性 Lennard–Jones プローブを用い、各ソフトウェ�
 
 各測定時間、配置エネルギーの照合、再現コマンドは[ベンチマーク文書](docs/benchmarks.md)と[生データ](benchmarks/results)に掲載しています。
 
+4,416 サイトの Ni_TPT_TATBA 固定骨格内の帯電 p-キシレンを、有限直接 Ewald 和で評価しました。低吸着量での 3 シードの単一 CPU コア測定では、二段階サンプリングの中央値は毎秒約 6,400–6,600 試行でした。64³ 骨格場の読み込みは 0.24 秒、初回の構築と書き込みは 18.37 秒でした。[計時条件と個別データ](docs/benchmarks.md#charged-p-xylene-in-ni_tpt_tatba)。
+
 ## 中核アルゴリズム
 
 - **厳密な空間・パラメータキャッシュ。** 周期的な分率座標のセル分割と CSR 候補表により近傍関係を再利用し、混合パラメータ行を事前に結び付けます。各問い合わせでは実距離と厳密なカットオフを評価します。
@@ -50,7 +52,10 @@ Cu-BTC 中の中性 Lennard–Jones プローブを用い、各ソフトウェ�
 - **試行の一括評価と骨格データの共有。** 同じ不変環境とパラメータを用いるエネルギー要求をまとめます。独立鎖は骨格キャッシュを共有し、ゲスト状態、乱数生成器、受理判定を個別に保持します。
 - **厳密な目標分布への補正。** Python 経路では、グリッドまたは学習代理モデルで提案を選別し、二段階受理規則により厳密な目標エネルギーへ補正できます。
 
-[アルゴリズムとソースコードの対応](docs/algorithms.md)
+- **固定骨格グリッドと二段階受理。** 骨格の LJ 場と静電場を事前計算し、C++ の CBMC 成長と再追跡に使います。選択された分子配置を目標ポテンシャルで補正します。
+- **長距離静電相互作用。** 直接 Ewald は CPU の調和成分の縮約とオプションの FP64 CUDA テンソル演算に対応します。PME では指定メッシュが目標エネルギーを定めます。
+
+[アルゴリズムとソースコードの対応](docs/algorithms.md) · [長距離サンプリング](docs/long_range.md)
 
 ## RASPA・gRASPA に対する利点
 
@@ -59,7 +64,7 @@ OpenGCMC は、再利用可能なエネルギー表現、柔軟分子の成長�
 | ワークフロー | OpenGCMC の機能 |
 |---|---|
 | 剛体・柔軟ゲスト | 剛体、木構造トポロジー、固定または有界の結合長・結合角、Fourier ねじれ項、CBMC 挿入・削除・再成長 |
-| 高速ネイティブサンプリング | 単一成分 LJ/DSF の完全な C++ ループ。移動ループ内の Python 呼び出し不要 |
+| 高速ネイティブサンプリング | 単一成分の LJ、DSF、直接 Ewald、PME に対応する C++ ループと固定骨格グリッド |
 | 汎用サンプリング | Python 多成分 GCMC、Ewald 静電相互作用、オプションの厳密な目標補正 |
 | GPU エネルギー評価 | 常駐する近傍・パラメータ表、再利用可能な作業領域、NumPy/CuPy インターフェース |
 | 解析・再利用 | 粒子数統計、ESS、自己相関、チェックポイント、骨格データを共有する独立鎖 |
@@ -103,6 +108,9 @@ opengcmc run examples/flexible_cuda.json -o output/cuda
 # グリッド提案と厳密な目標補正
 opengcmc run examples/grid_delayed_acceptance.json -o output/corrected
 
+# 帯電した柔軟ゲストの二段階サンプリング
+opengcmc run examples/longrange/small_delayed_ewald.json -o output/delayed
+
 # 定電位電解質 GCMC
 opengcmc-thermo run examples/thermodynamics/interface_constant_potential.json -o output/interface
 
@@ -136,4 +144,4 @@ from poremc.batching import evaluate_requests, run_native_replicas
 
 [MIT License](LICENSE) で公開しています。アルゴリズムの参考文献は [`docs/references.bib`](docs/references.bib) を参照してください。
 
-[RASPA3](https://github.com/iRASPA/RASPA3) · [gRASPA](https://github.com/snurr-group/gRASPA) · 図のスタイル参考：[figures4papers](https://github.com/ChenLiu-1996/figures4papers)
+[RASPA3](https://github.com/iRASPA/RASPA3) · [gRASPA](https://github.com/snurr-group/gRASPA)

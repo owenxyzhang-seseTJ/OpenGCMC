@@ -1,6 +1,6 @@
 # Direct performance comparisons
 
-The retained measurements compare the current cached native OpenGCMC sampler directly with RASPA3 and gRASPA. Each pair runs serially on the same system. The RASPA3 and gRASPA experiments use separate systems and protocols; their absolute rates appear on separate axes.
+The retained measurements compare the cached native OpenGCMC sampler directly with RASPA3 and gRASPA. Each pair runs serially on the same system. The RASPA3 and gRASPA experiments use separate systems and protocols; their absolute rates appear on separate axes.
 
 ![Measured throughput](assets/opengcmc_performance.svg)
 
@@ -101,7 +101,7 @@ python figures/plot_figures.py
 
 ## Additional algorithm measurements
 
-The repository also retains internal measurements for distinct mechanisms. These use their own tasks and denominators:
+The repository includes measurements of individual computational mechanisms. These use their own tasks and denominators:
 
 | Measurement | Retained result | Data |
 |---|---:|---|
@@ -111,3 +111,25 @@ The repository also retains internal measurements for distinct mechanisms. These
 | CUDA cached versus direct energy call, retained 32,000-site case | 23.67× | [Paired CUDA records](../benchmarks/gpu_20261117/results.json) |
 
 The last row compares two OpenGCMC energy algorithms and is separate from the gRASPA comparison. The voxel-well ESS/s result is specific to that analytic sampling task.
+
+## Charged p-xylene in Ni_TPT_TATBA
+
+This single-core HPC benchmark uses a fixed 2 × 2 × 2 framework supercell with 4,416 sites, a charged 12-site p-xylene model and the full finite direct Ewald target with `kmax=[13, 13, 13]`. Insertion, deletion, translation, rotation and full CBMC regrowth are enabled. Each mode uses three seeds. The delayed paths load the prebuilt reference grid before production. The table reports the median number of attempted moves per second for the harmonic CPU implementation.
+
+| Loading and run length | Mode | Median production attempts/s | Mean guest count per supercell |
+|---|---|---:|---:|
+| Low, 5,000 attempts after 500 warm-up | Exact | 286.32 | 4.33 |
+| Low, 5,000 attempts after 500 warm-up | Delayed, 32³ | 6,412.00 | 3.57 |
+| Low, 5,000 attempts after 500 warm-up | Delayed, 64³ | 6,564.00 | 4.35 |
+| Higher, 3,000 attempts after 300 warm-up | Delayed, 32³ | 1,678.72 | 29.55 |
+| Higher, 3,000 attempts after 300 warm-up | Delayed, 64³ | 1,535.84 | 32.04 |
+
+These short runs have different observed loadings across modes. The rates describe the stated inputs and measure computational throughput. Equilibrium uptake, mixing and effective sample size require separate analysis. The study's framework and force field are required to repeat these particular timings. The source includes [illustrative Ewald inputs and benchmark commands](long_range.md#reproduction-and-source).
+
+A cache audit at 64³ used 128 moves per condition with a common seed. Framework preparation took 19.27 s with the file cache off, 18.37 s on a cold write and 0.24 s on a warm read. The cache file occupies 9,437,416 bytes. Direct comparisons found identical recorded counts, sampled energies, move counters and end coordinates across the three conditions. These preparation times are separate from the throughput table.
+
+- [Low-loading seed records](../benchmarks/results/nit_tpt_pxylene/low_loading.json)
+- [Higher-loading seed records](../benchmarks/results/nit_tpt_pxylene/higher_loading.json)
+- [Framework cache audit](../benchmarks/results/nit_tpt_pxylene/host_grid_cache.json)
+
+CUDA compile/link and CPU test-plug-in checks for the reciprocal tensor path are recorded separately. [Compile record](../benchmarks/results/longrange/tensor_build_validation.json) · [Host numerical check](../benchmarks/results/longrange/tensor_host_validation.json)

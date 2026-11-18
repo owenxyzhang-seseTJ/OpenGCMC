@@ -42,6 +42,8 @@ Each pair runs serially on the same system; the two comparisons are displayed se
 
 See the [benchmark protocol](docs/benchmarks.md) and [raw results](benchmarks/results) for individual timings, configuration-energy checks and reproduction commands.
 
+A single-core benchmark for charged p-xylene in a 4,416-site Ni_TPT_TATBA framework uses the full finite direct Ewald target. At low loading, the two delayed modes yielded about 6,400–6,600 production attempts/s across three seeds. Warm loading of the 64³ host field took 0.24 s compared with 18.37 s for the cold build and write. [Protocol and seed records](docs/benchmarks.md#charged-p-xylene-in-ni_tpt_tatba).
+
 ## Core algorithms
 
 - **Exact spatial and parameter caches.** Periodic fractional-cell bins and CSR candidate tables reuse neighbourhood geometry. Bound parameter rows reuse mixed interactions. Every query still evaluates actual distances and the exact cutoff.
@@ -50,7 +52,10 @@ See the [benchmark protocol](docs/benchmarks.md) and [raw results](benchmarks/re
 - **Batched trials and shared host data.** Energy requests with matching immutable environments and parameters are coalesced. Independent chains share the host cache while retaining separate guest states, random generators and acceptance decisions.
 - **Exact target correction.** The Python route can screen proposals with a grid or learned surrogate and apply a two-stage acceptance rule for the exact target energy.
 
-[Algorithm details and source map](docs/algorithms.md)
+- **Fixed-host grid and delayed acceptance.** Precompute framework LJ and electrostatic fields for native CBMC growth and retracing, then evaluate the selected complete molecule with the target potential.
+- **Long-range reciprocal evaluation.** CPU harmonic contraction and optional FP64 CUDA tensor batches reuse the finite Ewald modes. PME is available with a mesh-defined target.
+
+[Algorithm details and source map](docs/algorithms.md) · [Native long-range sampling](docs/long_range.md)
 
 ## Advances relative to RASPA and gRASPA
 
@@ -59,7 +64,7 @@ OpenGCMC combines reusable energy representations, flexible molecular growth and
 | Workflow | OpenGCMC capabilities |
 |---|---|
 | Rigid and flexible guests | Rigid bodies, tree topologies, fixed or bounded bonds/angles, Fourier torsions, CBMC insertion/deletion/regrowth |
-| Native fast sampling | Complete single-component C++ LJ/DSF loop with no Python calls inside the move loop |
+| Native fast sampling | Single-component C++ LJ, DSF, direct Ewald and PME with optional fixed-host delayed sampling |
 | General sampling | Python multicomponent GCMC, Ewald electrostatics and optional exact target correction |
 | GPU energy evaluation | Resident neighbourhood/parameter tables, reusable workspaces and NumPy/CuPy interfaces |
 | Analysis and reuse | Number statistics, ESS, autocorrelation, checkpoints and independent chains sharing host data |
@@ -103,6 +108,9 @@ opengcmc run examples/flexible_cuda.json -o output/cuda
 # Grid proposals with exact target correction
 opengcmc run examples/grid_delayed_acceptance.json -o output/corrected
 
+# Native delayed sampling of a charged flexible guest
+opengcmc run examples/longrange/small_delayed_ewald.json -o output/delayed
+
 # Constant-potential electrolyte GCMC
 opengcmc-thermo run examples/thermodynamics/interface_constant_potential.json -o output/interface
 
@@ -136,4 +144,4 @@ from poremc.batching import evaluate_requests, run_native_replicas
 
 Released under the [MIT License](LICENSE). Algorithm references are collected in [`docs/references.bib`](docs/references.bib).
 
-[RASPA3](https://github.com/iRASPA/RASPA3) · [gRASPA](https://github.com/snurr-group/gRASPA) · Figure style reference: [figures4papers](https://github.com/ChenLiu-1996/figures4papers)
+[RASPA3](https://github.com/iRASPA/RASPA3) · [gRASPA](https://github.com/snurr-group/gRASPA)

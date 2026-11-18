@@ -1,4 +1,4 @@
-// PoreMC 0.6: immutable periodic host fields for reference-potential CBMC.
+// Immutable periodic host fields for reference-potential CBMC.
 // The physical target is corrected separately; no physical energy is capped.
 #include "host_grid.h"
 #include <algorithm>

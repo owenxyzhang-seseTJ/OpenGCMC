@@ -1,0 +1,12 @@
+{
+  "direct_configurations": 8,
+  "host_fft_nodes": 9024,
+  "max_total_energy_error_K": 5.9117155615240335e-12,
+  "max_increment_error_K": 2.2737367544323206e-12,
+  "max_translation_structure_factor_error": 7.84457223709878e-15,
+  "max_host_field_error_K": 1.2505552149377763e-12,
+  "max_host_fft_error_K": 1.2732925824820995e-11,
+  "max_pme_host_grid_error_K": 1.8189894035458565e-12,
+  "kmax13_full_modes": 19682,
+  "kmax13_stored_modes": 9841
+}

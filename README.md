@@ -42,9 +42,7 @@ OpenGCMC 已贯通带电 MOF 混合吸附、恒电势电解质界面、显式水
 
 完整协议、逐次耗时、能量核对和复现命令见[基准文档](docs/benchmarks.md)及[原始结果](benchmarks/results)。
 
-0.6 在真实 `Ni_TPT_TATBA + p-xylene`、4416 个框架位点、12 位点客体和完整有限 Ewald 目标上增加了固定框架参考网格与两阶段 `delayed` 采样。在相近的 `N≈5` 载量、3 个随机种子和每次 10,000 次生产尝试下，`delayed32` 和 `delayed64` 相对 0.5 全谱 exact 路径的中位吞吐分别提升 **17.55×** 和 **21.57×**，相对 RASPA2 正式日志折算值分别约快 **18%** 和 **43%**。较高载量的 3,000 次配对短测仍取得 **7.82×–7.85×** 提升。测量协议、原始 JSON 与缓存功能的已知限制见[HPC 基准记录](docs/poremc-0.6-hpc-benchmarks.md)。
-
-0.7 修复了 0.6 在目标 HPC 运行时的持久化网格缓存写入崩溃，并把 CPU 直接 Ewald 改为沿 z 方向的谐波收缩。真实 MOF 输入的 0.6→0.7 配对测试中，低载量 `exact`、`delayed32`、`delayed64` 分别提升 **1.87×**、**1.87×**、**1.62×**；较高载量 `delayed32/64` 提升 **1.27×/1.19×**，所有种子下的计数轨迹保持一致。冷写缓存与无缓存轨迹完全相同，热读把构建时间从约 **18.37 s** 降到 **0.24 s**。详见[0.7 HPC 基准](docs/poremc-0.7-hpc-benchmarks.md)。
+带电 p-xylene 在 4,416 位点的 Ni_TPT_TATBA 固定框架中使用完整的有限直接 Ewald 势。低载量的三个单核短测中，两种框架网格的生产吞吐中位数约为每秒 6,400–6,600 次尝试。64³ 框架场的热读耗时为 0.24 s，冷构建和写入为 18.37 s。[查看计时范围、负载和逐种子记录](docs/benchmarks.md#charged-p-xylene-in-ni_tpt_tatba)。
 
 ## 核心算法
 
@@ -53,11 +51,11 @@ OpenGCMC 已贯通带电 MOF 混合吸附、恒电势电解质界面、显式水
 - **带密度校正的偏置 CBMC。** 冻结的全支持体素 alias 分布将根位点引向有利区域；正向生长与反向回溯均纳入 `1 / [V q(r)]`，保持目标分布。
 - **试探合批与独立链共享。** 相同不可变环境和参数的能量请求合批；多条链共享框架缓存，各自保有客体状态、随机数与接受决策。
 - **精确目标校正。** Python 路径可使用网格或学习代理进行提议筛选，再通过两阶段接受规则校正到精确目标能量。
-- **固定框架参考网格。** 0.6 预计算框架 LJ 与静电场，在 C++ CBMC 中完成参考势生长和回溯，仅对通过第一阶段的完整分子执行精确残差校正。
+- **固定框架参考网格。** 预计算框架 LJ 与静电场，在 C++ CBMC 中完成参考势生长和回溯，仅对通过第一阶段的完整分子执行精确残差校正。
 - **长程增量化。** 直接 Ewald 使用共轭半谱、平移相位递推和已接受结构因子缓存；PME 保留为独立可选的离散网格 Hamiltonian。
-- **谐波收缩与张量后端。** 0.7 的 CPU 路径按周期网格的 z 方向连续区间收缩结构因子；可选 FP64 CUDA tensor 路径支持 exact 候选批处理和 delayed 入选结构回传。
+- **谐波收缩与张量后端。** CPU 路径按周期网格的 z 方向连续区间收缩结构因子；可选 FP64 CUDA tensor 路径支持 exact 候选批处理和 delayed 入选结构回传。
 
-[算法说明与源码映射](docs/algorithms.md) · [0.6 实现与参数](docs/poremc-0.6.md)
+[算法说明与源码映射](docs/algorithms.md) · [原生长程采样](docs/long_range.md)
 
 ## 相对 RASPA 与 gRASPA 的价值
 
@@ -66,7 +64,7 @@ OpenGCMC 将缓存、柔性构象生长和可扩展能量接口组织在同一�
 | 工作流 | OpenGCMC 提供的内容 |
 |---|---|
 | 刚体与柔性客体 | 刚体、树状柔性拓扑、固定或有界键长/键角、Fourier 扭转项、CBMC 插入/删除/再生长 |
-| 原生快速采样 | C++ 完整单组分 LJ/DSF 循环，采样循环内无需 Python 调用 |
+| 原生快速采样 | C++ 单组分 LJ、DSF、直接 Ewald 和 PME，含框架网格两阶段采样 |
 | 通用采样 | Python 多组分 GCMC、Ewald 静电、可选精确目标校正 |
 | GPU 能量计算 | 常驻邻域与参数表、复用工作空间、NumPy/CuPy 接口 |
 | 分析与复用 | 粒子数统计、ESS、自相关、检查点、独立链与共享框架缓存 |
@@ -110,6 +108,9 @@ opengcmc run examples/flexible_cuda.json -o output/cuda
 # 网格提议与精确目标校正
 opengcmc run examples/grid_delayed_acceptance.json -o output/corrected
 
+# 带电柔性客体与固定框架的两阶段采样
+opengcmc run examples/longrange/small_delayed_ewald.json -o output/delayed
+
 # 恒电势电解质 GCMC
 opengcmc-thermo run examples/thermodynamics/interface_constant_potential.json -o output/interface
 
@@ -143,4 +144,4 @@ from poremc.batching import evaluate_requests, run_native_replicas
 
 项目采用 [MIT License](LICENSE)。算法参考文献见 [`docs/references.bib`](docs/references.bib)。
 
-[RASPA3](https://github.com/iRASPA/RASPA3) · [gRASPA](https://github.com/snurr-group/gRASPA) · 图形风格参考 [figures4papers](https://github.com/ChenLiu-1996/figures4papers)
+[RASPA3](https://github.com/iRASPA/RASPA3) · [gRASPA](https://github.com/snurr-group/gRASPA)

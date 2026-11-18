@@ -133,7 +133,7 @@ struct CudaPlugin {
    auto set_lattice=reinterpret_cast<SetLattice>(dlsym(library,"poremc_ewald_cuda_set_lattice"));
    auto name=reinterpret_cast<KernelName>(dlsym(library,"poremc_ewald_cuda_kernel_name"));
    structure=reinterpret_cast<Structure>(dlsym(library,"poremc_ewald_cuda_structure"));
-   if(!set_lattice || !name || !structure){reason="requested tensor CUDA kernel requires the 0.7 lattice plugin ABI";return false;}
+   if(!set_lattice || !name || !structure){reason="requested tensor CUDA kernel requires the tensor lattice plug-in ABI";return false;}
    std::vector<int> packed;
    packed.reserve(3*integer_modes.size());
    for(const auto& mode:integer_modes)packed.insert(packed.end(),mode.begin(),mode.end());

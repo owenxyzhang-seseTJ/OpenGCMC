@@ -1,7 +1,6 @@
 {
   "schema": "poremc-v02-shared-RTX-cached-kernel-recheck-v1",
   "checked_at_Asia_Shanghai": "2026-11-17T19:37:57.597345+08:00",
-  "hostname": "athena-wsl",
   "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
   "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
   "numpy": "2.4.6",

@@ -50,11 +50,11 @@ The first stage includes the proposal and reservoir terms. Forward and reverse p
 
 | Route | Sampling scope | Energy evaluation |
 |---|---|---|
-| [`FastGCMC`](../poremc/fast.py) / native C++ | One classical component; insertion, deletion, translation, rotation and full regrowth | Exact CPU LJ/DSF; direct, cell or cached algorithm |
+| [`FastGCMC`](../poremc/fast.py) / native C++ | One classical component; insertion, deletion, translation, rotation and full regrowth | LJ, DSF, direct Ewald and PME. Optional fixed-host grid and exact target correction. |
 | [`GCMC`](../poremc/engine.py) / Python | Mixtures, flexible CBMC, partial regrowth and optional delayed acceptance | Classical LJ/DSF/Ewald and extensible potential interfaces |
 | [`CudaEnvironment`](../poremc/cuda.py) | Called by the Python sampling/energy layer | Resident neighbour plans, mixed-parameter bindings and reusable FP64 workspaces |
 
-The CUDA module accelerates energy evaluation. The direct external benchmarks use the native CPU sampling loop. The architecture figure shows these boundaries explicitly.
+The diagram illustrates short-range cache reuse. The external throughput comparisons use the native CPU sampling loop. Direct Ewald, PME, fixed-host reference grids and the native CUDA reciprocal plug-in are described in [Native long-range sampling](long_range.md).
 
 ## Comparison with RASPA3 and gRASPA
 
@@ -72,4 +72,4 @@ The measured ratios quantify the complete retained sampling paths. They do not i
 
 ## References
 
-Algorithm references are collected in [BibTeX format](references.bib). Upstream projects: [RASPA3](https://github.com/iRASPA/RASPA3), [gRASPA](https://github.com/snurr-group/gRASPA). Figure styling was informed by [figures4papers](https://github.com/ChenLiu-1996/figures4papers).
+Algorithm references are collected in [BibTeX format](references.bib). Upstream projects: [RASPA3](https://github.com/iRASPA/RASPA3), [gRASPA](https://github.com/snurr-group/gRASPA).

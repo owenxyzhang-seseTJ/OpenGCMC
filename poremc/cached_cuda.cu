@@ -1,4 +1,4 @@
-// PoreMC 0.2, independent FP64 cached-neighbour kernels. MIT.
+// FP64 cached-neighbour kernels. MIT.
 // One block per trial atom; immutable host and query tables stay device-resident.
 #include <math.h>
 extern "C" __global__ void poremc_cached_atoms(

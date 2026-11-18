@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build PoreMC's standalone C++17 energy library; no Python headers needed."""
+"""Build OpenGCMC's standalone C++17 energy library; no Python headers needed."""
 import argparse
 import json
 import os
