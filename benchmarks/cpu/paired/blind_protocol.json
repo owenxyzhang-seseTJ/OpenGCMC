@@ -1,0 +1,52 @@
+{
+  "locked_utc": "2026-11-23T10:21:36.197518+00:00",
+  "holdout": "holdout_co2_uio66",
+  "holdout_condition": {
+    "temperature_K": 350.0,
+    "fugacity_Pa": 60000.0,
+    "framework": "UiO-66",
+    "mesh": 32
+  },
+  "development": "charged IRMOF-1 CO2/CH4 at 2 bar",
+  "development_pilot": {
+    "exact": {
+      "predicted_s": 4.130983499984723,
+      "fixed_wall_s": 2.1266062499780674,
+      "max_prepare_s": 0.015006708010332659,
+      "seconds_per_attempt_batch": 0.00010021886250033276,
+      "worst_rhat": 0.9999775364129349,
+      "ESS_penalty": {
+        "count_0": 1.177604327996758,
+        "count_1": 1.3651367265662648,
+        "joint_probability": 1.0881040949466616
+      },
+      "fraction_of_valid_candidates_reaching_exact": null
+    },
+    "delayed": {
+      "predicted_s": 0.6105617687222546,
+      "fixed_wall_s": 0.3946428330091294,
+      "max_prepare_s": 0.020704833004856482,
+      "seconds_per_attempt_batch": 9.525835399108472e-06,
+      "worst_rhat": 1.0065937990109532,
+      "ESS_penalty": {
+        "count_0": 1.3521428305568435,
+        "count_1": 1.210772562066775,
+        "joint_probability": 1.26865671641791
+      },
+      "fraction_of_valid_candidates_reaching_exact": 0.6722316633811434
+    }
+  },
+  "required_predicted_ratio": 0.85,
+  "pilot_max_rhat": 1.1,
+  "pilot_budget": 20000,
+  "pilot_burnin": 20000,
+  "pilot_seed_offset": 731000,
+  "confirmation_seed_offset": 928000,
+  "confirmation_budgets": [
+    20000,
+    60000,
+    120000,
+    240000
+  ],
+  "development_decision": "delayed"
+}

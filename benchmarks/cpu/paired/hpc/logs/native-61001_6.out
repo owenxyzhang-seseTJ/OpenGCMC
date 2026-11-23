@@ -1,0 +1,8 @@
+benchmark_precision.py benchmarks/cpu/paired/inputs/nist_co2_zif8.json --output benchmarks/cpu/paired/hpc/nist/nist_co2_zif8-delayed.json --cache <scratch>/fields --mode delayed --budgets 20000 60000 120000 240000 --warmup 20000 --mesh 32 --guest-update incremental --workers 4
+nist_co2_zif8 delayed total_s 22.672 qualified_wall_s 8.954576535150409
+benchmark_precision.py benchmarks/cpu/paired/inputs/nist_co2_zif8.json --output benchmarks/cpu/paired/hpc/nist/nist_co2_zif8-reference-mh.json --cache <scratch>/fields --mode reference-mh --budgets 20000 60000 120000 240000 --warmup 20000 --mesh 32 --guest-update incremental --workers 4
+nist_co2_zif8 reference-mh total_s 28.882 qualified_wall_s 4.540057965088636
+benchmark_precision.py benchmarks/cpu/paired/inputs/nist_n2_co2_zif8.json --output benchmarks/cpu/paired/hpc/nist/nist_n2_co2_zif8-delayed.json --cache <scratch>/fields --mode delayed --budgets 20000 60000 120000 240000 --warmup 20000 --mesh 32 --guest-update incremental --workers 4
+nist_n2_co2_zif8 delayed total_s 23.711 qualified_wall_s 14.040881160646677
+benchmark_precision.py benchmarks/cpu/paired/inputs/nist_n2_co2_zif8.json --output benchmarks/cpu/paired/hpc/nist/nist_n2_co2_zif8-reference-mh.json --cache <scratch>/fields --mode reference-mh --budgets 20000 60000 120000 240000 --warmup 20000 --mesh 32 --guest-update incremental --workers 4
+nist_n2_co2_zif8 reference-mh total_s 29.69 qualified_wall_s 9.357241674792022

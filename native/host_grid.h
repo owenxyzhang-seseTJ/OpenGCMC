@@ -29,12 +29,14 @@ struct HostGridConfig {
   double temperature=300.;
   int threads=1;
   std::string cache_path, cache_key;
+  std::string lj_prefix, electrostatic_path;
 };
 
 struct HostGridStats {
   std::uint64_t builds=0, cache_loads=0, cache_writes=0;
   std::uint64_t lookups=0, cubic_lookups=0, linear_lookups=0, boltzmann_lookups=0, exact_fallbacks=0;
   std::uint64_t mesh_points=0, lj_fields=0, site_types=0, bytes=0, steep_cells=0;
+  std::uint64_t raw_field_builds=0, raw_field_loads=0;
 };
 
 using HostReciprocalGridBuilder=std::function<std::vector<double>()>;

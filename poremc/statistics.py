@@ -80,3 +80,51 @@ def split_rhat(chains):
         return 1.0 if b == 0 else math.inf
     varplus = ((n-1)*w+b)/n
     return float(math.sqrt(varplus/w))
+
+
+def rank_split_rhat(chains):
+    """Maximum of rank-normalized and folded split R-hat (Vehtari et al.)."""
+    from scipy.special import ndtri
+    from scipy.stats import rankdata
+
+    x = np.asarray(chains, dtype=float)
+    if x.ndim != 2 or x.shape[0] < 2 or x.shape[1] < 4 or not np.isfinite(x).all():
+        raise ValueError("need at least two equal finite chains with four or more draws")
+    half = x.shape[1] // 2
+    x = np.concatenate((x[:, :half], x[:, -half:]), axis=1)
+    if np.ptp(x) == 0:
+        return math.nan
+
+    def normal_scores(values):
+        ranks = rankdata(values).reshape(values.shape)
+        return ndtri((ranks - 3/8) / (values.size + 1/4))
+
+    return max(split_rhat(normal_scores(x)),
+               split_rhat(normal_scores(np.abs(x-np.median(x)))))
+
+
+def chain_mean_interval(chains):
+    """Mean and approximate 95% interval over independent equal-length chains.
+
+    Use the larger of the between-chain and within-chain correlation-aware
+    errors. A constant series has no empirical information about rare visits.
+    """
+    from scipy.stats import t
+
+    x = np.asarray(chains, dtype=float)
+    if x.ndim != 2 or not x.size or not np.isfinite(x).all():
+        raise ValueError("need equal-length nonempty finite chains")
+    n, length = x.shape
+    mean = float(x.mean())
+    sem = rhat = ess = math.nan
+    if n >= 2 and length >= 4 and np.ptp(x) > 0:
+        rhat = rank_split_rhat(x)
+        stats = [summarize(chain) for chain in x]
+        if all(math.isfinite(v['sem_autocorrelation']) for v in stats):
+            between = float(np.std(x.mean(axis=1),ddof=1)/math.sqrt(n))
+            within = math.sqrt(sum(v['sem_autocorrelation']**2 for v in stats))/n
+            sem = max(between,within)
+            ess = min(float(n*length),float(x.var(ddof=1)/sem**2))
+    delta = float(t.ppf(.975,n-1)*sem) if math.isfinite(sem) else math.nan
+    return {'mean':mean,'mcse':sem,'ci95':[mean-delta,mean+delta],
+            'rank_split_rhat':rhat,'ess':ess,'chains':n,'draws_per_chain':length}

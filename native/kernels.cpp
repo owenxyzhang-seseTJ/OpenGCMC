@@ -1,5 +1,6 @@
 // PoreMC: independently implemented pair-energy kernels. MIT license.
 // Cell vectors are rows. Energies U/k_B are in K; lengths are in Angstrom.
+#include "guest_cells.h"
 #include <algorithm>
 #include <atomic>
 #include <array>
@@ -129,6 +130,52 @@ struct Environment {
     tables.emplace(key,t);table_bytes+=32*m;++misses;return t;
   }
 
+  inline std::array<double,3> fractional(const double* xyz) const {
+    std::array<double,3> f{};
+    for(int d=0;d<3;++d) {
+      f[d]=xyz[0]*inv[d]+xyz[1]*inv[3+d]+xyz[2]*inv[6+d];
+      f[d]-=std::floor(f[d]);
+    }
+    return f;
+  }
+
+  inline double distance_squared(double fx,double fy,double fz) const {
+    fx-=std::nearbyint(fx);fy-=std::nearbyint(fy);fz-=std::nearbyint(fz);
+    double dx,dy,dz;
+    if(diagonal) {dx=fx*lengths[0];dy=fy*lengths[1];dz=fz*lengths[2];}
+    else {
+      dx=fx*cell[0]+fy*cell[3]+fz*cell[6];
+      dy=fx*cell[1]+fy*cell[4]+fz*cell[7];
+      dz=fx*cell[2]+fy*cell[5]+fz*cell[8];
+    }
+    return dx*dx+dy*dy+dz*dz;
+  }
+
+  inline double pair_energy(double r2,double s2,double e4,double qq,
+                            const double* cached_shift=nullptr) const {
+    double v=0.;
+    if(e4>0 && s2>0) {
+      if(r2==0)return std::numeric_limits<double>::infinity();
+      const double t=s2/r2,t3=t*t*t;
+      v=e4*t3*(t3-1);
+      if(cached_shift)v-=*cached_shift;
+      else if(shifted) {
+        const double c=s2*inv_cutoff2,c3=c*c*c;
+        v-=e4*c3*(c3-1);
+      }
+      if(shifted==2) {
+        const double c=s2*inv_cutoff2,c3=c*c*c;
+        v-=6*e4*c3*(1-2*c3)*(std::sqrt(r2)-cutoff)/cutoff;
+      }
+    }
+    if(coulomb && qq!=0. && !std::isinf(v)) {
+      if(r2==0)return std::copysign(std::numeric_limits<double>::infinity(),qq);
+      const double r=std::sqrt(r2),radial=std::erfc(alpha*r)/r;
+      v+=qq*(coulomb==1?radial-dsf_value+dsf_slope*(r-cutoff):radial);
+    }
+    return v;
+  }
+
   inline double range_energy(double x,double y,double z,double si,double sqei,double qi,
                              std::size_t begin,std::size_t end,size_t exlo=0,size_t exhi=0,const PairTable* table=nullptr,const std::uint32_t* ids=nullptr) const {
     double total=0;
@@ -138,28 +185,12 @@ struct Environment {
     for(std::size_t k=begin;k<end;++k) {
       const std::size_t j=ids?ids[k]:k;
       if(exhi>exlo && original_id[j]>=exlo && original_id[j]<exhi)continue;
-      double fx=x-sx[j],fy=y-sy[j],fz=z-sz[j];
-      fx-=std::nearbyint(fx);fy-=std::nearbyint(fy);fz-=std::nearbyint(fz);
-      double dx,dy,dz;
-      if(diagonal) {dx=fx*lengths[0];dy=fy*lengths[1];dz=fz*lengths[2];}
-      else {dx=fx*cell[0]+fy*cell[3]+fz*cell[6];dy=fx*cell[1]+fy*cell[4]+fz*cell[7];dz=fx*cell[2]+fy*cell[5]+fz*cell[8];}
-      const double r2=dx*dx+dy*dy+dz*dz;
+      const double r2=distance_squared(x-sx[j],y-sy[j],z-sz[j]);
       if(r2<cutoff2) {
         const double sij=table?0.0:0.5*(si+sigma[j]);
         const double s2=table?table->s2[j]:sij*sij,e4=table?table->e4[j]:4*sqei*sqrt_epsilon[j];
-        double v=0;
-        if(e4>0 && s2>0) {
-          if(r2==0)v=std::numeric_limits<double>::infinity();
-          else {const double t=s2/r2,t3=t*t*t;v=e4*t3*(t3-1);
-            if(table)v-=table->shift[j];
-            else if(shifted){const double c=s2*inv_cutoff2,c3=c*c*c;v-=e4*c3*(c3-1);}}
-        }
         const double qq=table?table->q[j]:COULOMB_K*qi*charge[j];
-        if(coulomb && qq!=0 && !std::isinf(v)) {
-          if(r2==0)v=std::copysign(std::numeric_limits<double>::infinity(),qq);
-          else {double r=std::sqrt(r2),radial=std::erfc(alpha*r)/r;v+=qq*(coulomb==1?radial-dsf_value+dsf_slope*(r-cutoff):radial);}
-        }
-        total+=v;
+        total+=pair_energy(r2,s2,e4,qq,table?&table->shift[j]:nullptr);
       }
     }
     return total;
@@ -167,7 +198,7 @@ struct Environment {
 
   inline double atom_energy(const double* xyz,double si,double ei,double qi,size_t exlo=0,size_t exhi=0,const PairTable* table=nullptr) const {
     if(m==0) return 0.0;
-    double f[3];for(int d=0;d<3;++d) {f[d]=xyz[0]*inv[d]+xyz[1]*inv[3+d]+xyz[2]*inv[6+d];f[d]-=std::floor(f[d]);}
+    const auto f=fractional(xyz);
     const double sqei=std::sqrt(ei);
     if(algorithm==0 || m<64) return range_energy(f[0],f[1],f[2],si,sqei,qi,0,m,exlo,exhi,table);
     if(expanded) {
@@ -194,9 +225,112 @@ struct Environment {
 };
 }
 
+namespace poremc {
+struct GuestCells::Impl {
+  struct Site {
+    std::size_t owner;
+    std::array<double,3> position;
+    double sigma, sqrt_epsilon, charge;
+  };
+  Environment geometry;
+  std::array<int,3> bins;
+  std::vector<std::vector<Site>> cells;
+  std::array<std::vector<std::array<int,3>>,3> neighbors;
+  std::array<std::vector<int>,3> widths;
+
+  Impl(const double* h,double rc,int coulomb,double alpha,int shifted)
+      : geometry(0,nullptr,nullptr,nullptr,nullptr,h,rc,coulomb,alpha,shifted,1,1),
+        bins(geometry.bins) {
+    for(auto& n:bins)n=std::min(n,32);
+    cells.resize(std::size_t(bins[0])*bins[1]*bins[2]);
+    for(int d=0;d<3;++d) {
+      const int n=bins[d];
+      neighbors[d].resize(n);
+      widths[d].resize(n,n==2?2:3);
+      for(int i=0;i<n;++i)neighbors[d][i]={(i+n-1)%n,i,(i+1)%n};
+    }
+  }
+
+  std::array<int,3> center(const std::array<double,3>& f) const {
+    return {std::min(bins[0]-1,int(f[0]*bins[0])),
+            std::min(bins[1]-1,int(f[1]*bins[1])),
+            std::min(bins[2]-1,int(f[2]*bins[2]))};
+  }
+  std::size_t key(int i,int j,int k) const {
+    return (std::size_t(i)*bins[1]+j)*bins[2]+k;
+  }
+  std::vector<Site>& box(const std::array<double,3>& f) {
+    const auto c=center(f);
+    return cells[key(c[0],c[1],c[2])];
+  }
+  double energy(const double* xyz,double sigma,double sqrt_epsilon,double q,
+                std::size_t lo,std::size_t hi) const {
+    const auto f=geometry.fractional(xyz);
+    const auto c=center(f);
+    double total=0.;
+    for(int i=0;i<widths[0][c[0]];++i)
+      for(int j=0;j<widths[1][c[1]];++j)
+        for(int k=0;k<widths[2][c[2]];++k) {
+          const auto& box=cells[key(neighbors[0][c[0]][i],neighbors[1][c[1]][j],neighbors[2][c[2]][k])];
+          double partial=0.;
+          for(const auto& site:box) {
+            if(site.owner>=lo&&site.owner<hi)continue;
+            const double r2=geometry.distance_squared(f[0]-site.position[0],f[1]-site.position[1],f[2]-site.position[2]);
+            if(r2>=geometry.cutoff2)continue;
+            const double s=.5*(sigma+site.sigma);
+            partial+=geometry.pair_energy(r2,s*s,4*sqrt_epsilon*site.sqrt_epsilon,COULOMB_K*q*site.charge);
+          }
+          total+=partial;
+        }
+    return total;
+  }
+};
+
+GuestCells::GuestCells(const double* h,double rc,int coulomb,double alpha,int shifted)
+    :impl_(new Impl(h,rc,coulomb,alpha,shifted)) {}
+GuestCells::~GuestCells()=default;
+void GuestCells::reserve(std::size_t atoms,const double* xyz) {
+  for(std::size_t i=0;i<atoms;++i) {
+    auto& box=impl_->box(impl_->geometry.fractional(xyz+3*i));
+    if(box.capacity()-box.size()<atoms)box.reserve(std::max(box.size()+atoms,box.capacity()*2));
+  }
+}
+void GuestCells::insert(std::size_t owner,std::size_t atoms,const double* xyz,
+                        const double* sigma,const double* epsilon,const double* q) {
+  for(std::size_t i=0;i<atoms;++i) {
+    const auto f=impl_->geometry.fractional(xyz+3*i);
+    auto& box=impl_->box(f);
+    const auto pos=std::upper_bound(box.begin(),box.end(),owner,
+        [](std::size_t id,const Impl::Site& site){return id<site.owner;});
+    box.insert(pos,{owner,f,sigma[i],std::sqrt(epsilon[i]),q[i]});
+  }
+}
+void GuestCells::erase(std::size_t owner,std::size_t atoms,const double* xyz) {
+  for(std::size_t i=0;i<atoms;++i) {
+    auto& box=impl_->box(impl_->geometry.fractional(xyz+3*i));
+    auto first=std::lower_bound(box.begin(),box.end(),owner,
+        [](const Impl::Site& site,std::size_t id){return site.owner<id;});
+    auto end=first;
+    while(end!=box.end()&&end->owner==owner)++end;
+    box.erase(first,end);
+  }
+}
+void GuestCells::batch(std::size_t batches,std::size_t atoms,const double* xyz,
+                      const double* sigma,const double* epsilon,const double* q,
+                      std::size_t lo,std::size_t hi,double* output) const {
+  std::fill(output,output+batches,0.);
+  for(std::size_t a=0;a<atoms;++a) {
+    const double se=std::sqrt(epsilon[a]);
+    for(std::size_t b=0;b<batches;++b)
+      output[b]+=impl_->energy(xyz+3*(b*atoms+a),sigma[a],se,q[a],lo,hi);
+  }
+}
+}
+
 extern "C" {
 const char* poremc_last_error() {return last_error.c_str();}
-const char* poremc_kernel_version() {return "PoreMC native 0.2 cache-first; C++17; FP64; no-fast-math";}
+const char* poremc_kernel_version() {return "OpenGCMC native C++17 FP64";}
+int poremc_kernel_abi() {return 2;}
 int poremc_has_openmp() {
 #ifdef _OPENMP
  return 1;

@@ -1,0 +1,2 @@
+benchmark_raspa3.py benchmarks/cpu/paired/inputs/irmof_mixture.json --binary <cluster-workspace>/raspa3_cpu --output benchmarks/cpu/paired/hpc/cfcmc/irmof_mixture-raspa-cfcmc.json --mode cfcmc --budgets 5000 10000 15000 --warmup 15000 --stride 10 --workers 4
+irmof_mixture cfcmc qualified_wall_s None

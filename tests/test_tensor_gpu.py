@@ -40,3 +40,25 @@ def test_tensor_native_selected_commit_and_exact_probe(host_plugin):
 def test_required_tensor_never_mislabels_cpu(tmp_path):
     with pytest.raises(RuntimeError,match='required CUDA reciprocal backend unavailable'):
         fixture_engine('cuda-tensor','delayed',tmp_path/'missing.so',19,kmax=2,host_atoms=6)
+
+
+def test_resident_plugin_commits_and_restores_only_accepted_state(host_plugin,tmp_path):
+    from poremc.fast import FastGCMC
+
+    configurations=dict(host_atoms=80,kmax=3)
+    with fixture_engine('cuda-resident','delayed',host_plugin,912,**configurations) as resident, \
+         fixture_engine('cpu','delayed',host_plugin,912,**configurations) as cpu:
+        first=resident.run(350,sample_every=10)
+        reference=cpu.run(350,sample_every=10)
+        assert first['counts']==reference['counts']
+        np.testing.assert_allclose(first['energies_kelvin'],reference['energies_kelvin'],atol=1e-8)
+        profile=resident.long_range_profile
+        assert profile['resident_trials']>profile['resident_commits']>0
+        assert profile['gpu_selected_structures']==0
+        path=tmp_path/'resident.json'
+        resident.save_checkpoint(path)
+        upcoming=resident.run(400,sample_every=10)
+        with FastGCMC.from_checkpoint(path,resident.potential) as restored:
+            actual=restored.run(400,sample_every=10)
+        assert actual['counts']==upcoming['counts']
+        np.testing.assert_array_equal(actual['energies_kelvin'],upcoming['energies_kelvin'])

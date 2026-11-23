@@ -1,0 +1,147 @@
+{
+  "models": [
+    "xylene_low",
+    "xylene_mid",
+    "xylene_high"
+  ],
+  "production_attempts_per_point": 12000,
+  "warmup": 4000,
+  "repeats": [
+    {
+      "seed": 533701,
+      "independent": [
+        {
+          "wall_s": 5.59899042500183,
+          "setup_s": 3.025834809988737,
+          "field_builds": 4,
+          "field_loads": 0
+        },
+        {
+          "wall_s": 9.163996646180749,
+          "setup_s": 2.9833046309649944,
+          "field_builds": 4,
+          "field_loads": 0
+        },
+        {
+          "wall_s": 29.54595523327589,
+          "setup_s": 2.9839139860123396,
+          "field_builds": 4,
+          "field_loads": 0
+        }
+      ],
+      "batch": [
+        {
+          "wall_s": 5.533676622901112,
+          "setup_s": 2.965847813989967,
+          "field_builds": 4,
+          "field_loads": 0
+        },
+        {
+          "wall_s": 6.3247375171631575,
+          "setup_s": 0.15518121886998415,
+          "field_builds": 0,
+          "field_loads": 4
+        },
+        {
+          "wall_s": 26.728399569168687,
+          "setup_s": 0.16416389821097255,
+          "field_builds": 0,
+          "field_loads": 4
+        }
+      ],
+      "cold_total_s": 44.30894230445847,
+      "batch_total_s": 38.586813709232956
+    },
+    {
+      "seed": 533723,
+      "independent": [
+        {
+          "wall_s": 5.333624582272023,
+          "setup_s": 2.951456342358142,
+          "field_builds": 4,
+          "field_loads": 0
+        },
+        {
+          "wall_s": 8.955534225795418,
+          "setup_s": 2.9651004946790636,
+          "field_builds": 4,
+          "field_loads": 0
+        },
+        {
+          "wall_s": 31.875374967232347,
+          "setup_s": 2.9608001331798732,
+          "field_builds": 4,
+          "field_loads": 0
+        }
+      ],
+      "batch": [
+        {
+          "wall_s": 5.336607595905662,
+          "setup_s": 2.9567171479575336,
+          "field_builds": 4,
+          "field_loads": 0
+        },
+        {
+          "wall_s": 6.1499291132204235,
+          "setup_s": 0.16128889238461852,
+          "field_builds": 0,
+          "field_loads": 4
+        },
+        {
+          "wall_s": 29.067052382975817,
+          "setup_s": 0.15730744088068604,
+          "field_builds": 0,
+          "field_loads": 4
+        }
+      ],
+      "cold_total_s": 46.16453377529979,
+      "batch_total_s": 40.5535890921019
+    },
+    {
+      "seed": 533753,
+      "independent": [
+        {
+          "wall_s": 5.5349553800188005,
+          "setup_s": 2.9596949252299964,
+          "field_builds": 4,
+          "field_loads": 0
+        },
+        {
+          "wall_s": 9.75852107303217,
+          "setup_s": 2.9477223306894302,
+          "field_builds": 4,
+          "field_loads": 0
+        },
+        {
+          "wall_s": 29.020125572104007,
+          "setup_s": 2.9692748859524727,
+          "field_builds": 4,
+          "field_loads": 0
+        }
+      ],
+      "batch": [
+        {
+          "wall_s": 5.5256722727790475,
+          "setup_s": 2.951869999989867,
+          "field_builds": 4,
+          "field_loads": 0
+        },
+        {
+          "wall_s": 6.9613397270441055,
+          "setup_s": 0.1518340017646551,
+          "field_builds": 0,
+          "field_loads": 4
+        },
+        {
+          "wall_s": 26.22045127907768,
+          "setup_s": 0.16513356426730752,
+          "field_builds": 0,
+          "field_loads": 4
+        }
+      ],
+      "cold_total_s": 44.31360202515498,
+      "batch_total_s": 38.70746327890083
+    }
+  ],
+  "batch_speedup": 1.1448335352244592
+}

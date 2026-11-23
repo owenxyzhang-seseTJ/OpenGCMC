@@ -1,0 +1,2298 @@
+{
+    "initialization": {
+        "components": {
+            "CO2": {
+                "acentricFactor": 0.2,
+                "bondTypes": [],
+                "cbmcStartingBead": 0,
+                "criticalPressure": 5000000.0,
+                "criticalTemperature": 400.0,
+                "diagonalizedInertiaVector": [
+                    38.7248398392,
+                    38.7248398392,
+                    0.0
+                ],
+                "fugacityCoefficient": 1.0,
+                "mass": 43.9988,
+                "molFraction": 0.25,
+                "moveProbabilities": [
+                    0.2,
+                    0.0,
+                    0.1,
+                    0.0,
+                    0.0,
+                    0.2,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.5,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "n_atoms": 3,
+                "n_bonds": 0,
+                "name": "CO2",
+                "netCharge": 0.0,
+                "rotationalDOF": 2,
+                "shape": "linear",
+                "swappable": true,
+                "translationalDOF": 3
+            },
+            "framework": {
+                "bondTypes": [],
+                "id": 0,
+                "mass": 5092.536799999958,
+                "n_bonds": 0,
+                "name": "framework"
+            },
+            "methane": {
+                "acentricFactor": 0.2,
+                "bondTypes": [],
+                "cbmcStartingBead": 0,
+                "criticalPressure": 5000000.0,
+                "criticalTemperature": 400.0,
+                "diagonalizedInertiaVector": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "fugacityCoefficient": 1.0,
+                "mass": 16.04246,
+                "molFraction": 0.75,
+                "moveProbabilities": [
+                    0.2,
+                    0.0,
+                    0.1,
+                    0.0,
+                    0.0,
+                    0.2,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.5,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "n_atoms": 1,
+                "n_bonds": 0,
+                "name": "methane",
+                "netCharge": 0.0,
+                "rotationalDOF": 0,
+                "swappable": true,
+                "translationalDOF": 3
+            }
+        },
+        "forceField": {
+            "Ewald": {
+                "alpha": 0.25,
+                "kVectors": [
+                    7,
+                    7,
+                    7
+                ]
+            },
+            "interactions": [
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.00021794556634776075,
+                    "tailCorrections": false,
+                    "typeA": "HAA",
+                    "typeB": "HAA",
+                    "ε/kʙ [K]": 0.42,
+                    "σ/kʙ [Å]": 2.7
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.012049801684547256,
+                    "tailCorrections": false,
+                    "typeA": "HAA",
+                    "typeB": "HAB",
+                    "ε/kʙ [K]": 17.146428199482244,
+                    "σ/kʙ [Å]": 2.84
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.004380070671146776,
+                    "tailCorrections": false,
+                    "typeA": "HAA",
+                    "typeB": "HAC",
+                    "ε/kʙ [K]": 5.441507144165115,
+                    "σ/kʙ [Å]": 2.9050000000000002
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.006631612947808778,
+                    "tailCorrections": false,
+                    "typeA": "HAA",
+                    "typeB": "HAD",
+                    "ε/kʙ [K]": 4.442971978304612,
+                    "σ/kʙ [Å]": 3.22
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.005175938645024757,
+                    "tailCorrections": false,
+                    "typeA": "HAA",
+                    "typeB": "HAE",
+                    "ε/kʙ [K]": 4.4834361822156,
+                    "σ/kʙ [Å]": 3.085
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.005175938645024757,
+                    "tailCorrections": false,
+                    "typeA": "HAA",
+                    "typeB": "HAF",
+                    "ε/kʙ [K]": 4.4834361822156,
+                    "σ/kʙ [Å]": 3.085
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.0010383057995451126,
+                    "tailCorrections": false,
+                    "typeA": "HAA",
+                    "typeB": "HAG",
+                    "ε/kʙ [K]": 2.139626135566679,
+                    "σ/kʙ [Å]": 2.67
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.004320608972781825,
+                    "tailCorrections": false,
+                    "typeA": "HAA",
+                    "typeB": "A000",
+                    "ε/kʙ [K]": 5.814889508838495,
+                    "σ/kʙ [Å]": 2.8665000000000003
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.0018995819708602344,
+                    "tailCorrections": false,
+                    "typeA": "HAA",
+                    "typeB": "A001",
+                    "ε/kʙ [K]": 3.4371761665646408,
+                    "σ/kʙ [Å]": 2.7285000000000004
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.004320608972781825,
+                    "tailCorrections": false,
+                    "typeA": "HAA",
+                    "typeB": "A002",
+                    "ε/kʙ [K]": 5.814889508838495,
+                    "σ/kʙ [Å]": 2.8665000000000003
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.011953162893642007,
+                    "tailCorrections": false,
+                    "typeA": "HAA",
+                    "typeB": "B000",
+                    "ε/kʙ [K]": 8.1590440616533,
+                    "σ/kʙ [Å]": 3.21
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.6565476780411552,
+                    "tailCorrections": false,
+                    "typeA": "HAB",
+                    "typeB": "HAB",
+                    "ε/kʙ [K]": 700.0,
+                    "σ/kʙ [Å]": 2.98
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.23715043372213648,
+                    "tailCorrections": false,
+                    "typeA": "HAB",
+                    "typeB": "HAC",
+                    "ε/kʙ [K]": 222.1485989152306,
+                    "σ/kʙ [Å]": 3.045
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.34945945527618844,
+                    "tailCorrections": false,
+                    "typeA": "HAB",
+                    "typeB": "HAD",
+                    "ε/kʙ [K]": 181.38357147217056,
+                    "σ/kʙ [Å]": 3.3600000000000003
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.27575445061036685,
+                    "tailCorrections": false,
+                    "typeA": "HAB",
+                    "typeB": "HAE",
+                    "ε/kʙ [K]": 183.03551567933474,
+                    "σ/kʙ [Å]": 3.225
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.27575445061036685,
+                    "tailCorrections": false,
+                    "typeA": "HAB",
+                    "typeB": "HAF",
+                    "ε/kʙ [K]": 183.03551567933474,
+                    "σ/kʙ [Å]": 3.225
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.05759716320935064,
+                    "tailCorrections": false,
+                    "typeA": "HAB",
+                    "typeB": "HAG",
+                    "ε/kʙ [K]": 87.34987120768982,
+                    "σ/kʙ [Å]": 2.81
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.23480004607330965,
+                    "tailCorrections": false,
+                    "typeA": "HAB",
+                    "typeB": "A000",
+                    "ε/kʙ [K]": 237.3918701219568,
+                    "σ/kʙ [Å]": 3.0065
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.10470002202454144,
+                    "tailCorrections": false,
+                    "typeA": "HAB",
+                    "typeB": "A001",
+                    "ε/kʙ [K]": 140.32212940231489,
+                    "σ/kʙ [Å]": 2.8685
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.23480004607330965,
+                    "tailCorrections": false,
+                    "typeA": "HAB",
+                    "typeB": "A002",
+                    "ε/kʙ [K]": 237.3918701219568,
+                    "σ/kʙ [Å]": 3.0065
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.6303755920618705,
+                    "tailCorrections": false,
+                    "typeA": "HAB",
+                    "typeB": "B000",
+                    "ε/kʙ [K]": 333.0915789989293,
+                    "σ/kʙ [Å]": 3.35
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.08542644727666673,
+                    "tailCorrections": false,
+                    "typeA": "HAC",
+                    "typeB": "HAC",
+                    "ε/kʙ [K]": 70.49999999999999,
+                    "σ/kʙ [Å]": 3.11
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.12440694184049449,
+                    "tailCorrections": false,
+                    "typeA": "HAC",
+                    "typeB": "HAD",
+                    "ε/kʙ [K]": 57.56300895540468,
+                    "σ/kʙ [Å]": 3.425
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.09863801455384452,
+                    "tailCorrections": false,
+                    "typeA": "HAC",
+                    "typeB": "HAE",
+                    "ε/kʙ [K]": 58.08726194270134,
+                    "σ/kʙ [Å]": 3.29
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.09863801455384452,
+                    "tailCorrections": false,
+                    "typeA": "HAC",
+                    "typeB": "HAF",
+                    "ε/kʙ [K]": 58.08726194270134,
+                    "σ/kʙ [Å]": 3.29
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.02096646795670927,
+                    "tailCorrections": false,
+                    "typeA": "HAC",
+                    "typeB": "HAG",
+                    "ε/kʙ [K]": 27.72093072030591,
+                    "σ/kʙ [Å]": 2.875
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.08471588893882942,
+                    "tailCorrections": false,
+                    "typeA": "HAC",
+                    "typeB": "A000",
+                    "ε/kʙ [K]": 75.3375304877987,
+                    "σ/kʙ [Å]": 3.0715
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.03800739283495767,
+                    "tailCorrections": false,
+                    "typeA": "HAC",
+                    "typeB": "A001",
+                    "ε/kʙ [K]": 44.531949205037044,
+                    "σ/kʙ [Å]": 2.9335
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.08471588893882942,
+                    "tailCorrections": false,
+                    "typeA": "HAC",
+                    "typeB": "A002",
+                    "ε/kʙ [K]": 75.3375304877987,
+                    "σ/kʙ [Å]": 3.0715
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.22448906809129673,
+                    "tailCorrections": false,
+                    "typeA": "HAC",
+                    "typeB": "B000",
+                    "ε/kʙ [K]": 105.7083251215343,
+                    "σ/kʙ [Å]": 3.415
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.17214791376028793,
+                    "tailCorrections": false,
+                    "typeA": "HAD",
+                    "typeB": "HAD",
+                    "ε/kʙ [K]": 47.0,
+                    "σ/kʙ [Å]": 3.74
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.13935419275817706,
+                    "tailCorrections": false,
+                    "typeA": "HAD",
+                    "typeB": "HAE",
+                    "ε/kʙ [K]": 47.42805077166887,
+                    "σ/kʙ [Å]": 3.6050000000000004
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.13935419275817706,
+                    "tailCorrections": false,
+                    "typeA": "HAD",
+                    "typeB": "HAF",
+                    "ε/kʙ [K]": 47.42805077166887,
+                    "σ/kʙ [Å]": 3.6050000000000004
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.031939307820478276,
+                    "tailCorrections": false,
+                    "typeA": "HAD",
+                    "typeB": "HAG",
+                    "ε/kʙ [K]": 22.63404515326414,
+                    "σ/kʙ [Å]": 3.1900000000000004
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.12422966291076025,
+                    "tailCorrections": false,
+                    "typeA": "HAD",
+                    "typeB": "A000",
+                    "ε/kʙ [K]": 61.51283605882597,
+                    "σ/kʙ [Å]": 3.3865
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.05721697100095132,
+                    "tailCorrections": false,
+                    "typeA": "HAD",
+                    "typeB": "A001",
+                    "ε/kʙ [K]": 36.360184267959916,
+                    "σ/kʙ [Å]": 3.2485
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.12422966291076025,
+                    "tailCorrections": false,
+                    "typeA": "HAD",
+                    "typeB": "A002",
+                    "ε/kʙ [K]": 61.51283605882597,
+                    "σ/kʙ [Å]": 3.3865
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.3110979825686172,
+                    "tailCorrections": false,
+                    "typeA": "HAD",
+                    "typeB": "B000",
+                    "ε/kʙ [K]": 86.31048603732921,
+                    "σ/kʙ [Å]": 3.7300000000000004
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.11185826462907868,
+                    "tailCorrections": false,
+                    "typeA": "HAE",
+                    "typeB": "HAE",
+                    "ε/kʙ [K]": 47.86,
+                    "σ/kʙ [Å]": 3.47
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.11185826462907868,
+                    "tailCorrections": false,
+                    "typeA": "HAE",
+                    "typeB": "HAF",
+                    "ε/kʙ [K]": 47.86,
+                    "σ/kʙ [Å]": 3.47
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.02486687106873197,
+                    "tailCorrections": false,
+                    "typeA": "HAE",
+                    "typeB": "HAG",
+                    "ε/kʙ [K]": 22.840183887175687,
+                    "σ/kʙ [Å]": 3.055
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.09822144753295448,
+                    "tailCorrections": false,
+                    "typeA": "HAE",
+                    "typeB": "A000",
+                    "ε/kʙ [K]": 62.073061951220026,
+                    "σ/kʙ [Å]": 3.2515
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.04476068423077552,
+                    "tailCorrections": false,
+                    "typeA": "HAE",
+                    "typeB": "A001",
+                    "ε/kʙ [K]": 36.69133330910721,
+                    "σ/kʙ [Å]": 3.1135
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.09822144753295448,
+                    "tailCorrections": false,
+                    "typeA": "HAE",
+                    "typeB": "A002",
+                    "ε/kʙ [K]": 62.073061951220026,
+                    "σ/kʙ [Å]": 3.2515
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.2516823606422855,
+                    "tailCorrections": false,
+                    "typeA": "HAE",
+                    "typeB": "B000",
+                    "ε/kʙ [K]": 87.09655561501843,
+                    "σ/kʙ [Å]": 3.595
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.11185826462907868,
+                    "tailCorrections": false,
+                    "typeA": "HAF",
+                    "typeB": "HAF",
+                    "ε/kʙ [K]": 47.86,
+                    "σ/kʙ [Å]": 3.47
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.02486687106873197,
+                    "tailCorrections": false,
+                    "typeA": "HAF",
+                    "typeB": "HAG",
+                    "ε/kʙ [K]": 22.840183887175687,
+                    "σ/kʙ [Å]": 3.055
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.09822144753295448,
+                    "tailCorrections": false,
+                    "typeA": "HAF",
+                    "typeB": "A000",
+                    "ε/kʙ [K]": 62.073061951220026,
+                    "σ/kʙ [Å]": 3.2515
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.04476068423077552,
+                    "tailCorrections": false,
+                    "typeA": "HAF",
+                    "typeB": "A001",
+                    "ε/kʙ [K]": 36.69133330910721,
+                    "σ/kʙ [Å]": 3.1135
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.09822144753295448,
+                    "tailCorrections": false,
+                    "typeA": "HAF",
+                    "typeB": "A002",
+                    "ε/kʙ [K]": 62.073061951220026,
+                    "σ/kʙ [Å]": 3.2515
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.2516823606422855,
+                    "tailCorrections": false,
+                    "typeA": "HAF",
+                    "typeB": "B000",
+                    "ε/kʙ [K]": 87.09655561501843,
+                    "σ/kʙ [Å]": 3.595
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.004942803336285289,
+                    "tailCorrections": false,
+                    "typeA": "HAG",
+                    "typeB": "HAG",
+                    "ε/kʙ [K]": 10.899999999999999,
+                    "σ/kʙ [Å]": 2.64
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.020664435913028075,
+                    "tailCorrections": false,
+                    "typeA": "HAG",
+                    "typeB": "A000",
+                    "ε/kʙ [K]": 29.62307040129365,
+                    "σ/kʙ [Å]": 2.8365
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.009056101486587718,
+                    "tailCorrections": false,
+                    "typeA": "HAG",
+                    "typeB": "A001",
+                    "ε/kʙ [K]": 17.510171329829983,
+                    "σ/kʙ [Å]": 2.6985
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.020664435913028075,
+                    "tailCorrections": false,
+                    "typeA": "HAG",
+                    "typeB": "A002",
+                    "ε/kʙ [K]": 29.62307040129365,
+                    "σ/kʙ [Å]": 2.8365
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.05755892670359314,
+                    "tailCorrections": false,
+                    "typeA": "HAG",
+                    "typeB": "B000",
+                    "ε/kʙ [K]": 41.565009322746455,
+                    "σ/kʙ [Å]": 3.18
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.08393196357541288,
+                    "tailCorrections": false,
+                    "typeA": "A000",
+                    "typeB": "A000",
+                    "ε/kʙ [K]": 80.507,
+                    "σ/kʙ [Å]": 3.033
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.037520814778247,
+                    "tailCorrections": false,
+                    "typeA": "A000",
+                    "typeB": "A001",
+                    "ε/kʙ [K]": 47.58761816901535,
+                    "σ/kʙ [Å]": 2.895
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.08393196357541288,
+                    "tailCorrections": false,
+                    "typeA": "A000",
+                    "typeB": "A002",
+                    "ε/kʙ [K]": 80.507,
+                    "σ/kʙ [Å]": 3.033
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.22412428445769444,
+                    "tailCorrections": false,
+                    "typeA": "A000",
+                    "typeB": "B000",
+                    "ε/kʙ [K]": 112.96176122918763,
+                    "σ/kʙ [Å]": 3.3765
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.01654563833514124,
+                    "tailCorrections": false,
+                    "typeA": "A001",
+                    "typeB": "A001",
+                    "ε/kʙ [K]": 28.129,
+                    "σ/kʙ [Å]": 2.757
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.037520814778247,
+                    "tailCorrections": false,
+                    "typeA": "A001",
+                    "typeB": "A002",
+                    "ε/kʙ [K]": 47.58761816901535,
+                    "σ/kʙ [Å]": 2.895
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.10314777945826252,
+                    "tailCorrections": false,
+                    "typeA": "A001",
+                    "typeB": "B000",
+                    "ε/kʙ [K]": 66.7715995015845,
+                    "σ/kʙ [Å]": 3.2385
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.08393196357541288,
+                    "tailCorrections": false,
+                    "typeA": "A002",
+                    "typeB": "A002",
+                    "ε/kʙ [K]": 80.507,
+                    "σ/kʙ [Å]": 3.033
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.22412428445769444,
+                    "tailCorrections": false,
+                    "typeA": "A002",
+                    "typeB": "B000",
+                    "ε/kʙ [K]": 112.96176122918763,
+                    "σ/kʙ [Å]": 3.3765
+                },
+                {
+                    "potential": "Lennard-Jones",
+                    "shift [K]": -0.5621779555490783,
+                    "tailCorrections": false,
+                    "typeA": "B000",
+                    "typeB": "B000",
+                    "ε/kʙ [K]": 158.5,
+                    "σ/kʙ [Å]": 3.72
+                }
+            ],
+            "pseudoAtoms": [
+                {
+                    "charge": 1.275,
+                    "mass": 12.0107,
+                    "name": "HAA"
+                },
+                {
+                    "charge": -1.5,
+                    "mass": 12.0107,
+                    "name": "HAB"
+                },
+                {
+                    "charge": -0.6,
+                    "mass": 12.0107,
+                    "name": "HAC"
+                },
+                {
+                    "charge": 0.475,
+                    "mass": 12.0107,
+                    "name": "HAD"
+                },
+                {
+                    "charge": 0.125,
+                    "mass": 12.0107,
+                    "name": "HAE"
+                },
+                {
+                    "charge": -0.15,
+                    "mass": 12.0107,
+                    "name": "HAF"
+                },
+                {
+                    "charge": 0.15,
+                    "mass": 12.0107,
+                    "name": "HAG"
+                },
+                {
+                    "charge": -0.3256,
+                    "mass": 14.666266666666667,
+                    "name": "A000"
+                },
+                {
+                    "charge": 0.6512,
+                    "mass": 14.666266666666667,
+                    "name": "A001"
+                },
+                {
+                    "charge": -0.3256,
+                    "mass": 14.666266666666667,
+                    "name": "A002"
+                },
+                {
+                    "charge": 0.0,
+                    "mass": 16.04246,
+                    "name": "B000"
+                }
+            ]
+        },
+        "hardwareInfo": {
+            "compile_date": "May 31 2026",
+            "compile_time": "08:13:02",
+            "compiler": "gcc Clang 22.1.1",
+            "hostname": "compute-01",
+            "os_arch": "x86_64",
+            "os_release": "4.19.91-26.an8.x86_64",
+            "os_type": "Linux",
+            "os_version": "#1 SMP Tue May 24 13:10:09 CST 2022",
+            "start_date": "Mon, Nov 23",
+            "start_time": "10:52:00"
+        },
+        "initialConditions": {
+            "beta": 0.004009077391850886,
+            "box": [
+                [
+                    25.832,
+                    0.0,
+                    0.0
+                ],
+                [
+                    1.5817538057787215e-15,
+                    25.832,
+                    0.0
+                ],
+                [
+                    1.5817538057787215e-15,
+                    1.5817538057787215e-15,
+                    25.832
+                ]
+            ],
+            "boxAngles": [
+                90.0,
+                90.0,
+                90.0
+            ],
+            "boxLengths": [
+                25.832,
+                25.832,
+                25.832
+            ],
+            "pressure": 200000.0,
+            "temperature": 300.0
+        },
+        "reactions": null,
+        "units": {
+            "Boltzmann constant [-]": 0.8314464919307584,
+            "Coulomb potential [K]": 167101.08000665612,
+            "Energy to Kelvin [-]": 1.202724284692786,
+            "Kelvin to energy [-]": 0.8314457542157567,
+            "acceleration [m²/s]": 1e-08,
+            "charge [C/particle]": 1.60217733e-19,
+            "dielectric constant [s² C²/(kg m³)]": 1.5458657349975193e-05,
+            "diffusion [m²/s]": 1e-08,
+            "dipole moment [C.m]": 1.60217733e-29,
+            "electric field [V]": 1036427.222447343,
+            "electric potential [V]": 0.00010364272224473431,
+            "energy [J]": 1.6605402000000002e-23,
+            "force [N]": 1.6605402000000002e-13,
+            "length [m]": 1e-10,
+            "mass [kg]": 1.6605402e-27,
+            "polarizability [-]": 1.5458657349975198e-35,
+            "pressure [Pa]": 16605402.0,
+            "temperature": "Kelvin",
+            "time [s]": 1e-12,
+            "velocity [m/s]": 100.0
+        }
+    },
+    "output": {
+        "MCMoveStatistics": {
+            "system": {
+                "CO2": {
+                    "Gibbs swap (CBMC)": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Gibbs swap (CFCMC)": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.5
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Gibbs volume": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.1,
+                        "total": 0.0
+                    },
+                    "Hybrid MC": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0005,
+                        "total": 0.0
+                    },
+                    "Identity change (CBMC)": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Parallel tempering": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Partial reinsertion (CBMC)": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Random rotation": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Random translation": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Reinsertion (CBMC)": {
+                        "accepted": 17667.0,
+                        "all": 47658,
+                        "constructed": 44022.0,
+                        "fraction": 0.4013220662396075,
+                        "maxChange": 0.0,
+                        "total": 44022.0
+                    },
+                    "Rotation": {
+                        "accepted": [
+                            5696.0,
+                            4987.0,
+                            4986.0
+                        ],
+                        "all": 24017,
+                        "constructed": [
+                            7395.0,
+                            7476.0,
+                            7441.0
+                        ],
+                        "fraction": [
+                            0.7702501690331305,
+                            0.6670679507758159,
+                            0.6700712269856202
+                        ],
+                        "maxChange": [
+                            1.1225490196078431,
+                            1.5,
+                            1.5
+                        ],
+                        "total": [
+                            7395.0,
+                            7476.0,
+                            7441.0
+                        ]
+                    },
+                    "Swap": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Swap (CB/CFCMC)": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.5
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Swap (CBMC)": {
+                        "accepted": [
+                            28071.0,
+                            28073.0,
+                            0.0
+                        ],
+                        "all": 119873,
+                        "constructed": [
+                            59908.0,
+                            55608.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.46856847165654003,
+                            0.4681564245810056,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "total": [
+                            59908.0,
+                            59965.0,
+                            0.0
+                        ]
+                    },
+                    "Swap (CFCMC)": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.5
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Translation": {
+                        "accepted": [
+                            7956.0,
+                            12833.0,
+                            8189.0
+                        ],
+                        "all": 48382,
+                        "constructed": [
+                            14832.0,
+                            14997.0,
+                            14996.0
+                        ],
+                        "fraction": [
+                            0.5362992922143579,
+                            0.855704474228179,
+                            0.5457150473144076
+                        ],
+                        "maxChange": [
+                            1.5,
+                            0.5625,
+                            1.5
+                        ],
+                        "total": [
+                            14835.0,
+                            14997.0,
+                            15006.0
+                        ]
+                    },
+                    "Volume change": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.1,
+                        "total": 0.0
+                    },
+                    "Widom": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Widom (CB/CFCMC)": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Widom (CFCMC)": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    }
+                },
+                "methane": {
+                    "Gibbs swap (CBMC)": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Gibbs swap (CFCMC)": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.5
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Gibbs volume": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.1,
+                        "total": 0.0
+                    },
+                    "Hybrid MC": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0005,
+                        "total": 0.0
+                    },
+                    "Identity change (CBMC)": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Parallel tempering": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Partial reinsertion (CBMC)": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Random rotation": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Random translation": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Reinsertion (CBMC)": {
+                        "accepted": 34919.0,
+                        "all": 48295,
+                        "constructed": 47609.0,
+                        "fraction": 0.7334075443165589,
+                        "maxChange": 0.0,
+                        "total": 47612.0
+                    },
+                    "Rotation": {
+                        "accepted": [
+                            7979.0,
+                            7921.0,
+                            7781.0
+                        ],
+                        "all": 24049,
+                        "constructed": [
+                            7979.0,
+                            7921.0,
+                            7781.0
+                        ],
+                        "fraction": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ],
+                        "maxChange": [
+                            1.125,
+                            1.5,
+                            1.125
+                        ],
+                        "total": [
+                            7979.0,
+                            7921.0,
+                            7781.0
+                        ]
+                    },
+                    "Swap": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Swap (CB/CFCMC)": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.5
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Swap (CBMC)": {
+                        "accepted": [
+                            39433.0,
+                            39433.0,
+                            0.0
+                        ],
+                        "all": 119460,
+                        "constructed": [
+                            59474.0,
+                            59133.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.6629623402824478,
+                            0.6574358119373125,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "total": [
+                            59480.0,
+                            59980.0,
+                            0.0
+                        ]
+                    },
+                    "Swap (CFCMC)": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.5
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Translation": {
+                        "accepted": [
+                            14136.0,
+                            11849.0,
+                            12997.0
+                        ],
+                        "all": 48266,
+                        "constructed": [
+                            15719.0,
+                            15891.0,
+                            15944.0
+                        ],
+                        "fraction": [
+                            0.8992938482091736,
+                            0.7456421874016739,
+                            0.8151655795283492
+                        ],
+                        "maxChange": [
+                            0.5625,
+                            1.5,
+                            1.125
+                        ],
+                        "total": [
+                            15719.0,
+                            15891.0,
+                            15944.0
+                        ]
+                    },
+                    "Volume change": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.1,
+                        "total": 0.0
+                    },
+                    "Widom": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Widom (CB/CFCMC)": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Widom (CFCMC)": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    }
+                },
+                "system": {
+                    "Gibbs swap (CBMC)": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Gibbs swap (CFCMC)": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.5
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Gibbs volume": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.1,
+                        "total": 0.0
+                    },
+                    "Hybrid MC": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0005,
+                        "total": 0.0
+                    },
+                    "Identity change (CBMC)": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Parallel tempering": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Partial reinsertion (CBMC)": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Random rotation": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Random translation": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Reinsertion (CBMC)": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Rotation": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Swap": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Swap (CB/CFCMC)": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.5
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Swap (CBMC)": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Swap (CFCMC)": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            0.0,
+                            0.0,
+                            0.5
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Translation": {
+                        "accepted": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "all": 0,
+                        "constructed": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "fraction": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "maxChange": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ],
+                        "total": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ]
+                    },
+                    "Volume change": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.1,
+                        "total": 0.0
+                    },
+                    "Widom": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Widom (CB/CFCMC)": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    },
+                    "Widom (CFCMC)": {
+                        "accepted": 0.0,
+                        "all": 0,
+                        "constructed": 0.0,
+                        "fraction": 0.0,
+                        "maxChange": 0.0,
+                        "total": 0.0
+                    }
+                }
+            }
+        },
+        "cpuTimings": {
+            "CO2": {
+                "Reinsertion (CBMC)": {
+                    "Ewald": 2.1019009999998115,
+                    "NonEwald": 29.06284699999982,
+                    "Overhead": 0.058682000000594314,
+                    "Total": 31.223430000000228
+                },
+                "Rotation": {
+                    "Ewald": 1.061912000000269,
+                    "ExternalField-Molecule": 0.0009150000000000156,
+                    "Framework-Molecule": 1.8636009999999525,
+                    "Molecule-Molecule": 0.041859000000005545,
+                    "Overhead": 0.04857599999990768,
+                    "Total": 3.016863000000135
+                },
+                "Swap (CBMC)": {
+                    "Deletion-Total": 23.488099000000332,
+                    "Ewald": 4.50448000000276,
+                    "Insertion-Total": 26.330272000000424,
+                    "NonEwald": 44.819850000000194,
+                    "Overhead": 0.207765000000467,
+                    "Tail": 0.2958469999999846,
+                    "Total": 49.827942000003404
+                },
+                "Translation": {
+                    "Ewald": 2.1328349999993454,
+                    "ExternalField-Molecule": 0.0016609999999999596,
+                    "Framework-Molecule": 3.7495560000005086,
+                    "Molecule-Molecule": 0.08481700000004101,
+                    "Overhead": 0.08630100000020045,
+                    "Total": 6.055170000000095
+                }
+            },
+            "equilibration": 0.0,
+            "gridCreation": 0.0,
+            "initialization": 10.18049999999999,
+            "methane": {
+                "Reinsertion (CBMC)": {
+                    "Ewald": 1.728798999999084,
+                    "NonEwald": 6.318886000003836,
+                    "Overhead": 0.08810299999727889,
+                    "Total": 8.135788000000199
+                },
+                "Rotation": {
+                    "Ewald": 0.8600450000001755,
+                    "ExternalField-Molecule": 0.000884000000000015,
+                    "Framework-Molecule": 0.7998839999998645,
+                    "Molecule-Molecule": 0.019820999999998846,
+                    "Overhead": 0.062278999999920724,
+                    "Total": 1.7429129999999595
+                },
+                "Swap (CBMC)": {
+                    "Deletion-Total": 9.239996000000303,
+                    "Ewald": 3.85497800000404,
+                    "Insertion-Total": 9.189839000000145,
+                    "NonEwald": 14.19711700000131,
+                    "Overhead": 0.24540899999556454,
+                    "Tail": 0.14198500000011405,
+                    "Total": 18.43948900000103
+                },
+                "Translation": {
+                    "Ewald": 1.7238719999991132,
+                    "ExternalField-Molecule": 0.0016869999999999578,
+                    "Framework-Molecule": 1.6100139999999337,
+                    "Molecule-Molecule": 0.04002800000001407,
+                    "Overhead": 0.10458900000076041,
+                    "Total": 3.4801899999998214
+                }
+            },
+            "production": 123.14273600000058,
+            "summedSystemsAndComponents": {
+                "Reinsertion (CBMC)": {
+                    "Ewald": 3.8307000000013742,
+                    "NonEwald": 35.38173300000395,
+                    "Overhead": 0.1467849999936348,
+                    "Total": 39.359217999998954
+                },
+                "Rotation": {
+                    "Ewald": 1.9219569999992159,
+                    "ExternalField-Molecule": 0.0017989999999999478,
+                    "Framework-Molecule": 2.6634850000001764,
+                    "Molecule-Molecule": 0.06168000000002449,
+                    "Overhead": 0.11085500000079163,
+                    "Total": 4.759776000000208
+                },
+                "Swap (CBMC)": {
+                    "Deletion-Total": 32.728095000000735,
+                    "Ewald": 8.359458000006626,
+                    "Insertion-Total": 35.52011100000007,
+                    "NonEwald": 59.016967000001806,
+                    "Overhead": 0.45317399999048125,
+                    "Tail": 0.43783199999851685,
+                    "Total": 68.26743099999743
+                },
+                "Translation": {
+                    "Ewald": 3.8567070000007613,
+                    "ExternalField-Molecule": 0.0033480000000001195,
+                    "Framework-Molecule": 5.359570000000815,
+                    "Molecule-Molecule": 0.1248450000000868,
+                    "Overhead": 0.19088999999934486,
+                    "Total": 9.535360000001008
+                },
+                "allSummed": 122.98741299999762,
+                "energyPressureSampling": 0.5696950000000016,
+                "overhead": 0.15532300000296573,
+                "productionSimulationTime": 123.14273600000058,
+                "propertySampling": 0.4959330000000252
+            },
+            "system": {
+                "energyPressureSampling": 0.5696950000000016,
+                "propertySampling": 0.4959330000000252
+            },
+            "total": 133.32323600000046
+        },
+        "drift": {
+            "Ewald Fourier [K]": -5.600108634661059e-11,
+            "Ewald exclusion [K]": -9.932351990765251e-10,
+            "Ewald self [K]": -4.375485458486895e-12,
+            "Total potential energy [K]": -1.0722716781054628e-09,
+            "Van der Waals (Tail) [K]": 0.0,
+            "bend [K]": 0.0,
+            "bendBend [K]": 0.0,
+            "bendTorsion [K]": 0.0,
+            "bond [K]": 0.0,
+            "bondBend [K]": 0.0,
+            "bondBond [K]": 0.0,
+            "bondTorsion [K]": 0.0,
+            "dU/dlambda Ewald [K]": 0.0,
+            "dU/dlambda Real [K]": 0.0,
+            "dU/dlambda VDW [K]": 0.0,
+            "external field Real [K]": 0.0,
+            "external field VDW [K]": 0.0,
+            "framework-molecule Rea [K]": 2.0042628995682256e-10,
+            "framework-molecule VDW [K]": -2.0728862359581665e-10,
+            "improperTorsion [K]": 0.0,
+            "intra Coulombic [K]": 0.0,
+            "intra VDW [K]": 0.0,
+            "inversionBend [K]": 0.0,
+            "molecule-molecule Real [K]": -4.34557491336052e-12,
+            "molecule-molecule VDW [K]": -7.451998671485494e-12,
+            "outOfPlaneBend [K]": 0.0,
+            "polarization [K]": 0.0,
+            "torsion [K]": 0.0,
+            "ureyBradley [K]": 0.0
+        },
+        "recomputedEnergies": {
+            "Ewald Fourier [K]": 56.149533321975056,
+            "Ewald exclusion [K]": 14955.09145933781,
+            "Ewald self [K]": -14992.165644462919,
+            "Total potential energy [K]": -4155.322984939116,
+            "Van der Waals (Tail) [K]": 0.0,
+            "bend [K]": 0.0,
+            "bendBend [K]": 0.0,
+            "bendTorsion [K]": 0.0,
+            "bond [K]": 0.0,
+            "bondBend [K]": 0.0,
+            "bondBond [K]": 0.0,
+            "bondTorsion [K]": 0.0,
+            "dU/dlambda Ewald [K]": 0.0,
+            "dU/dlambda Real [K]": 0.0,
+            "dU/dlambda VDW [K]": 0.0,
+            "external field Real [K]": 0.0,
+            "external field VDW [K]": 0.0,
+            "framework-molecule Rea [K]": -6.5974485155812275,
+            "framework-molecule VDW [K]": -3936.0887389725917,
+            "improperTorsion [K]": 0.0,
+            "intra Coulombic [K]": 0.0,
+            "intra VDW [K]": 0.0,
+            "inversionBend [K]": 0.0,
+            "molecule-molecule Real [K]": 0.0,
+            "molecule-molecule VDW [K]": -231.71214564780726,
+            "outOfPlaneBend [K]": 0.0,
+            "polarization [K]": 0.0,
+            "torsion [K]": 0.0,
+            "ureyBradley [K]": 0.0
+        },
+        "runningEnergies": {
+            "Ewald Fourier [K]": 56.14953332191905,
+            "Ewald exclusion [K]": 14955.091459336816,
+            "Ewald self [K]": -14992.165644462924,
+            "Total potential energy [K]": -4155.322984940189,
+            "Van der Waals (Tail) [K]": 0.0,
+            "bend [K]": 0.0,
+            "bendBend [K]": 0.0,
+            "bendTorsion [K]": 0.0,
+            "bond [K]": 0.0,
+            "bondBend [K]": 0.0,
+            "bondBond [K]": 0.0,
+            "bondTorsion [K]": 0.0,
+            "dU/dlambda Ewald [K]": 0.0,
+            "dU/dlambda Real [K]": 0.0,
+            "dU/dlambda VDW [K]": 0.0,
+            "external field Real [K]": 0.0,
+            "external field VDW [K]": 0.0,
+            "framework-molecule Rea [K]": -6.597448515380801,
+            "framework-molecule VDW [K]": -3936.088738972799,
+            "improperTorsion [K]": 0.0,
+            "intra Coulombic [K]": 0.0,
+            "intra VDW [K]": 0.0,
+            "inversionBend [K]": 0.0,
+            "molecule-molecule Real [K]": -4.34557491336052e-12,
+            "molecule-molecule VDW [K]": -231.7121456478147,
+            "outOfPlaneBend [K]": 0.0,
+            "polarization [K]": 0.0,
+            "torsion [K]": 0.0,
+            "ureyBradley [K]": 0.0
+        }
+    },
+    "properties": {
+        "averageEnergies": {
+            "Framework-Molecule": {
+                "CO2": {
+                    "coulombFourier": {
+                        "block": [
+                            -24.761361066059067,
+                            -32.234450160286954,
+                            -32.050930600110085,
+                            -29.261442556961185,
+                            -31.348856631760494
+                        ],
+                        "confidence": 3.8756667881584375,
+                        "mean": -29.931408203035563
+                    },
+                    "coulombReal": {
+                        "block": [
+                            -144.5422759810862,
+                            -154.46341228133815,
+                            -193.59501643868933,
+                            -175.34605854823016,
+                            -142.77865622785882
+                        ],
+                        "confidence": 27.10895430121976,
+                        "mean": -162.14508389544056
+                    },
+                    "tailCorrection": {
+                        "block": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "confidence": 0.0,
+                        "mean": 0.0
+                    },
+                    "total": {
+                        "block": [
+                            -3389.4262440021816,
+                            -3668.288719584434,
+                            -3853.2552748567487,
+                            -3747.112106387202,
+                            -3468.1082645662555
+                        ],
+                        "confidence": 239.60231385242142,
+                        "mean": -3625.238121879365
+                    },
+                    "vanDerWaals": {
+                        "block": [
+                            -3220.1226069550357,
+                            -3481.5908571428076,
+                            -3627.60932781795,
+                            -3542.5046052820144,
+                            -3293.9807517066365
+                        ],
+                        "confidence": 212.20348081389886,
+                        "mean": -3433.161629780889
+                    }
+                },
+                "methane": {
+                    "coulombFourier": {
+                        "block": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "confidence": 0.0,
+                        "mean": 0.0
+                    },
+                    "coulombReal": {
+                        "block": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "confidence": 0.0,
+                        "mean": 0.0
+                    },
+                    "tailCorrection": {
+                        "block": [
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "confidence": 0.0,
+                        "mean": 0.0
+                    },
+                    "total": {
+                        "block": [
+                            -3925.201255160321,
+                            -3960.076741374869,
+                            -4182.463189579137,
+                            -4012.8767599009225,
+                            -3845.048340786858
+                        ],
+                        "confidence": 156.48401112341298,
+                        "mean": -3985.1332573604222
+                    },
+                    "vanDerWaals": {
+                        "block": [
+                            -3925.201255160321,
+                            -3960.076741374869,
+                            -4182.463189579137,
+                            -4012.8767599009225,
+                            -3845.048340786858
+                        ],
+                        "confidence": 156.48401112341298,
+                        "mean": -3985.1332573604222
+                    }
+                }
+            },
+            "totalEnergy": {
+                "block": [
+                    -7461.337770808772,
+                    -7804.272049952959,
+                    -8218.998694050537,
+                    -7950.277245994542,
+                    -7479.291051498763
+                ],
+                "confidence": 399.5100043124139,
+                "mean": -7782.835362461114
+            }
+        },
+        "averageEnthalpy": {
+            "CO2": {
+                "block": [
+                    -1731.8227308794133,
+                    -1682.300022155822,
+                    -1732.195696205104,
+                    -1748.720455282422,
+                    -1708.846941137394
+                ],
+                "confidence": {
+                    "[K]": 31.990528217433265,
+                    "[kJ/mol]": 0.2659841246041285
+                },
+                "mean": {
+                    "[K]": -1720.777169132031,
+                    "[kJ/mol]": -14.307341406164404
+                },
+                "warning": "Note: Recompute value of the total enthalpy of adsorption by hand. Need to subtract the ideal-gas energy"
+            },
+            "methane": {
+                "block": [
+                    -1309.6074623313716,
+                    -1306.6410722472754,
+                    -1303.58471666474,
+                    -1317.0591314899252,
+                    -1289.4152438423635
+                ],
+                "confidence": {
+                    "[K]": 12.628361666484986,
+                    "[kJ/mol]": 0.1049980700604338
+                },
+                "mean": {
+                    "[K]": -1305.2615253151348,
+                    "[kJ/mol]": -10.85255116235312
+                },
+                "warning": "Note: Recompute value of the total enthalpy of adsorption by hand. Need to subtract the ideal-gas energy"
+            },
+            "total": {
+                "block": [
+                    -1415.161279468382,
+                    -1400.555809724412,
+                    -1410.737461549831,
+                    -1424.9744624380494,
+                    -1394.2731681661212
+                ],
+                "confidence": {
+                    "[K]": 15.003874265219647,
+                    "[kJ/mol]": 15.003874265219647
+                },
+                "mean": {
+                    "[K]": -1409.1404362693588,
+                    "[kJ/mol]": -1409.1404362693588
+                }
+            }
+        },
+        "averagePressure": {
+            "averagePressureTensor": {
+                "confidence": [
+                    [
+                        175266.0944193186,
+                        86431.59779389194,
+                        123766.11395283253
+                    ],
+                    [
+                        86431.59779389194,
+                        417424.61454600916,
+                        200838.4502115462
+                    ],
+                    [
+                        123766.11395283253,
+                        200838.4502115462,
+                        552789.740408729
+                    ]
+                ],
+                "mean": [
+                    [
+                        -5724282.713842438,
+                        116252.0719955266,
+                        -56943.497906949044
+                    ],
+                    [
+                        116252.0719955266,
+                        -5545179.908955901,
+                        -59585.72734298771
+                    ],
+                    [
+                        -56943.497906949044,
+                        -59585.72734298771,
+                        -5313718.05172189
+                    ]
+                ]
+            }
+        }
+    },
+    "seed": 440731,
+    "version": "3.0.30"
+}

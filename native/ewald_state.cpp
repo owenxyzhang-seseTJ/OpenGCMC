@@ -105,6 +105,13 @@ struct CudaPlugin {
  using Batch=int(*)(void*,std::size_t,std::size_t,const double*,const double*,const double*,double,double,double,double*);
  using Structure=int(*)(void*,std::size_t,const double*,const double*,double*);
  Structure structure=nullptr;
+ using Import=int(*)(void*,const double*);
+ using Export=int(*)(void*,double*);
+ using Accept=int(*)(void*);
+ Import resident_import=nullptr;
+ Export resident_export=nullptr;
+ Structure resident_trial=nullptr;
+ Accept resident_commit=nullptr;
  std::string backend_name="cuda", device_name;
  Destroy destroy=nullptr;Error error=nullptr;Batch batch=nullptr;
  ~CudaPlugin(){if(handle&&destroy)destroy(handle);
@@ -113,7 +120,7 @@ struct CudaPlugin {
 #endif
  }
  bool open(const std::string&path,const std::vector<double>&k,const std::vector<double>&w,const std::array<double,9>& inverse,
-           const std::array<int,3>& kmax,const std::vector<std::array<int,3>>& integer_modes,bool force_tensor,std::string&reason){
+           const std::array<int,3>& kmax,const std::vector<std::array<int,3>>& integer_modes,int backend,std::string&reason){
 #if defined(__unix__) || defined(__APPLE__)
   library=dlopen(path.c_str(),RTLD_NOW|RTLD_LOCAL);if(!library){const char*e=dlerror();reason=e?e:"could not load CUDA plugin";return false;}
   auto create=reinterpret_cast<Create>(dlsym(library,"poremc_ewald_cuda_create"));
@@ -121,7 +128,7 @@ struct CudaPlugin {
   if(!create||!destroy||!error||!batch){reason="CUDA plugin ABI symbols are missing";return false;}
   int device=0;if(const char*s=std::getenv("POREMC_CUDA_DEVICE"))device=std::stoi(s);
   const char* option=std::getenv("POREMC_CUDA_KERNEL");
-  const std::string kernel=force_tensor ? "tensor" : (option ? option : "direct");
+  const std::string kernel=backend>=3 ? "tensor" : (option ? option : "direct");
   if(kernel!="direct" && kernel!="tensor"){reason="POREMC_CUDA_KERNEL must be direct or tensor";return false;}
   handle=create(w.size(),k.data(),w.data(),device);if(!handle){reason=error();return false;}
   using Name=const char*(*)(void*);
@@ -139,6 +146,16 @@ struct CudaPlugin {
    for(const auto& mode:integer_modes)packed.insert(packed.end(),mode.begin(),mode.end());
    if(set_lattice(handle,inverse.data(),kmax.data(),packed.data())!=0){reason=error();return false;}
    backend_name=name(handle);
+  }
+  if(backend==4){
+   resident_import=reinterpret_cast<Import>(dlsym(library,"poremc_ewald_cuda_resident_import"));
+   resident_export=reinterpret_cast<Export>(dlsym(library,"poremc_ewald_cuda_resident_export"));
+   resident_trial=reinterpret_cast<Structure>(dlsym(library,"poremc_ewald_cuda_resident_trial"));
+   resident_commit=reinterpret_cast<Accept>(dlsym(library,"poremc_ewald_cuda_resident_commit"));
+   if(!resident_import||!resident_export||!resident_trial||!resident_commit){
+    reason="resident CUDA plug-in ABI symbols are missing";return false;
+   }
+   backend_name="cuda-resident";
   }
   return true;
 #else
@@ -158,10 +175,12 @@ struct EwaldState::Impl {
  double total_q=0,total_q2=0,host_reciprocal=0,mesh_reciprocal=0,weight_sum=0;
  mutable ReciprocalStats counters;
  std::unique_ptr<CudaPlugin> cuda;
+ bool resident_pending=false;
+ std::vector<double> staged_positions, staged_charges;
  std::string backend="cpu";
  Impl(const ReciprocalConfig&config,std::size_t n,const double*xyz,const double*q):c(config){
   if(!(c.alpha>0)||!std::isfinite(c.alpha))throw std::invalid_argument("positive finite Ewald alpha required");
-  if(c.method<0||c.method>1||c.backend<0||c.backend>3)throw std::invalid_argument("unknown reciprocal method/backend");
+  if(c.method<0||c.method>1||c.backend<0||c.backend>4)throw std::invalid_argument("unknown reciprocal method/backend");
   if(c.k_cutoff<0||!std::isfinite(c.k_cutoff))throw std::invalid_argument("reciprocal k_cutoff must be finite and nonnegative");
   if(c.method==1&&c.k_cutoff!=0)throw std::invalid_argument("radial reciprocal cutoff applies to direct Ewald only");
   inverse=invert(c.cell,volume);self=-CK*c.alpha/std::sqrt(PI);bg=c.background?-CK*PI/(2*c.alpha*c.alpha*volume):0;
@@ -190,8 +209,9 @@ struct EwaldState::Impl {
    current.assign(coefficient.size(),Cx(0,0));counters.modes=coefficient.size();
    weight_sum=std::accumulate(coefficient.begin(),coefficient.end(),0.0);
   }else{
+   if(!c.pme_refresh)throw std::invalid_argument("PME refresh interval must be positive");
    for(int m:c.mesh)if(!power_two(m))throw std::invalid_argument("PME mesh dimensions must be powers of two >= 8");
-   const std::size_t count=std::size_t(c.mesh[0])*c.mesh[1]*c.mesh[2];coefficient.resize(count);mesh_charge.assign(count,0);mesh_phi.assign(count,0);counters.mesh_points=count;
+   const std::size_t count=std::size_t(c.mesh[0])*c.mesh[1]*c.mesh[2];coefficient.resize(count);mesh_charge.assign(count,0);mesh_phi.assign(count,0);mesh_work.resize(count);counters.mesh_points=count;
    std::vector<Cx> kernel(count);
    for(int i=0;i<c.mesh[0];++i)for(int j=0;j<c.mesh[1];++j)for(int l=0;l<c.mesh[2];++l){
     int ni=i<=c.mesh[0]/2?i:i-c.mesh[0],nj=j<=c.mesh[1]/2?j:j-c.mesh[1],nl=l<=c.mesh[2]/2?l:l-c.mesh[2];
@@ -211,7 +231,11 @@ struct EwaldState::Impl {
   if(c.backend && c.method==0){
    cuda=std::make_unique<CudaPlugin>();std::string reason,path=c.cuda_library;
    if(path.empty()){const char*env=std::getenv("POREMC_EWALD_CUDA_LIBRARY");path=env?env:"libporemc_ewald_cuda.so";}
-   if(cuda->open(path,k,coefficient,inverse,c.kmax,integer_modes,c.backend==3,reason))backend=cuda->backend_name;
+   if(cuda->open(path,k,coefficient,inverse,c.kmax,integer_modes,c.backend,reason)){
+    backend=cuda->backend_name;
+    if(c.backend==4&&cuda->resident_import(cuda->handle,reinterpret_cast<const double*>(current.data())))
+     throw std::runtime_error(cuda->error());
+   }
    else{cuda.reset();if(c.backend>=2)throw std::runtime_error("required CUDA reciprocal backend unavailable: "+reason);backend="cpu (CUDA unavailable)";}
   }else if(c.backend>=2&&c.method==1)throw std::invalid_argument("PME currently uses native CPU FFT; CUDA reciprocal batching is available for direct Ewald");
  }
@@ -329,6 +353,16 @@ struct EwaldState::Impl {
  double quadratic(const ChargeContribution&a)const{
   double u=0;for(std::size_t i=0;i<a.indices.size();++i){u+=a.values[i]*a.values[i]*green[0];double v=0;for(std::size_t j=0;j<i;++j)v+=a.values[j]*green[difference(a.indices[i],a.indices[j])];u+=2*a.values[i]*v;}return u;
  }
+ ChargeContribution pending_mesh;
+ std::vector<Cx> mesh_work;
+ std::size_t pending_commits=0;
+ double pending_energy=0.;
+ double mesh_cross(const ChargeContribution& a) const {
+  double u=0.;
+  for(std::size_t i=0;i<a.indices.size();++i)u+=a.values[i]*mesh_phi[a.indices[i]];
+  if(!pending_mesh.indices.empty())u+=2*bilinear(a,pending_mesh);
+  return u;
+ }
  double delta(const ChargeContribution&a,const ChargeContribution*ex,const ChargeContribution*pre)const{
   double energy=self*a.squared_charge;double baseq=total_q-(ex?ex->charge:0)+(pre?pre->charge:0);energy+=bg*(2*baseq*a.charge+a.charge*a.charge);
   if(c.method==0 && !a.modes.empty()) {
@@ -347,7 +381,7 @@ struct EwaldState::Impl {
    else
     energy+=direct_delta<false,false,false>(coefficient,active,added,nullptr,nullptr);
   }
-  else if(c.method==1){for(std::size_t i=0;i<a.indices.size();++i)energy+=a.values[i]*mesh_phi[a.indices[i]];energy+=quadratic(a);if(ex)energy-=2*bilinear(a,*ex);if(pre)energy+=2*bilinear(a,*pre);}
+  else if(c.method==1){energy+=mesh_cross(a)+quadratic(a);if(ex)energy-=2*bilinear(a,*ex);if(pre)energy+=2*bilinear(a,*pre);}
   return energy;
  }
  double host_cross(const ChargeContribution&a)const{
@@ -366,7 +400,8 @@ struct EwaldState::Impl {
   return result;
  }
  void refresh_mesh(){
-  std::vector<Cx> work(mesh_charge.begin(),mesh_charge.end());fft3(work,c.mesh,false);++counters.fft_transforms;
+  auto& work=mesh_work;
+  std::copy(mesh_charge.begin(),mesh_charge.end(),work.begin());fft3(work,c.mesh,false);++counters.fft_transforms;
   for(std::size_t i=0;i<work.size();++i)work[i]*=coefficient[i];
   fft3(work,c.mesh,true);++counters.fft_transforms;
   mesh_reciprocal=0;for(std::size_t i=0;i<work.size();++i){mesh_phi[i]=2*work.size()*work[i].real();mesh_reciprocal+=.5*mesh_charge[i]*mesh_phi[i];}
@@ -374,6 +409,29 @@ struct EwaldState::Impl {
 };
 EwaldState::EwaldState(const ReciprocalConfig&c,std::size_t n,const double*x,const double*q):p_(new Impl(c,n,x,q)){}
 EwaldState::~EwaldState()=default;
+bool EwaldState::resident()const{return p_->c.backend==4;}
+double EwaldState::resident_trial(std::size_t atoms,const double* added,const double* removed,const double* q){
+ if(!resident())throw std::logic_error("resident_trial requires a resident CUDA state");
+ auto& xyz=p_->staged_positions;
+ auto& charges=p_->staged_charges;
+ xyz.clear();charges.clear();p_->resident_pending=false;
+ double dq=0.,dq2=0.;
+ const int change=int(added!=nullptr)-int(removed!=nullptr);
+ for(std::size_t i=0;i<atoms;++i)if(q[i]!=0.){
+  dq+=change*q[i];dq2+=change*q[i]*q[i];
+  if(added){xyz.insert(xyz.end(),added+3*i,added+3*i+3);charges.push_back(q[i]);}
+  if(removed){xyz.insert(xyz.end(),removed+3*i,removed+3*i+3);charges.push_back(-q[i]);}
+ }
+ if(charges.empty())return 0.;
+ double delta=0.;
+ if(p_->cuda->resident_trial(p_->cuda->handle,charges.size(),xyz.data(),charges.data(),&delta))
+  throw std::runtime_error(p_->cuda->error());
+ if(!std::isfinite(delta))throw std::runtime_error("resident reciprocal energy is nonfinite");
+ p_->resident_pending=true;
+ ++p_->counters.resident_trials;
+ return delta+p_->self*dq2+p_->bg*dq*(2*p_->total_q+dq);
+}
+void EwaldState::discard_resident_trial(){p_->resident_pending=false;}
 ChargeContribution EwaldState::contribution(std::size_t n,const double*x,const double*q)const{++p_->counters.contributions;return p_->make(n,x,q);}
 ChargeContribution EwaldState::selected_contribution(std::size_t atoms,const double* xyz,const double* q)const{
  if(!p_->cuda || !p_->cuda->structure)return contribution(atoms,xyz,q);
@@ -477,7 +535,7 @@ std::vector<double>EwaldState::host_potential_grid(const std::array<int,3>&m)con
 void EwaldState::batch_insertion(std::size_t B,std::size_t A,const double*x,const double*q,const ChargeContribution*ex,const ChargeContribution*pre,double*out)const{
  ++p_->counters.candidate_batches;p_->counters.candidates+=B;
  if(!B)return;
- if(p_->cuda){
+ if(p_->cuda && !resident()){
   std::vector<double> base(2*p_->current.size());for(std::size_t i=0;i<p_->current.size();++i){Cx s=p_->current[i];if(ex&&!ex->modes.empty())s-=ex->modes[i];if(pre&&!pre->modes.empty())s+=pre->modes[i];base[2*i]=s.real();base[2*i+1]=s.imag();}
   double baseq=p_->total_q-(ex?ex->charge:0)+(pre?pre->charge:0);
   if(p_->cuda->batch(p_->cuda->handle,B,A,x,q,base.data(),baseq,p_->self,p_->bg,out))throw std::runtime_error(p_->cuda->error());
@@ -493,25 +551,72 @@ void EwaldState::batch_insertion(std::size_t B,std::size_t A,const double*x,cons
 }
 void EwaldState::commit(const ChargeContribution*a,const ChargeContribution*r){
  if(!a&&!r)return;
+ if(p_->c.method==0){
+  const bool staged=resident()&&p_->resident_pending;
+  if(staged){
+   if(p_->cuda->resident_commit(p_->cuda->handle))throw std::runtime_error(p_->cuda->error());
+   p_->resident_pending=false;
+   ++p_->counters.resident_commits;
+  }
+  for(std::size_t i=0;i<p_->current.size();++i){if(r&&!r->modes.empty())p_->current[i]-=r->modes[i];if(a&&!a->modes.empty())p_->current[i]+=a->modes[i];}
+  if(resident()&&!staged&&((a&&a->squared_charge)||(r&&r->squared_charge))&&
+     p_->cuda->resident_import(p_->cuda->handle,reinterpret_cast<const double*>(p_->current.data())))
+   throw std::runtime_error(p_->cuda->error());
+ }
+ else if(p_->c.pme_refresh==1){
+  if(r)for(std::size_t i=0;i<r->indices.size();++i)p_->mesh_charge[r->indices[i]]-=r->values[i];
+  if(a)for(std::size_t i=0;i<a->indices.size();++i)p_->mesh_charge[a->indices[i]]+=a->values[i];
+  p_->refresh_mesh();
+ }else if((a&&!a->indices.empty())||(r&&!r->indices.empty())){
+  ChargeContribution change;
+  if(r)accumulate(change,*r,-1.);
+  if(a)accumulate(change,*a);
+  auto pending=p_->pending_mesh;
+  accumulate(pending,change);
+  // Bound the cost of the sparse cross term as well as the commit interval.
+  if(p_->pending_commits+1>=p_->c.pme_refresh||pending.indices.size()>=1024){
+   for(std::size_t i=0;i<pending.indices.size();++i)p_->mesh_charge[pending.indices[i]]+=pending.values[i];
+   p_->refresh_mesh();
+   p_->pending_mesh={};
+   p_->pending_commits=0;
+   p_->pending_energy=0.;
+  }else{
+   p_->pending_energy+=p_->mesh_cross(change)+p_->quadratic(change);
+   p_->pending_mesh=std::move(pending);
+   ++p_->pending_commits;
+  }
+ }
  p_->total_q+=(a?a->charge:0)-(r?r->charge:0);p_->total_q2+=(a?a->squared_charge:0)-(r?r->squared_charge:0);
- if(p_->c.method==0){for(std::size_t i=0;i<p_->current.size();++i){if(r&&!r->modes.empty())p_->current[i]-=r->modes[i];if(a&&!a->modes.empty())p_->current[i]+=a->modes[i];}}
- else{if(r)for(std::size_t i=0;i<r->indices.size();++i)p_->mesh_charge[r->indices[i]]-=r->values[i];if(a)for(std::size_t i=0;i<a->indices.size();++i)p_->mesh_charge[a->indices[i]]+=a->values[i];p_->refresh_mesh();}
  ++p_->counters.accepted_commits;
 }
 double EwaldState::total_host_relative_energy()const{
- double reciprocal=p_->c.method==0?p_->reciprocal(p_->current):p_->mesh_reciprocal;
+ double reciprocal=p_->c.method==0?p_->reciprocal(p_->current):p_->mesh_reciprocal+p_->pending_energy;
  return reciprocal-p_->host_reciprocal+p_->self*(p_->total_q2-p_->host.squared_charge)+p_->bg*(p_->total_q*p_->total_q-p_->host.charge*p_->host.charge);
 }
 std::string EwaldState::serialize()const{
  std::ostringstream s;s<<std::setprecision(std::numeric_limits<double>::max_digits10);const auto n=p_->c.method==0?p_->current.size():p_->mesh_charge.size();
- s<<"PoreMC-EwaldState-v2 "<<p_->c.method<<' '<<n<<' '<<p_->total_q<<' '<<p_->total_q2<<' '<<p_->c.half_spectrum<<' '<<p_->c.k_cutoff<<'\n';
+ const bool deferred=p_->c.method==1&&p_->c.pme_refresh!=1;
+ s<<(resident()?"OpenGCMC-Resident-v1 ":deferred?"PoreMC-EwaldState-v3 ":"PoreMC-EwaldState-v2 ")<<p_->c.method<<' '<<n<<' '<<p_->total_q<<' '<<p_->total_q2<<' '<<p_->c.half_spectrum<<' '<<p_->c.k_cutoff<<'\n';
  if(p_->c.method==0)for(const auto&z:p_->current)s<<z.real()<<' '<<z.imag()<<'\n';else for(double v:p_->mesh_charge)s<<v<<'\n';
- s<<p_->counters.host_builds<<' '<<p_->counters.contributions<<' '<<p_->counters.candidate_batches<<' '<<p_->counters.candidates<<' '<<p_->counters.accepted_commits<<' '<<p_->counters.fft_transforms<<' '<<p_->counters.gpu_batches<<' '<<p_->counters.host_grid_builds<<' '<<p_->counters.host_field_evaluations<<' '<<p_->counters.gpu_selected_structures<<'\n';return s.str();
+ s<<p_->counters.host_builds<<' '<<p_->counters.contributions<<' '<<p_->counters.candidate_batches<<' '<<p_->counters.candidates<<' '<<p_->counters.accepted_commits<<' '<<p_->counters.fft_transforms<<' '<<p_->counters.gpu_batches<<' '<<p_->counters.host_grid_builds<<' '<<p_->counters.host_field_evaluations<<' '<<p_->counters.gpu_selected_structures<<'\n';
+ if(deferred){
+  s<<p_->c.pme_refresh<<' '<<p_->pending_commits<<' '<<p_->pending_energy<<' '<<p_->pending_mesh.indices.size()<<'\n';
+  for(std::size_t i=0;i<p_->pending_mesh.indices.size();++i)
+   s<<p_->pending_mesh.indices[i]<<' '<<p_->pending_mesh.values[i]<<'\n';
+ }
+ if(resident()){
+  std::vector<double> modes(2*n);
+  if(p_->cuda->resident_export(p_->cuda->handle,modes.data()))throw std::runtime_error(p_->cuda->error());
+  s<<p_->counters.resident_trials<<' '<<p_->counters.resident_commits<<'\n';
+  for(double mode:modes)s<<mode<<'\n';
+ }
+ return s.str();
 }
 void EwaldState::restore(const std::string&data){
  std::istringstream s(data);std::string version;int method;std::size_t n;double q,q2,cutoff;bool half;s>>version>>method>>n>>q>>q2>>half>>cutoff;
  std::size_t expected=p_->c.method==0?p_->current.size():p_->mesh_charge.size();
- if(!s||version!="PoreMC-EwaldState-v2"||method!=p_->c.method||n!=expected||half!=p_->c.half_spectrum||cutoff!=p_->c.k_cutoff)throw std::invalid_argument("reciprocal checkpoint format/configuration mismatch");
+ const bool deferred=p_->c.method==1&&p_->c.pme_refresh!=1;
+ if(!s||version!=(resident()?"OpenGCMC-Resident-v1":deferred?"PoreMC-EwaldState-v3":"PoreMC-EwaldState-v2")||method!=p_->c.method||n!=expected||half!=p_->c.half_spectrum||cutoff!=p_->c.k_cutoff)throw std::invalid_argument("reciprocal checkpoint format/configuration mismatch");
  std::vector<Cx> modes;std::vector<double> mesh;
  if(method==0){modes.resize(n);for(auto&z:modes){double re,im;s>>re>>im;if(!s||!std::isfinite(re)||!std::isfinite(im))throw std::invalid_argument("invalid reciprocal checkpoint value");z=Cx(re,im);}}
  else{mesh.resize(n);for(double&v:mesh){s>>v;if(!s||!std::isfinite(v))throw std::invalid_argument("invalid mesh checkpoint value");}}
@@ -520,9 +625,37 @@ void EwaldState::restore(const std::string&data){
  counts.gpu_selected_structures=0;
  s>>std::ws;
  if(!s.eof() && !(s>>counts.gpu_selected_structures))throw std::invalid_argument("invalid CUDA checkpoint counter");
+ ChargeContribution pending;
+ std::size_t pending_commits=0;
+ double pending_energy=0.;
+ if(deferred){
+  std::size_t refresh=0,nodes=0;
+  s>>refresh>>pending_commits>>pending_energy>>nodes;
+  if(!s||refresh!=p_->c.pme_refresh||pending_commits>=refresh||nodes>=1024||!std::isfinite(pending_energy))
+   throw std::invalid_argument("invalid deferred PME checkpoint");
+  for(std::size_t i=0;i<nodes;++i){
+   std::size_t node=0;
+   double value=0.;
+   s>>node>>value;
+   if(!s||node>=n||!std::isfinite(value)||(i&&node<=pending.indices.back()))
+    throw std::invalid_argument("invalid deferred PME node");
+   pending.indices.push_back(node);
+   pending.values.push_back(value);
+  }
+ }
+ if(resident()){
+  std::vector<double> device_modes(2*n);
+  s>>counts.resident_trials>>counts.resident_commits;
+  for(auto& value:device_modes){
+   s>>value;
+   if(!s||!std::isfinite(value))throw std::invalid_argument("invalid resident spectrum in checkpoint");
+  }
+  if(p_->cuda->resident_import(p_->cuda->handle,device_modes.data()))throw std::runtime_error(p_->cuda->error());
+ }
  p_->total_q=q;p_->total_q2=q2;if(method==0)p_->current.swap(modes);else{p_->mesh_charge.swap(mesh);p_->refresh_mesh();}p_->counters=counts;
+ p_->pending_mesh=std::move(pending);p_->pending_commits=pending_commits;p_->pending_energy=pending_energy;
 }
-ReciprocalStats EwaldState::stats()const{return p_->counters;}
+ReciprocalStats EwaldState::stats()const{auto c=p_->counters;c.pme_pending_nodes=p_->pending_mesh.indices.size();return c;}
 const char*EwaldState::backend_name()const{return p_->backend.c_str();}
 const char*EwaldState::device_name()const{return p_->cuda ? p_->cuda->device_name.c_str() : "";}
 const ReciprocalConfig&EwaldState::config()const{return p_->c;}

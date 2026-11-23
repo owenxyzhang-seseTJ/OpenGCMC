@@ -8,10 +8,10 @@ import os
 import tempfile
 import numpy as np
 
-SCHEMA = 'poremc-precompute-v2'
+SCHEMA = 'opengcmc-precompute-v3'
 
 def content_key(metadata: dict, arrays: dict[str, np.ndarray]) -> str:
-    h=hashlib.sha256(json.dumps({'schema':SCHEMA, **metadata},sort_keys=True,separators=(',',':'),allow_nan=False).encode())
+    h=hashlib.blake2b(json.dumps({'schema':SCHEMA, **metadata},sort_keys=True,separators=(',',':'),allow_nan=False).encode(),digest_size=32)
     for name,value in sorted(arrays.items()):
         a=np.ascontiguousarray(value)
         if a.dtype.hasobject: raise TypeError('object arrays cannot be cached')

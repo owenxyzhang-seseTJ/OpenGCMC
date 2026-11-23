@@ -1,0 +1,132 @@
+{
+  "description": "NaCl and SPC/E water confined by two ideal constant-potential planes",
+  "ion_parameters": "Joung and Cheatham, Table 5, SPC/E; doi:10.1021/jp8001614",
+  "seed": 1774,
+  "cell": [
+    12.8,
+    12.8,
+    48.0
+  ],
+  "templates": [
+    {
+      "kind": "spce"
+    },
+    {
+      "kind": "ion",
+      "name": "Na+",
+      "charge": 1.0,
+      "sigma": 2.159538492772182,
+      "epsilon": 177.45624208816506
+    },
+    {
+      "kind": "ion",
+      "name": "Cl-",
+      "charge": -1.0,
+      "sigma": 4.830452849756919,
+      "epsilon": 6.43366173578172
+    }
+  ],
+  "forcefield": {
+    "cutoff": 6.0,
+    "alpha": 0.35,
+    "kmax": [
+      4,
+      4,
+      14
+    ],
+    "dielectric": 1.0,
+    "coulomb": "ewald",
+    "shifted": false,
+    "backend": "native",
+    "slab": true
+  },
+  "electrodes": {
+    "plane_grid": {
+      "shape": [
+        3,
+        3
+      ],
+      "z_A": [
+        16.0,
+        32.0
+      ]
+    },
+    "plane_potentials_V": [
+      -0.05,
+      0.05
+    ],
+    "width": 1.0
+  },
+  "region": {
+    "lower": [
+      0,
+      0,
+      0.375
+    ],
+    "upper": [
+      1,
+      1,
+      0.625
+    ]
+  },
+  "initial": [
+    {
+      "template": 0,
+      "grid": {
+        "shape": [
+          4,
+          4,
+          4
+        ],
+        "lower_A": [
+          0,
+          0,
+          18
+        ],
+        "upper_A": [
+          12.8,
+          12.8,
+          30
+        ],
+        "skip_flat_indices": [
+          21,
+          42
+        ]
+      }
+    },
+    {
+      "template": 1,
+      "anchor_A": [
+        4.8,
+        4.8,
+        22.5
+      ]
+    },
+    {
+      "template": 2,
+      "anchor_A": [
+        8.0,
+        8.0,
+        25.5
+      ]
+    }
+  ],
+  "reservoirs": {
+    "temperature": 298.15
+  },
+  "moves": {
+    "move_weights": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "translation_A": 0.23,
+    "rotation_rad": 0.31
+  },
+  "run": {
+    "steps": 24000,
+    "burnin": 10000,
+    "sample_every": 50,
+    "record_positions": true
+  }
+}

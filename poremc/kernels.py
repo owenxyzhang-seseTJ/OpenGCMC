@@ -61,7 +61,8 @@ class _Environment:
         self.alpha = float(alpha)
         if not np.isfinite(self.alpha) or self.alpha < 0:
             raise ValueError('alpha must be finite and nonnegative')
-        self.coulomb, self.shifted, self.algorithm, self.threads = coulomb, bool(shifted), algorithm, int(threads)
+        self.coulomb, self.shifted = coulomb, 'force' if shifted == 'force' else bool(shifted)
+        self.algorithm, self.threads = algorithm, int(threads)
         self.frac = self.pos @ self.inv
         self.frac -= np.floor(self.frac)
         self.frac.flags.writeable = False
@@ -123,6 +124,9 @@ class ReferenceEnvironment(_Environment):
                     if self.shifted:
                         tc3 = (sij[ordinary]/rc)**6
                         pair[ordinary] -= 4*eij[ordinary]*tc3*(tc3-1)
+                        if self.shifted == 'force':
+                            slope = 24*eij[ordinary]*tc3*(1-2*tc3)/rc
+                            pair[ordinary] -= (np.sqrt(dist2[ordinary])-rc)*slope
                 pair[active&(dist2==0)] = np.inf
                 if self.coulomb != 'none':
                     use = (qij!=0)&~np.isinf(pair)&(dist2>0)
@@ -154,6 +158,8 @@ def _load_native():
     lib = ctypes.CDLL(str(library))
     lib.poremc_last_error.restype = ctypes.c_char_p
     lib.poremc_kernel_version.restype = ctypes.c_char_p
+    if hasattr(lib,'poremc_kernel_abi'):
+        lib.poremc_kernel_abi.restype = ctypes.c_int
     lib.poremc_has_openmp.restype = ctypes.c_int
     lib.poremc_environment_create.argtypes = [ctypes.c_size_t,_DOUBLE,_DOUBLE,_DOUBLE,_DOUBLE,_DOUBLE,ctypes.c_double,ctypes.c_int,ctypes.c_double,ctypes.c_int,ctypes.c_int,ctypes.c_int]
     lib.poremc_environment_create.restype = ctypes.c_void_p
@@ -175,14 +181,19 @@ class NativeEnvironment(_Environment):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._lib = _load_native()
-        self._handle = self._lib.poremc_environment_create(len(self.pos),_ptr(self.pos),_ptr(self.sigma),_ptr(self.epsilon),_ptr(self.charge),_ptr(self.cell),self.cutoff,{'none':0,'dsf':1,'ewald-real':2}[self.coulomb],self.alpha,int(self.shifted),{'direct':0,'cell':1,'cached':2}[self.algorithm],self.threads)
+        shift_mode = 2 if self.shifted == 'force' else int(self.shifted)
+        self._handle = self._lib.poremc_environment_create(len(self.pos),_ptr(self.pos),_ptr(self.sigma),_ptr(self.epsilon),_ptr(self.charge),_ptr(self.cell),self.cutoff,{'none':0,'dsf':1,'ewald-real':2}[self.coulomb],self.alpha,shift_mode,{'direct':0,'cell':1,'cached':2}[self.algorithm],self.threads)
         if not self._handle:
             raise RuntimeError(self._lib.poremc_last_error().decode())
         self._finalizer = weakref.finalize(self,self._lib.poremc_environment_destroy,self._handle)
 
     @property
     def build_info(self):
-        return {'version': self._lib.poremc_kernel_version().decode(), 'openmp': bool(self._lib.poremc_has_openmp()), 'algorithm': self.algorithm, 'threads': self.threads}
+        from . import __version__
+        abi = self._lib.poremc_kernel_abi() if hasattr(self._lib,'poremc_kernel_abi') else 1
+        return {'version': self._lib.poremc_kernel_version().decode(), 'package_version': __version__,
+                'native_abi': abi, 'openmp': bool(self._lib.poremc_has_openmp()),
+                'algorithm': self.algorithm, 'threads': self.threads}
 
     def energy(self,trials,sigma,epsilon,charge):
         xyz,sigma,epsilon,charge = self._trials(trials,sigma,epsilon,charge)
@@ -241,6 +252,8 @@ class LegacyCudaEnvironment(_Environment):
             raise ValueError("CudaEnvironment currently implements algorithm='direct' only")
         kwargs['algorithm'] = 'direct'
         super().__init__(*args,**kwargs)
+        if self.shifted == 'force':
+            raise ValueError('linear-force-shifted LJ requires a CPU pair kernel')
         try:
             import cupy as cp
         except ImportError as e:

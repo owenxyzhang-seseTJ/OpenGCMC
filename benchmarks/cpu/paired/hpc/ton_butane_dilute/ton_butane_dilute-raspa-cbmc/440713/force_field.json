@@ -1,0 +1,112 @@
+{
+  "PseudoAtoms": [
+    {
+      "name": "HAA",
+      "framework": true,
+      "print_to_output": false,
+      "element": "O",
+      "print_as": "O",
+      "mass": 15.9994,
+      "charge": 0.0
+    },
+    {
+      "name": "HAB",
+      "framework": true,
+      "print_to_output": false,
+      "element": "Si",
+      "print_as": "Si",
+      "mass": 28.0855,
+      "charge": 0.0
+    },
+    {
+      "name": "A000",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 14.53055,
+      "charge": 0.0
+    },
+    {
+      "name": "A001",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 14.53055,
+      "charge": 0.0
+    },
+    {
+      "name": "A002",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 14.53055,
+      "charge": 0.0
+    },
+    {
+      "name": "A003",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 14.53055,
+      "charge": 0.0
+    }
+  ],
+  "SelfInteractions": [
+    {
+      "name": "HAA",
+      "type": "lennard-jones",
+      "parameters": [
+        30.193,
+        3.118146
+      ]
+    },
+    {
+      "name": "HAB",
+      "type": "lennard-jones",
+      "parameters": [
+        202.294,
+        3.408578
+      ]
+    },
+    {
+      "name": "A000",
+      "type": "lennard-jones",
+      "parameters": [
+        98.0,
+        3.75
+      ]
+    },
+    {
+      "name": "A001",
+      "type": "lennard-jones",
+      "parameters": [
+        46.0,
+        3.95
+      ]
+    },
+    {
+      "name": "A002",
+      "type": "lennard-jones",
+      "parameters": [
+        46.0,
+        3.95
+      ]
+    },
+    {
+      "name": "A003",
+      "type": "lennard-jones",
+      "parameters": [
+        98.0,
+        3.75
+      ]
+    }
+  ],
+  "MixingRule": "Lorentz-Berthelot",
+  "CutOff": 8.0,
+  "TruncationMethod": "shifted",
+  "TailCorrections": false
+}

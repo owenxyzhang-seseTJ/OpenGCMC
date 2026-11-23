@@ -1,0 +1,244 @@
+{
+  "checkpoints": [
+    {
+      "budget": 2000,
+      "draws_per_chain": 200,
+      "batch_wall_s": 23.4763383330137,
+      "observables": {
+        "count_0": {
+          "mean": 15.595,
+          "mcse": 0.09653072599725845,
+          "ci95": [
+            15.287796147703672,
+            15.90220385229633
+          ],
+          "rank_split_rhat": 1.1438378522348496,
+          "ess": 42.010809601887296,
+          "chains": 4,
+          "draws_per_chain": 200
+        },
+        "trans_fraction": {
+          "mean": 0.4969541519717858,
+          "mcse": 0.02074715322630964,
+          "ci95": [
+            0.4309274508415617,
+            0.5629808531020098
+          ],
+          "rank_split_rhat": 1.3121530826683598,
+          "ess": 10.18501928793633,
+          "chains": 4,
+          "draws_per_chain": 200
+        }
+      },
+      "met": false
+    },
+    {
+      "budget": 6000,
+      "draws_per_chain": 600,
+      "batch_wall_s": 44.08479024999542,
+      "observables": {
+        "count_0": {
+          "mean": 15.38875,
+          "mcse": 0.1626165892293669,
+          "ci95": [
+            14.871231436429163,
+            15.906268563570837
+          ],
+          "rank_split_rhat": 1.2949469907845292,
+          "ess": 23.397025407083156,
+          "chains": 4,
+          "draws_per_chain": 600
+        },
+        "trans_fraction": {
+          "mean": 0.5488587442124929,
+          "mcse": 0.017201833276253027,
+          "ci95": [
+            0.49411483345837515,
+            0.6036026549666107
+          ],
+          "rank_split_rhat": 1.2124703734783706,
+          "ess": 28.794622260550987,
+          "chains": 4,
+          "draws_per_chain": 600
+        }
+      },
+      "met": false
+    },
+    {
+      "budget": 12000,
+      "draws_per_chain": 1200,
+      "batch_wall_s": 76.49469066699385,
+      "observables": {
+        "count_0": {
+          "mean": 15.436041666666666,
+          "mcse": 0.11796665361762515,
+          "ci95": [
+            15.060619125714572,
+            15.81146420761876
+          ],
+          "rank_split_rhat": 1.0627525424359912,
+          "ess": 39.356491109048875,
+          "chains": 4,
+          "draws_per_chain": 1200
+        },
+        "trans_fraction": {
+          "mean": 0.566598734023457,
+          "mcse": 0.015930267130482793,
+          "ci95": [
+            0.5159015142518695,
+            0.6172959537950444
+          ],
+          "rank_split_rhat": 1.116749174450024,
+          "ess": 42.220864975804055,
+          "chains": 4,
+          "draws_per_chain": 1200
+        }
+      },
+      "met": false
+    },
+    {
+      "budget": 21000,
+      "draws_per_chain": 2100,
+      "batch_wall_s": 120.32754266701522,
+      "observables": {
+        "count_0": {
+          "mean": 15.53547619047619,
+          "mcse": 0.08336051396297763,
+          "ci95": [
+            15.270185830808161,
+            15.80076655014422
+          ],
+          "rank_split_rhat": 1.084068569951659,
+          "ess": 73.21971808467939,
+          "chains": 4,
+          "draws_per_chain": 2100
+        },
+        "trans_fraction": {
+          "mean": 0.5941853514996399,
+          "mcse": 0.01690226073389136,
+          "ci95": [
+            0.5403948142761255,
+            0.6479758887231544
+          ],
+          "rank_split_rhat": 1.115684860676355,
+          "ess": 44.439347278627224,
+          "chains": 4,
+          "draws_per_chain": 2100
+        }
+      },
+      "met": false
+    }
+  ],
+  "qualified_wall_s": null,
+  "start_group_final_means": {
+    "empty": [
+      15.63404761904762
+    ],
+    "preload": [
+      15.436904761904762
+    ]
+  },
+  "occupancy_distribution": [
+    [
+      12,
+      0.0011904761904761906
+    ],
+    [
+      13,
+      0.012380952380952381
+    ],
+    [
+      14,
+      0.06404761904761905
+    ],
+    [
+      15,
+      0.3161904761904762
+    ],
+    [
+      16,
+      0.5845238095238096
+    ],
+    [
+      17,
+      0.021666666666666667
+    ]
+  ],
+  "precision_goals": {
+    "count_0": 0.35,
+    "trans_fraction": 0.015
+  },
+  "case": "ton_butane",
+  "engine": "RASPA3",
+  "mode": "cbmc",
+  "platform": "macOS-26.5-arm64-arm-64bit-Mach-O",
+  "warmup_cycles": 2500,
+  "sample_every": 10,
+  "workers": 4,
+  "chains": [
+    {
+      "seed": 440713,
+      "start": "empty",
+      "initial_counts": [
+        0
+      ],
+      "elapsed_at_prefix_s": [
+        22.753027375001693,
+        43.83126808301313,
+        76.24865533300908,
+        118.94667770800879
+      ],
+      "subprocess_wall_s": 118.71879520802759,
+      "raspa_output": "ton_butane-raspa-cbmc/440713/output/output_298.15_100.s0.json",
+      "data": "ton_butane-raspa-cbmc_440713.npz"
+    },
+    {
+      "seed": 440731,
+      "start": "empty",
+      "initial_counts": [
+        0
+      ],
+      "elapsed_at_prefix_s": [
+        22.730609833000926,
+        41.91690587499761,
+        72.99948491700343,
+        116.43708737500128
+      ],
+      "subprocess_wall_s": 116.22433433297556,
+      "raspa_output": "ton_butane-raspa-cbmc/440731/output/output_298.15_100.s0.json",
+      "data": "ton_butane-raspa-cbmc_440731.npz"
+    },
+    {
+      "seed": 440747,
+      "start": "preloaded",
+      "initial_counts": [
+        16
+      ],
+      "elapsed_at_prefix_s": [
+        23.4763383330137,
+        44.06952266700682,
+        76.28894475000561,
+        120.32754266701522
+      ],
+      "subprocess_wall_s": 119.99747850000858,
+      "raspa_output": "ton_butane-raspa-cbmc/440747/output/output_298.15_100.s0.json",
+      "data": "ton_butane-raspa-cbmc_440747.npz"
+    },
+    {
+      "seed": 440753,
+      "start": "preloaded",
+      "initial_counts": [
+        16
+      ],
+      "elapsed_at_prefix_s": [
+        23.051443458010908,
+        44.08479024999542,
+        76.49469066699385,
+        119.79069095800514
+      ],
+      "subprocess_wall_s": 119.4582946250157,
+      "raspa_output": "ton_butane-raspa-cbmc/440753/output/output_298.15_100.s0.json",
+      "data": "ton_butane-raspa-cbmc_440753.npz"
+    }
+  ]
+}

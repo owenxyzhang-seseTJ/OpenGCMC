@@ -1,0 +1,184 @@
+{
+  "checkpoints": [
+    {
+      "budget": 400,
+      "draws_per_chain": 50,
+      "batch_wall_s": 1022.0274746670038,
+      "observables": {
+        "count_0": {
+          "mean": 213.2,
+          "mcse": 1.5321227104902522,
+          "ci95": [
+            208.32410174075903,
+            218.07589825924094
+          ],
+          "rank_split_rhat": 3.0475777787932756,
+          "ess": 4.080211914133164,
+          "chains": 4,
+          "draws_per_chain": 50
+        }
+      },
+      "met": false
+    },
+    {
+      "budget": 800,
+      "draws_per_chain": 100,
+      "batch_wall_s": 1335.9866152500035,
+      "observables": {
+        "count_0": {
+          "mean": 215.1975,
+          "mcse": 1.6593089676127217,
+          "ci95": [
+            209.91683830669677,
+            220.4781616933032
+          ],
+          "rank_split_rhat": 2.644205079491233,
+          "ess": 5.2080447299544605,
+          "chains": 4,
+          "draws_per_chain": 100
+        }
+      },
+      "met": false
+    }
+  ],
+  "qualified_wall_s": null,
+  "start_group_final_means": {
+    "empty": [
+      214.82
+    ],
+    "preload": [
+      215.575
+    ]
+  },
+  "occupancy_distribution": [
+    [
+      208,
+      0.0175
+    ],
+    [
+      209,
+      0.055
+    ],
+    [
+      210,
+      0.05
+    ],
+    [
+      211,
+      0.035
+    ],
+    [
+      212,
+      0.12
+    ],
+    [
+      213,
+      0.13
+    ],
+    [
+      214,
+      0.0825
+    ],
+    [
+      215,
+      0.0525
+    ],
+    [
+      216,
+      0.07
+    ],
+    [
+      217,
+      0.0475
+    ],
+    [
+      218,
+      0.0675
+    ],
+    [
+      219,
+      0.075
+    ],
+    [
+      220,
+      0.1325
+    ],
+    [
+      221,
+      0.0425
+    ],
+    [
+      222,
+      0.0225
+    ]
+  ],
+  "precision_goals": {
+    "count_0": 1.2
+  },
+  "case": "xylene_high",
+  "engine": "RASPA3",
+  "mode": "cbmc",
+  "platform": "macOS-26.5-arm64-arm-64bit-Mach-O",
+  "warmup_cycles": 1000,
+  "sample_every": 8,
+  "workers": 4,
+  "chains": [
+    {
+      "seed": 440713,
+      "start": "empty",
+      "initial_counts": [
+        0
+      ],
+      "elapsed_at_prefix_s": [
+        986.0944198750076,
+        1315.392104958999
+      ],
+      "subprocess_wall_s": 1319.9672914170078,
+      "raspa_output": "xylene_high-raspa-cbmc/440713/output/output_298.15_40.s0.json",
+      "data": "xylene_high-raspa-cbmc_440713.npz"
+    },
+    {
+      "seed": 440731,
+      "start": "empty",
+      "initial_counts": [
+        0
+      ],
+      "elapsed_at_prefix_s": [
+        981.4331772089936,
+        1301.5372306669888
+      ],
+      "subprocess_wall_s": 1306.3968337089755,
+      "raspa_output": "xylene_high-raspa-cbmc/440731/output/output_298.15_40.s0.json",
+      "data": "xylene_high-raspa-cbmc_440731.npz"
+    },
+    {
+      "seed": 440747,
+      "start": "preloaded",
+      "initial_counts": [
+        140
+      ],
+      "elapsed_at_prefix_s": [
+        1008.4747541669931,
+        1326.5681115000043
+      ],
+      "subprocess_wall_s": 1330.6982097500004,
+      "raspa_output": "xylene_high-raspa-cbmc/440747/output/output_298.15_40.s0.json",
+      "data": "xylene_high-raspa-cbmc_440747.npz"
+    },
+    {
+      "seed": 440753,
+      "start": "preloaded",
+      "initial_counts": [
+        140
+      ],
+      "elapsed_at_prefix_s": [
+        1022.0274746670038,
+        1335.9866152500035
+      ],
+      "subprocess_wall_s": 1338.429631832987,
+      "raspa_output": "xylene_high-raspa-cbmc/440753/output/output_298.15_40.s0.json",
+      "data": "xylene_high-raspa-cbmc_440753.npz"
+    }
+  ],
+  "production_cycle_cap": 800
+}

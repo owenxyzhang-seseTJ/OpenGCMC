@@ -1,0 +1,95 @@
+{
+  "PseudoAtoms": [
+    {
+      "name": "HAA",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": 0.0
+    },
+    {
+      "name": "A000",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 14.53055,
+      "charge": 0.0
+    },
+    {
+      "name": "A001",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 14.53055,
+      "charge": 0.0
+    },
+    {
+      "name": "A002",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 14.53055,
+      "charge": 0.0
+    },
+    {
+      "name": "A003",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 14.53055,
+      "charge": 0.0
+    }
+  ],
+  "SelfInteractions": [
+    {
+      "name": "HAA",
+      "type": "lennard-jones",
+      "parameters": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "A000",
+      "type": "lennard-jones",
+      "parameters": [
+        0.0,
+        3.75
+      ]
+    },
+    {
+      "name": "A001",
+      "type": "lennard-jones",
+      "parameters": [
+        0.0,
+        3.95
+      ]
+    },
+    {
+      "name": "A002",
+      "type": "lennard-jones",
+      "parameters": [
+        0.0,
+        3.95
+      ]
+    },
+    {
+      "name": "A003",
+      "type": "lennard-jones",
+      "parameters": [
+        0.0,
+        3.75
+      ]
+    }
+  ],
+  "MixingRule": "Lorentz-Berthelot",
+  "CutOff": 8.0,
+  "TruncationMethod": "shifted",
+  "TailCorrections": false
+}

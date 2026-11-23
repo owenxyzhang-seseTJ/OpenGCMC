@@ -1,0 +1,23 @@
+{
+  "run_id": "00000000000000000000000000000001",
+  "status": "running",
+  "chains": {
+    "queued": 11,
+    "running": 1
+  },
+  "blocks": 0,
+  "latest_checkpoint_step": null,
+  "errors": [],
+  "controller_wall_seconds": 0.00031154201133176684
+}
+{
+  "run_id": "00000000000000000000000000000001",
+  "status": "completed",
+  "chains": {
+    "completed": 12
+  },
+  "blocks": 24,
+  "latest_checkpoint_step": 28000,
+  "errors": [],
+  "controller_wall_seconds": 4.478389124997193
+}

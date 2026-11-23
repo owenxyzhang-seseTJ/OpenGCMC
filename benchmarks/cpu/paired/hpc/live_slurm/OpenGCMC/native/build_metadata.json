@@ -1,0 +1,26 @@
+{
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-O3",
+    "-DNDEBUG",
+    "-fPIC",
+    "-shared",
+    "-fno-fast-math",
+    "-ffp-contract=off",
+    "<cluster-workspace>/run-verification/OpenGCMC/native/kernels.cpp",
+    "<cluster-workspace>/run-verification/OpenGCMC/native/fast_mc.cpp",
+    "<cluster-workspace>/run-verification/OpenGCMC/native/ewald_state.cpp",
+    "<cluster-workspace>/run-verification/OpenGCMC/native/host_grid.cpp",
+    "-o",
+    "<cluster-workspace>/run-verification/OpenGCMC/poremc/libporemc.so",
+    "-ldl"
+  ],
+  "compiler": "g++ (GCC) 8.5.0 20210514 (Anolis 8.5.0-10.0.1)",
+  "platform": "Linux-4.19.91-26.an8.x86_64-x86_64-with-glibc2.28",
+  "build_seconds": 9.807035635050852,
+  "fast_math": false,
+  "portable": true,
+  "openmp": false,
+  "library": "libporemc.so"
+}

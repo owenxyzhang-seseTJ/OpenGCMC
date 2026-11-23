@@ -1,0 +1,1002 @@
+{
+  "PseudoAtoms": [
+    {
+      "name": "HAA",
+      "framework": true,
+      "print_to_output": false,
+      "element": "Ni",
+      "print_as": "Ni",
+      "mass": 58.6934,
+      "charge": 0.840911139368
+    },
+    {
+      "name": "HAB",
+      "framework": true,
+      "print_to_output": false,
+      "element": "Ni",
+      "print_as": "Ni",
+      "mass": 58.6934,
+      "charge": 1.045951929832
+    },
+    {
+      "name": "HAC",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": 1.471970523206
+    },
+    {
+      "name": "HAD",
+      "framework": true,
+      "print_to_output": false,
+      "element": "O",
+      "print_as": "O",
+      "mass": 15.9994,
+      "charge": -0.827350823533
+    },
+    {
+      "name": "HAE",
+      "framework": true,
+      "print_to_output": false,
+      "element": "H",
+      "print_as": "H",
+      "mass": 1.00794,
+      "charge": 0.385187907596
+    },
+    {
+      "name": "HAF",
+      "framework": true,
+      "print_to_output": false,
+      "element": "O",
+      "print_as": "O",
+      "mass": 15.9994,
+      "charge": -0.683418145821
+    },
+    {
+      "name": "HAG",
+      "framework": true,
+      "print_to_output": false,
+      "element": "O",
+      "print_as": "O",
+      "mass": 15.9994,
+      "charge": -0.584751227745
+    },
+    {
+      "name": "HAH",
+      "framework": true,
+      "print_to_output": false,
+      "element": "O",
+      "print_as": "O",
+      "mass": 15.9994,
+      "charge": -0.526278703437
+    },
+    {
+      "name": "HAI",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.185791639298
+    },
+    {
+      "name": "HAJ",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.039203572867
+    },
+    {
+      "name": "HAK",
+      "framework": true,
+      "print_to_output": false,
+      "element": "H",
+      "print_as": "H",
+      "mass": 1.00794,
+      "charge": 0.116141670547
+    },
+    {
+      "name": "HAL",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.162386232726
+    },
+    {
+      "name": "HAM",
+      "framework": true,
+      "print_to_output": false,
+      "element": "H",
+      "print_as": "H",
+      "mass": 1.00794,
+      "charge": 0.117754959909
+    },
+    {
+      "name": "HAN",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": 0.019861248837
+    },
+    {
+      "name": "HAO",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.157776200514
+    },
+    {
+      "name": "HAP",
+      "framework": true,
+      "print_to_output": false,
+      "element": "H",
+      "print_as": "H",
+      "mass": 1.00794,
+      "charge": 0.117757843079
+    },
+    {
+      "name": "HAQ",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.011645590941
+    },
+    {
+      "name": "HAR",
+      "framework": true,
+      "print_to_output": false,
+      "element": "H",
+      "print_as": "H",
+      "mass": 1.00794,
+      "charge": 0.121925203943
+    },
+    {
+      "name": "HAS",
+      "framework": true,
+      "print_to_output": false,
+      "element": "O",
+      "print_as": "O",
+      "mass": 15.9994,
+      "charge": -0.531210952348
+    },
+    {
+      "name": "HAT",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.192598339247
+    },
+    {
+      "name": "HAU",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.383984604243
+    },
+    {
+      "name": "HAV",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": 0.385046946854
+    },
+    {
+      "name": "HAW",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": 0.022252656655
+    },
+    {
+      "name": "HAX",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": 0.610701320104
+    },
+    {
+      "name": "HAY",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": 0.387291345709
+    },
+    {
+      "name": "HAZ",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.162838196768
+    },
+    {
+      "name": "HBA",
+      "framework": true,
+      "print_to_output": false,
+      "element": "H",
+      "print_as": "H",
+      "mass": 1.00794,
+      "charge": 0.118542591618
+    },
+    {
+      "name": "HBB",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.021702111089
+    },
+    {
+      "name": "HBC",
+      "framework": true,
+      "print_to_output": false,
+      "element": "H",
+      "print_as": "H",
+      "mass": 1.00794,
+      "charge": 0.118119155178
+    },
+    {
+      "name": "HBD",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.021503297365
+    },
+    {
+      "name": "HBE",
+      "framework": true,
+      "print_to_output": false,
+      "element": "H",
+      "print_as": "H",
+      "mass": 1.00794,
+      "charge": 0.121374209523
+    },
+    {
+      "name": "HBF",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.517853489341
+    },
+    {
+      "name": "HBG",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.015587611432
+    },
+    {
+      "name": "HBH",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.123841344517
+    },
+    {
+      "name": "HBI",
+      "framework": true,
+      "print_to_output": false,
+      "element": "H",
+      "print_as": "H",
+      "mass": 1.00794,
+      "charge": 0.118554475454
+    },
+    {
+      "name": "HBJ",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.146410293195
+    },
+    {
+      "name": "HBK",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": 0.286602595624
+    },
+    {
+      "name": "HBL",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.162781630912
+    },
+    {
+      "name": "HBM",
+      "framework": true,
+      "print_to_output": false,
+      "element": "H",
+      "print_as": "H",
+      "mass": 1.00794,
+      "charge": 0.125920874877
+    },
+    {
+      "name": "HBN",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.124079755153
+    },
+    {
+      "name": "HBO",
+      "framework": true,
+      "print_to_output": false,
+      "element": "H",
+      "print_as": "H",
+      "mass": 1.00794,
+      "charge": 0.120841692988
+    },
+    {
+      "name": "HBP",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.394736748498
+    },
+    {
+      "name": "HBQ",
+      "framework": true,
+      "print_to_output": false,
+      "element": "H",
+      "print_as": "H",
+      "mass": 1.00794,
+      "charge": 0.268571641222
+    },
+    {
+      "name": "HBR",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.375239243797
+    },
+    {
+      "name": "HBS",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.168362771046
+    },
+    {
+      "name": "HBT",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": 0.585968281951
+    },
+    {
+      "name": "A000",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 8.847333333333333,
+      "charge": -0.115
+    },
+    {
+      "name": "A001",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 8.847333333333333,
+      "charge": -0.115
+    },
+    {
+      "name": "A002",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 8.847333333333333,
+      "charge": -0.115
+    },
+    {
+      "name": "A003",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 8.847333333333333,
+      "charge": -0.115
+    },
+    {
+      "name": "A004",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 8.847333333333333,
+      "charge": -0.115
+    },
+    {
+      "name": "A005",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 8.847333333333333,
+      "charge": -0.115
+    },
+    {
+      "name": "A006",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 8.847333333333333,
+      "charge": 0.115
+    },
+    {
+      "name": "A007",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 8.847333333333333,
+      "charge": 0.115
+    },
+    {
+      "name": "A008",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 8.847333333333333,
+      "charge": 0.115
+    },
+    {
+      "name": "A009",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 8.847333333333333,
+      "charge": 0.115
+    },
+    {
+      "name": "A010",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 8.847333333333333,
+      "charge": 0.115
+    },
+    {
+      "name": "A011",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 8.847333333333333,
+      "charge": 0.115
+    }
+  ],
+  "SelfInteractions": [
+    {
+      "name": "HAA",
+      "type": "lennard-jones",
+      "parameters": [
+        7.54829,
+        2.52481
+      ]
+    },
+    {
+      "name": "HAB",
+      "type": "lennard-jones",
+      "parameters": [
+        7.54829,
+        2.52481
+      ]
+    },
+    {
+      "name": "HAC",
+      "type": "lennard-jones",
+      "parameters": [
+        173.107,
+        3.59032
+      ]
+    },
+    {
+      "name": "HAD",
+      "type": "lennard-jones",
+      "parameters": [
+        48.1581,
+        3.03315
+      ]
+    },
+    {
+      "name": "HAE",
+      "type": "lennard-jones",
+      "parameters": [
+        7.64893,
+        2.84642
+      ]
+    },
+    {
+      "name": "HAF",
+      "type": "lennard-jones",
+      "parameters": [
+        48.1581,
+        3.03315
+      ]
+    },
+    {
+      "name": "HAG",
+      "type": "lennard-jones",
+      "parameters": [
+        48.1581,
+        3.03315
+      ]
+    },
+    {
+      "name": "HAH",
+      "type": "lennard-jones",
+      "parameters": [
+        48.1581,
+        3.03315
+      ]
+    },
+    {
+      "name": "HAI",
+      "type": "lennard-jones",
+      "parameters": [
+        38.9492,
+        3.26256
+      ]
+    },
+    {
+      "name": "HAJ",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HAK",
+      "type": "lennard-jones",
+      "parameters": [
+        7.64893,
+        2.84642
+      ]
+    },
+    {
+      "name": "HAL",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HAM",
+      "type": "lennard-jones",
+      "parameters": [
+        7.64893,
+        2.84642
+      ]
+    },
+    {
+      "name": "HAN",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HAO",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HAP",
+      "type": "lennard-jones",
+      "parameters": [
+        7.64893,
+        2.84642
+      ]
+    },
+    {
+      "name": "HAQ",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HAR",
+      "type": "lennard-jones",
+      "parameters": [
+        7.64893,
+        2.84642
+      ]
+    },
+    {
+      "name": "HAS",
+      "type": "lennard-jones",
+      "parameters": [
+        48.1581,
+        3.03315
+      ]
+    },
+    {
+      "name": "HAT",
+      "type": "lennard-jones",
+      "parameters": [
+        38.9492,
+        3.26256
+      ]
+    },
+    {
+      "name": "HAU",
+      "type": "lennard-jones",
+      "parameters": [
+        38.9492,
+        3.26256
+      ]
+    },
+    {
+      "name": "HAV",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HAW",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HAX",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HAY",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HAZ",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HBA",
+      "type": "lennard-jones",
+      "parameters": [
+        7.64893,
+        2.84642
+      ]
+    },
+    {
+      "name": "HBB",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HBC",
+      "type": "lennard-jones",
+      "parameters": [
+        7.64893,
+        2.84642
+      ]
+    },
+    {
+      "name": "HBD",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HBE",
+      "type": "lennard-jones",
+      "parameters": [
+        7.64893,
+        2.84642
+      ]
+    },
+    {
+      "name": "HBF",
+      "type": "lennard-jones",
+      "parameters": [
+        38.9492,
+        3.26256
+      ]
+    },
+    {
+      "name": "HBG",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HBH",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HBI",
+      "type": "lennard-jones",
+      "parameters": [
+        7.64893,
+        2.84642
+      ]
+    },
+    {
+      "name": "HBJ",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HBK",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HBL",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HBM",
+      "type": "lennard-jones",
+      "parameters": [
+        7.64893,
+        2.84642
+      ]
+    },
+    {
+      "name": "HBN",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HBO",
+      "type": "lennard-jones",
+      "parameters": [
+        7.64893,
+        2.84642
+      ]
+    },
+    {
+      "name": "HBP",
+      "type": "lennard-jones",
+      "parameters": [
+        38.9492,
+        3.26256
+      ]
+    },
+    {
+      "name": "HBQ",
+      "type": "lennard-jones",
+      "parameters": [
+        7.64893,
+        2.84642
+      ]
+    },
+    {
+      "name": "HBR",
+      "type": "lennard-jones",
+      "parameters": [
+        38.9492,
+        3.26256
+      ]
+    },
+    {
+      "name": "HBS",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "HBT",
+      "type": "lennard-jones",
+      "parameters": [
+        47.8562,
+        3.47299
+      ]
+    },
+    {
+      "name": "A000",
+      "type": "lennard-jones",
+      "parameters": [
+        35.24,
+        3.55
+      ]
+    },
+    {
+      "name": "A001",
+      "type": "lennard-jones",
+      "parameters": [
+        35.24,
+        3.55
+      ]
+    },
+    {
+      "name": "A002",
+      "type": "lennard-jones",
+      "parameters": [
+        35.24,
+        3.55
+      ]
+    },
+    {
+      "name": "A003",
+      "type": "lennard-jones",
+      "parameters": [
+        35.24,
+        3.55
+      ]
+    },
+    {
+      "name": "A004",
+      "type": "lennard-jones",
+      "parameters": [
+        35.24,
+        3.55
+      ]
+    },
+    {
+      "name": "A005",
+      "type": "lennard-jones",
+      "parameters": [
+        35.24,
+        3.55
+      ]
+    },
+    {
+      "name": "A006",
+      "type": "lennard-jones",
+      "parameters": [
+        85.51,
+        3.8
+      ]
+    },
+    {
+      "name": "A007",
+      "type": "lennard-jones",
+      "parameters": [
+        85.51,
+        3.8
+      ]
+    },
+    {
+      "name": "A008",
+      "type": "lennard-jones",
+      "parameters": [
+        15.03,
+        2.42
+      ]
+    },
+    {
+      "name": "A009",
+      "type": "lennard-jones",
+      "parameters": [
+        15.03,
+        2.42
+      ]
+    },
+    {
+      "name": "A010",
+      "type": "lennard-jones",
+      "parameters": [
+        15.03,
+        2.42
+      ]
+    },
+    {
+      "name": "A011",
+      "type": "lennard-jones",
+      "parameters": [
+        15.03,
+        2.42
+      ]
+    }
+  ],
+  "MixingRule": "Lorentz-Berthelot",
+  "CutOff": 12.0,
+  "TruncationMethod": "truncated",
+  "TailCorrections": false,
+  "EwaldParameters": [
+    0.265058,
+    13,
+    13,
+    13
+  ]
+}

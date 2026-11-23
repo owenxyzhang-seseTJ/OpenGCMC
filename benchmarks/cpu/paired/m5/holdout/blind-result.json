@@ -1,0 +1,9 @@
+{
+  "model": "holdout_co2_uio66",
+  "predicted_choice": "delayed",
+  "time_to_precision_s": {
+    "exact": 243.62422370901913,
+    "delayed": null
+  },
+  "faster_qualified_mode": null
+}

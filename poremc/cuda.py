@@ -15,6 +15,8 @@ from .kernels import _Environment,NativeEnvironment,COULOMB_K
 class CudaEnvironment(_Environment):
     def __init__(self,*args,**kwargs):
         kwargs.setdefault('algorithm','cached');super().__init__(*args,**kwargs)
+        if self.shifted == 'force':
+            raise ValueError('linear-force-shifted LJ requires a CPU pair kernel')
         try:import cupy as cp
         except ImportError as e:raise RuntimeError('CUDA requires CuPy and a working CUDA device') from e
         if cp.cuda.runtime.getDeviceCount()<1:raise RuntimeError('no CUDA device available')

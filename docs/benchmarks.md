@@ -1,5 +1,7 @@
 # Direct performance comparisons
 
+[CPU time-to-precision benchmarks](../benchmarks/cpu/README.md) report four-chain measurements for charged and flexible adsorption, matched RASPA3 CBMC runs, and independent NIST distribution checks.
+
 The retained measurements compare the cached native OpenGCMC sampler directly with RASPA3 and gRASPA. Each pair runs serially on the same system. The RASPA3 and gRASPA experiments use separate systems and protocols; their absolute rates appear on separate axes.
 
 ![Measured throughput](assets/opengcmc_performance.svg)

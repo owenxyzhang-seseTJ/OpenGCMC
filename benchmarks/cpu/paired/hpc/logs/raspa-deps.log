@@ -1,0 +1,56 @@
+Retrieving notices: ...working... done
+Channels:
+ - conda-forge
+Platform: linux-64
+Collecting package metadata (repodata.json): ...working... done
+Solving environment: ...working... done
+
+## Package Plan ##
+
+  environment location: <cluster-workspace>/raspa-deps
+
+  added / updated specs:
+    - libblas[build=*openblas]
+    - liblapack
+    - llvm-openmp
+    - ocl-icd
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    _openmp_mutex-4.5          |           20_gnu          28 KB  conda-forge
+    libblas-3.11.0             |12_h4a7cf45_openblas          18 KB  conda-forge
+    libgcc-16.2.0              |       ha9f2e26_7         1.0 MB  conda-forge
+    libgfortran-16.2.0         |       h69a702a_7          28 KB  conda-forge
+    libgfortran5-16.2.0        |       h6b99dfc_7         2.4 MB  conda-forge
+    libgomp-16.2.0             |       he0feb66_7         626 KB  conda-forge
+    liblapack-3.11.0           |12_h47877c9_openblas          18 KB  conda-forge
+    libopenblas-0.3.34         |pthreads_hf13c14d_2         6.5 MB  conda-forge
+    libstdcxx-16.2.0           |       h934c35e_7         6.3 MB  conda-forge
+    llvm-openmp-23.1.6         |       h7148c6a_0         5.8 MB  conda-forge
+    ocl-icd-2.3.4              |       hb03c661_1         107 KB  conda-forge
+    opencl-headers-2025.06.13  |       hecca717_0          54 KB  conda-forge
+    ------------------------------------------------------------
+                                           Total:        22.9 MB
+
+The following NEW packages will be INSTALLED:
+
+  _openmp_mutex      conda-forge/linux-64::_openmp_mutex-4.5-20_gnu 
+  libblas            conda-forge/linux-64::libblas-3.11.0-12_h4a7cf45_openblas 
+  libgcc             conda-forge/linux-64::libgcc-16.2.0-ha9f2e26_7 
+  libgfortran        conda-forge/linux-64::libgfortran-16.2.0-h69a702a_7 
+  libgfortran5       conda-forge/linux-64::libgfortran5-16.2.0-h6b99dfc_7 
+  libgomp            conda-forge/linux-64::libgomp-16.2.0-he0feb66_7 
+  liblapack          conda-forge/linux-64::liblapack-3.11.0-12_h47877c9_openblas 
+  libopenblas        conda-forge/linux-64::libopenblas-0.3.34-pthreads_hf13c14d_2 
+  libstdcxx          conda-forge/linux-64::libstdcxx-16.2.0-h934c35e_7 
+  llvm-openmp        conda-forge/linux-64::llvm-openmp-23.1.6-h7148c6a_0 
+  ocl-icd            conda-forge/linux-64::ocl-icd-2.3.4-hb03c661_1 
+  opencl-headers     conda-forge/linux-64::opencl-headers-2025.06.13-hecca717_0 
+
+
+Preparing transaction: ...working... done
+Verifying transaction: ...working... done
+Executing transaction: ...working... done

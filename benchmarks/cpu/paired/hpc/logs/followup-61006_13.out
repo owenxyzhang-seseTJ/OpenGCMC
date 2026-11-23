@@ -1,0 +1,2 @@
+benchmark_precision.py <cluster-workspace>/followup.RxHccTH9/inputs/xylene_low.json --output benchmarks/cpu/paired/hpc/xylene_low_confirm/xylene_low-delayed-long.json --cache <scratch>/fields --mode delayed --budgets 120000 360000 720000 1440000 --warmup 30000 --mesh 32 --guest-update incremental --workers 4 --seed-offset 150000
+xylene_low delayed total_s 216.475 qualified_wall_s 219.65305127110332

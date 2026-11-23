@@ -1,0 +1,6 @@
+benchmark_precision.py benchmarks/cpu/paired/inputs/ton_butane_dilute.json --output benchmarks/cpu/paired/hpc/ton_butane_dilute/ton_butane_dilute-delayed.json --cache <scratch>/fields --mode delayed --budgets 60000 180000 400000 --warmup 20000 --mesh 32 --guest-update incremental --workers 4
+ton_butane_dilute delayed total_s 9.678 qualified_wall_s 9.825598306953907
+benchmark_precision.py benchmarks/cpu/paired/inputs/ton_butane_dilute_suffix.json --output benchmarks/cpu/paired/hpc/ton_butane_dilute/ton_butane_dilute_suffix-delayed.json --cache <scratch>/fields --mode delayed --budgets 60000 180000 400000 --warmup 20000 --mesh 32 --guest-update incremental --workers 4
+ton_butane_dilute_suffix delayed total_s 8.058 qualified_wall_s 8.058272873982787
+benchmark_raspa3.py benchmarks/cpu/paired/inputs/ton_butane_dilute.json --binary <cluster-workspace>/raspa3_cpu --output benchmarks/cpu/paired/hpc/ton_butane_dilute/ton_butane_dilute-raspa-cbmc.json --mode cbmc --budgets 800 1600 4000 8000 --warmup 1000 --stride 8 --workers 4
+ton_butane_dilute cbmc qualified_wall_s 91.95315545937046

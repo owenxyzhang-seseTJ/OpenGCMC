@@ -1,0 +1,81 @@
+2026-11-23T19:49:54+08:00
+login-node
+JobID|State|Elapsed|ExitCode|NodeList|AllocCPUS
+61001_0|COMPLETED|00:02:17|0:0|compute-01|4
+61001_6|COMPLETED|00:02:19|0:0|compute-02|4
+61001_8|COMPLETED|00:06:41|0:0|compute-03|4
+61001_9|COMPLETED|00:04:27|0:0|compute-02|4
+61001_10|COMPLETED|00:00:13|0:0|compute-02|4
+61002|COMPLETED|00:00:01|0:0|compute-04|1
+61003_1|COMPLETED|00:15:02|0:0|compute-05|4
+61003_2|COMPLETED|00:54:29|0:0|compute-02|4
+61003_3|COMPLETED|00:55:01|0:0|compute-06|4
+61003_4|COMPLETED|00:04:17|0:0|compute-07|4
+61003_5|COMPLETED|00:02:38|0:0|compute-01|4
+61003_7|COMPLETED|00:05:15|0:0|compute-04|4
+61004_11|COMPLETED|00:03:33|0:0|compute-07|4
+61005_12|COMPLETED|00:02:05|0:0|compute-03|4
+61006_13|COMPLETED|00:04:13|0:0|compute-02|4
+61006_14|COMPLETED|00:08:31|0:0|compute-06|4
+61006_15|FAILED|00:00:13|2:0|compute-08|4
+61007|COMPLETED|00:01:25|0:0|compute-09|1
+
+logs/followup-61006_15.out
+python: can't open file '<scratch>/OpenGCMC/tools/benchmark_incremental_kernels.py': [Errno 2] No such file or directory
+
+logs/matched-61003_1.out
+benchmark_precision.py benchmarks/cpu/paired/inputs/xylene_low.json --output benchmarks/cpu/paired/hpc/xylene_low/xylene_low-delayed.json --cache <scratch>/fields --mode delayed --budgets 40000 120000 240000 480000 --warmup 30000 --mesh 32 --guest-update incremental --workers 4
+xylene_low delayed total_s 78.866 qualified_wall_s None
+benchmark_raspa3.py benchmarks/cpu/paired/inputs/xylene_low.json --binary <cluster-workspace>/raspa3_cpu --output benchmarks/cpu/paired/hpc/xylene_low/xylene_low-raspa-cbmc.json --mode cbmc --budgets 800 2400 4800 8000 --warmup 1000 --stride 8 --workers 4
+xylene_low cbmc qualified_wall_s None
+
+logs/matched-61003_2.out
+benchmark_precision.py benchmarks/cpu/paired/inputs/xylene_mid.json --output benchmarks/cpu/paired/hpc/xylene_mid/xylene_mid-delayed.json --cache <scratch>/fields --mode delayed --budgets 40000 120000 240000 480000 --warmup 30000 --mesh 32 --guest-update incremental --workers 4
+xylene_mid delayed total_s 851.919 qualified_wall_s None
+benchmark_precision.py benchmarks/cpu/paired/inputs/xylene_mid.json --output benchmarks/cpu/paired/hpc/xylene_mid/xylene_mid-reference-mh.json --cache <scratch>/fields --mode reference-mh --budgets 40000 120000 240000 480000 --warmup 30000 --mesh 32 --guest-update incremental --workers 4
+xylene_mid reference-mh total_s 1003.57 qualified_wall_s None
+benchmark_precision.py benchmarks/cpu/paired/inputs/xylene_mid.json --output benchmarks/cpu/paired/hpc/xylene_mid/xylene_mid-exact-cost.json --cache <scratch>/fields --mode exact --budgets 8000 20000 40000 --warmup 10000 --mesh 32 --guest-update incremental --workers 4
+xylene_mid exact total_s 288.398 qualified_wall_s None
+benchmark_raspa3.py benchmarks/cpu/paired/inputs/xylene_mid.json --binary <cluster-workspace>/raspa3_cpu --output benchmarks/cpu/paired/hpc/xylene_mid/xylene_mid-raspa-cbmc.json --mode cbmc --budgets 800 2400 4800 8000 --warmup 1000 --stride 8 --workers 4
+xylene_mid: production is capped at 1600 cycles
+xylene_mid cbmc qualified_wall_s None
+
+logs/matched-61003_3.out
+benchmark_precision.py benchmarks/cpu/paired/inputs/xylene_high.json --output benchmarks/cpu/paired/hpc/xylene_high/xylene_high-delayed.json --cache <scratch>/fields --mode delayed --budgets 40000 120000 240000 480000 --warmup 30000 --mesh 32 --guest-update incremental --workers 4
+xylene_high delayed total_s 1676.895 qualified_wall_s None
+benchmark_raspa3.py benchmarks/cpu/paired/inputs/xylene_high.json --binary <cluster-workspace>/raspa3_cpu --output benchmarks/cpu/paired/hpc/xylene_high/xylene_high-raspa-cbmc.json --mode cbmc --budgets 400 1000 2000 3600 --warmup 1000 --stride 8 --workers 4
+xylene_high: production is capped at 800 cycles
+xylene_high cbmc qualified_wall_s None
+
+logs/matched-61003_4.out
+benchmark_precision.py benchmarks/cpu/paired/inputs/butane_harmonic_ideal.json --output benchmarks/cpu/paired/hpc/ton_butane/butane_harmonic_ideal-delayed.json --cache <scratch>/fields --mode delayed --budgets 20000 60000 120000 --warmup 6000 --mesh 32 --guest-update incremental --workers 4
+butane_harmonic_ideal delayed total_s 1.931 qualified_wall_s 0.4473607740364969
+benchmark_raspa3.py benchmarks/cpu/paired/inputs/butane_harmonic_ideal.json --binary <cluster-workspace>/raspa3_cpu --output benchmarks/cpu/paired/hpc/ton_butane/butane_harmonic_ideal-raspa-cbmc.json --mode cbmc --budgets 1000 2500 5000 --warmup 1000 --stride 5 --workers 4
+butane_harmonic_ideal cbmc qualified_wall_s 16.824774652719498
+benchmark_precision.py benchmarks/cpu/paired/inputs/ton_butane_harmonic.json --output benchmarks/cpu/paired/hpc/ton_butane/ton_butane_harmonic-delayed.json --cache <scratch>/fields --mode delayed --budgets 100000 240000 480000 840000 --warmup 35000 --mesh 32 --guest-update incremental --workers 4
+ton_butane_harmonic delayed total_s 29.63 qualified_wall_s None
+benchmark_precision.py benchmarks/cpu/paired/inputs/ton_butane_harmonic_suffix.json --output benchmarks/cpu/paired/hpc/ton_butane/ton_butane_harmonic_suffix-delayed.json --cache <scratch>/fields --mode delayed --budgets 100000 240000 480000 840000 --warmup 35000 --mesh 32 --guest-update incremental --workers 4
+ton_butane_harmonic_suffix delayed total_s 24.245 qualified_wall_s None
+benchmark_raspa3.py benchmarks/cpu/paired/inputs/ton_butane_harmonic.json --binary <cluster-workspace>/raspa3_cpu --output benchmarks/cpu/paired/hpc/ton_butane/ton_butane_harmonic-raspa-cbmc.json --mode cbmc --budgets 2000 6000 12000 21000 --warmup 2500 --stride 10 --workers 4
+ton_butane_harmonic cbmc qualified_wall_s None
+
+logs/matched-61003_5.out
+benchmark_precision.py benchmarks/cpu/paired/inputs/irmof_mixture.json --output benchmarks/cpu/paired/hpc/irmof_mixture/irmof_mixture-delayed.json --cache <scratch>/fields --mode delayed --budgets 20000 60000 120000 240000 --warmup 20000 --mesh 32 --guest-update incremental --workers 4
+irmof_mixture delayed total_s 8.267 qualified_wall_s 3.3497321498580277
+benchmark_raspa3.py benchmarks/cpu/paired/inputs/irmof_mixture.json --binary <cluster-workspace>/raspa3_cpu --output benchmarks/cpu/paired/hpc/irmof_mixture/irmof_mixture-raspa-cbmc.json --mode cbmc --budgets 1000 3000 6000 12000 --warmup 1000 --stride 5 --workers 4
+irmof_mixture cbmc qualified_wall_s 20.802906799595803
+
+logs/matched-61003_7.out
+benchmark_raspa3.py benchmarks/cpu/paired/inputs/irmof_mixture.json --binary <cluster-workspace>/raspa3_cpu --output benchmarks/cpu/paired/hpc/cfcmc/irmof_mixture-raspa-cfcmc.json --mode cfcmc --budgets 5000 10000 15000 --warmup 15000 --stride 10 --workers 4
+irmof_mixture cfcmc qualified_wall_s None
+
+logs/dilute-61005_12.out
+benchmark_precision.py benchmarks/cpu/paired/inputs/ton_butane_dilute.json --output benchmarks/cpu/paired/hpc/ton_butane_dilute/ton_butane_dilute-delayed.json --cache <scratch>/fields --mode delayed --budgets 60000 180000 400000 --warmup 20000 --mesh 32 --guest-update incremental --workers 4
+ton_butane_dilute delayed total_s 9.678 qualified_wall_s 9.825598306953907
+benchmark_precision.py benchmarks/cpu/paired/inputs/ton_butane_dilute_suffix.json --output benchmarks/cpu/paired/hpc/ton_butane_dilute/ton_butane_dilute_suffix-delayed.json --cache <scratch>/fields --mode delayed --budgets 60000 180000 400000 --warmup 20000 --mesh 32 --guest-update incremental --workers 4
+ton_butane_dilute_suffix delayed total_s 8.058 qualified_wall_s 8.058272873982787
+benchmark_raspa3.py benchmarks/cpu/paired/inputs/ton_butane_dilute.json --binary <cluster-workspace>/raspa3_cpu --output benchmarks/cpu/paired/hpc/ton_butane_dilute/ton_butane_dilute-raspa-cbmc.json --mode cbmc --budgets 800 1600 4000 8000 --warmup 1000 --stride 8 --workers 4
+ton_butane_dilute cbmc qualified_wall_s 91.95315545937046
+
+logs/blind-budget-61004_11.out
+holdout_co2_uio66 delayed total_s 183.704 qualified_wall_s 94.34181502508

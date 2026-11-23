@@ -22,7 +22,7 @@ struct PoreMCFastConfig {
   uint64_t host_atoms;
   const double *host_positions, *host_charge;
   const char *cuda_library;
-  // 0.6: exact half-spectrum algebra and optional reference-CBMC screening.
+  // Exact half-spectrum algebra and optional reference-CBMC screening.
   int32_t ewald_half_spectrum, sampling_mode, host_grid_mesh[3];
   double ewald_k_cutoff, host_grid_cap, grid_root_bias;
   const char *host_grid_cache, *host_grid_key;
@@ -34,15 +34,27 @@ extern "C" {
 size_t poremc_fast_config_size(void);
 const char* poremc_fast_last_error(void);
 void* poremc_fast_create(const struct PoreMCFastConfig* c);
+// Component entries share the simulation settings in configs[0].
+void* poremc_fast_create_components(const struct PoreMCFastConfig* configs,size_t count,
+                                   const double* weights,int local,size_t pme_refresh,
+                                   int background,int partial_regrowth,
+                                   const char* lj_prefix,const char* electrostatic_path);
 void poremc_fast_destroy(void* handle);
 int poremc_fast_add(void* handle,const double* coordinates);
 int poremc_fast_add_raw(void* handle,const double* coordinates);
+int poremc_fast_add_component(void* handle,size_t species,const double* coordinates,int raw);
+int poremc_fast_counts(void* handle,uint64_t* counts);
+int poremc_fast_set_activities(void* handle,const double* activities);
+int poremc_fast_export_particles(void* handle,uint64_t* species,double* xyz);
 size_t poremc_fast_count(void* handle);
 uint64_t poremc_fast_step_count(void* handle);
 int poremc_fast_positions(void* handle,double* coordinates);
 int poremc_fast_counters(void* handle,uint64_t* counters);
 int poremc_fast_run(void* handle,uint64_t burnin,uint64_t steps,uint64_t sample_every,
                    uint64_t* counts,double* energies,int record_energy,double* timing);
+// The count output is row-major [samples, components].
+int poremc_fast_run_components(void* handle,uint64_t burnin,uint64_t steps,uint64_t sample_every,
+                               uint64_t* counts,double* energies,int record_energy,double* timing);
 int poremc_fast_total_energy(void* handle,double* energy);
 size_t poremc_fast_rng(void* handle,char* buffer,size_t capacity);
 int poremc_fast_restore_bookkeeping(void* handle,const char* rng,uint64_t steps,const uint64_t* counters);
@@ -58,6 +70,11 @@ int poremc_fast_surrogate_site_energies(void* handle,size_t exclude,size_t prefi
                                       const double* prefix,size_t batches,const double* trials,double* energies);
 int poremc_fast_surrogate_molecule_energies(void* handle,size_t exclude,size_t batches,
                                           const double* trials,double* energies);
+int poremc_fast_probe_sites(void* handle,size_t species,size_t exclude,size_t prefix_atoms,
+                           const double* prefix,size_t batches,const double* trials,
+                           int reference,double* energies);
+int poremc_fast_probe_molecules(void* handle,size_t species,size_t exclude,size_t batches,
+                               const double* trials,int reference,double* energies);
 size_t poremc_fast_acceleration_info(void* handle,char* buffer,size_t capacity);
 int poremc_fast_acceleration_counters(void* handle,uint64_t* output);
 int poremc_fast_restore_acceleration_counters(void* handle,const uint64_t* input);

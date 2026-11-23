@@ -336,7 +336,12 @@ class GCMC:
         from .free_energy import HarmonicCountBias
         if self.count_bias is not None and not isinstance(self.count_bias, HarmonicCountBias):
             raise TypeError("checkpoint requires a serializable HarmonicCountBias")
-        return {"count_bias": None if self.count_bias is None else self.count_bias.__dict__, "schema": "poremc-gcmc-checkpoint-v1", "root_proposal":self.root_proposal.to_dict() if self.root_proposal is not None else None, "species": [s.to_dict() for s in self.species],
+        bias = None if self.count_bias is None else vars(self.count_bias).copy()
+        if bias is not None:
+            for bound in ("lower", "upper"):
+                if not math.isfinite(bias[bound]):
+                    del bias[bound]
+        return {"count_bias": bias, "schema": "poremc-gcmc-checkpoint-v1", "root_proposal":self.root_proposal.to_dict() if self.root_proposal is not None else None, "species": [s.to_dict() for s in self.species],
                 "cell": self.cell.tolist(), "temperature": self.temperature, "activities": self.activities.tolist(),
                 "trials": self.trials, "move_weights": dict(zip(self.MOVE_NAMES, self.move_probabilities.tolist())),
                 "species_probabilities": self.species_probabilities.tolist(),
@@ -357,7 +362,7 @@ class GCMC:
     @classmethod
     def from_checkpoint(cls, path, potential, target_potential=None):
         """Restore exact RNG and state; caller supplies the identical Hamiltonian."""
-        data = json.loads(Path(path).read_text(encoding="utf8"))
+        data = path if isinstance(path, dict) else json.loads(Path(path).read_text(encoding="utf8"))
         if data.get("schema") != "poremc-gcmc-checkpoint-v1":
             raise ValueError("unsupported checkpoint schema")
         if data["requires_target_potential"] != (target_potential is not None):

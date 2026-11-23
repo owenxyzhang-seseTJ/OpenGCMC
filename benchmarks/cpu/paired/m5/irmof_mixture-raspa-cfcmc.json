@@ -1,0 +1,83 @@
+{
+  "expanded_ensemble": true,
+  "qualified_wall_s": null,
+  "production_budgets": [
+    5000,
+    10000,
+    15000
+  ],
+  "case": "irmof_mixture",
+  "engine": "RASPA3",
+  "mode": "cfcmc",
+  "platform": "macOS-26.5-arm64-arm-64bit-Mach-O",
+  "warmup_cycles": 15000,
+  "sample_every": 10,
+  "workers": 4,
+  "chains": [
+    {
+      "seed": 440713,
+      "start": "empty",
+      "initial_counts": [
+        0,
+        0
+      ],
+      "elapsed_at_prefix_s": [
+        143.76048145801178,
+        180.33044445799896,
+        216.22301650000736
+      ],
+      "subprocess_wall_s": 216.04447183400043,
+      "raspa_output": "irmof_mixture-raspa-cfcmc/440713/output/output_300_2e+05.s0.json",
+      "data": "irmof_mixture-raspa-cfcmc_440713.npz"
+    },
+    {
+      "seed": 440731,
+      "start": "empty",
+      "initial_counts": [
+        0,
+        0
+      ],
+      "elapsed_at_prefix_s": [
+        140.37410099999397,
+        172.75293716602027,
+        209.70660041601514
+      ],
+      "subprocess_wall_s": 209.52712670800975,
+      "raspa_output": "irmof_mixture-raspa-cfcmc/440731/output/output_300_2e+05.s0.json",
+      "data": "irmof_mixture-raspa-cfcmc_440731.npz"
+    },
+    {
+      "seed": 440747,
+      "start": "preloaded",
+      "initial_counts": [
+        7,
+        8
+      ],
+      "elapsed_at_prefix_s": [
+        148.8154904160183,
+        185.1460575000092,
+        218.75215479100007
+      ],
+      "subprocess_wall_s": 218.4677286670194,
+      "raspa_output": "irmof_mixture-raspa-cfcmc/440747/output/output_300_2e+05.s0.json",
+      "data": "irmof_mixture-raspa-cfcmc_440747.npz"
+    },
+    {
+      "seed": 440753,
+      "start": "preloaded",
+      "initial_counts": [
+        7,
+        8
+      ],
+      "elapsed_at_prefix_s": [
+        139.95097662499757,
+        175.9256146250118,
+        212.99984820801183
+      ],
+      "subprocess_wall_s": 212.81931458300096,
+      "raspa_output": "irmof_mixture-raspa-cfcmc/440753/output/output_300_2e+05.s0.json",
+      "data": "irmof_mixture-raspa-cfcmc_440753.npz"
+    }
+  ],
+  "production_cycle_cap": null
+}

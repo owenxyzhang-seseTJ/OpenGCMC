@@ -1,0 +1,27 @@
+[
+  {
+    "case": "xylene_low",
+    "OpenGCMC_energy_K": -47313.768186600355,
+    "initial_counts": [
+      10
+    ],
+    "RASPA3_exit": 0
+  },
+  {
+    "case": "ton_butane",
+    "OpenGCMC_energy_K": -105610.5384105145,
+    "initial_counts": [
+      16
+    ],
+    "RASPA3_exit": 0
+  },
+  {
+    "case": "irmof_mixture",
+    "OpenGCMC_energy_K": -12978.738402523348,
+    "initial_counts": [
+      7,
+      8
+    ],
+    "RASPA3_exit": 0
+  }
+]

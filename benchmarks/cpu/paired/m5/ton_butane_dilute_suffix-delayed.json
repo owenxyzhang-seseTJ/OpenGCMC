@@ -1,0 +1,1730 @@
+{
+  "checkpoints": [
+    {
+      "budget": 60000,
+      "draws_per_chain": 300,
+      "batch_wall_s": 1.9453411669819616,
+      "observables": {
+        "count_0": {
+          "mean": 4.4816666666666665,
+          "mcse": 0.17427362478670227,
+          "ci95": [
+            3.9270502133558267,
+            5.036283119977506
+          ],
+          "rank_split_rhat": 1.032516982526631,
+          "ess": 103.79177652260904,
+          "chains": 4,
+          "draws_per_chain": 300
+        },
+        "trans_fraction": {
+          "mean": 0.8469691335068799,
+          "mcse": 0.011628593436691767,
+          "ci95": [
+            0.8099617592886338,
+            0.8839765077251259
+          ],
+          "rank_split_rhat": 1.0141943275226164,
+          "ess": 232.7960170794774,
+          "chains": 4,
+          "draws_per_chain": 300
+        }
+      },
+      "met": false
+    },
+    {
+      "budget": 180000,
+      "draws_per_chain": 900,
+      "batch_wall_s": 3.6314674589957576,
+      "observables": {
+        "count_0": {
+          "mean": 4.495,
+          "mcse": 0.1787177119821414,
+          "ci95": [
+            3.9262404778136766,
+            5.063759522186324
+          ],
+          "rank_split_rhat": 1.0284662750742253,
+          "ess": 91.0284100957202,
+          "chains": 4,
+          "draws_per_chain": 900
+        },
+        "trans_fraction": {
+          "mean": 0.8443950067976763,
+          "mcse": 0.011249763720214977,
+          "ci95": [
+            0.8085932378109635,
+            0.8801967757843892
+          ],
+          "rank_split_rhat": 1.009726166958086,
+          "ess": 238.12175345147818,
+          "chains": 4,
+          "draws_per_chain": 900
+        }
+      },
+      "met": false
+    },
+    {
+      "budget": 400000,
+      "draws_per_chain": 2000,
+      "batch_wall_s": 6.73492362498655,
+      "observables": {
+        "count_0": {
+          "mean": 4.45125,
+          "mcse": 0.10570763532813825,
+          "ci95": [
+            4.114841126509689,
+            4.787658873490311
+          ],
+          "rank_split_rhat": 1.0091056833735235,
+          "ess": 256.9765173088761,
+          "chains": 4,
+          "draws_per_chain": 2000
+        },
+        "trans_fraction": {
+          "mean": 0.8473462510530749,
+          "mcse": 0.006298870875926464,
+          "ci95": [
+            0.8273004327065236,
+            0.8673920693996262
+          ],
+          "rank_split_rhat": 1.0037347681824753,
+          "ess": 756.9893327290608,
+          "chains": 4,
+          "draws_per_chain": 2000
+        }
+      },
+      "met": true
+    }
+  ],
+  "qualified_wall_s": 6.73492362498655,
+  "start_group_final_means": {
+    "empty": [
+      4.27925
+    ],
+    "preload": [
+      4.62325
+    ]
+  },
+  "occupancy_distribution": [
+    [
+      0,
+      0.005125
+    ],
+    [
+      1,
+      0.0265
+    ],
+    [
+      2,
+      0.095625
+    ],
+    [
+      3,
+      0.170125
+    ],
+    [
+      4,
+      0.216875
+    ],
+    [
+      5,
+      0.219
+    ],
+    [
+      6,
+      0.152875
+    ],
+    [
+      7,
+      0.07775
+    ],
+    [
+      8,
+      0.027
+    ],
+    [
+      9,
+      0.00825
+    ],
+    [
+      10,
+      0.00075
+    ],
+    [
+      11,
+      0.000125
+    ]
+  ],
+  "precision_goals": {
+    "count_0": 0.15,
+    "trans_fraction": 0.025
+  },
+  "case": "ton_butane_dilute_suffix",
+  "platform": "macOS-26.5-arm64-arm-64bit-Mach-O",
+  "mode": "delayed",
+  "mesh": 32,
+  "guest_update": "incremental",
+  "force_cold": false,
+  "warmup": 20000,
+  "workers": 4,
+  "chains": [
+    {
+      "seed": 440713,
+      "start": "empty",
+      "initial_counts": [
+        0
+      ],
+      "preparation_s": 0.05825354199623689,
+      "elapsed_at_prefix_s": [
+        1.7702712919854093,
+        3.4398996669915505,
+        6.529487041989341
+      ],
+      "last_energy_K": -31806.99044129852,
+      "energy_closure_K": 7.275957614183426e-12,
+      "moves_after_warmup": {
+        "insert": {
+          "attempted": 3214,
+          "accepted": 132
+        },
+        "delete": {
+          "attempted": 3180,
+          "accepted": 126
+        },
+        "translate": {
+          "attempted": 4616,
+          "accepted": 473
+        },
+        "rotate": {
+          "attempted": 1957,
+          "accepted": 1024
+        },
+        "regrow": {
+          "attempted": 7033,
+          "accepted": 383
+        }
+      },
+      "acceleration_after_warmup": {
+        "sampling_mode": "delayed",
+        "selected_correction_backend": "cpu",
+        "grid_root_bias": 0.78,
+        "stages": {
+          "insert": {
+            "stage1_evaluated": 3214,
+            "stage1_passed": 284,
+            "exact_evaluations": 284,
+            "stage2_accepted": 132
+          },
+          "delete": {
+            "stage1_evaluated": 3177,
+            "stage1_passed": 242,
+            "exact_evaluations": 242,
+            "stage2_accepted": 126
+          },
+          "translate": {
+            "stage1_evaluated": 4605,
+            "stage1_passed": 718,
+            "exact_evaluations": 1436,
+            "stage2_accepted": 473
+          },
+          "rotate": {
+            "stage1_evaluated": 1951,
+            "stage1_passed": 1253,
+            "exact_evaluations": 2506,
+            "stage2_accepted": 1024
+          },
+          "regrow": {
+            "stage1_evaluated": 7028,
+            "stage1_passed": 494,
+            "exact_evaluations": 988,
+            "stage2_accepted": 383
+          }
+        },
+        "stage1_evaluated": 19975,
+        "stage1_passed": 2991,
+        "exact_evaluations": 5456,
+        "stage2_accepted": 2138,
+        "host_grid": {
+          "builds": 0,
+          "cache_loads": 2,
+          "cache_writes": 0,
+          "raw_field_builds": 0,
+          "raw_field_loads": 2,
+          "lookups": 469994,
+          "cubic_lookups": 0,
+          "linear_lookups": 0,
+          "boltzmann_lookups": 469994,
+          "exact_fallbacks": 0,
+          "steep_interpolation": "boltzmann",
+          "reference_cap_K": 100000,
+          "mesh_points": 32768,
+          "lj_fields": 2,
+          "site_types": 2,
+          "bytes": 2322272,
+          "steep_cells": 65536
+        }
+      },
+      "profiles": [
+        {
+          "production_wall_s": 0.9798595829925034,
+          "steps": 60000,
+          "acceleration": {
+            "sampling_mode": "delayed",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.78,
+            "stages": {
+              "insert": {
+                "stage1_evaluated": 12719,
+                "stage1_passed": 1088,
+                "exact_evaluations": 1088,
+                "stage2_accepted": 517
+              },
+              "delete": {
+                "stage1_evaluated": 12585,
+                "stage1_passed": 962,
+                "exact_evaluations": 962,
+                "stage2_accepted": 514
+              },
+              "translate": {
+                "stage1_evaluated": 18248,
+                "stage1_passed": 2765,
+                "exact_evaluations": 5530,
+                "stage2_accepted": 1832
+              },
+              "rotate": {
+                "stage1_evaluated": 7838,
+                "stage1_passed": 5049,
+                "exact_evaluations": 10098,
+                "stage2_accepted": 4200
+              },
+              "regrow": {
+                "stage1_evaluated": 27972,
+                "stage1_passed": 1957,
+                "exact_evaluations": 3914,
+                "stage2_accepted": 1474
+              }
+            },
+            "stage1_evaluated": 79362,
+            "stage1_passed": 11821,
+            "exact_evaluations": 21592,
+            "stage2_accepted": 8537,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 2,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 2,
+              "lookups": 1775082,
+              "cubic_lookups": 0,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 1775082,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 65536
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 12719,
+              "accepted": 517
+            },
+            "delete": {
+              "attempted": 12713,
+              "accepted": 514
+            },
+            "translate": {
+              "attempted": 18412,
+              "accepted": 1832
+            },
+            "rotate": {
+              "attempted": 7900,
+              "accepted": 4200
+            },
+            "regrow": {
+              "attempted": 28256,
+              "accepted": 1474
+            }
+          },
+          "long_range": {
+            "method": "none",
+            "backend": "none"
+          }
+        },
+        {
+          "production_wall_s": 2.649487082991982,
+          "steps": 180000,
+          "acceleration": {
+            "sampling_mode": "delayed",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.78,
+            "stages": {
+              "insert": {
+                "stage1_evaluated": 32050,
+                "stage1_passed": 2518,
+                "exact_evaluations": 2518,
+                "stage2_accepted": 1213
+              },
+              "delete": {
+                "stage1_evaluated": 31661,
+                "stage1_passed": 2256,
+                "exact_evaluations": 2256,
+                "stage2_accepted": 1207
+              },
+              "translate": {
+                "stage1_evaluated": 45823,
+                "stage1_passed": 6954,
+                "exact_evaluations": 13908,
+                "stage2_accepted": 4582
+              },
+              "rotate": {
+                "stage1_evaluated": 19799,
+                "stage1_passed": 12935,
+                "exact_evaluations": 25870,
+                "stage2_accepted": 10885
+              },
+              "regrow": {
+                "stage1_evaluated": 69719,
+                "stage1_passed": 4668,
+                "exact_evaluations": 9336,
+                "stage2_accepted": 3581
+              }
+            },
+            "stage1_evaluated": 199052,
+            "stage1_passed": 29331,
+            "exact_evaluations": 53888,
+            "stage2_accepted": 21468,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 2,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 2,
+              "lookups": 4392388,
+              "cubic_lookups": 0,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 4392388,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 65536
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 32050,
+              "accepted": 1213
+            },
+            "delete": {
+              "attempted": 31848,
+              "accepted": 1207
+            },
+            "translate": {
+              "attempted": 46063,
+              "accepted": 4582
+            },
+            "rotate": {
+              "attempted": 19896,
+              "accepted": 10885
+            },
+            "regrow": {
+              "attempted": 70143,
+              "accepted": 3581
+            }
+          },
+          "long_range": {
+            "method": "none",
+            "backend": "none"
+          }
+        },
+        {
+          "production_wall_s": 5.73907404197962,
+          "steps": 400000,
+          "acceleration": {
+            "sampling_mode": "delayed",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.78,
+            "stages": {
+              "insert": {
+                "stage1_evaluated": 67048,
+                "stage1_passed": 5279,
+                "exact_evaluations": 5279,
+                "stage2_accepted": 2616
+              },
+              "delete": {
+                "stage1_evaluated": 66568,
+                "stage1_passed": 4844,
+                "exact_evaluations": 4844,
+                "stage2_accepted": 2611
+              },
+              "translate": {
+                "stage1_evaluated": 96114,
+                "stage1_passed": 15048,
+                "exact_evaluations": 30096,
+                "stage2_accepted": 9906
+              },
+              "rotate": {
+                "stage1_evaluated": 41529,
+                "stage1_passed": 27174,
+                "exact_evaluations": 54348,
+                "stage2_accepted": 22793
+              },
+              "regrow": {
+                "stage1_evaluated": 146727,
+                "stage1_passed": 10008,
+                "exact_evaluations": 20016,
+                "stage2_accepted": 7636
+              }
+            },
+            "stage1_evaluated": 417986,
+            "stage1_passed": 62353,
+            "exact_evaluations": 114583,
+            "stage2_accepted": 45562,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 2,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 2,
+              "lookups": 9196108,
+              "cubic_lookups": 0,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 9196108,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 65536
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 67048,
+              "accepted": 2616
+            },
+            "delete": {
+              "attempted": 66958,
+              "accepted": 2611
+            },
+            "translate": {
+              "attempted": 96632,
+              "accepted": 9906
+            },
+            "rotate": {
+              "attempted": 41760,
+              "accepted": 22793
+            },
+            "regrow": {
+              "attempted": 147602,
+              "accepted": 7636
+            }
+          },
+          "long_range": {
+            "method": "none",
+            "backend": "none"
+          }
+        }
+      ],
+      "cache": {
+        "builds": 0,
+        "cache_loads": 2,
+        "cache_writes": 0,
+        "raw_field_builds": 0,
+        "raw_field_loads": 2,
+        "lookups": 9196108,
+        "cubic_lookups": 0,
+        "linear_lookups": 0,
+        "boltzmann_lookups": 9196108,
+        "exact_fallbacks": 0,
+        "steep_interpolation": "boltzmann",
+        "reference_cap_K": 100000,
+        "mesh_points": 32768,
+        "lj_fields": 2,
+        "site_types": 2,
+        "bytes": 2322272,
+        "steep_cells": 65536
+      },
+      "data": "ton_butane_dilute_suffix-delayed_440713.npz"
+    },
+    {
+      "seed": 440731,
+      "start": "empty",
+      "initial_counts": [
+        0
+      ],
+      "preparation_s": 0.05413245898671448,
+      "elapsed_at_prefix_s": [
+        1.8138410419924185,
+        3.463954125007149,
+        6.575429499993334
+      ],
+      "last_energy_K": -22104.06712646845,
+      "energy_closure_K": 3.637978807091713e-12,
+      "moves_after_warmup": {
+        "insert": {
+          "attempted": 3144,
+          "accepted": 116
+        },
+        "delete": {
+          "attempted": 3206,
+          "accepted": 115
+        },
+        "translate": {
+          "attempted": 4664,
+          "accepted": 425
+        },
+        "rotate": {
+          "attempted": 1941,
+          "accepted": 1066
+        },
+        "regrow": {
+          "attempted": 7045,
+          "accepted": 326
+        }
+      },
+      "acceleration_after_warmup": {
+        "sampling_mode": "delayed",
+        "selected_correction_backend": "cpu",
+        "grid_root_bias": 0.78,
+        "stages": {
+          "insert": {
+            "stage1_evaluated": 3144,
+            "stage1_passed": 239,
+            "exact_evaluations": 239,
+            "stage2_accepted": 116
+          },
+          "delete": {
+            "stage1_evaluated": 3179,
+            "stage1_passed": 220,
+            "exact_evaluations": 220,
+            "stage2_accepted": 115
+          },
+          "translate": {
+            "stage1_evaluated": 4621,
+            "stage1_passed": 640,
+            "exact_evaluations": 1280,
+            "stage2_accepted": 425
+          },
+          "rotate": {
+            "stage1_evaluated": 1921,
+            "stage1_passed": 1264,
+            "exact_evaluations": 2528,
+            "stage2_accepted": 1066
+          },
+          "regrow": {
+            "stage1_evaluated": 6978,
+            "stage1_passed": 406,
+            "exact_evaluations": 812,
+            "stage2_accepted": 326
+          }
+        },
+        "stage1_evaluated": 19843,
+        "stage1_passed": 2769,
+        "exact_evaluations": 5079,
+        "stage2_accepted": 2048,
+        "host_grid": {
+          "builds": 0,
+          "cache_loads": 2,
+          "cache_writes": 0,
+          "raw_field_builds": 0,
+          "raw_field_loads": 2,
+          "lookups": 466552,
+          "cubic_lookups": 0,
+          "linear_lookups": 0,
+          "boltzmann_lookups": 466552,
+          "exact_fallbacks": 0,
+          "steep_interpolation": "boltzmann",
+          "reference_cap_K": 100000,
+          "mesh_points": 32768,
+          "lj_fields": 2,
+          "site_types": 2,
+          "bytes": 2322272,
+          "steep_cells": 65536
+        }
+      },
+      "profiles": [
+        {
+          "production_wall_s": 1.0164242500031833,
+          "steps": 60000,
+          "acceleration": {
+            "sampling_mode": "delayed",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.78,
+            "stages": {
+              "insert": {
+                "stage1_evaluated": 12707,
+                "stage1_passed": 987,
+                "exact_evaluations": 987,
+                "stage2_accepted": 492
+              },
+              "delete": {
+                "stage1_evaluated": 12764,
+                "stage1_passed": 910,
+                "exact_evaluations": 910,
+                "stage2_accepted": 487
+              },
+              "translate": {
+                "stage1_evaluated": 18429,
+                "stage1_passed": 2907,
+                "exact_evaluations": 5814,
+                "stage2_accepted": 1946
+              },
+              "rotate": {
+                "stage1_evaluated": 7848,
+                "stage1_passed": 5202,
+                "exact_evaluations": 10404,
+                "stage2_accepted": 4374
+              },
+              "regrow": {
+                "stage1_evaluated": 28090,
+                "stage1_passed": 1802,
+                "exact_evaluations": 3604,
+                "stage2_accepted": 1371
+              }
+            },
+            "stage1_evaluated": 79838,
+            "stage1_passed": 11808,
+            "exact_evaluations": 21719,
+            "stage2_accepted": 8670,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 2,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 2,
+              "lookups": 1782102,
+              "cubic_lookups": 0,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 1782102,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 65536
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 12707,
+              "accepted": 492
+            },
+            "delete": {
+              "attempted": 12793,
+              "accepted": 487
+            },
+            "translate": {
+              "attempted": 18473,
+              "accepted": 1946
+            },
+            "rotate": {
+              "attempted": 7869,
+              "accepted": 4374
+            },
+            "regrow": {
+              "attempted": 28158,
+              "accepted": 1371
+            }
+          },
+          "long_range": {
+            "method": "none",
+            "backend": "none"
+          }
+        },
+        {
+          "production_wall_s": 2.6665374170115683,
+          "steps": 180000,
+          "acceleration": {
+            "sampling_mode": "delayed",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.78,
+            "stages": {
+              "insert": {
+                "stage1_evaluated": 31956,
+                "stage1_passed": 2601,
+                "exact_evaluations": 2601,
+                "stage2_accepted": 1294
+              },
+              "delete": {
+                "stage1_evaluated": 31983,
+                "stage1_passed": 2368,
+                "exact_evaluations": 2368,
+                "stage2_accepted": 1292
+              },
+              "translate": {
+                "stage1_evaluated": 45830,
+                "stage1_passed": 7343,
+                "exact_evaluations": 14686,
+                "stage2_accepted": 4839
+              },
+              "rotate": {
+                "stage1_evaluated": 19604,
+                "stage1_passed": 12943,
+                "exact_evaluations": 25886,
+                "stage2_accepted": 10874
+              },
+              "regrow": {
+                "stage1_evaluated": 70140,
+                "stage1_passed": 4796,
+                "exact_evaluations": 9592,
+                "stage2_accepted": 3606
+              }
+            },
+            "stage1_evaluated": 199513,
+            "stage1_passed": 30051,
+            "exact_evaluations": 55133,
+            "stage2_accepted": 21905,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 2,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 2,
+              "lookups": 4410934,
+              "cubic_lookups": 0,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 4410934,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 65536
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 31956,
+              "accepted": 1294
+            },
+            "delete": {
+              "attempted": 32065,
+              "accepted": 1292
+            },
+            "translate": {
+              "attempted": 45953,
+              "accepted": 4839
+            },
+            "rotate": {
+              "attempted": 19662,
+              "accepted": 10874
+            },
+            "regrow": {
+              "attempted": 70364,
+              "accepted": 3606
+            }
+          },
+          "long_range": {
+            "method": "none",
+            "backend": "none"
+          }
+        },
+        {
+          "production_wall_s": 5.778012166992994,
+          "steps": 400000,
+          "acceleration": {
+            "sampling_mode": "delayed",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.78,
+            "stages": {
+              "insert": {
+                "stage1_evaluated": 66961,
+                "stage1_passed": 5382,
+                "exact_evaluations": 5382,
+                "stage2_accepted": 2671
+              },
+              "delete": {
+                "stage1_evaluated": 66621,
+                "stage1_passed": 5056,
+                "exact_evaluations": 5056,
+                "stage2_accepted": 2667
+              },
+              "translate": {
+                "stage1_evaluated": 95877,
+                "stage1_passed": 15395,
+                "exact_evaluations": 30790,
+                "stage2_accepted": 10269
+              },
+              "rotate": {
+                "stage1_evaluated": 41435,
+                "stage1_passed": 27227,
+                "exact_evaluations": 54454,
+                "stage2_accepted": 22888
+              },
+              "regrow": {
+                "stage1_evaluated": 146437,
+                "stage1_passed": 10045,
+                "exact_evaluations": 20090,
+                "stage2_accepted": 7591
+              }
+            },
+            "stage1_evaluated": 417331,
+            "stage1_passed": 63105,
+            "exact_evaluations": 115772,
+            "stage2_accepted": 46086,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 2,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 2,
+              "lookups": 9179984,
+              "cubic_lookups": 0,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 9179984,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 65536
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 66961,
+              "accepted": 2671
+            },
+            "delete": {
+              "attempted": 67130,
+              "accepted": 2667
+            },
+            "translate": {
+              "attempted": 96568,
+              "accepted": 10269
+            },
+            "rotate": {
+              "attempted": 41724,
+              "accepted": 22888
+            },
+            "regrow": {
+              "attempted": 147617,
+              "accepted": 7591
+            }
+          },
+          "long_range": {
+            "method": "none",
+            "backend": "none"
+          }
+        }
+      ],
+      "cache": {
+        "builds": 0,
+        "cache_loads": 2,
+        "cache_writes": 0,
+        "raw_field_builds": 0,
+        "raw_field_loads": 2,
+        "lookups": 9179984,
+        "cubic_lookups": 0,
+        "linear_lookups": 0,
+        "boltzmann_lookups": 9179984,
+        "exact_fallbacks": 0,
+        "steep_interpolation": "boltzmann",
+        "reference_cap_K": 100000,
+        "mesh_points": 32768,
+        "lj_fields": 2,
+        "site_types": 2,
+        "bytes": 2322272,
+        "steep_cells": 65536
+      },
+      "data": "ton_butane_dilute_suffix-delayed_440731.npz"
+    },
+    {
+      "seed": 440747,
+      "start": "preloaded",
+      "initial_counts": [
+        6
+      ],
+      "preparation_s": 0.05501916600042023,
+      "elapsed_at_prefix_s": [
+        1.9453411669819616,
+        3.6314674589957576,
+        6.73492362498655
+      ],
+      "last_energy_K": -36575.39008689604,
+      "energy_closure_K": 7.275957614183426e-12,
+      "moves_after_warmup": {
+        "insert": {
+          "attempted": 3149,
+          "accepted": 110
+        },
+        "delete": {
+          "attempted": 3232,
+          "accepted": 110
+        },
+        "translate": {
+          "attempted": 4624,
+          "accepted": 418
+        },
+        "rotate": {
+          "attempted": 1967,
+          "accepted": 1082
+        },
+        "regrow": {
+          "attempted": 7028,
+          "accepted": 355
+        }
+      },
+      "acceleration_after_warmup": {
+        "sampling_mode": "delayed",
+        "selected_correction_backend": "cpu",
+        "grid_root_bias": 0.78,
+        "stages": {
+          "insert": {
+            "stage1_evaluated": 3149,
+            "stage1_passed": 239,
+            "exact_evaluations": 239,
+            "stage2_accepted": 110
+          },
+          "delete": {
+            "stage1_evaluated": 3232,
+            "stage1_passed": 227,
+            "exact_evaluations": 227,
+            "stage2_accepted": 110
+          },
+          "translate": {
+            "stage1_evaluated": 4624,
+            "stage1_passed": 625,
+            "exact_evaluations": 1250,
+            "stage2_accepted": 418
+          },
+          "rotate": {
+            "stage1_evaluated": 1967,
+            "stage1_passed": 1271,
+            "exact_evaluations": 2542,
+            "stage2_accepted": 1082
+          },
+          "regrow": {
+            "stage1_evaluated": 7028,
+            "stage1_passed": 464,
+            "exact_evaluations": 928,
+            "stage2_accepted": 355
+          }
+        },
+        "stage1_evaluated": 20000,
+        "stage1_passed": 2826,
+        "exact_evaluations": 5186,
+        "stage2_accepted": 2075,
+        "host_grid": {
+          "builds": 0,
+          "cache_loads": 2,
+          "cache_writes": 0,
+          "raw_field_builds": 0,
+          "raw_field_loads": 2,
+          "lookups": 470172,
+          "cubic_lookups": 0,
+          "linear_lookups": 0,
+          "boltzmann_lookups": 470172,
+          "exact_fallbacks": 0,
+          "steep_interpolation": "boltzmann",
+          "reference_cap_K": 100000,
+          "mesh_points": 32768,
+          "lj_fields": 2,
+          "site_types": 2,
+          "bytes": 2322272,
+          "steep_cells": 65536
+        }
+      },
+      "profiles": [
+        {
+          "production_wall_s": 1.1450484170054551,
+          "steps": 60000,
+          "acceleration": {
+            "sampling_mode": "delayed",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.78,
+            "stages": {
+              "insert": {
+                "stage1_evaluated": 12748,
+                "stage1_passed": 978,
+                "exact_evaluations": 978,
+                "stage2_accepted": 468
+              },
+              "delete": {
+                "stage1_evaluated": 12753,
+                "stage1_passed": 906,
+                "exact_evaluations": 906,
+                "stage2_accepted": 468
+              },
+              "translate": {
+                "stage1_evaluated": 18323,
+                "stage1_passed": 2746,
+                "exact_evaluations": 5492,
+                "stage2_accepted": 1837
+              },
+              "rotate": {
+                "stage1_evaluated": 8005,
+                "stage1_passed": 5157,
+                "exact_evaluations": 10314,
+                "stage2_accepted": 4346
+              },
+              "regrow": {
+                "stage1_evaluated": 27930,
+                "stage1_passed": 1919,
+                "exact_evaluations": 3838,
+                "stage2_accepted": 1444
+              }
+            },
+            "stage1_evaluated": 79759,
+            "stage1_passed": 11706,
+            "exact_evaluations": 21528,
+            "stage2_accepted": 8563,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 2,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 2,
+              "lookups": 1779522,
+              "cubic_lookups": 0,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 1779522,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 65536
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 12748,
+              "accepted": 468
+            },
+            "delete": {
+              "attempted": 12794,
+              "accepted": 468
+            },
+            "translate": {
+              "attempted": 18404,
+              "accepted": 1837
+            },
+            "rotate": {
+              "attempted": 8024,
+              "accepted": 4346
+            },
+            "regrow": {
+              "attempted": 28030,
+              "accepted": 1444
+            }
+          },
+          "long_range": {
+            "method": "none",
+            "backend": "none"
+          }
+        },
+        {
+          "production_wall_s": 2.831173792015761,
+          "steps": 180000,
+          "acceleration": {
+            "sampling_mode": "delayed",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.78,
+            "stages": {
+              "insert": {
+                "stage1_evaluated": 31946,
+                "stage1_passed": 2547,
+                "exact_evaluations": 2547,
+                "stage2_accepted": 1271
+              },
+              "delete": {
+                "stage1_evaluated": 31952,
+                "stage1_passed": 2401,
+                "exact_evaluations": 2401,
+                "stage2_accepted": 1273
+              },
+              "translate": {
+                "stage1_evaluated": 45881,
+                "stage1_passed": 7209,
+                "exact_evaluations": 14418,
+                "stage2_accepted": 4809
+              },
+              "rotate": {
+                "stage1_evaluated": 20029,
+                "stage1_passed": 12988,
+                "exact_evaluations": 25976,
+                "stage2_accepted": 10986
+              },
+              "regrow": {
+                "stage1_evaluated": 69802,
+                "stage1_passed": 4731,
+                "exact_evaluations": 9462,
+                "stage2_accepted": 3556
+              }
+            },
+            "stage1_evaluated": 199610,
+            "stage1_passed": 29876,
+            "exact_evaluations": 54804,
+            "stage2_accepted": 21895,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 2,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 2,
+              "lookups": 4401258,
+              "cubic_lookups": 0,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 4401258,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 65536
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 31946,
+              "accepted": 1271
+            },
+            "delete": {
+              "attempted": 32032,
+              "accepted": 1273
+            },
+            "translate": {
+              "attempted": 45993,
+              "accepted": 4809
+            },
+            "rotate": {
+              "attempted": 20064,
+              "accepted": 10986
+            },
+            "regrow": {
+              "attempted": 69965,
+              "accepted": 3556
+            }
+          },
+          "long_range": {
+            "method": "none",
+            "backend": "none"
+          }
+        },
+        {
+          "production_wall_s": 5.934629875002429,
+          "steps": 400000,
+          "acceleration": {
+            "sampling_mode": "delayed",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.78,
+            "stages": {
+              "insert": {
+                "stage1_evaluated": 67192,
+                "stage1_passed": 5398,
+                "exact_evaluations": 5398,
+                "stage2_accepted": 2664
+              },
+              "delete": {
+                "stage1_evaluated": 67136,
+                "stage1_passed": 5020,
+                "exact_evaluations": 5020,
+                "stage2_accepted": 2664
+              },
+              "translate": {
+                "stage1_evaluated": 96279,
+                "stage1_passed": 15363,
+                "exact_evaluations": 30726,
+                "stage2_accepted": 10265
+              },
+              "rotate": {
+                "stage1_evaluated": 41827,
+                "stage1_passed": 27302,
+                "exact_evaluations": 54604,
+                "stage2_accepted": 23129
+              },
+              "regrow": {
+                "stage1_evaluated": 146466,
+                "stage1_passed": 9989,
+                "exact_evaluations": 19978,
+                "stage2_accepted": 7536
+              }
+            },
+            "stage1_evaluated": 418900,
+            "stage1_passed": 63072,
+            "exact_evaluations": 115726,
+            "stage2_accepted": 46258,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 2,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 2,
+              "lookups": 9202608,
+              "cubic_lookups": 0,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 9202608,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 65536
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 67192,
+              "accepted": 2664
+            },
+            "delete": {
+              "attempted": 67352,
+              "accepted": 2664
+            },
+            "translate": {
+              "attempted": 96596,
+              "accepted": 10265
+            },
+            "rotate": {
+              "attempted": 41951,
+              "accepted": 23129
+            },
+            "regrow": {
+              "attempted": 146909,
+              "accepted": 7536
+            }
+          },
+          "long_range": {
+            "method": "none",
+            "backend": "none"
+          }
+        }
+      ],
+      "cache": {
+        "builds": 0,
+        "cache_loads": 2,
+        "cache_writes": 0,
+        "raw_field_builds": 0,
+        "raw_field_loads": 2,
+        "lookups": 9202608,
+        "cubic_lookups": 0,
+        "linear_lookups": 0,
+        "boltzmann_lookups": 9202608,
+        "exact_fallbacks": 0,
+        "steep_interpolation": "boltzmann",
+        "reference_cap_K": 100000,
+        "mesh_points": 32768,
+        "lj_fields": 2,
+        "site_types": 2,
+        "bytes": 2322272,
+        "steep_cells": 65536
+      },
+      "data": "ton_butane_dilute_suffix-delayed_440747.npz"
+    },
+    {
+      "seed": 440753,
+      "start": "preloaded",
+      "initial_counts": [
+        6
+      ],
+      "preparation_s": 0.058403292001457885,
+      "elapsed_at_prefix_s": [
+        1.8192276670015417,
+        3.5392540839966387,
+        6.658448166999733
+      ],
+      "last_energy_K": -16916.727295320532,
+      "energy_closure_K": 7.275957614183426e-12,
+      "moves_after_warmup": {
+        "insert": {
+          "attempted": 3228,
+          "accepted": 133
+        },
+        "delete": {
+          "attempted": 3208,
+          "accepted": 135
+        },
+        "translate": {
+          "attempted": 4608,
+          "accepted": 471
+        },
+        "rotate": {
+          "attempted": 1972,
+          "accepted": 1117
+        },
+        "regrow": {
+          "attempted": 6984,
+          "accepted": 342
+        }
+      },
+      "acceleration_after_warmup": {
+        "sampling_mode": "delayed",
+        "selected_correction_backend": "cpu",
+        "grid_root_bias": 0.78,
+        "stages": {
+          "insert": {
+            "stage1_evaluated": 3228,
+            "stage1_passed": 304,
+            "exact_evaluations": 304,
+            "stage2_accepted": 133
+          },
+          "delete": {
+            "stage1_evaluated": 3189,
+            "stage1_passed": 199,
+            "exact_evaluations": 199,
+            "stage2_accepted": 135
+          },
+          "translate": {
+            "stage1_evaluated": 4579,
+            "stage1_passed": 732,
+            "exact_evaluations": 1464,
+            "stage2_accepted": 471
+          },
+          "rotate": {
+            "stage1_evaluated": 1953,
+            "stage1_passed": 1296,
+            "exact_evaluations": 2592,
+            "stage2_accepted": 1117
+          },
+          "regrow": {
+            "stage1_evaluated": 6938,
+            "stage1_passed": 473,
+            "exact_evaluations": 946,
+            "stage2_accepted": 342
+          }
+        },
+        "stage1_evaluated": 19887,
+        "stage1_passed": 3004,
+        "exact_evaluations": 5505,
+        "stage2_accepted": 2198,
+        "host_grid": {
+          "builds": 0,
+          "cache_loads": 2,
+          "cache_writes": 0,
+          "raw_field_builds": 0,
+          "raw_field_loads": 2,
+          "lookups": 468544,
+          "cubic_lookups": 0,
+          "linear_lookups": 0,
+          "boltzmann_lookups": 468544,
+          "exact_fallbacks": 0,
+          "steep_interpolation": "boltzmann",
+          "reference_cap_K": 100000,
+          "mesh_points": 32768,
+          "lj_fields": 2,
+          "site_types": 2,
+          "bytes": 2322272,
+          "steep_cells": 65536
+        }
+      },
+      "profiles": [
+        {
+          "production_wall_s": 1.0251579999749083,
+          "steps": 60000,
+          "acceleration": {
+            "sampling_mode": "delayed",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.78,
+            "stages": {
+              "insert": {
+                "stage1_evaluated": 12781,
+                "stage1_passed": 1056,
+                "exact_evaluations": 1056,
+                "stage2_accepted": 515
+              },
+              "delete": {
+                "stage1_evaluated": 12985,
+                "stage1_passed": 951,
+                "exact_evaluations": 951,
+                "stage2_accepted": 515
+              },
+              "translate": {
+                "stage1_evaluated": 18314,
+                "stage1_passed": 2797,
+                "exact_evaluations": 5594,
+                "stage2_accepted": 1834
+              },
+              "rotate": {
+                "stage1_evaluated": 7844,
+                "stage1_passed": 5111,
+                "exact_evaluations": 10222,
+                "stage2_accepted": 4332
+              },
+              "regrow": {
+                "stage1_evaluated": 27946,
+                "stage1_passed": 1898,
+                "exact_evaluations": 3796,
+                "stage2_accepted": 1417
+              }
+            },
+            "stage1_evaluated": 79870,
+            "stage1_passed": 11813,
+            "exact_evaluations": 21619,
+            "stage2_accepted": 8613,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 2,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 2,
+              "lookups": 1784678,
+              "cubic_lookups": 0,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 1784678,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 65536
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 12781,
+              "accepted": 515
+            },
+            "delete": {
+              "attempted": 13005,
+              "accepted": 515
+            },
+            "translate": {
+              "attempted": 18345,
+              "accepted": 1834
+            },
+            "rotate": {
+              "attempted": 7868,
+              "accepted": 4332
+            },
+            "regrow": {
+              "attempted": 28001,
+              "accepted": 1417
+            }
+          },
+          "long_range": {
+            "method": "none",
+            "backend": "none"
+          }
+        },
+        {
+          "production_wall_s": 2.7451832910010125,
+          "steps": 180000,
+          "acceleration": {
+            "sampling_mode": "delayed",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.78,
+            "stages": {
+              "insert": {
+                "stage1_evaluated": 31932,
+                "stage1_passed": 2437,
+                "exact_evaluations": 2437,
+                "stage2_accepted": 1223
+              },
+              "delete": {
+                "stage1_evaluated": 31735,
+                "stage1_passed": 2287,
+                "exact_evaluations": 2287,
+                "stage2_accepted": 1221
+              },
+              "translate": {
+                "stage1_evaluated": 45846,
+                "stage1_passed": 6968,
+                "exact_evaluations": 13936,
+                "stage2_accepted": 4631
+              },
+              "rotate": {
+                "stage1_evaluated": 19753,
+                "stage1_passed": 12878,
+                "exact_evaluations": 25756,
+                "stage2_accepted": 10972
+              },
+              "regrow": {
+                "stage1_evaluated": 70530,
+                "stage1_passed": 4661,
+                "exact_evaluations": 9322,
+                "stage2_accepted": 3565
+              }
+            },
+            "stage1_evaluated": 199796,
+            "stage1_passed": 29231,
+            "exact_evaluations": 53738,
+            "stage2_accepted": 21612,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 2,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 2,
+              "lookups": 4412958,
+              "cubic_lookups": 0,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 4412958,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 65536
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 31932,
+              "accepted": 1223
+            },
+            "delete": {
+              "attempted": 31765,
+              "accepted": 1221
+            },
+            "translate": {
+              "attempted": 45903,
+              "accepted": 4631
+            },
+            "rotate": {
+              "attempted": 19783,
+              "accepted": 10972
+            },
+            "regrow": {
+              "attempted": 70617,
+              "accepted": 3565
+            }
+          },
+          "long_range": {
+            "method": "none",
+            "backend": "none"
+          }
+        },
+        {
+          "production_wall_s": 5.864377374993637,
+          "steps": 400000,
+          "acceleration": {
+            "sampling_mode": "delayed",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.78,
+            "stages": {
+              "insert": {
+                "stage1_evaluated": 66929,
+                "stage1_passed": 5179,
+                "exact_evaluations": 5179,
+                "stage2_accepted": 2630
+              },
+              "delete": {
+                "stage1_evaluated": 66775,
+                "stage1_passed": 4917,
+                "exact_evaluations": 4917,
+                "stage2_accepted": 2633
+              },
+              "translate": {
+                "stage1_evaluated": 95921,
+                "stage1_passed": 14784,
+                "exact_evaluations": 29568,
+                "stage2_accepted": 9820
+              },
+              "rotate": {
+                "stage1_evaluated": 41603,
+                "stage1_passed": 27278,
+                "exact_evaluations": 54556,
+                "stage2_accepted": 23134
+              },
+              "regrow": {
+                "stage1_evaluated": 147588,
+                "stage1_passed": 9957,
+                "exact_evaluations": 19914,
+                "stage2_accepted": 7591
+              }
+            },
+            "stage1_evaluated": 418816,
+            "stage1_passed": 62115,
+            "exact_evaluations": 114134,
+            "stage2_accepted": 45808,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 2,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 2,
+              "lookups": 9213702,
+              "cubic_lookups": 0,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 9213702,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 65536
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 66929,
+              "accepted": 2630
+            },
+            "delete": {
+              "attempted": 66957,
+              "accepted": 2633
+            },
+            "translate": {
+              "attempted": 96264,
+              "accepted": 9820
+            },
+            "rotate": {
+              "attempted": 41774,
+              "accepted": 23134
+            },
+            "regrow": {
+              "attempted": 148076,
+              "accepted": 7591
+            }
+          },
+          "long_range": {
+            "method": "none",
+            "backend": "none"
+          }
+        }
+      ],
+      "cache": {
+        "builds": 0,
+        "cache_loads": 2,
+        "cache_writes": 0,
+        "raw_field_builds": 0,
+        "raw_field_loads": 2,
+        "lookups": 9213702,
+        "cubic_lookups": 0,
+        "linear_lookups": 0,
+        "boltzmann_lookups": 9213702,
+        "exact_fallbacks": 0,
+        "steep_interpolation": "boltzmann",
+        "reference_cap_K": 100000,
+        "mesh_points": 32768,
+        "lj_fields": 2,
+        "site_types": 2,
+        "bytes": 2322272,
+        "steep_cells": 65536
+      },
+      "data": "ton_butane_dilute_suffix-delayed_440753.npz"
+    }
+  ],
+  "sample_every": 200
+}

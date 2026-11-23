@@ -1,0 +1,228 @@
+{
+  "checkpoints": [
+    {
+      "budget": 1000,
+      "draws_per_chain": 200,
+      "batch_wall_s": 21.181801875005476,
+      "observables": {
+        "count_0": {
+          "mean": 2.51375,
+          "mcse": 0.060364543738054686,
+          "ci95": [
+            2.321643080810691,
+            2.705856919189309
+          ],
+          "rank_split_rhat": 1.0054820577712444,
+          "ess": 697.1930584900446,
+          "chains": 4,
+          "draws_per_chain": 200
+        },
+        "trans_fraction": {
+          "mean": 0.6663351566384881,
+          "mcse": 0.011354962118537731,
+          "ci95": [
+            0.6301985993977112,
+            0.702471713879265
+          ],
+          "rank_split_rhat": 0.998075083431604,
+          "ess": 650.6548447124919,
+          "chains": 4,
+          "draws_per_chain": 200
+        }
+      },
+      "met": true
+    },
+    {
+      "budget": 2500,
+      "draws_per_chain": 500,
+      "batch_wall_s": 35.54598387499573,
+      "observables": {
+        "count_0": {
+          "mean": 2.4215,
+          "mcse": 0.03623788167286097,
+          "ci95": [
+            2.306174887358895,
+            2.5368251126411048
+          ],
+          "rank_split_rhat": 1.0002549340270057,
+          "ess": 1874.122862025675,
+          "chains": 4,
+          "draws_per_chain": 500
+        },
+        "trans_fraction": {
+          "mean": 0.6611604377451992,
+          "mcse": 0.007382644861743973,
+          "ci95": [
+            0.6376655668817203,
+            0.6846553086086781
+          ],
+          "rank_split_rhat": 1.000549765987598,
+          "ess": 1688.214414222371,
+          "chains": 4,
+          "draws_per_chain": 500
+        }
+      },
+      "met": true
+    },
+    {
+      "budget": 5000,
+      "draws_per_chain": 1000,
+      "batch_wall_s": 59.24264445799054,
+      "observables": {
+        "count_0": {
+          "mean": 2.38625,
+          "mcse": 0.024868201006431813,
+          "ci95": [
+            2.3071082855880283,
+            2.4653917144119717
+          ],
+          "rank_split_rhat": 0.9995067467615477,
+          "ess": 3847.914515942435,
+          "chains": 4,
+          "draws_per_chain": 1000
+        },
+        "trans_fraction": {
+          "mean": 0.6607647983237297,
+          "mcse": 0.005033502133428385,
+          "ci95": [
+            0.6447459480565628,
+            0.6767836485908966
+          ],
+          "rank_split_rhat": 0.9999273722302725,
+          "ess": 3690.7845763082664,
+          "chains": 4,
+          "draws_per_chain": 1000
+        }
+      },
+      "met": true
+    }
+  ],
+  "qualified_wall_s": 21.181801875005476,
+  "start_group_final_means": {
+    "empty": [
+      2.3735
+    ],
+    "preload": [
+      2.399
+    ]
+  },
+  "occupancy_distribution": [
+    [
+      0,
+      0.09
+    ],
+    [
+      1,
+      0.226
+    ],
+    [
+      2,
+      0.25275
+    ],
+    [
+      3,
+      0.21275
+    ],
+    [
+      4,
+      0.1265
+    ],
+    [
+      5,
+      0.05675
+    ],
+    [
+      6,
+      0.02475
+    ],
+    [
+      7,
+      0.0065
+    ],
+    [
+      8,
+      0.0035
+    ],
+    [
+      9,
+      0.00025
+    ],
+    [
+      10,
+      0.00025
+    ]
+  ],
+  "precision_goals": {
+    "count_0": 0.12,
+    "trans_fraction": 0.025
+  },
+  "case": "butane_harmonic_ideal",
+  "engine": "RASPA3",
+  "mode": "cbmc",
+  "platform": "macOS-26.5-arm64-arm-64bit-Mach-O",
+  "warmup_cycles": 1000,
+  "sample_every": 5,
+  "workers": 4,
+  "chains": [
+    {
+      "seed": 440713,
+      "start": "empty",
+      "initial_counts": [
+        0
+      ],
+      "elapsed_at_prefix_s": [
+        20.999542082980042,
+        35.32899958299822,
+        59.07678012500401
+      ],
+      "subprocess_wall_s": 58.5466394170071,
+      "raspa_output": "butane_harmonic_ideal-raspa-cbmc/440713/output/output_298.15_3e+05.s0.json",
+      "data": "butane_harmonic_ideal-raspa-cbmc_440713.npz"
+    },
+    {
+      "seed": 440731,
+      "start": "empty",
+      "initial_counts": [
+        0
+      ],
+      "elapsed_at_prefix_s": [
+        20.576821540977107,
+        34.55721154098865,
+        57.89911800000118
+      ],
+      "subprocess_wall_s": 57.26254870797857,
+      "raspa_output": "butane_harmonic_ideal-raspa-cbmc/440731/output/output_298.15_3e+05.s0.json",
+      "data": "butane_harmonic_ideal-raspa-cbmc_440731.npz"
+    },
+    {
+      "seed": 440747,
+      "start": "preloaded",
+      "initial_counts": [
+        5
+      ],
+      "elapsed_at_prefix_s": [
+        21.181801875005476,
+        35.534023040992906,
+        58.859722790977685
+      ],
+      "subprocess_wall_s": 58.18863124999916,
+      "raspa_output": "butane_harmonic_ideal-raspa-cbmc/440747/output/output_298.15_3e+05.s0.json",
+      "data": "butane_harmonic_ideal-raspa-cbmc_440747.npz"
+    },
+    {
+      "seed": 440753,
+      "start": "preloaded",
+      "initial_counts": [
+        5
+      ],
+      "elapsed_at_prefix_s": [
+        20.98944212499191,
+        35.54598387499573,
+        59.24264445799054
+      ],
+      "subprocess_wall_s": 58.66113550000591,
+      "raspa_output": "butane_harmonic_ideal-raspa-cbmc/440753/output/output_298.15_3e+05.s0.json",
+      "data": "butane_harmonic_ideal-raspa-cbmc_440753.npz"
+    }
+  ]
+}

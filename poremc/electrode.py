@@ -19,6 +19,60 @@ ELEMENTARY_CHARGE=1.602176634e-19
 VOLT_TO_K=ELEMENTARY_CHARGE/KB
 
 
+def solve_projected_charge(apply,field,potentials,total_charge,*,eigenvalue_lower_bound,
+                           tolerance=1e-10,max_iterations=None,precondition=None):
+    """Solve fixed-potential charges using only products with the electrode matrix.
+
+    The caller supplies a positive spectral lower bound of A on sum(q)=0.
+    Given that bound, a feasible iterate lies at most ||r_perp||²/(2*m)
+    above the minimum. Roundoff in A and the dot products is outside the bound.
+    """
+    from inspect import signature
+    from scipy.sparse.linalg import LinearOperator, cg
+
+    b=np.asarray(field,float)
+    v=np.asarray(potentials,float)
+    q_total=float(total_charge)
+    lower=float(eigenvalue_lower_bound)
+    if (b.ndim!=1 or b.size<2 or v.shape!=b.shape or not np.isfinite(b).all()
+            or not np.isfinite(v).all() or not np.isfinite([q_total,lower,tolerance]).all()
+            or lower<=0 or tolerance<=0):
+        raise ValueError('finite electrode fields and a positive eigenvalue lower bound are required')
+
+    def project(x):
+        return x-np.mean(x)
+
+    def product(x):
+        result=np.asarray(apply(x),dtype=float)
+        if result.shape!=b.shape or not np.isfinite(result).all():
+            raise ValueError('invalid electrode matrix-vector product')
+        return result
+
+    def projected_product(x):
+        return project(product(project(x)))+np.mean(x)
+
+    fixed=np.full(b.shape,q_total/b.size)
+    linear=b-VOLT_TO_K*v
+    rhs=-project(product(fixed)+linear)
+    op=LinearOperator((b.size,b.size),matvec=projected_product,dtype=float)
+    pc=None
+    if precondition is not None:
+        pc=LinearOperator(op.shape,matvec=lambda x:project(precondition(project(x)))+np.mean(x),dtype=float)
+    relative={'rtol' if 'rtol' in signature(cg).parameters else 'tol':tolerance}
+    free,info=cg(op,rhs,atol=0.,maxiter=max_iterations,M=pc,**relative)
+    if info<0 or not np.isfinite(free).all():
+        raise FloatingPointError('projected electrode solver failed')
+    q=fixed+project(free)
+    aq=product(q)
+    gradient=aq+linear
+    residual=project(gradient)
+    energy=float(0.5*q@aq+linear@q)
+    bound=float(residual@residual/(2*lower))
+    return {'q':q,'free_energy':energy,'free_energy_lower_bound':energy-bound,
+            'energy_error_bound':bound,'potential_residual_V':float(np.max(np.abs(residual))/VOLT_TO_K),
+            'lagrange':float(-np.mean(gradient)),'converged':info==0}
+
+
 class ElectrodeResponse:
     """Analytical Gaussian integration / constrained minimization for fixed A.
 

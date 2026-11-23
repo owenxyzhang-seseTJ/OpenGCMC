@@ -1,0 +1,33 @@
+{
+    "TMMC_data": {
+        "contents": {
+            "N0": "number of n2 particles",
+            "N1": "number of co2 particles",
+            "lnPi(N0,N1)": "particle number probability distribution"
+        },
+        "note": "if lnPi is not given for a (N0', N1') pair, then its value is set to -infinity",
+        "file": "n2_co2_zif8.300K.lnpi.rX.csv"
+    },
+
+    "beta": 0.4009078501424201,
+    "beta_units": "MOL-PER-KiloJ",
+    "cell": [
+        34.02324,
+        34.02324,
+        34.02324
+    ],
+    "cell_units": "ANG",
+    "ewald_parameters": {
+        "alpha": "0.2346370178899813",
+        "alpha_units": "PER-ANG",
+        "kvectors": [
+            "7",
+            "7",
+            "7"
+        ]
+    },
+    "lnz": [-3.5, -6.8],
+    "temperature": 300.0,
+    "temperature_units": "K",
+    "z_units": "PER-ANG3"
+}

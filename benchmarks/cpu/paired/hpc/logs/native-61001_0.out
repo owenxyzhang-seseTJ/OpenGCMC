@@ -1,0 +1,10 @@
+benchmark_precision.py benchmarks/cpu/paired/inputs/irmof_mixture.json --output benchmarks/cpu/paired/hpc/controls/control-reference-mh.json --cache <scratch>/fields --mode reference-mh --budgets 20000 60000 120000 240000 --warmup 20000 --mesh 32 --guest-update incremental --workers 4
+irmof_mixture reference-mh total_s 9.483 qualified_wall_s 2.998176258057356
+benchmark_precision.py benchmarks/cpu/paired/inputs/irmof_mixture.json --output benchmarks/cpu/paired/hpc/controls/control-delayed.json --cache <scratch>/fields --mode delayed --budgets 20000 60000 120000 240000 --warmup 20000 --mesh 32 --guest-update incremental --workers 4
+irmof_mixture delayed total_s 7.245 qualified_wall_s 2.3357286169193685
+benchmark_precision.py benchmarks/cpu/paired/inputs/irmof_mixture.json --output benchmarks/cpu/paired/hpc/controls/control-exact.json --cache <scratch>/fields --mode exact --budgets 20000 60000 120000 240000 --warmup 20000 --mesh 32 --guest-update incremental --workers 4
+irmof_mixture exact total_s 67.62 qualified_wall_s 10.6296729138121
+benchmark_precision.py benchmarks/cpu/paired/inputs/irmof_mixture.json --output benchmarks/cpu/paired/hpc/controls/control-delayed-mesh8.json --cache <scratch>/fields --mode delayed --budgets 20000 60000 120000 240000 --warmup 20000 --mesh 8 --guest-update incremental --workers 4
+irmof_mixture delayed total_s 8.141 qualified_wall_s 8.15383847616613
+benchmark_precision.py benchmarks/cpu/paired/inputs/irmof_mixture.json --output benchmarks/cpu/paired/hpc/controls/control-delayed-rebuild.json --cache <scratch>/fields --mode delayed --budgets 20000 60000 120000 240000 --warmup 20000 --mesh 32 --guest-update rebuild --workers 4
+irmof_mixture delayed total_s 6.89 qualified_wall_s 2.2017788477241993

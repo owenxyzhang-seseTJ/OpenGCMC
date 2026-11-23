@@ -1,0 +1,239 @@
+{
+  "schema": "poremc-v1",
+  "description": "Flexible n-butane conformation in an ideal siliceous TON pore at 298.15 K",
+  "temperature_K": 298.15,
+  "species": [
+    {
+      "name": "n-butane",
+      "sigma": [
+        3.75,
+        3.95,
+        3.95,
+        3.75
+      ],
+      "epsilon": [
+        98.0,
+        46.0,
+        46.0,
+        98.0
+      ],
+      "molar_mass": 58.1222,
+      "charge": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "parents": [
+        -1,
+        0,
+        1,
+        2
+      ],
+      "bond_lengths": [
+        0.0,
+        1.54,
+        1.54,
+        1.54
+      ],
+      "angle_refs": [
+        -1,
+        -1,
+        0,
+        1
+      ],
+      "angles": [
+        0.0,
+        0.0,
+        1.9896753472735358,
+        1.9896753472735358
+      ],
+      "dihedral_refs": [
+        -1,
+        -1,
+        -1,
+        0
+      ],
+      "torsions": [
+        {
+          "indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "k": 355.03,
+          "periodicity": 1,
+          "phase": 0.0
+        },
+        {
+          "indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "k": -68.19,
+          "periodicity": 2,
+          "phase": 3.141592653589793
+        },
+        {
+          "indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "k": 791.32,
+          "periodicity": 3,
+          "phase": 0.0
+        }
+      ],
+      "exclusions": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "log_q_internal": -5.779325540074989,
+      "q_internal_temperature": 298.15,
+      "angle_ranges": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          1.3962634015954636,
+          2.5830872929516078
+        ],
+        [
+          1.3962634015954636,
+          2.5830872929516078
+        ]
+      ],
+      "angle_force_constants": [
+        0.0,
+        0.0,
+        62500.0,
+        62500.0
+      ]
+    }
+  ],
+  "host": {
+    "cif": "TON.cif",
+    "replicas": [
+      2,
+      1,
+      4
+    ],
+    "charge_source": "force_field",
+    "force_field": {
+      "Si": {
+        "sigma": 3.408578,
+        "epsilon": 202.294,
+        "charge": 0,
+        "mass": 28.0855
+      },
+      "O": {
+        "sigma": 3.118146,
+        "epsilon": 30.193,
+        "charge": 0,
+        "mass": 15.9994
+      }
+    }
+  },
+  "potential": {
+    "kind": "classical",
+    "cutoff_A": 8.0,
+    "algorithm": "cached",
+    "backend": "native",
+    "coulomb": "none",
+    "shifted": true,
+    "threads": 1
+  },
+  "reservoir": {
+    "fugacities_Pa": [
+      100.0
+    ]
+  },
+  "sampling": {
+    "driver": "cpp",
+    "sampling_mode": "delayed",
+    "host_grid_mesh": 32,
+    "grid_root_bias": 0.78,
+    "guest_update": "incremental",
+    "trials": [
+      6,
+      5,
+      5,
+      8
+    ],
+    "record_energy": false,
+    "move_weights": {
+      "insert": 0.16,
+      "delete": 0.16,
+      "translate": 0.23,
+      "rotate": 0.1,
+      "regrow": 0.35
+    },
+    "partial_regrowth": false
+  },
+  "metadata": {
+    "framework": "SiO2 TON",
+    "source_cif": "https://www.iza-structure.org/IZA-SC/cif/TON.cif",
+    "replicas": [
+      2,
+      1,
+      4
+    ],
+    "force_field_doi": "10.1021/jp972543+",
+    "framework_LJ": "UFF",
+    "framework_LJ_doi": "10.1021/ja00051a040",
+    "mixing": "Lorentz-Berthelot",
+    "fixed_bonds_A": 1.54,
+    "trans_threshold_abs_deg": 120.0,
+    "temperature_K": 298.15,
+    "q_ref": 0.12959588041362308,
+    "isolated_trans_fraction": 0.6646827982891534,
+    "preload_counts": [
+      16
+    ],
+    "precision_goals": {
+      "count_0": 0.35,
+      "trans_fraction": 0.015
+    },
+    "observe_trans": true,
+    "bend_K_rad2": 62500.0,
+    "bend_center_deg": 114.0,
+    "angular_support_deg": [
+      80.0,
+      148.0
+    ],
+    "raspa_q_reference": 0.12959588041362308,
+    "conditional_angle_partition": 0.1544328926492874
+  }
+}

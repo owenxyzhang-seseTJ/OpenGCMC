@@ -1,0 +1,4 @@
+g++ -std=c++17 -O3 -DNDEBUG -fPIC -shared -fno-fast-math -ffp-contract=off <cluster-workspace>/run-verification/OpenGCMC/native/kernels.cpp <cluster-workspace>/run-verification/OpenGCMC/native/fast_mc.cpp <cluster-workspace>/run-verification/OpenGCMC/native/ewald_state.cpp <cluster-workspace>/run-verification/OpenGCMC/native/host_grid.cpp -o <cluster-workspace>/run-verification/OpenGCMC/poremc/libporemc.so -ldl
+Built <cluster-workspace>/run-verification/OpenGCMC/poremc/libporemc.so
+............................                                             [100%]
+28 passed in 27.37s

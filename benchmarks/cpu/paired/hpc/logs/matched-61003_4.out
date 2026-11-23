@@ -1,0 +1,10 @@
+benchmark_precision.py benchmarks/cpu/paired/inputs/butane_harmonic_ideal.json --output benchmarks/cpu/paired/hpc/ton_butane/butane_harmonic_ideal-delayed.json --cache <scratch>/fields --mode delayed --budgets 20000 60000 120000 --warmup 6000 --mesh 32 --guest-update incremental --workers 4
+butane_harmonic_ideal delayed total_s 1.931 qualified_wall_s 0.4473607740364969
+benchmark_raspa3.py benchmarks/cpu/paired/inputs/butane_harmonic_ideal.json --binary <cluster-workspace>/raspa3_cpu --output benchmarks/cpu/paired/hpc/ton_butane/butane_harmonic_ideal-raspa-cbmc.json --mode cbmc --budgets 1000 2500 5000 --warmup 1000 --stride 5 --workers 4
+butane_harmonic_ideal cbmc qualified_wall_s 16.824774652719498
+benchmark_precision.py benchmarks/cpu/paired/inputs/ton_butane_harmonic.json --output benchmarks/cpu/paired/hpc/ton_butane/ton_butane_harmonic-delayed.json --cache <scratch>/fields --mode delayed --budgets 100000 240000 480000 840000 --warmup 35000 --mesh 32 --guest-update incremental --workers 4
+ton_butane_harmonic delayed total_s 29.63 qualified_wall_s None
+benchmark_precision.py benchmarks/cpu/paired/inputs/ton_butane_harmonic_suffix.json --output benchmarks/cpu/paired/hpc/ton_butane/ton_butane_harmonic_suffix-delayed.json --cache <scratch>/fields --mode delayed --budgets 100000 240000 480000 840000 --warmup 35000 --mesh 32 --guest-update incremental --workers 4
+ton_butane_harmonic_suffix delayed total_s 24.245 qualified_wall_s None
+benchmark_raspa3.py benchmarks/cpu/paired/inputs/ton_butane_harmonic.json --binary <cluster-workspace>/raspa3_cpu --output benchmarks/cpu/paired/hpc/ton_butane/ton_butane_harmonic-raspa-cbmc.json --mode cbmc --budgets 2000 6000 12000 21000 --warmup 2500 --stride 10 --workers 4
+ton_butane_harmonic cbmc qualified_wall_s None

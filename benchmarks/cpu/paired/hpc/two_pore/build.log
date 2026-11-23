@@ -1,0 +1,2 @@
+g++ -std=c++17 -O3 -DNDEBUG -fPIC -shared -fno-fast-math -ffp-contract=off <scratch>/OpenGCMC/native/kernels.cpp <scratch>/OpenGCMC/native/fast_mc.cpp <scratch>/OpenGCMC/native/ewald_state.cpp <scratch>/OpenGCMC/native/host_grid.cpp -o <scratch>/OpenGCMC/poremc/libporemc.so -ldl
+Built <scratch>/OpenGCMC/poremc/libporemc.so

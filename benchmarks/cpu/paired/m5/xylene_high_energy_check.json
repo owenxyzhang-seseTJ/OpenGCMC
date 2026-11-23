@@ -1,0 +1,80 @@
+{
+  "xylene_high": [
+    {
+      "seed": 440713,
+      "counts": [
+        222
+      ],
+      "RASPA3_version": "3.1.0",
+      "RASPA3_Ewald": {
+        "alpha": 0.265058,
+        "kVectors": [
+          13,
+          13,
+          13
+        ]
+      },
+      "RASPA3_temperature_K": 298.15,
+      "OpenGCMC_energy_K": -1630945.958645061,
+      "RASPA3_energy_K": -1630946.0200756823,
+      "absolute_difference_K": 0.061430621426552534
+    },
+    {
+      "seed": 440731,
+      "counts": [
+        212
+      ],
+      "RASPA3_version": "3.1.0",
+      "RASPA3_Ewald": {
+        "alpha": 0.265058,
+        "kVectors": [
+          13,
+          13,
+          13
+        ]
+      },
+      "RASPA3_temperature_K": 298.15,
+      "OpenGCMC_energy_K": -1510198.4450243856,
+      "RASPA3_energy_K": -1510198.4998605198,
+      "absolute_difference_K": 0.054836134193465114
+    },
+    {
+      "seed": 440747,
+      "counts": [
+        220
+      ],
+      "RASPA3_version": "3.1.0",
+      "RASPA3_Ewald": {
+        "alpha": 0.265058,
+        "kVectors": [
+          13,
+          13,
+          13
+        ]
+      },
+      "RASPA3_temperature_K": 298.15,
+      "OpenGCMC_energy_K": -1594723.302663629,
+      "RASPA3_energy_K": -1594723.3564561629,
+      "absolute_difference_K": 0.05379253393039107
+    },
+    {
+      "seed": 440753,
+      "counts": [
+        220
+      ],
+      "RASPA3_version": "3.1.0",
+      "RASPA3_Ewald": {
+        "alpha": 0.265058,
+        "kVectors": [
+          13,
+          13,
+          13
+        ]
+      },
+      "RASPA3_temperature_K": 298.15,
+      "OpenGCMC_energy_K": -1623665.4020095281,
+      "RASPA3_energy_K": -1623665.4602339787,
+      "absolute_difference_K": 0.05822445056401193
+    }
+  ]
+}

@@ -29,6 +29,8 @@ The cases connect real crystal inputs, experimental parameters, or standard phys
 
 ## Performance
 
+[The two-platform CPU benchmark suite](benchmarks/cpu/README.md) includes NIST distribution checks, shared-proposal comparisons, time-to-precision comparisons with RASPA3, and raw samples and scripts for additional scientific cases.
+
 Same-system paired comparisons using a neutral Lennard–Jones probe in Cu-BTC give the following throughput gains for the cached native OpenGCMC sampler:
 
 | Direct comparison | Median throughput gain | Range across three pairs | Workload |
@@ -47,7 +49,7 @@ A single-core benchmark for charged p-xylene in a 4,416-site Ni_TPT_TATBA framew
 ## Core algorithms
 
 - **Exact spatial and parameter caches.** Periodic fractional-cell bins and CSR candidate tables reuse neighbourhood geometry. Bound parameter rows reuse mixed interactions. Every query still evaluates actual distances and the exact cutoff.
-- **Accepted-state environment reuse.** Rejected moves retain the guest environment; accepted moves trigger a lazy rebuild. Original-index exclusions remove the moved molecule without copying all remaining guests.
+- **Accepted-state neighbor updates.** The native sampler updates only the periodic bins touched by the moved molecule. It uses the same energy kernel for single-component adsorption and mixtures.
 - **Density-corrected biased CBMC.** A frozen, full-support voxel alias distribution directs root-site proposals toward favourable regions. Both forward growth and retracing include `1 / [V q(r)]` to preserve the target distribution.
 - **Batched trials and shared host data.** Energy requests with matching immutable environments and parameters are coalesced. Independent chains share the host cache while retaining separate guest states, random generators and acceptance decisions.
 - **Exact target correction.** The Python route can screen proposals with a grid or learned surrogate and apply a two-stage acceptance rule for the exact target energy.
@@ -64,7 +66,7 @@ OpenGCMC combines reusable energy representations, flexible molecular growth and
 | Workflow | OpenGCMC capabilities |
 |---|---|
 | Rigid and flexible guests | Rigid bodies, tree topologies, fixed or bounded bonds/angles, Fourier torsions, CBMC insertion/deletion/regrowth |
-| Native fast sampling | Single-component C++ LJ, DSF, direct Ewald and PME with optional fixed-host delayed sampling |
+| Native fast sampling | Multicomponent C++ LJ, DSF, direct Ewald and PME with optional fixed-host delayed sampling |
 | General sampling | Python multicomponent GCMC, Ewald electrostatics and optional exact target correction |
 | GPU energy evaluation | Resident neighbourhood/parameter tables, reusable workspaces and NumPy/CuPy interfaces |
 | Analysis and reuse | Number statistics, ESS, autocorrelation, checkpoints and independent chains sharing host data |

@@ -14,7 +14,7 @@ Bound query rows store mixed Lennard–Jones parameters, cutoff shifts and charg
 
 In [`native/fast_mc.cpp`](../native/fast_mc.cpp), `cached_environment()` constructs a guest environment for the current accepted configuration. `external()` excludes the selected molecule through its original index range. Forward trials and retracing use the same remaining environment.
 
-Rejected moves preserve this environment. Accepted insertion, deletion, translation, rotation or regrowth marks it dirty; the next energy query rebuilds it. This avoids constructing a new environment for every rejected trial while keeping the environment consistent with committed coordinates.
+Rejected moves preserve this environment. The incremental path updates the affected bins when a move is accepted. It counts each guest pair once during energy reporting and excludes an entire selected molecule during a trial. Use `guest_update: "rebuild"` to reproduce the alternative rebuilding path for paired timing.
 
 ## Full-support root proposals and CBMC
 
@@ -28,7 +28,7 @@ w(\mathbf r)=\frac{\exp[-\Delta u(\mathbf r)/T]}{Vq(\mathbf r)}.
 
 The same density factor appears in forward growth and reverse retracing. The native sampler fixes the root proposal before production. Uniform proposals recover \(Vq=1\). For a multisite molecule, the root-site map directs proposals; the trial energy and CBMC weights account for the molecule's actual interactions.
 
-The [`Python CBMC implementation`](../poremc/cbmc.py) handles rigid guests and tree-flexible growth, including partial suffix regrowth. The native implementation handles rigid guests, tree-flexible growth and full regrowth with fixed or bounded bond lengths and angles, and Fourier torsional terms. Internal-coordinate reference measures and activities are explicit in [`topology.py`](../poremc/topology.py).
+The [`Python CBMC implementation`](../poremc/cbmc.py) handles rigid guests and tree-flexible growth, including partial suffix regrowth. The native implementation handles mixtures of rigid and tree-flexible guests with fixed or bounded bonds and angles and Fourier torsions. The `partial_regrowth` option retains a common flexible prefix for growth and retracing. Internal-coordinate reference measures and activities are explicit in [`topology.py`](../poremc/topology.py).
 
 ## Batch energy requests and independent chains
 
@@ -50,7 +50,7 @@ The first stage includes the proposal and reservoir terms. Forward and reverse p
 
 | Route | Sampling scope | Energy evaluation |
 |---|---|---|
-| [`FastGCMC`](../poremc/fast.py) / native C++ | One classical component; insertion, deletion, translation, rotation and full regrowth | LJ, DSF, direct Ewald and PME. Optional fixed-host grid and exact target correction. |
+| [`FastGCMC`](../poremc/fast.py) / native C++ | Classical mixtures with insertion, deletion, translation, rotation and regrowth | LJ, DSF, direct Ewald and PME. Optional fixed-host grid and exact target correction. |
 | [`GCMC`](../poremc/engine.py) / Python | Mixtures, flexible CBMC, partial regrowth and optional delayed acceptance | Classical LJ/DSF/Ewald and extensible potential interfaces |
 | [`CudaEnvironment`](../poremc/cuda.py) | Called by the Python sampling/energy layer | Resident neighbour plans, mixed-parameter bindings and reusable FP64 workspaces |
 

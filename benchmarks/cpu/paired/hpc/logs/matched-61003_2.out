@@ -1,0 +1,9 @@
+benchmark_precision.py benchmarks/cpu/paired/inputs/xylene_mid.json --output benchmarks/cpu/paired/hpc/xylene_mid/xylene_mid-delayed.json --cache <scratch>/fields --mode delayed --budgets 40000 120000 240000 480000 --warmup 30000 --mesh 32 --guest-update incremental --workers 4
+xylene_mid delayed total_s 851.919 qualified_wall_s None
+benchmark_precision.py benchmarks/cpu/paired/inputs/xylene_mid.json --output benchmarks/cpu/paired/hpc/xylene_mid/xylene_mid-reference-mh.json --cache <scratch>/fields --mode reference-mh --budgets 40000 120000 240000 480000 --warmup 30000 --mesh 32 --guest-update incremental --workers 4
+xylene_mid reference-mh total_s 1003.57 qualified_wall_s None
+benchmark_precision.py benchmarks/cpu/paired/inputs/xylene_mid.json --output benchmarks/cpu/paired/hpc/xylene_mid/xylene_mid-exact-cost.json --cache <scratch>/fields --mode exact --budgets 8000 20000 40000 --warmup 10000 --mesh 32 --guest-update incremental --workers 4
+xylene_mid exact total_s 288.398 qualified_wall_s None
+benchmark_raspa3.py benchmarks/cpu/paired/inputs/xylene_mid.json --binary <cluster-workspace>/raspa3_cpu --output benchmarks/cpu/paired/hpc/xylene_mid/xylene_mid-raspa-cbmc.json --mode cbmc --budgets 800 2400 4800 8000 --warmup 1000 --stride 8 --workers 4
+xylene_mid: production is capped at 1600 cycles
+xylene_mid cbmc qualified_wall_s None

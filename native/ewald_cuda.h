@@ -12,6 +12,12 @@ const char* poremc_ewald_cuda_kernel_name(void* handle);
 const char* poremc_ewald_cuda_device_name(void* handle);
 // Return one selected complete molecule in exact mode order, interleaved [K,2].
 int poremc_ewald_cuda_structure(void* handle,size_t atoms,const double* xyz,const double* charge,double* structure);
+// Resident state uses interleaved [K,2] at construction/checkpoint boundaries.
+// The regular trial uploads only signed molecular sites and returns one energy.
+int poremc_ewald_cuda_resident_import(void* handle,const double* modes);
+int poremc_ewald_cuda_resident_export(void* handle,double* modes);
+int poremc_ewald_cuda_resident_trial(void* handle,size_t atoms,const double* xyz,const double* charge,double* energy);
+int poremc_ewald_cuda_resident_commit(void* handle);
 void poremc_ewald_cuda_destroy(void* handle);
 const char* poremc_ewald_cuda_last_error(void);
 // base is interleaved real/imaginary accepted S - exclusion + prefix.

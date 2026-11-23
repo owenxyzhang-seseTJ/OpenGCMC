@@ -25,7 +25,7 @@ template<typename T> struct Buffer {
 struct GPU {
  int device=0;size_t modes=0;cudaStream_t stream=nullptr;
  Buffer<double> k,weight,xyz,q,base,delta,partial,result;
- Buffer<Complex> powers,selected;
+ Buffer<Complex> powers,selected,resident;
  Buffer<Tile> tiles;
  Buffer<int> z_index;
  Axes axes{};
@@ -126,6 +126,16 @@ __global__ void reduce_kernel(size_t modes,const double*partial,double correctio
  for(unsigned width=blockDim.x/2;width; width>>=1){if(threadIdx.x<width)sums[threadIdx.x]+=sums[threadIdx.x+width];__syncthreads();}
  if(threadIdx.x==0)out[b]=sums[0]+correction;
 }
+template<bool Commit>
+__global__ void resident_delta(size_t modes,Complex* bath,const Complex* change,const double* weights,double* out){
+ for(size_t k=size_t(blockIdx.x)*blockDim.x+threadIdx.x;k<modes;k+=size_t(gridDim.x)*blockDim.x){
+  const Complex d=change[k];
+  if constexpr (Commit){
+   bath[k].re+=d.re;
+   bath[k].im+=d.im;
+  }else out[k]=energy(weights[k],bath[k].re,bath[k].im,d);
+ }
+}
 }
 extern "C" {
 void* poremc_ewald_cuda_create(size_t modes,const double*k,const double*weights,int device){
@@ -147,6 +157,56 @@ int poremc_ewald_cuda_set_lattice(void* p,const double* inverse,const int* limit
 }
 const char* poremc_ewald_cuda_kernel_name(void* p){return p && static_cast<GPU*>(p)->tile_count ? "cuda-tensor" : "cuda";}
 const char* poremc_ewald_cuda_device_name(void* p){return p ? static_cast<GPU*>(p)->device_name.c_str() : "";}
+int poremc_ewald_cuda_resident_import(void* p,const double* modes){
+ try{
+  GPU& g=*static_cast<GPU*>(p);check(cudaSetDevice(g.device),"select CUDA resident device");
+  g.resident.reserve(g.modes);
+  static_assert(sizeof(Complex)==2*sizeof(double),"unexpected complex layout");
+  check(cudaMemcpyAsync(g.resident.data,modes,g.modes*sizeof(Complex),cudaMemcpyHostToDevice,g.stream),"upload resident spectrum");
+  check(cudaStreamSynchronize(g.stream),"finish spectrum upload");
+  return 0;
+ }catch(const std::exception& e){last_error=e.what();return -1;}
+}
+int poremc_ewald_cuda_resident_export(void* p,double* modes){
+ try{
+  GPU& g=*static_cast<GPU*>(p);check(cudaSetDevice(g.device),"select CUDA resident device");
+  check(cudaMemcpyAsync(modes,g.resident.data,g.modes*sizeof(Complex),cudaMemcpyDeviceToHost,g.stream),"read resident spectrum");
+  check(cudaStreamSynchronize(g.stream),"finish spectrum read");
+  return 0;
+ }catch(const std::exception& e){last_error=e.what();return -1;}
+}
+int poremc_ewald_cuda_resident_trial(void* p,size_t atoms,const double* xyz,const double* q,double* out){
+ auto& g=*static_cast<GPU*>(p);
+ try{
+  last_error.clear();
+  if(!g.resident.data||!g.tile_count||!atoms)throw std::invalid_argument("invalid resident Ewald trial");
+  check(cudaSetDevice(g.device),"select CUDA resident device");
+  g.selected.reserve(g.modes);g.partial.reserve(g.modes);g.result.reserve(1);
+  upload_candidates(g,1,atoms,xyz,q);tensor_phases(g,1,atoms);
+  contraction_kernel<true><<<blocks_for(g.tile_count,4),128,0,g.stream>>>(
+      1,atoms,g.tile_count,g.axes.span,g.tiles.data,g.z_index.data,g.powers.data,g.q.data,
+      nullptr,nullptr,nullptr,g.selected.data);
+  check(cudaPeekAtLastError(),"launch resident structure-factor increment");
+  resident_delta<false><<<blocks_for(g.modes,256),256,0,g.stream>>>(
+      g.modes,g.resident.data,g.selected.data,g.weight.data,g.partial.data);
+  check(cudaPeekAtLastError(),"launch resident energy increment");
+  reduce_kernel<<<1,256,0,g.stream>>>(g.modes,g.partial.data,0.,g.result.data);
+  check(cudaPeekAtLastError(),"reduce resident trial energy");
+  check(cudaMemcpyAsync(out,g.result.data,sizeof(double),cudaMemcpyDeviceToHost,g.stream),"read resident trial energy");
+  check(cudaStreamSynchronize(g.stream),"finish resident trial");
+  return 0;
+ }catch(const std::exception& e){cudaSetDevice(g.device);cudaStreamSynchronize(g.stream);last_error=e.what();return -1;}
+}
+int poremc_ewald_cuda_resident_commit(void* p){
+ try{
+  GPU& g=*static_cast<GPU*>(p);
+  check(cudaSetDevice(g.device),"select CUDA resident device");
+  resident_delta<true><<<blocks_for(g.modes,256),256,0,g.stream>>>(
+      g.modes,g.resident.data,g.selected.data,nullptr,nullptr);
+  check(cudaPeekAtLastError(),"commit resident structure-factor increment");
+  return 0;
+ }catch(const std::exception& e){last_error=e.what();return -1;}
+}
 int poremc_ewald_cuda_structure(void* p,size_t atoms,const double* xyz,const double* q,double* out){
  try{
   last_error.clear();if(!p||!out)throw std::invalid_argument("missing CUDA state/structure output");

@@ -1,0 +1,297 @@
+{
+  "run_id": "00000000000000000000000000000002",
+  "status": "completed",
+  "chains": {
+    "completed": 12
+  },
+  "blocks": 24,
+  "latest_checkpoint_step": 28000,
+  "errors": [],
+  "points": [
+    {
+      "reservoir": {
+        "fugacity_coefficients": [
+          1,
+          1
+        ],
+        "mole_fractions": [
+          0.5,
+          0.5
+        ],
+        "pressure_Pa": 20000
+      },
+      "counts_per_cell": {
+        "CO2": {
+          "mean": 8.236875,
+          "mcse": 0.17453805976224793,
+          "ci95": [
+            7.681416996578149,
+            8.792333003421849
+          ],
+          "rank_split_rhat": 1.0062492928665006,
+          "ess": 180.63383314997984,
+          "chains": 4,
+          "draws_per_chain": 1200,
+          "nonzero_draws": 4800
+        },
+        "CH4": {
+          "mean": 2.2925,
+          "mcse": 0.04614011854642669,
+          "ci95": [
+            2.1456615502065466,
+            2.4393384497934534
+          ],
+          "rank_split_rhat": 1.002433436569754,
+          "ess": 990.2794203734328,
+          "chains": 4,
+          "draws_per_chain": 1200,
+          "nonzero_draws": 4349
+        }
+      },
+      "uptake_mmol_g": {
+        "CO2": 0.7140033357299638,
+        "CH4": 0.19872253095511852
+      },
+      "uptake_ci95_mmol_g": {
+        "CO2": [
+          0.6658541447684514,
+          0.7621525266914759
+        ],
+        "CH4": [
+          0.1859940212999468,
+          0.21145104061029024
+        ]
+      },
+      "selectivity": {
+        "direction": [
+          "CO2",
+          "CH4"
+        ],
+        "estimate": 3.592966194111232,
+        "log": {
+          "mean": 1.278978099267534,
+          "mcse": 0.03479470688415896,
+          "ci95": [
+            1.1682458129005933,
+            1.3897103856344746
+          ],
+          "rank_split_rhat": 1.0043521772110822,
+          "ess": 462.6367421723323,
+          "chains": 4,
+          "draws_per_chain": 1200
+        },
+        "ci95": [
+          3.216345615023573,
+          4.013687463102917
+        ]
+      },
+      "precision_met": true,
+      "preparation_seconds": 3.581691543571651,
+      "production_seconds": 1.227847283
+    },
+    {
+      "reservoir": {
+        "fugacity_coefficients": [
+          1,
+          1
+        ],
+        "mole_fractions": [
+          0.5,
+          0.5
+        ],
+        "pressure_Pa": 100000
+      },
+      "counts_per_cell": {
+        "CO2": {
+          "mean": 18.378958333333333,
+          "mcse": 0.44881136136537053,
+          "ci95": [
+            16.950640274586508,
+            19.80727639208016
+          ],
+          "rank_split_rhat": 1.1209057805429683,
+          "ess": 40.91950422305493,
+          "chains": 4,
+          "draws_per_chain": 1200,
+          "nonzero_draws": 4800
+        },
+        "CH4": {
+          "mean": 4.385,
+          "mcse": 0.22183836459006895,
+          "ci95": [
+            3.6790113162400315,
+            5.090988683759968
+          ],
+          "rank_split_rhat": 1.0546708960984879,
+          "ess": 84.58547152255423,
+          "chains": 4,
+          "draws_per_chain": 1200,
+          "nonzero_draws": 4747
+        }
+      },
+      "uptake_mmol_g": {
+        "CO2": 1.5931573026471828,
+        "CH4": 0.38010830893705333
+      },
+      "uptake_ci95_mmol_g": {
+        "CO2": [
+          1.469345315889028,
+          1.7169692894053383
+        ],
+        "CH4": [
+          0.3189105518760048,
+          0.4413060659981018
+        ]
+      },
+      "selectivity": {
+        "direction": [
+          "CO2",
+          "CH4"
+        ],
+        "estimate": 4.19132459141011,
+        "log": {
+          "mean": 1.4330168155764387,
+          "mcse": 0.07531291846638322,
+          "ci95": [
+            1.1933374964629224,
+            1.672696134689955
+          ],
+          "rank_split_rhat": 1.0797110882561387,
+          "ess": 56.533425656349785,
+          "chains": 4,
+          "draws_per_chain": 1200
+        },
+        "ci95": [
+          3.2980701568757467,
+          5.326509441873271
+        ]
+      },
+      "precision_met": false,
+      "preparation_seconds": 2.883192314009648,
+      "production_seconds": 1.5310684620000001
+    },
+    {
+      "reservoir": {
+        "fugacity_coefficients": [
+          1,
+          1
+        ],
+        "mole_fractions": [
+          0.5,
+          0.5
+        ],
+        "pressure_Pa": 500000
+      },
+      "counts_per_cell": {
+        "CO2": {
+          "mean": 23.504583333333333,
+          "mcse": 0.7280997352952664,
+          "ci95": [
+            21.187445020864462,
+            25.821721645802203
+          ],
+          "rank_split_rhat": 1.4182578142451714,
+          "ess": 18.882939031852207,
+          "chains": 4,
+          "draws_per_chain": 1200,
+          "nonzero_draws": 4800
+        },
+        "CH4": {
+          "mean": 6.522708333333333,
+          "mcse": 0.4566039304549214,
+          "ci95": [
+            5.069590841878796,
+            7.97582582478787
+          ],
+          "rank_split_rhat": 1.2481860329248258,
+          "ess": 27.450980451767986,
+          "chains": 4,
+          "draws_per_chain": 1200,
+          "nonzero_draws": 4794
+        }
+      },
+      "uptake_mmol_g": {
+        "CO2": 2.0374657749380574,
+        "CH4": 0.5654129154556349
+      },
+      "uptake_ci95_mmol_g": {
+        "CO2": [
+          1.8366075022981942,
+          2.2383240475779203
+        ],
+        "CH4": [
+          0.43945122050383617,
+          0.6913746104074335
+        ]
+      },
+      "selectivity": {
+        "direction": [
+          "CO2",
+          "CH4"
+        ],
+        "estimate": 3.60350059088441,
+        "log": {
+          "mean": 1.2819057593574834,
+          "mcse": 0.096178209987668,
+          "ci95": [
+            0.9758237703333754,
+            1.5879877483815914
+          ],
+          "rank_split_rhat": 1.3182839861591924,
+          "ess": 24.565133248644443,
+          "chains": 4,
+          "draws_per_chain": 1200
+        },
+        "ci95": [
+          2.65335206366469,
+          4.893891272977059
+        ]
+      },
+      "precision_met": false,
+      "preparation_seconds": 3.378277186944615,
+      "production_seconds": 1.657799083
+    }
+  ],
+  "elapsed_since_submission_s": 197.26957511901855,
+  "artifacts": [
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0000-r0000/b000000-a000001/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0000-r0000/b000001-a000002/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0000-r0001/b000000-a000001/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0000-r0001/b000001-a000002/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0000-r0002/b000000-a000001/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0000-r0002/b000001-a000002/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0000-r0003/b000000-a000001/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0000-r0003/b000001-a000002/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0001-r0000/b000000-a000001/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0001-r0000/b000001-a000002/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0001-r0001/b000000-a000001/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0001-r0001/b000001-a000002/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0001-r0002/b000000-a000001/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0001-r0002/b000001-a000002/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0001-r0003/b000000-a000001/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0001-r0003/b000001-a000002/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0002-r0000/b000000-a000001/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0002-r0000/b000001-a000002/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0002-r0001/b000000-a000001/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0002-r0001/b000001-a000002/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0002-r0002/b000000-a000001/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0002-r0002/b000001-a000002/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0002-r0003/b000000-a000001/samples.json",
+    "benchmarks/cpu/paired/hpc/live_slurm/runstore/runs/00000000000000000000000000000002/p0002-r0003/b000001-a000002/samples.json"
+  ],
+  "plan": {
+    "plan_id": "d00ae8dcefce502396eed7eee976be22fb85ea88322bf9161c7163f7c6566423",
+    "points": 3,
+    "chains": 12,
+    "attempts": 336000,
+    "block_steps": 12000
+  },
+  "repeated_submission": {
+    "run_id": "00000000000000000000000000000002",
+    "created": false
+  },
+  "slurm_jobs": [
+    "61009",
+    "61008"
+  ]
+}

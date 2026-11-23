@@ -40,7 +40,8 @@ class ClassicalPotential:
         self._prepared_cache=OrderedDict();self.environment_cache_stats={'hits':0,'builds':0}
         self.species=list(species); self.cell,self.inverse,_=validate_cell(cell,cutoff)
         self.cutoff=float(cutoff); self.coulomb=coulomb; self.alpha=float(alpha)
-        self.shifted=bool(shifted); self.backend=backend; self.algorithm=algorithm
+        self.shifted='force' if shifted=='force' else bool(shifted)
+        self.backend=backend; self.algorithm=algorithm
         self.allow_charge_background=bool(allow_charge_background)
         self.threads=threads
         hmin=float(1.0 / np.linalg.norm(self.inverse,axis=0).max())
@@ -154,6 +155,9 @@ class ClassicalPotential:
                 en=4*epsilon*(sr6*sr6-sr6)
                 if self.shifted:
                     c=(sigma/self.cutoff)**6; en-=4*epsilon*(c*c-c)
+                    if self.shifted=='force':
+                        slope=24*epsilon*c*(1-2*c)/self.cutoff
+                        en-=slope*(r-self.cutoff)
                 out+=slj*np.where(mask,en,0)
                 out[r<=1e-12]=np.inf
             qq=m.charge[i]*m.charge[j]

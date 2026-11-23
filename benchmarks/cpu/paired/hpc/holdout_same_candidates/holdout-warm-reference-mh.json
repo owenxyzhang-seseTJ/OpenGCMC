@@ -1,0 +1,2987 @@
+{
+  "checkpoints": [
+    {
+      "budget": 240000,
+      "draws_per_chain": 1200,
+      "batch_wall_s": 38.092728084884584,
+      "observables": {
+        "count_0": {
+          "mean": 26.35875,
+          "mcse": 0.206716257883466,
+          "ci95": [
+            25.700886608856575,
+            27.016613391143427
+          ],
+          "rank_split_rhat": 1.0063969594446571,
+          "ess": 511.13640395068154,
+          "chains": 4,
+          "draws_per_chain": 1200
+        }
+      },
+      "met": true
+    },
+    {
+      "budget": 480000,
+      "draws_per_chain": 2400,
+      "batch_wall_s": 72.52842479199171,
+      "observables": {
+        "count_0": {
+          "mean": 26.415208333333332,
+          "mcse": 0.14763946051420646,
+          "ci95": [
+            25.945353677705736,
+            26.88506298896093
+          ],
+          "rank_split_rhat": 1.0019500603394345,
+          "ess": 1037.6213372549464,
+          "chains": 4,
+          "draws_per_chain": 2400
+        }
+      },
+      "met": true
+    },
+    {
+      "budget": 960000,
+      "draws_per_chain": 4800,
+      "batch_wall_s": 140.9103313232772,
+      "observables": {
+        "count_0": {
+          "mean": 26.359322916666667,
+          "mcse": 0.1211352004923496,
+          "ci95": [
+            25.97381664541992,
+            26.744829187913414
+          ],
+          "rank_split_rhat": 1.0016246412870204,
+          "ess": 1520.660229473734,
+          "chains": 4,
+          "draws_per_chain": 4800
+        }
+      },
+      "met": true
+    },
+    {
+      "budget": 1440000,
+      "draws_per_chain": 7200,
+      "batch_wall_s": 209.21820680610836,
+      "observables": {
+        "count_0": {
+          "mean": 26.42076388888889,
+          "mcse": 0.0807521002699761,
+          "ci95": [
+            26.16377466574076,
+            26.677753112037017
+          ],
+          "rank_split_rhat": 1.0009621817205052,
+          "ess": 3413.081573685651,
+          "chains": 4,
+          "draws_per_chain": 7200
+        }
+      },
+      "met": true
+    },
+    {
+      "budget": 1920000,
+      "draws_per_chain": 9600,
+      "batch_wall_s": 277.678378903307,
+      "observables": {
+        "count_0": {
+          "mean": 26.469583333333333,
+          "mcse": 0.07386367069544869,
+          "ci95": [
+            26.234516167433867,
+            26.704650499232798
+          ],
+          "rank_split_rhat": 1.0013390814404834,
+          "ess": 4090.000431276212,
+          "chains": 4,
+          "draws_per_chain": 9600
+        }
+      },
+      "met": true
+    }
+  ],
+  "qualified_wall_s": 38.092728084884584,
+  "start_group_final_means": {
+    "empty": [
+      26.364947916666665
+    ],
+    "preload": [
+      26.57421875
+    ]
+  },
+  "occupancy_distribution": [
+    [
+      9,
+      5.208333333333334e-05
+    ],
+    [
+      10,
+      5.208333333333334e-05
+    ],
+    [
+      11,
+      0.00013020833333333333
+    ],
+    [
+      12,
+      0.000390625
+    ],
+    [
+      13,
+      0.0009375
+    ],
+    [
+      14,
+      0.0016927083333333334
+    ],
+    [
+      15,
+      0.0031510416666666666
+    ],
+    [
+      16,
+      0.0053125
+    ],
+    [
+      17,
+      0.010755208333333334
+    ],
+    [
+      18,
+      0.016770833333333332
+    ],
+    [
+      19,
+      0.02390625
+    ],
+    [
+      20,
+      0.03598958333333333
+    ],
+    [
+      21,
+      0.04841145833333333
+    ],
+    [
+      22,
+      0.0571875
+    ],
+    [
+      23,
+      0.06716145833333333
+    ],
+    [
+      24,
+      0.07484375
+    ],
+    [
+      25,
+      0.08239583333333333
+    ],
+    [
+      26,
+      0.08401041666666667
+    ],
+    [
+      27,
+      0.08447916666666666
+    ],
+    [
+      28,
+      0.07919270833333333
+    ],
+    [
+      29,
+      0.06791666666666667
+    ],
+    [
+      30,
+      0.06114583333333334
+    ],
+    [
+      31,
+      0.049765625
+    ],
+    [
+      32,
+      0.040755208333333334
+    ],
+    [
+      33,
+      0.030520833333333334
+    ],
+    [
+      34,
+      0.02171875
+    ],
+    [
+      35,
+      0.018020833333333333
+    ],
+    [
+      36,
+      0.012447916666666666
+    ],
+    [
+      37,
+      0.008307291666666666
+    ],
+    [
+      38,
+      0.005130208333333333
+    ],
+    [
+      39,
+      0.0030729166666666665
+    ],
+    [
+      40,
+      0.001953125
+    ],
+    [
+      41,
+      0.001171875
+    ],
+    [
+      42,
+      0.0004427083333333333
+    ],
+    [
+      43,
+      0.00046875
+    ],
+    [
+      44,
+      0.00028645833333333333
+    ],
+    [
+      45,
+      5.208333333333334e-05
+    ]
+  ],
+  "precision_goals": {
+    "count_0": 0.25
+  },
+  "NIST": {
+    "reference_replica_means": [
+      [
+        26.39882311669722
+      ],
+      [
+        26.382612609020143
+      ],
+      [
+        26.49379395012228
+      ],
+      [
+        26.3551775398035
+      ]
+    ],
+    "empirical_mean": [
+      26.469583333333333
+    ],
+    "total_variation": 0.012692219900714473,
+    "reference_replica_TV": [
+      0.0036943008648203084,
+      0.0036369841352673054,
+      0.007378975578839337,
+      0.006358191673735058
+    ]
+  },
+  "case": "holdout_co2_uio66",
+  "platform": "Linux-4.19.91-26.an8.x86_64-x86_64-with-glibc2.28",
+  "mode": "reference-mh",
+  "mesh": 32,
+  "guest_update": "incremental",
+  "force_cold": false,
+  "warmup": 20000,
+  "workers": 4,
+  "chains": [
+    {
+      "seed": 1368713,
+      "start": "empty",
+      "initial_counts": [
+        0
+      ],
+      "preparation_s": 0.11900383420288563,
+      "elapsed_at_prefix_s": [
+        38.09271689224988,
+        72.52840657299384,
+        140.67763949930668,
+        208.91848815511912,
+        276.9614527639933
+      ],
+      "last_energy_K": -71825.04648550804,
+      "energy_closure_K": null,
+      "moves_after_warmup": {
+        "insert": {
+          "attempted": 4964,
+          "accepted": 1450
+        },
+        "delete": {
+          "attempted": 4991,
+          "accepted": 1422
+        },
+        "translate": {
+          "attempted": 4091,
+          "accepted": 1370
+        },
+        "rotate": {
+          "attempted": 1981,
+          "accepted": 1498
+        },
+        "regrow": {
+          "attempted": 3973,
+          "accepted": 570
+        }
+      },
+      "acceleration_after_warmup": {
+        "sampling_mode": "reference-mh",
+        "selected_correction_backend": "cpu",
+        "grid_root_bias": 0.6,
+        "stages": {
+          "insert": {
+            "reference_proposals": 4964,
+            "proposals_reaching_exact": 4964,
+            "exact_evaluations": 4964,
+            "accepted": 1450
+          },
+          "delete": {
+            "reference_proposals": 4989,
+            "proposals_reaching_exact": 4989,
+            "exact_evaluations": 4989,
+            "accepted": 1422
+          },
+          "translate": {
+            "reference_proposals": 4090,
+            "proposals_reaching_exact": 4090,
+            "exact_evaluations": 8180,
+            "accepted": 1370
+          },
+          "rotate": {
+            "reference_proposals": 1980,
+            "proposals_reaching_exact": 1980,
+            "exact_evaluations": 3960,
+            "accepted": 1498
+          },
+          "regrow": {
+            "reference_proposals": 3972,
+            "proposals_reaching_exact": 3972,
+            "exact_evaluations": 7944,
+            "accepted": 570
+          }
+        },
+        "reference_proposals": 19995,
+        "proposals_reaching_exact": 19995,
+        "exact_evaluations": 30037,
+        "accepted": 6310,
+        "host_grid": {
+          "builds": 0,
+          "cache_loads": 3,
+          "cache_writes": 0,
+          "raw_field_builds": 0,
+          "raw_field_loads": 3,
+          "lookups": 651116,
+          "cubic_lookups": 91449,
+          "linear_lookups": 0,
+          "boltzmann_lookups": 559667,
+          "exact_fallbacks": 0,
+          "steep_interpolation": "boltzmann",
+          "reference_cap_K": 100000,
+          "mesh_points": 32768,
+          "lj_fields": 2,
+          "site_types": 2,
+          "bytes": 2322272,
+          "steep_cells": 64768
+        }
+      },
+      "profiles": [
+        {
+          "production_wall_s": 34.99108858872205,
+          "steps": 240000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 64753,
+                "proposals_reaching_exact": 64753,
+                "exact_evaluations": 64753,
+                "accepted": 19098
+              },
+              "delete": {
+                "reference_proposals": 65200,
+                "proposals_reaching_exact": 65200,
+                "exact_evaluations": 65200,
+                "accepted": 19075
+              },
+              "translate": {
+                "reference_proposals": 51849,
+                "proposals_reaching_exact": 51849,
+                "exact_evaluations": 103698,
+                "accepted": 18169
+              },
+              "rotate": {
+                "reference_proposals": 25988,
+                "proposals_reaching_exact": 25988,
+                "exact_evaluations": 51976,
+                "accepted": 20308
+              },
+              "regrow": {
+                "reference_proposals": 52205,
+                "proposals_reaching_exact": 52205,
+                "exact_evaluations": 104410,
+                "accepted": 7614
+              }
+            },
+            "reference_proposals": 259995,
+            "proposals_reaching_exact": 259995,
+            "exact_evaluations": 390037,
+            "accepted": 84264,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 8115065,
+              "cubic_lookups": 1195552,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 6919513,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 64753,
+              "accepted": 19098
+            },
+            "delete": {
+              "attempted": 65202,
+              "accepted": 19075
+            },
+            "translate": {
+              "attempted": 51850,
+              "accepted": 18169
+            },
+            "rotate": {
+              "attempted": 25989,
+              "accepted": 20308
+            },
+            "regrow": {
+              "attempted": 52206,
+              "accepted": 7614
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 194795,
+            "candidate_batches": 0,
+            "candidates": 0,
+            "accepted_commits": 84264,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        },
+        {
+          "production_wall_s": 69.42677743686363,
+          "steps": 480000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 125056,
+                "proposals_reaching_exact": 125056,
+                "exact_evaluations": 125056,
+                "accepted": 36751
+              },
+              "delete": {
+                "reference_proposals": 125061,
+                "proposals_reaching_exact": 125061,
+                "exact_evaluations": 125061,
+                "accepted": 36718
+              },
+              "translate": {
+                "reference_proposals": 99860,
+                "proposals_reaching_exact": 99860,
+                "exact_evaluations": 199720,
+                "accepted": 34818
+              },
+              "rotate": {
+                "reference_proposals": 49999,
+                "proposals_reaching_exact": 49999,
+                "exact_evaluations": 99998,
+                "accepted": 39045
+              },
+              "regrow": {
+                "reference_proposals": 100019,
+                "proposals_reaching_exact": 100019,
+                "exact_evaluations": 200038,
+                "accepted": 14563
+              }
+            },
+            "reference_proposals": 499995,
+            "proposals_reaching_exact": 499995,
+            "exact_evaluations": 749873,
+            "accepted": 161895,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 15561374,
+              "cubic_lookups": 2296451,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 13264923,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 125056,
+              "accepted": 36751
+            },
+            "delete": {
+              "attempted": 125063,
+              "accepted": 36718
+            },
+            "translate": {
+              "attempted": 99861,
+              "accepted": 34818
+            },
+            "rotate": {
+              "attempted": 50000,
+              "accepted": 39045
+            },
+            "regrow": {
+              "attempted": 100020,
+              "accepted": 14563
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 374934,
+            "candidate_batches": 0,
+            "candidates": 0,
+            "accepted_commits": 161895,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        },
+        {
+          "production_wall_s": 137.57600705092773,
+          "steps": 960000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 244399,
+                "proposals_reaching_exact": 244399,
+                "exact_evaluations": 244399,
+                "accepted": 71834
+              },
+              "delete": {
+                "reference_proposals": 245155,
+                "proposals_reaching_exact": 245155,
+                "exact_evaluations": 245155,
+                "accepted": 71804
+              },
+              "translate": {
+                "reference_proposals": 196150,
+                "proposals_reaching_exact": 196150,
+                "exact_evaluations": 392300,
+                "accepted": 67853
+              },
+              "rotate": {
+                "reference_proposals": 98134,
+                "proposals_reaching_exact": 98134,
+                "exact_evaluations": 196268,
+                "accepted": 76637
+              },
+              "regrow": {
+                "reference_proposals": 196157,
+                "proposals_reaching_exact": 196157,
+                "exact_evaluations": 392314,
+                "accepted": 28438
+              }
+            },
+            "reference_proposals": 979995,
+            "proposals_reaching_exact": 979995,
+            "exact_evaluations": 1470436,
+            "accepted": 316566,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 30459032,
+              "cubic_lookups": 4497313,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 25961719,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 244399,
+              "accepted": 71834
+            },
+            "delete": {
+              "attempted": 245157,
+              "accepted": 71804
+            },
+            "translate": {
+              "attempted": 196151,
+              "accepted": 67853
+            },
+            "rotate": {
+              "attempted": 98135,
+              "accepted": 76637
+            },
+            "regrow": {
+              "attempted": 196158,
+              "accepted": 28438
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 734840,
+            "candidate_batches": 0,
+            "candidates": 0,
+            "accepted_commits": 316566,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        },
+        {
+          "production_wall_s": 205.8168558338657,
+          "steps": 1440000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 364685,
+                "proposals_reaching_exact": 364685,
+                "exact_evaluations": 364685,
+                "accepted": 106952
+              },
+              "delete": {
+                "reference_proposals": 364639,
+                "proposals_reaching_exact": 364639,
+                "exact_evaluations": 364639,
+                "accepted": 106918
+              },
+              "translate": {
+                "reference_proposals": 292511,
+                "proposals_reaching_exact": 292511,
+                "exact_evaluations": 585022,
+                "accepted": 101286
+              },
+              "rotate": {
+                "reference_proposals": 146272,
+                "proposals_reaching_exact": 146272,
+                "exact_evaluations": 292544,
+                "accepted": 114193
+              },
+              "regrow": {
+                "reference_proposals": 291888,
+                "proposals_reaching_exact": 291888,
+                "exact_evaluations": 583776,
+                "accepted": 42258
+              }
+            },
+            "reference_proposals": 1459995,
+            "proposals_reaching_exact": 1459995,
+            "exact_evaluations": 2190666,
+            "accepted": 471607,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 45344534,
+              "cubic_lookups": 6694018,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 38650516,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 364685,
+              "accepted": 106952
+            },
+            "delete": {
+              "attempted": 364641,
+              "accepted": 106918
+            },
+            "translate": {
+              "attempted": 292512,
+              "accepted": 101286
+            },
+            "rotate": {
+              "attempted": 146273,
+              "accepted": 114193
+            },
+            "regrow": {
+              "attempted": 291889,
+              "accepted": 42258
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 1095356,
+            "candidate_batches": 0,
+            "candidates": 0,
+            "accepted_commits": 471607,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        },
+        {
+          "production_wall_s": 273.85982047906145,
+          "steps": 1920000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 485237,
+                "proposals_reaching_exact": 485237,
+                "exact_evaluations": 485237,
+                "accepted": 142337
+              },
+              "delete": {
+                "reference_proposals": 484037,
+                "proposals_reaching_exact": 484037,
+                "exact_evaluations": 484037,
+                "accepted": 142308
+              },
+              "translate": {
+                "reference_proposals": 388835,
+                "proposals_reaching_exact": 388835,
+                "exact_evaluations": 777670,
+                "accepted": 134619
+              },
+              "rotate": {
+                "reference_proposals": 194296,
+                "proposals_reaching_exact": 194296,
+                "exact_evaluations": 388592,
+                "accepted": 151782
+              },
+              "regrow": {
+                "reference_proposals": 387590,
+                "proposals_reaching_exact": 387590,
+                "exact_evaluations": 775180,
+                "accepted": 56308
+              }
+            },
+            "reference_proposals": 1939995,
+            "proposals_reaching_exact": 1939995,
+            "exact_evaluations": 2910716,
+            "accepted": 627354,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 60233048,
+              "cubic_lookups": 8890454,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 51342594,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 485237,
+              "accepted": 142337
+            },
+            "delete": {
+              "attempted": 484039,
+              "accepted": 142308
+            },
+            "translate": {
+              "attempted": 388836,
+              "accepted": 134619
+            },
+            "rotate": {
+              "attempted": 194297,
+              "accepted": 151782
+            },
+            "regrow": {
+              "attempted": 387591,
+              "accepted": 56308
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 1455958,
+            "candidate_batches": 0,
+            "candidates": 0,
+            "accepted_commits": 627354,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        }
+      ],
+      "cache": {
+        "builds": 0,
+        "cache_loads": 3,
+        "cache_writes": 0,
+        "raw_field_builds": 0,
+        "raw_field_loads": 3,
+        "lookups": 60233048,
+        "cubic_lookups": 8890454,
+        "linear_lookups": 0,
+        "boltzmann_lookups": 51342594,
+        "exact_fallbacks": 0,
+        "steep_interpolation": "boltzmann",
+        "reference_cap_K": 100000,
+        "mesh_points": 32768,
+        "lj_fields": 2,
+        "site_types": 2,
+        "bytes": 2322272,
+        "steep_cells": 64768
+      },
+      "data": "holdout-warm-reference-mh_1368713.npz"
+    },
+    {
+      "seed": 1368731,
+      "start": "empty",
+      "initial_counts": [
+        0
+      ],
+      "preparation_s": 0.11895018396899104,
+      "elapsed_at_prefix_s": [
+        38.09270195104182,
+        72.52841536421329,
+        140.67762945219874,
+        208.91847945703194,
+        277.0101024429314
+      ],
+      "last_energy_K": -66047.01029201772,
+      "energy_closure_K": null,
+      "moves_after_warmup": {
+        "insert": {
+          "attempted": 5068,
+          "accepted": 1527
+        },
+        "delete": {
+          "attempted": 5065,
+          "accepted": 1488
+        },
+        "translate": {
+          "attempted": 3956,
+          "accepted": 1364
+        },
+        "rotate": {
+          "attempted": 1967,
+          "accepted": 1555
+        },
+        "regrow": {
+          "attempted": 3944,
+          "accepted": 581
+        }
+      },
+      "acceleration_after_warmup": {
+        "sampling_mode": "reference-mh",
+        "selected_correction_backend": "cpu",
+        "grid_root_bias": 0.6,
+        "stages": {
+          "insert": {
+            "reference_proposals": 5068,
+            "proposals_reaching_exact": 5068,
+            "exact_evaluations": 5068,
+            "accepted": 1527
+          },
+          "delete": {
+            "reference_proposals": 5064,
+            "proposals_reaching_exact": 5064,
+            "exact_evaluations": 5064,
+            "accepted": 1488
+          },
+          "translate": {
+            "reference_proposals": 3954,
+            "proposals_reaching_exact": 3954,
+            "exact_evaluations": 7908,
+            "accepted": 1364
+          },
+          "rotate": {
+            "reference_proposals": 1967,
+            "proposals_reaching_exact": 1967,
+            "exact_evaluations": 3934,
+            "accepted": 1555
+          },
+          "regrow": {
+            "reference_proposals": 3944,
+            "proposals_reaching_exact": 3944,
+            "exact_evaluations": 7888,
+            "accepted": 581
+          }
+        },
+        "reference_proposals": 19997,
+        "proposals_reaching_exact": 19997,
+        "exact_evaluations": 29862,
+        "accepted": 6515,
+        "host_grid": {
+          "builds": 0,
+          "cache_loads": 3,
+          "cache_writes": 0,
+          "raw_field_builds": 0,
+          "raw_field_loads": 3,
+          "lookups": 653693,
+          "cubic_lookups": 92394,
+          "linear_lookups": 0,
+          "boltzmann_lookups": 561299,
+          "exact_fallbacks": 0,
+          "steep_interpolation": "boltzmann",
+          "reference_cap_K": 100000,
+          "mesh_points": 32768,
+          "lj_fields": 2,
+          "site_types": 2,
+          "bytes": 2322272,
+          "steep_cells": 64768
+        }
+      },
+      "profiles": [
+        {
+          "production_wall_s": 34.991079811006784,
+          "steps": 240000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 64873,
+                "proposals_reaching_exact": 64873,
+                "exact_evaluations": 64873,
+                "accepted": 18949
+              },
+              "delete": {
+                "reference_proposals": 65197,
+                "proposals_reaching_exact": 65197,
+                "exact_evaluations": 65197,
+                "accepted": 18926
+              },
+              "translate": {
+                "reference_proposals": 52167,
+                "proposals_reaching_exact": 52167,
+                "exact_evaluations": 104334,
+                "accepted": 18011
+              },
+              "rotate": {
+                "reference_proposals": 25941,
+                "proposals_reaching_exact": 25941,
+                "exact_evaluations": 51882,
+                "accepted": 20316
+              },
+              "regrow": {
+                "reference_proposals": 51819,
+                "proposals_reaching_exact": 51819,
+                "exact_evaluations": 103638,
+                "accepted": 7558
+              }
+            },
+            "reference_proposals": 259997,
+            "proposals_reaching_exact": 259997,
+            "exact_evaluations": 389924,
+            "accepted": 83760,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 8097056,
+              "cubic_lookups": 1192783,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 6904273,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 64873,
+              "accepted": 18949
+            },
+            "delete": {
+              "attempted": 65198,
+              "accepted": 18926
+            },
+            "translate": {
+              "attempted": 52169,
+              "accepted": 18011
+            },
+            "rotate": {
+              "attempted": 25941,
+              "accepted": 20316
+            },
+            "regrow": {
+              "attempted": 51819,
+              "accepted": 7558
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 194800,
+            "candidate_batches": 0,
+            "candidates": 0,
+            "accepted_commits": 83760,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        },
+        {
+          "production_wall_s": 69.42679383605719,
+          "steps": 480000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 124646,
+                "proposals_reaching_exact": 124646,
+                "exact_evaluations": 124646,
+                "accepted": 36428
+              },
+              "delete": {
+                "reference_proposals": 125361,
+                "proposals_reaching_exact": 125361,
+                "exact_evaluations": 125361,
+                "accepted": 36401
+              },
+              "translate": {
+                "reference_proposals": 100527,
+                "proposals_reaching_exact": 100527,
+                "exact_evaluations": 201054,
+                "accepted": 34781
+              },
+              "rotate": {
+                "reference_proposals": 49745,
+                "proposals_reaching_exact": 49745,
+                "exact_evaluations": 99490,
+                "accepted": 38943
+              },
+              "regrow": {
+                "reference_proposals": 99718,
+                "proposals_reaching_exact": 99718,
+                "exact_evaluations": 199436,
+                "accepted": 14561
+              }
+            },
+            "reference_proposals": 499997,
+            "proposals_reaching_exact": 499997,
+            "exact_evaluations": 749987,
+            "accepted": 161114,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 15541598,
+              "cubic_lookups": 2290711,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 13250887,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 124646,
+              "accepted": 36428
+            },
+            "delete": {
+              "attempted": 125362,
+              "accepted": 36401
+            },
+            "translate": {
+              "attempted": 100529,
+              "accepted": 34781
+            },
+            "rotate": {
+              "attempted": 49745,
+              "accepted": 38943
+            },
+            "regrow": {
+              "attempted": 99718,
+              "accepted": 14561
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 374636,
+            "candidate_batches": 0,
+            "candidates": 0,
+            "accepted_commits": 161114,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        },
+        {
+          "production_wall_s": 137.57600347697735,
+          "steps": 960000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 244530,
+                "proposals_reaching_exact": 244530,
+                "exact_evaluations": 244530,
+                "accepted": 72055
+              },
+              "delete": {
+                "reference_proposals": 245247,
+                "proposals_reaching_exact": 245247,
+                "exact_evaluations": 245247,
+                "accepted": 72025
+              },
+              "translate": {
+                "reference_proposals": 196525,
+                "proposals_reaching_exact": 196525,
+                "exact_evaluations": 393050,
+                "accepted": 68005
+              },
+              "rotate": {
+                "reference_proposals": 97544,
+                "proposals_reaching_exact": 97544,
+                "exact_evaluations": 195088,
+                "accepted": 76270
+              },
+              "regrow": {
+                "reference_proposals": 196151,
+                "proposals_reaching_exact": 196151,
+                "exact_evaluations": 392302,
+                "accepted": 28841
+              }
+            },
+            "reference_proposals": 979997,
+            "proposals_reaching_exact": 979997,
+            "exact_evaluations": 1470217,
+            "accepted": 317196,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 30463802,
+              "cubic_lookups": 4492081,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 25971721,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 244530,
+              "accepted": 72055
+            },
+            "delete": {
+              "attempted": 245248,
+              "accepted": 72025
+            },
+            "translate": {
+              "attempted": 196527,
+              "accepted": 68005
+            },
+            "rotate": {
+              "attempted": 97544,
+              "accepted": 76270
+            },
+            "regrow": {
+              "attempted": 196151,
+              "accepted": 28841
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 734750,
+            "candidate_batches": 0,
+            "candidates": 0,
+            "accepted_commits": 317196,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        },
+        {
+          "production_wall_s": 205.81685357075185,
+          "steps": 1440000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 364488,
+                "proposals_reaching_exact": 364488,
+                "exact_evaluations": 364488,
+                "accepted": 107063
+              },
+              "delete": {
+                "reference_proposals": 364964,
+                "proposals_reaching_exact": 364964,
+                "exact_evaluations": 364964,
+                "accepted": 107035
+              },
+              "translate": {
+                "reference_proposals": 292631,
+                "proposals_reaching_exact": 292631,
+                "exact_evaluations": 585262,
+                "accepted": 101404
+              },
+              "rotate": {
+                "reference_proposals": 145554,
+                "proposals_reaching_exact": 145554,
+                "exact_evaluations": 291108,
+                "accepted": 113691
+              },
+              "regrow": {
+                "reference_proposals": 292360,
+                "proposals_reaching_exact": 292360,
+                "exact_evaluations": 584720,
+                "accepted": 42901
+              }
+            },
+            "reference_proposals": 1459997,
+            "proposals_reaching_exact": 1459997,
+            "exact_evaluations": 2190542,
+            "accepted": 472094,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 45372137,
+              "cubic_lookups": 6691713,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 38680424,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 364488,
+              "accepted": 107063
+            },
+            "delete": {
+              "attempted": 364965,
+              "accepted": 107035
+            },
+            "translate": {
+              "attempted": 292633,
+              "accepted": 101404
+            },
+            "rotate": {
+              "attempted": 145554,
+              "accepted": 113691
+            },
+            "regrow": {
+              "attempted": 292360,
+              "accepted": 42901
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 1095033,
+            "candidate_batches": 0,
+            "candidates": 0,
+            "accepted_commits": 472094,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        },
+        {
+          "production_wall_s": 273.9084759890102,
+          "steps": 1920000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 484451,
+                "proposals_reaching_exact": 484451,
+                "exact_evaluations": 484451,
+                "accepted": 141899
+              },
+              "delete": {
+                "reference_proposals": 485369,
+                "proposals_reaching_exact": 485369,
+                "exact_evaluations": 485369,
+                "accepted": 141873
+              },
+              "translate": {
+                "reference_proposals": 388486,
+                "proposals_reaching_exact": 388486,
+                "exact_evaluations": 776972,
+                "accepted": 134218
+              },
+              "rotate": {
+                "reference_proposals": 193504,
+                "proposals_reaching_exact": 193504,
+                "exact_evaluations": 387008,
+                "accepted": 151083
+              },
+              "regrow": {
+                "reference_proposals": 388187,
+                "proposals_reaching_exact": 388187,
+                "exact_evaluations": 776374,
+                "accepted": 56648
+              }
+            },
+            "reference_proposals": 1939997,
+            "proposals_reaching_exact": 1939997,
+            "exact_evaluations": 2910174,
+            "accepted": 625721,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 60274412,
+              "cubic_lookups": 8889916,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 51384496,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 484451,
+              "accepted": 141899
+            },
+            "delete": {
+              "attempted": 485370,
+              "accepted": 141873
+            },
+            "translate": {
+              "attempted": 388488,
+              "accepted": 134218
+            },
+            "rotate": {
+              "attempted": 193504,
+              "accepted": 151083
+            },
+            "regrow": {
+              "attempted": 388187,
+              "accepted": 56648
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 1454628,
+            "candidate_batches": 0,
+            "candidates": 0,
+            "accepted_commits": 625721,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        }
+      ],
+      "cache": {
+        "builds": 0,
+        "cache_loads": 3,
+        "cache_writes": 0,
+        "raw_field_builds": 0,
+        "raw_field_loads": 3,
+        "lookups": 60274412,
+        "cubic_lookups": 8889916,
+        "linear_lookups": 0,
+        "boltzmann_lookups": 51384496,
+        "exact_fallbacks": 0,
+        "steep_interpolation": "boltzmann",
+        "reference_cap_K": 100000,
+        "mesh_points": 32768,
+        "lj_fields": 2,
+        "site_types": 2,
+        "bytes": 2322272,
+        "steep_cells": 64768
+      },
+      "data": "holdout-warm-reference-mh_1368731.npz"
+    },
+    {
+      "seed": 1368747,
+      "start": "preloaded",
+      "initial_counts": [
+        12
+      ],
+      "preparation_s": 0.27147166477516294,
+      "elapsed_at_prefix_s": [
+        38.092728084884584,
+        72.52842479199171,
+        140.9103313232772,
+        209.21820680610836,
+        277.678378903307
+      ],
+      "last_energy_K": -61763.80742642988,
+      "energy_closure_K": null,
+      "moves_after_warmup": {
+        "insert": {
+          "attempted": 4971,
+          "accepted": 1484
+        },
+        "delete": {
+          "attempted": 5096,
+          "accepted": 1460
+        },
+        "translate": {
+          "attempted": 4000,
+          "accepted": 1318
+        },
+        "rotate": {
+          "attempted": 1942,
+          "accepted": 1517
+        },
+        "regrow": {
+          "attempted": 3991,
+          "accepted": 554
+        }
+      },
+      "acceleration_after_warmup": {
+        "sampling_mode": "reference-mh",
+        "selected_correction_backend": "cpu",
+        "grid_root_bias": 0.6,
+        "stages": {
+          "insert": {
+            "reference_proposals": 4971,
+            "proposals_reaching_exact": 4971,
+            "exact_evaluations": 4971,
+            "accepted": 1484
+          },
+          "delete": {
+            "reference_proposals": 5096,
+            "proposals_reaching_exact": 5096,
+            "exact_evaluations": 5096,
+            "accepted": 1460
+          },
+          "translate": {
+            "reference_proposals": 4000,
+            "proposals_reaching_exact": 4000,
+            "exact_evaluations": 8000,
+            "accepted": 1318
+          },
+          "rotate": {
+            "reference_proposals": 1942,
+            "proposals_reaching_exact": 1942,
+            "exact_evaluations": 3884,
+            "accepted": 1517
+          },
+          "regrow": {
+            "reference_proposals": 3991,
+            "proposals_reaching_exact": 3991,
+            "exact_evaluations": 7982,
+            "accepted": 554
+          }
+        },
+        "reference_proposals": 20000,
+        "proposals_reaching_exact": 20000,
+        "exact_evaluations": 29933,
+        "accepted": 6333,
+        "host_grid": {
+          "builds": 0,
+          "cache_loads": 3,
+          "cache_writes": 0,
+          "raw_field_builds": 0,
+          "raw_field_loads": 3,
+          "lookups": 654638,
+          "cubic_lookups": 92539,
+          "linear_lookups": 0,
+          "boltzmann_lookups": 562099,
+          "exact_fallbacks": 0,
+          "steep_interpolation": "boltzmann",
+          "reference_cap_K": 100000,
+          "mesh_points": 32768,
+          "lj_fields": 2,
+          "site_types": 2,
+          "bytes": 2322272,
+          "steep_cells": 64768
+        }
+      },
+      "profiles": [
+        {
+          "production_wall_s": 34.9400120023638,
+          "steps": 240000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 65330,
+                "proposals_reaching_exact": 65330,
+                "exact_evaluations": 65330,
+                "accepted": 19224
+              },
+              "delete": {
+                "reference_proposals": 65447,
+                "proposals_reaching_exact": 65447,
+                "exact_evaluations": 65447,
+                "accepted": 19212
+              },
+              "translate": {
+                "reference_proposals": 51648,
+                "proposals_reaching_exact": 51648,
+                "exact_evaluations": 103296,
+                "accepted": 17869
+              },
+              "rotate": {
+                "reference_proposals": 25574,
+                "proposals_reaching_exact": 25574,
+                "exact_evaluations": 51148,
+                "accepted": 20053
+              },
+              "regrow": {
+                "reference_proposals": 52001,
+                "proposals_reaching_exact": 52001,
+                "exact_evaluations": 104002,
+                "accepted": 7531
+              }
+            },
+            "reference_proposals": 260000,
+            "proposals_reaching_exact": 260000,
+            "exact_evaluations": 389223,
+            "accepted": 83889,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 8123165,
+              "cubic_lookups": 1195508,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 6927657,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 65330,
+              "accepted": 19224
+            },
+            "delete": {
+              "attempted": 65447,
+              "accepted": 19212
+            },
+            "translate": {
+              "attempted": 51648,
+              "accepted": 17869
+            },
+            "rotate": {
+              "attempted": 25574,
+              "accepted": 20053
+            },
+            "regrow": {
+              "attempted": 52001,
+              "accepted": 7531
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 194565,
+            "candidate_batches": 12,
+            "candidates": 12,
+            "accepted_commits": 83901,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        },
+        {
+          "production_wall_s": 69.37570852413774,
+          "steps": 480000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 125295,
+                "proposals_reaching_exact": 125295,
+                "exact_evaluations": 125295,
+                "accepted": 36720
+              },
+              "delete": {
+                "reference_proposals": 125614,
+                "proposals_reaching_exact": 125614,
+                "exact_evaluations": 125614,
+                "accepted": 36715
+              },
+              "translate": {
+                "reference_proposals": 99287,
+                "proposals_reaching_exact": 99287,
+                "exact_evaluations": 198574,
+                "accepted": 34509
+              },
+              "rotate": {
+                "reference_proposals": 49713,
+                "proposals_reaching_exact": 49713,
+                "exact_evaluations": 99426,
+                "accepted": 38808
+              },
+              "regrow": {
+                "reference_proposals": 100091,
+                "proposals_reaching_exact": 100091,
+                "exact_evaluations": 200182,
+                "accepted": 14423
+              }
+            },
+            "reference_proposals": 500000,
+            "proposals_reaching_exact": 500000,
+            "exact_evaluations": 749091,
+            "accepted": 161175,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 15582692,
+              "cubic_lookups": 2297552,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 13285140,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 125295,
+              "accepted": 36720
+            },
+            "delete": {
+              "attempted": 125614,
+              "accepted": 36715
+            },
+            "translate": {
+              "attempted": 99287,
+              "accepted": 34509
+            },
+            "rotate": {
+              "attempted": 49713,
+              "accepted": 38808
+            },
+            "regrow": {
+              "attempted": 100091,
+              "accepted": 14423
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 374398,
+            "candidate_batches": 12,
+            "candidates": 12,
+            "accepted_commits": 161187,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        },
+        {
+          "production_wall_s": 137.75761332409456,
+          "steps": 960000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 245113,
+                "proposals_reaching_exact": 245113,
+                "exact_evaluations": 245113,
+                "accepted": 71893
+              },
+              "delete": {
+                "reference_proposals": 246220,
+                "proposals_reaching_exact": 246220,
+                "exact_evaluations": 246220,
+                "accepted": 71876
+              },
+              "translate": {
+                "reference_proposals": 195121,
+                "proposals_reaching_exact": 195121,
+                "exact_evaluations": 390242,
+                "accepted": 67653
+              },
+              "rotate": {
+                "reference_proposals": 97422,
+                "proposals_reaching_exact": 97422,
+                "exact_evaluations": 194844,
+                "accepted": 76158
+              },
+              "regrow": {
+                "reference_proposals": 196124,
+                "proposals_reaching_exact": 196124,
+                "exact_evaluations": 392248,
+                "accepted": 28069
+              }
+            },
+            "reference_proposals": 980000,
+            "proposals_reaching_exact": 980000,
+            "exact_evaluations": 1468667,
+            "accepted": 315649,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 30496832,
+              "cubic_lookups": 4496484,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 26000348,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 245113,
+              "accepted": 71893
+            },
+            "delete": {
+              "attempted": 246220,
+              "accepted": 71876
+            },
+            "translate": {
+              "attempted": 195121,
+              "accepted": 67653
+            },
+            "rotate": {
+              "attempted": 97422,
+              "accepted": 76158
+            },
+            "regrow": {
+              "attempted": 196124,
+              "accepted": 28069
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 733792,
+            "candidate_batches": 12,
+            "candidates": 12,
+            "accepted_commits": 315661,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        },
+        {
+          "production_wall_s": 206.06548631936312,
+          "steps": 1440000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 365501,
+                "proposals_reaching_exact": 365501,
+                "exact_evaluations": 365501,
+                "accepted": 107015
+              },
+              "delete": {
+                "reference_proposals": 366159,
+                "proposals_reaching_exact": 366159,
+                "exact_evaluations": 366159,
+                "accepted": 107005
+              },
+              "translate": {
+                "reference_proposals": 291178,
+                "proposals_reaching_exact": 291178,
+                "exact_evaluations": 582356,
+                "accepted": 100751
+              },
+              "rotate": {
+                "reference_proposals": 145556,
+                "proposals_reaching_exact": 145556,
+                "exact_evaluations": 291112,
+                "accepted": 113822
+              },
+              "regrow": {
+                "reference_proposals": 291606,
+                "proposals_reaching_exact": 291606,
+                "exact_evaluations": 583212,
+                "accepted": 41995
+              }
+            },
+            "reference_proposals": 1460000,
+            "proposals_reaching_exact": 1460000,
+            "exact_evaluations": 2188340,
+            "accepted": 470588,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 45380891,
+              "cubic_lookups": 6692733,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 38688158,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 365501,
+              "accepted": 107015
+            },
+            "delete": {
+              "attempted": 366159,
+              "accepted": 107005
+            },
+            "translate": {
+              "attempted": 291178,
+              "accepted": 100751
+            },
+            "rotate": {
+              "attempted": 145556,
+              "accepted": 113822
+            },
+            "regrow": {
+              "attempted": 291606,
+              "accepted": 41995
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 1093853,
+            "candidate_batches": 12,
+            "candidates": 12,
+            "accepted_commits": 470600,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        },
+        {
+          "production_wall_s": 274.52565879933536,
+          "steps": 1920000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 486128,
+                "proposals_reaching_exact": 486128,
+                "exact_evaluations": 486128,
+                "accepted": 141885
+              },
+              "delete": {
+                "reference_proposals": 486049,
+                "proposals_reaching_exact": 486049,
+                "exact_evaluations": 486049,
+                "accepted": 141872
+              },
+              "translate": {
+                "reference_proposals": 386854,
+                "proposals_reaching_exact": 386854,
+                "exact_evaluations": 773708,
+                "accepted": 133660
+              },
+              "rotate": {
+                "reference_proposals": 193519,
+                "proposals_reaching_exact": 193519,
+                "exact_evaluations": 387038,
+                "accepted": 151306
+              },
+              "regrow": {
+                "reference_proposals": 387450,
+                "proposals_reaching_exact": 387450,
+                "exact_evaluations": 774900,
+                "accepted": 55643
+              }
+            },
+            "reference_proposals": 1940000,
+            "proposals_reaching_exact": 1940000,
+            "exact_evaluations": 2907823,
+            "accepted": 624366,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 60289205,
+              "cubic_lookups": 8894000,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 51395205,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 486128,
+              "accepted": 141885
+            },
+            "delete": {
+              "attempted": 486049,
+              "accepted": 141872
+            },
+            "translate": {
+              "attempted": 386854,
+              "accepted": 133660
+            },
+            "rotate": {
+              "attempted": 193519,
+              "accepted": 151306
+            },
+            "regrow": {
+              "attempted": 387450,
+              "accepted": 55643
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 1453963,
+            "candidate_batches": 12,
+            "candidates": 12,
+            "accepted_commits": 624378,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        }
+      ],
+      "cache": {
+        "builds": 0,
+        "cache_loads": 3,
+        "cache_writes": 0,
+        "raw_field_builds": 0,
+        "raw_field_loads": 3,
+        "lookups": 60289205,
+        "cubic_lookups": 8894000,
+        "linear_lookups": 0,
+        "boltzmann_lookups": 51395205,
+        "exact_fallbacks": 0,
+        "steep_interpolation": "boltzmann",
+        "reference_cap_K": 100000,
+        "mesh_points": 32768,
+        "lj_fields": 2,
+        "site_types": 2,
+        "bytes": 2322272,
+        "steep_cells": 64768
+      },
+      "data": "holdout-warm-reference-mh_1368747.npz"
+    },
+    {
+      "seed": 1368753,
+      "start": "preloaded",
+      "initial_counts": [
+        12
+      ],
+      "preparation_s": 0.2712665209546685,
+      "elapsed_at_prefix_s": [
+        38.09270912129432,
+        72.52839670190588,
+        140.83532442199066,
+        208.91846989514306,
+        276.8983314312063
+      ],
+      "last_energy_K": -86771.99301282008,
+      "energy_closure_K": null,
+      "moves_after_warmup": {
+        "insert": {
+          "attempted": 5033,
+          "accepted": 1522
+        },
+        "delete": {
+          "attempted": 4979,
+          "accepted": 1500
+        },
+        "translate": {
+          "attempted": 4011,
+          "accepted": 1411
+        },
+        "rotate": {
+          "attempted": 1995,
+          "accepted": 1575
+        },
+        "regrow": {
+          "attempted": 3982,
+          "accepted": 591
+        }
+      },
+      "acceleration_after_warmup": {
+        "sampling_mode": "reference-mh",
+        "selected_correction_backend": "cpu",
+        "grid_root_bias": 0.6,
+        "stages": {
+          "insert": {
+            "reference_proposals": 5033,
+            "proposals_reaching_exact": 5033,
+            "exact_evaluations": 5033,
+            "accepted": 1522
+          },
+          "delete": {
+            "reference_proposals": 4979,
+            "proposals_reaching_exact": 4979,
+            "exact_evaluations": 4979,
+            "accepted": 1500
+          },
+          "translate": {
+            "reference_proposals": 4011,
+            "proposals_reaching_exact": 4011,
+            "exact_evaluations": 8022,
+            "accepted": 1411
+          },
+          "rotate": {
+            "reference_proposals": 1995,
+            "proposals_reaching_exact": 1995,
+            "exact_evaluations": 3990,
+            "accepted": 1575
+          },
+          "regrow": {
+            "reference_proposals": 3982,
+            "proposals_reaching_exact": 3982,
+            "exact_evaluations": 7964,
+            "accepted": 591
+          }
+        },
+        "reference_proposals": 20000,
+        "proposals_reaching_exact": 20000,
+        "exact_evaluations": 29988,
+        "accepted": 6599,
+        "host_grid": {
+          "builds": 0,
+          "cache_loads": 3,
+          "cache_writes": 0,
+          "raw_field_builds": 0,
+          "raw_field_loads": 3,
+          "lookups": 653183,
+          "cubic_lookups": 92066,
+          "linear_lookups": 0,
+          "boltzmann_lookups": 561117,
+          "exact_fallbacks": 0,
+          "steep_interpolation": "boltzmann",
+          "reference_cap_K": 100000,
+          "mesh_points": 32768,
+          "lj_fields": 2,
+          "site_types": 2,
+          "bytes": 2322272,
+          "steep_cells": 64768
+        }
+      },
+      "profiles": [
+        {
+          "production_wall_s": 34.95523175271228,
+          "steps": 240000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 65151,
+                "proposals_reaching_exact": 65151,
+                "exact_evaluations": 65151,
+                "accepted": 19103
+              },
+              "delete": {
+                "reference_proposals": 64853,
+                "proposals_reaching_exact": 64853,
+                "exact_evaluations": 64853,
+                "accepted": 19094
+              },
+              "translate": {
+                "reference_proposals": 51928,
+                "proposals_reaching_exact": 51928,
+                "exact_evaluations": 103856,
+                "accepted": 17975
+              },
+              "rotate": {
+                "reference_proposals": 25803,
+                "proposals_reaching_exact": 25803,
+                "exact_evaluations": 51606,
+                "accepted": 20124
+              },
+              "regrow": {
+                "reference_proposals": 52265,
+                "proposals_reaching_exact": 52265,
+                "exact_evaluations": 104530,
+                "accepted": 7439
+              }
+            },
+            "reference_proposals": 260000,
+            "proposals_reaching_exact": 260000,
+            "exact_evaluations": 389996,
+            "accepted": 83735,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 8120651,
+              "cubic_lookups": 1188617,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 6932034,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 65151,
+              "accepted": 19103
+            },
+            "delete": {
+              "attempted": 64853,
+              "accepted": 19094
+            },
+            "translate": {
+              "attempted": 51928,
+              "accepted": 17975
+            },
+            "rotate": {
+              "attempted": 25803,
+              "accepted": 20124
+            },
+            "regrow": {
+              "attempted": 52265,
+              "accepted": 7439
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 195159,
+            "candidate_batches": 12,
+            "candidates": 12,
+            "accepted_commits": 83747,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        },
+        {
+          "production_wall_s": 69.39091842481866,
+          "steps": 480000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 125506,
+                "proposals_reaching_exact": 125506,
+                "exact_evaluations": 125506,
+                "accepted": 36543
+              },
+              "delete": {
+                "reference_proposals": 124554,
+                "proposals_reaching_exact": 124554,
+                "exact_evaluations": 124554,
+                "accepted": 36524
+              },
+              "translate": {
+                "reference_proposals": 99805,
+                "proposals_reaching_exact": 99805,
+                "exact_evaluations": 199610,
+                "accepted": 34455
+              },
+              "rotate": {
+                "reference_proposals": 49926,
+                "proposals_reaching_exact": 49926,
+                "exact_evaluations": 99852,
+                "accepted": 38934
+              },
+              "regrow": {
+                "reference_proposals": 100209,
+                "proposals_reaching_exact": 100209,
+                "exact_evaluations": 200418,
+                "accepted": 14293
+              }
+            },
+            "reference_proposals": 500000,
+            "proposals_reaching_exact": 500000,
+            "exact_evaluations": 749940,
+            "accepted": 160749,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 15571868,
+              "cubic_lookups": 2288551,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 13283317,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 125506,
+              "accepted": 36543
+            },
+            "delete": {
+              "attempted": 124554,
+              "accepted": 36524
+            },
+            "translate": {
+              "attempted": 99805,
+              "accepted": 34455
+            },
+            "rotate": {
+              "attempted": 49926,
+              "accepted": 38934
+            },
+            "regrow": {
+              "attempted": 100209,
+              "accepted": 14293
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 375458,
+            "candidate_batches": 12,
+            "candidates": 12,
+            "accepted_commits": 160761,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        },
+        {
+          "production_wall_s": 137.69784523174167,
+          "steps": 960000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 245503,
+                "proposals_reaching_exact": 245503,
+                "exact_evaluations": 245503,
+                "accepted": 71563
+              },
+              "delete": {
+                "reference_proposals": 244527,
+                "proposals_reaching_exact": 244527,
+                "exact_evaluations": 244527,
+                "accepted": 71546
+              },
+              "translate": {
+                "reference_proposals": 195863,
+                "proposals_reaching_exact": 195863,
+                "exact_evaluations": 391726,
+                "accepted": 67560
+              },
+              "rotate": {
+                "reference_proposals": 97542,
+                "proposals_reaching_exact": 97542,
+                "exact_evaluations": 195084,
+                "accepted": 76217
+              },
+              "regrow": {
+                "reference_proposals": 196565,
+                "proposals_reaching_exact": 196565,
+                "exact_evaluations": 393130,
+                "accepted": 28325
+              }
+            },
+            "reference_proposals": 980000,
+            "proposals_reaching_exact": 980000,
+            "exact_evaluations": 1469970,
+            "accepted": 315211,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 30494453,
+              "cubic_lookups": 4497080,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 25997373,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 245503,
+              "accepted": 71563
+            },
+            "delete": {
+              "attempted": 244527,
+              "accepted": 71546
+            },
+            "translate": {
+              "attempted": 195863,
+              "accepted": 67560
+            },
+            "rotate": {
+              "attempted": 97542,
+              "accepted": 76217
+            },
+            "regrow": {
+              "attempted": 196565,
+              "accepted": 28325
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 735485,
+            "candidate_batches": 12,
+            "candidates": 12,
+            "accepted_commits": 315223,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        },
+        {
+          "production_wall_s": 205.7809884250164,
+          "steps": 1440000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 365103,
+                "proposals_reaching_exact": 365103,
+                "exact_evaluations": 365103,
+                "accepted": 106669
+              },
+              "delete": {
+                "reference_proposals": 364542,
+                "proposals_reaching_exact": 364542,
+                "exact_evaluations": 364542,
+                "accepted": 106654
+              },
+              "translate": {
+                "reference_proposals": 292371,
+                "proposals_reaching_exact": 292371,
+                "exact_evaluations": 584742,
+                "accepted": 100892
+              },
+              "rotate": {
+                "reference_proposals": 145503,
+                "proposals_reaching_exact": 145503,
+                "exact_evaluations": 291006,
+                "accepted": 113642
+              },
+              "regrow": {
+                "reference_proposals": 292481,
+                "proposals_reaching_exact": 292481,
+                "exact_evaluations": 584962,
+                "accepted": 42210
+              }
+            },
+            "reference_proposals": 1460000,
+            "proposals_reaching_exact": 1460000,
+            "exact_evaluations": 2190355,
+            "accepted": 470067,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 45384632,
+              "cubic_lookups": 6691819,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 38692813,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 365103,
+              "accepted": 106669
+            },
+            "delete": {
+              "attempted": 364542,
+              "accepted": 106654
+            },
+            "translate": {
+              "attempted": 292371,
+              "accepted": 100892
+            },
+            "rotate": {
+              "attempted": 145503,
+              "accepted": 113642
+            },
+            "regrow": {
+              "attempted": 292481,
+              "accepted": 42210
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 1095470,
+            "candidate_batches": 12,
+            "candidates": 12,
+            "accepted_commits": 470079,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        },
+        {
+          "production_wall_s": 273.76085061300546,
+          "steps": 1920000,
+          "acceleration": {
+            "sampling_mode": "reference-mh",
+            "selected_correction_backend": "cpu",
+            "grid_root_bias": 0.6,
+            "stages": {
+              "insert": {
+                "reference_proposals": 485080,
+                "proposals_reaching_exact": 485080,
+                "exact_evaluations": 485080,
+                "accepted": 141713
+              },
+              "delete": {
+                "reference_proposals": 485369,
+                "proposals_reaching_exact": 485369,
+                "exact_evaluations": 485369,
+                "accepted": 141691
+              },
+              "translate": {
+                "reference_proposals": 388351,
+                "proposals_reaching_exact": 388351,
+                "exact_evaluations": 776702,
+                "accepted": 134011
+              },
+              "rotate": {
+                "reference_proposals": 193264,
+                "proposals_reaching_exact": 193264,
+                "exact_evaluations": 386528,
+                "accepted": 151048
+              },
+              "regrow": {
+                "reference_proposals": 387936,
+                "proposals_reaching_exact": 387936,
+                "exact_evaluations": 775872,
+                "accepted": 56125
+              }
+            },
+            "reference_proposals": 1940000,
+            "proposals_reaching_exact": 1940000,
+            "exact_evaluations": 2909551,
+            "accepted": 624588,
+            "host_grid": {
+              "builds": 0,
+              "cache_loads": 3,
+              "cache_writes": 0,
+              "raw_field_builds": 0,
+              "raw_field_loads": 3,
+              "lookups": 60276017,
+              "cubic_lookups": 8888311,
+              "linear_lookups": 0,
+              "boltzmann_lookups": 51387706,
+              "exact_fallbacks": 0,
+              "steep_interpolation": "boltzmann",
+              "reference_cap_K": 100000,
+              "mesh_points": 32768,
+              "lj_fields": 2,
+              "site_types": 2,
+              "bytes": 2322272,
+              "steep_cells": 64768
+            }
+          },
+          "move_counters": {
+            "insert": {
+              "attempted": 485080,
+              "accepted": 141713
+            },
+            "delete": {
+              "attempted": 485369,
+              "accepted": 141691
+            },
+            "translate": {
+              "attempted": 388351,
+              "accepted": 134011
+            },
+            "rotate": {
+              "attempted": 193264,
+              "accepted": 151048
+            },
+            "regrow": {
+              "attempted": 387936,
+              "accepted": 56125
+            }
+          },
+          "long_range": {
+            "method": "ewald",
+            "backend": "cpu",
+            "host_builds": 1,
+            "contributions": 1454643,
+            "candidate_batches": 12,
+            "candidates": 12,
+            "accepted_commits": 624600,
+            "fft_transforms": 0,
+            "gpu_batches": 0,
+            "gpu_selected_structures": 0,
+            "device": "",
+            "modes": 1484,
+            "full_modes": 2968,
+            "half_spectrum": true,
+            "pme_refresh": 1,
+            "pme_pending_nodes": 0,
+            "resident_trials": 0,
+            "resident_commits": 0,
+            "k_cutoff": 1.36166,
+            "host_grid_builds": 0,
+            "host_field_evaluations": 0,
+            "mesh_points": 0
+          }
+        }
+      ],
+      "cache": {
+        "builds": 0,
+        "cache_loads": 3,
+        "cache_writes": 0,
+        "raw_field_builds": 0,
+        "raw_field_loads": 3,
+        "lookups": 60276017,
+        "cubic_lookups": 8888311,
+        "linear_lookups": 0,
+        "boltzmann_lookups": 51387706,
+        "exact_fallbacks": 0,
+        "steep_interpolation": "boltzmann",
+        "reference_cap_K": 100000,
+        "mesh_points": 32768,
+        "lj_fields": 2,
+        "site_types": 2,
+        "bytes": 2322272,
+        "steep_cells": 64768
+      },
+      "data": "holdout-warm-reference-mh_1368753.npz"
+    }
+  ],
+  "sample_every": 200
+}

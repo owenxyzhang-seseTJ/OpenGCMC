@@ -1,0 +1,30 @@
+{
+  "description": "Ferricyanide and ferrocyanide in the fast-transfer planar diffusion limit",
+  "diffusion_reference": "doi:10.1021/ac50160a042",
+  "transport": {
+    "diffusivity_oxidized_m2_s": 7.26e-10,
+    "diffusivity_reduced_m2_s": 6.67e-10,
+    "bulk_oxidized_mol_m3": 1.0,
+    "bulk_reduced_mol_m3": 0.0,
+    "temperature_K": 298.15,
+    "electrons": 1,
+    "formal_potential_V": 0.0,
+    "k0_m_s": 0.02,
+    "area_m2": 7.068583470577034e-06,
+    "length_m": 0.0006,
+    "cells": 600
+  },
+  "protocol": {
+    "times_s": [
+      0,
+      5.999999999999999,
+      11.999999999999998
+    ],
+    "potentials_V": [
+      0.3,
+      -0.3,
+      0.3
+    ],
+    "samples": 801
+  }
+}

@@ -5,7 +5,7 @@ recursive-include tools *.py *.cpp *.cu *.sh
 recursive-include docs *.md *.bib *.svg *.png *.pdf
 recursive-include figures *.py *.md *.csv *.json
 recursive-include tests *.py *.cpp *.bin *.gpu
-recursive-include benchmarks *.py *.json *.cif *.def *.input *.txt *.log *.npz *.csv restartfile
+recursive-include benchmarks *.py *.json *.cif *.def *.input *.txt *.log *.npz *.csv *.md restartfile
 recursive-exclude benchmarks/runs *
 recursive-exclude examples/longrange/cache *
 recursive-exclude figures/.mplconfig *

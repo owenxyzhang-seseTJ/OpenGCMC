@@ -1,0 +1,4 @@
+benchmark_precision.py <cluster-workspace>/followup.RxHccTH9/inputs/holdout_co2_uio66.json --output benchmarks/cpu/paired/hpc/holdout_same_candidates/holdout-warm-reference-mh.json --cache <scratch>/fields --mode reference-mh --budgets 240000 480000 960000 1440000 1920000 --warmup 20000 --mesh 32 --guest-update incremental --workers 4 --seed-offset 928000
+holdout_co2_uio66 reference-mh total_s 276.898 qualified_wall_s 38.092728084884584
+benchmark_precision.py <cluster-workspace>/followup.RxHccTH9/inputs/holdout_co2_uio66.json --output benchmarks/cpu/paired/hpc/holdout_same_candidates/holdout-warm-delayed.json --cache <scratch>/fields --mode delayed --budgets 240000 480000 960000 1440000 1920000 --warmup 20000 --mesh 32 --guest-update incremental --workers 4 --seed-offset 928000
+holdout_co2_uio66 delayed total_s 193.663 qualified_wall_s 98.04804139211774

@@ -9,9 +9,11 @@
 #include <cmath>
 #include <cstring>
 #include <fstream>
+#include <iomanip>
 #include <limits>
 #include <map>
 #include <memory>
+#include <sstream>
 #include <stdexcept>
 #include <utility>
 #include <vector>
@@ -21,6 +23,8 @@
 #include <io.h>
 #include <windows.h>
 #else
+#include <fcntl.h>
+#include <sys/file.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #endif
@@ -157,6 +161,46 @@ class GridCacheWriter {
   std::string temporary_;
   std::FILE* stream_ = nullptr;
 };
+
+// The lock belongs to the OS file handle and is released on process exit.
+// Keep the lock file in place to prevent waiters from locking different inodes.
+class FieldLock {
+public:
+  explicit FieldLock(const std::string& path) {
+#ifdef _WIN32
+    const auto file=std::filesystem::u8path(path);
+    handle_=CreateFileW(file.c_str(),GENERIC_READ|GENERIC_WRITE,FILE_SHARE_READ|FILE_SHARE_WRITE,
+                        nullptr,OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,nullptr);
+    if(handle_==INVALID_HANDLE_VALUE)throw std::runtime_error("cannot open field lock: "+path);
+    if(!LockFileEx(handle_,LOCKFILE_EXCLUSIVE_LOCK,0,1,0,&region_)){
+      CloseHandle(handle_);
+      throw std::runtime_error("cannot acquire field lock: "+path);
+    }
+#else
+    fd_=::open(path.c_str(),O_CREAT|O_RDWR,0666);
+    if(fd_<0)throw std::runtime_error("cannot open field lock: "+path);
+    int result;
+    do{result=::flock(fd_,LOCK_EX);}while(result<0&&errno==EINTR);
+    if(result<0){::close(fd_);throw std::runtime_error("cannot acquire field lock: "+path);}
+#endif
+  }
+  FieldLock(const FieldLock&)=delete;
+  FieldLock& operator=(const FieldLock&)=delete;
+  ~FieldLock(){
+#ifdef _WIN32
+    CloseHandle(handle_);
+#else
+    ::close(fd_);
+#endif
+  }
+private:
+#ifdef _WIN32
+  HANDLE handle_;
+  OVERLAPPED region_{};
+#else
+  int fd_;
+#endif
+};
 }
 
 struct HostGrid::Impl {
@@ -223,7 +267,24 @@ struct HostGrid::Impl {
     lj.resize(lj_parameters.size());
     for(auto& f:lj){f.values.resize(points);f.bad.resize(points);}
     phi.values.resize(points);phi.bad.resize(points);
-    if(load())++statistics.cache_loads;
+    if(!cfg.lj_prefix.empty()){
+      for(std::size_t i=0;i<lj.size();++i){
+        const auto p=lj_parameters[i];
+        if(p[1]==0.)continue;
+        std::uint64_t sigma=0,epsilon=0;
+        std::memcpy(&sigma,&p[0],sizeof(sigma));
+        std::memcpy(&epsilon,&p[1],sizeof(epsilon));
+        std::ostringstream suffix;
+        suffix<<'-'<<std::setfill('0')<<std::hex<<std::setw(16)<<sigma<<'-'<<std::setw(16)<<epsilon;
+        raw_field(host,lj[i],p[0],p[1],0.,cfg.lj_prefix+suffix.str()+".bin",{});
+      }
+      if(charged&&!cfg.electrostatic_path.empty())
+        raw_field(host,phi,0.,0.,1.,cfg.electrostatic_path,std::move(builder));
+      statistics.builds=statistics.raw_field_builds!=0;
+      statistics.cache_writes=statistics.raw_field_builds;
+      statistics.cache_loads=statistics.raw_field_loads;
+    }
+    else if(load())++statistics.cache_loads;
     else {
       build(host,charged,std::move(builder));++statistics.builds;
       if(!cfg.cache_path.empty()){save();++statistics.cache_writes;}
@@ -239,6 +300,61 @@ struct HostGrid::Impl {
   }
   int periodic(int x,int d) const {
     const int m=cfg.mesh[d];return x<0?x+m:(x>=m?x-m:x);
+  }
+  bool read_field(const std::string& path,Field& field) const {
+    std::ifstream in(path,std::ios::binary);
+    char magic[8];
+    std::uint64_t n=0,expected=0;
+    const std::string key=path.substr(path.find_last_of("/\\")+1);
+    std::string stored(key.size(),'\0');
+    if(!in.read(magic,8)||std::memcmp(magic,"OGCMCF01",8)||
+       !in.read(stored.data(),stored.size())||stored!=key||!read_scalar(in,n)||n!=points||
+       !in.read(reinterpret_cast<char*>(field.values.data()),points*sizeof(double))||
+       !in.read(reinterpret_cast<char*>(field.bad.data()),points)||
+       !read_scalar(in,expected)||in.peek()!=std::char_traits<char>::eof())return false;
+    const auto h=checksum(field.values.data(),points*sizeof(double));
+    return checksum(field.bad.data(),points,h)==expected;
+  }
+  void raw_field(void* host,Field& field,double s,double e,double q,const std::string& path,
+                 HostReciprocalGridBuilder reciprocal) {
+    if(read_field(path,field)){++statistics.raw_field_loads;return;}
+    FieldLock lock(path+".lock");
+    if(read_field(path,field)){++statistics.raw_field_loads;return;}
+    auto query=make_query(host,s,e,q);
+    const auto spectrum=reciprocal?reciprocal():std::vector<double>{};
+    if(reciprocal&&spectrum.size()!=points)throw std::invalid_argument("host reciprocal grid shape mismatch");
+    constexpr std::size_t chunk=4096;
+    std::vector<double> xyz(3*std::min(chunk,points)), values(std::min(chunk,points));
+    for(std::size_t begin=0;begin<points;begin+=chunk){
+      const auto n=std::min(chunk,points-begin);
+      grid_coordinates(begin,n,xyz.data());
+      if(poremc_query_energy(query.get(),n,xyz.data(),values.data()))throw std::runtime_error(poremc_last_error());
+      for(std::size_t j=0;j<n;++j){
+        const double u=values[j]+(spectrum.empty()?0.:spectrum[begin+j]);
+        field.bad[begin+j]=!std::isfinite(u);
+        field.values[begin+j]=std::isfinite(u)?u:0.;
+      }
+    }
+    const std::string key=path.substr(path.find_last_of("/\\")+1);
+    GridCacheWriter out(path);
+    out.write("OGCMCF01",8);
+    out.write(key.data(),key.size());
+    out.scalar(std::uint64_t(points));
+    std::uint64_t h=14695981039346656037ull;
+    out.write(field.values.data(),points*sizeof(double),&h);
+    out.write(field.bad.data(),points,&h);
+    out.scalar(h);
+    out.publish();
+    ++statistics.raw_field_builds;
+  }
+  void grid_coordinates(std::size_t begin,std::size_t count,double* xyz) const {
+    for(std::size_t j=0;j<count;++j){
+      const std::size_t key=begin+j;
+      const double fz=double(key%cfg.mesh[2])/cfg.mesh[2];
+      const double fy=double((key/cfg.mesh[2])%cfg.mesh[1])/cfg.mesh[1];
+      const double fx=double(key/(std::size_t(cfg.mesh[1])*cfg.mesh[2]))/cfg.mesh[0];
+      for(int d=0;d<3;++d)xyz[3*j+d]=fx*cfg.cell[d]+fy*cfg.cell[3+d]+fz*cfg.cell[6+d];
+    }
   }
   void build(void* host,bool charged,HostReciprocalGridBuilder builder) {
     // One reusable scalar Coulomb field and one LJ field per unique LJ type.
@@ -257,13 +373,7 @@ struct HostGrid::Impl {
     std::vector<double> xyz(3*std::min(chunk,points)),values(std::min(chunk,points));
     for(std::size_t begin=0;begin<points;begin+=chunk){
       const std::size_t n=std::min(chunk,points-begin);
-      for(std::size_t j=0;j<n;++j){
-        const std::size_t key=begin+j;
-        const double fz=double(key%cfg.mesh[2])/cfg.mesh[2];
-        const double fy=double((key/cfg.mesh[2])%cfg.mesh[1])/cfg.mesh[1];
-        const double fx=double(key/(std::size_t(cfg.mesh[1])*cfg.mesh[2]))/cfg.mesh[0];
-        for(int d=0;d<3;++d)xyz[3*j+d]=fx*cfg.cell[d]+fy*cfg.cell[3+d]+fz*cfg.cell[6+d];
-      }
+      grid_coordinates(begin,n,xyz.data());
       for(std::size_t t=0;t<lj.size();++t){
         if(lj_parameters[t][1]==0.)continue;
         if(poremc_query_energy(queries[t].get(),n,xyz.data(),values.data()))throw std::runtime_error(poremc_last_error());

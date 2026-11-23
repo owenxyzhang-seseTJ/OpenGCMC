@@ -1,0 +1,232 @@
+{
+  "description": "Frozen-composition explicit-water redox free-energy windows for MBAR; use calibrated reference free energies before predicting physical E0/pKa.",
+  "seed": 20261117,
+  "cell": [
+    12.8,
+    12.8,
+    48.0
+  ],
+  "templates": [
+    {
+      "kind": "spce"
+    },
+    {
+      "kind": "ion",
+      "name": "X+",
+      "charge": 1.0,
+      "sigma": 2.8,
+      "epsilon": 50.0
+    },
+    {
+      "kind": "ion",
+      "name": "Y-",
+      "charge": -1.0,
+      "sigma": 4.0,
+      "epsilon": 50.0
+    },
+    {
+      "kind": "acid",
+      "name": "surface_acid",
+      "pKa": 7.0,
+      "sigma": 3.5,
+      "epsilon": 50.0,
+      "reference_deprotonation_kelvin": 0.0
+    },
+    {
+      "kind": "redox",
+      "name": "surface_redox",
+      "E0_V": 0.0,
+      "sigma": 3.5,
+      "epsilon": 50.0,
+      "reference_reduction_kelvin": 0.0
+    }
+  ],
+  "forcefield": {
+    "cutoff": 6.0,
+    "alpha": 0.35,
+    "kmax": [
+      4,
+      4,
+      14
+    ],
+    "dielectric": 1.0,
+    "coulomb": "ewald",
+    "shifted": false,
+    "backend": "native",
+    "slab": true
+  },
+  "electrodes": {
+    "plane_grid": {
+      "shape": [
+        3,
+        3
+      ],
+      "z_A": [
+        16.0,
+        32.0
+      ]
+    },
+    "plane_potentials_V": [
+      -0.05,
+      0.05
+    ],
+    "width": 1.0
+  },
+  "region": {
+    "lower": [
+      0,
+      0,
+      0.375
+    ],
+    "upper": [
+      1,
+      1,
+      0.625
+    ]
+  },
+  "initial": [
+    {
+      "template": 0,
+      "grid": {
+        "shape": [
+          4,
+          4,
+          4
+        ],
+        "lower_A": [
+          0,
+          0,
+          18
+        ],
+        "upper_A": [
+          12.8,
+          12.8,
+          30
+        ],
+        "skip_flat_indices": [
+          21,
+          42,
+          25,
+          38
+        ]
+      }
+    },
+    {
+      "template": 1,
+      "anchor_A": [
+        4.8,
+        4.8,
+        22.5
+      ]
+    },
+    {
+      "template": 2,
+      "anchor_A": [
+        8.0,
+        8.0,
+        25.5
+      ]
+    },
+    {
+      "template": 3,
+      "state": 0,
+      "anchor_A": [
+        4.8,
+        8.0,
+        22.5
+      ],
+      "mobile": false,
+      "exchangeable": false
+    },
+    {
+      "template": 4,
+      "state": 0,
+      "anchor_A": [
+        8.0,
+        4.8,
+        25.5
+      ],
+      "mobile": false,
+      "exchangeable": false
+    }
+  ],
+  "reservoirs": {
+    "temperature": 298.15,
+    "pH": 7.0,
+    "electron_potential_V": -0.05,
+    "proton_reference_V": 0.0
+  },
+  "log_activities": [
+    -14.0,
+    -12.0,
+    -12.0,
+    0.0,
+    0.0
+  ],
+  "exchanges": [
+    {
+      "name": "water",
+      "stoichiometry": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "trials": 4,
+      "weight": 4.0
+    },
+    {
+      "name": "salt",
+      "stoichiometry": [
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "trials": 1,
+      "weight": 1.0
+    }
+  ],
+  "reactions": [
+    {
+      "name": "acid",
+      "template": 3,
+      "state_a": 0,
+      "state_b": 1,
+      "stages": 6,
+      "relaxations": 2
+    },
+    {
+      "name": "redox",
+      "template": 4,
+      "state_a": 0,
+      "state_b": 1,
+      "stages": 6,
+      "relaxations": 2
+    }
+  ],
+  "moves": {
+    "move_weights": [
+      1,
+      0,
+      0
+    ],
+    "translation_A": 0.18,
+    "rotation_rad": 0.25
+  },
+  "run": {
+    "steps": 2500,
+    "burnin": 750,
+    "sample_every": 10,
+    "record_positions": true
+  },
+  "calibration": {
+    "edge_index": 1,
+    "uid": 63,
+    "samples_per_window": 35,
+    "decorrelation_moves": 6,
+    "burnin_moves": 100
+  }
+}

@@ -12,6 +12,7 @@ thread_local std::string diagnostic;
 struct Mock {
     std::vector<double> weights, kvector;
     Plan lattice;
+    std::vector<Complex> resident, change;
     std::vector<Complex> evaluate(size_t n,const double* xyz,const double* q) const {
         std::vector<Complex> powers(n*lattice.axes.span), result(weights.size());
         if(lattice.tiles.empty()){
@@ -62,6 +63,34 @@ int poremc_ewald_cuda_set_lattice(void*p,const double*h,const int*limits,const i
 int poremc_ewald_cuda_structure(void*p,size_t n,const double*x,const double*q,double*out){
     const auto modes=static_cast<Mock*>(p)->evaluate(n,x,q);
     for(size_t k=0;k<modes.size();++k){out[2*k]=modes[k].re;out[2*k+1]=modes[k].im;}
+    return 0;
+}
+int poremc_ewald_cuda_resident_import(void* p,const double* modes){
+    auto& mock=*static_cast<Mock*>(p);
+    mock.resident.resize(mock.weights.size());
+    for(size_t i=0;i<mock.weights.size();++i)mock.resident[i]={modes[2*i],modes[2*i+1]};
+    return 0;
+}
+int poremc_ewald_cuda_resident_export(void* p,double* modes){
+    const auto& mock=*static_cast<Mock*>(p);
+    for(size_t i=0;i<mock.weights.size();++i){
+        modes[2*i]=mock.resident[i].re;modes[2*i+1]=mock.resident[i].im;
+    }
+    return 0;
+}
+int poremc_ewald_cuda_resident_trial(void* p,size_t n,const double* x,const double* q,double* out){
+    auto& mock=*static_cast<Mock*>(p);
+    mock.change=mock.evaluate(n,x,q);
+    *out=0.;
+    for(size_t i=0;i<mock.weights.size();++i)
+        *out+=energy(mock.weights[i],mock.resident[i].re,mock.resident[i].im,mock.change[i]);
+    return 0;
+}
+int poremc_ewald_cuda_resident_commit(void* p){
+    auto& mock=*static_cast<Mock*>(p);
+    for(size_t i=0;i<mock.weights.size();++i){
+        mock.resident[i].re+=mock.change[i].re;mock.resident[i].im+=mock.change[i].im;
+    }
     return 0;
 }
 int poremc_ewald_cuda_batch(void*p,size_t B,size_t n,const double*x,const double*q,const double*base,

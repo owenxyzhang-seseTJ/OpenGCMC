@@ -1,6 +1,6 @@
 # Native long-range sampling
 
-The C++ sampler handles one species of rigid or tree-flexible guests in a fixed periodic framework. It supports insertion, deletion, translation, rotation and complete configurational-bias regrowth. For charged guests, choose finite direct Ewald or particle-mesh Ewald (PME) when constructing the classical potential and sampler.
+The C++ sampler handles mixtures of rigid and tree-flexible guests in a fixed periodic framework. It supports insertion, deletion, translation, rotation and complete configurational-bias regrowth. For charged guests, choose finite direct Ewald or particle-mesh Ewald (PME) when constructing the classical potential and sampler.
 
 ## Input and execution
 
@@ -42,10 +42,14 @@ Coordinates use Å, charges use elementary charge, and energies use K for $U/k_\
 
 | Field | Effect |
 |---|---|
-| `sampling_mode` | `exact` evaluates the target for each candidate. `delayed` uses a reference potential and a second acceptance stage. |
+| `sampling_mode` | `exact` evaluates the target for each candidate. `reference-mh` and `delayed` share grid CBMC proposals and use one-stage and two-stage acceptance, respectively. |
 | `host_grid_mesh` | Number of grid points on each axis. Ewald grids use powers of two. The benchmark includes 32³ and 64³ meshes. |
 | `host_grid_steep` | `boltzmann` uses thermal interpolation in steep cells. `linear` uses linear energy interpolation in those cells. |
 | `host_grid_cap` | Finite energy cap for the reference field in K. Zero enables the exact framework fallback in steep cells. |
+| `guest_update` | `auto` uses the incremental guest index for cell or cached kernels and the direct rebuild path for direct kernels. The explicit options are `incremental` and `rebuild`. |
+| `partial_regrowth` | Choose a flexible suffix, retaining the same prefix in forward growth and retracing. |
+| `host_field_cache` | Directory for separate raw LJ fields and a unit-charge electrostatic field. Compatible species and runs share the same immutable files. |
+| `pme_refresh` | Maximum number of accepted charged changes between FFT refreshes. The default is 1. Sparse corrections preserve the chosen mesh energy. |
 | `host_grid_cache` | Optional file for the raw framework fields. Relative paths resolve against the JSON file's directory in the CLI and against the working directory in Python. |
 | `grid_root_bias` | Weight of the field-derived root proposal for delayed sampling. The remaining weight provides uniform support. The bias and an explicit root proposal are mutually exclusive. |
 | `ewald_half_spectrum` | Stores only one of each conjugate wave-vector pair with the corresponding doubled coefficient. |
@@ -55,6 +59,38 @@ Coordinates use Å, charges use elementary charge, and energies use K for $U/k_\
 ## Reference-field CBMC
 
 The sampler tabulates framework LJ interactions for each unique guest parameter type and shares unit-charge static electric fields. Guest–guest short-range interactions use the accepted-state cache. Stage one grows and retraces candidates in the reference potential $U_0$. The acceptance ratio $r_0$ includes reservoir terms, move probabilities, Rosenbluth weights and any root proposal density. Stage two evaluates the selected complete configuration using the energy residual $R = U - U_0$.
+
+### Forward proposals, retracing and acceptances
+
+For each growth step $i$, let $g_i$ be the trial density relative to the normalized configurational measure at that prefix. The root measure is uniform over the box and the orientation measure is normalized. The rigid sampler treats a whole pose as one growth step. The flexible sampler draws coordinates in the molecule's specified internal reference measure. The trial weights and the Rosenbluth factor are
+
+$$ w_{ij}=\exp[-\beta\,\Delta_i U_0(x_{ij})]/g_i(x_{ij}),\qquad
+\overline w_i=\frac1{K_i}\sum_j w_{ij},\qquad W=\prod_i\overline w_i . $$
+
+Native geometry trials have unit relative density except for an explicitly biased root, whose relative density is $V$ times its spatial density. Forward growth selects trial $j$ with probability $w_{ij}/\sum_l w_{il}$. The reverse retrace contains the actual coordinates and $K_i-1$ fresh trials using the same prefix and base law. The forced trial can occupy any slot by exchangeability. When the slot is coupled uniformly, its $1/K_i$ probability cancels the corresponding normalization in the forward selection. The unselected trial densities cancel on the augmented forward and reverse paths. The remaining growth-to-retrace proposal factor is $\exp[-\beta\Delta U_0]/W$ relative to the normalized pose measure.
+
+For species $s$, write $N_s$ for the count before the move, $z_s$ for its normalized activity, $V$ for the volume and $p_+$ and $p_-$ for the insertion and deletion move probabilities. When using fugacity input, $z_s=f_s/(k_BT q_{\mathrm{int},s})$ in consistent volume units, with $q_{\mathrm{int},s}$ evaluated in the same normalized internal measure used for growth. State-independent species selection cancels. The reverse of an insertion chooses the added molecule with probability $1/(N_s+1)$. Starting from a deletion, the corresponding probability is $1/N_s$. The reference ratios are
+
+$$
+r_{0,+}=\frac{p_-}{p_+}\frac{z_sV}{N_s+1}W_{\rm new},
+\qquad
+r_{0,-}=\frac{p_+}{p_-}\frac{N_s}{z_s V W_{\rm old}} .
+$$
+
+For regrowth the same molecule is selected in both directions. A suffix start index is drawn independently of the conformation, and the two paths retain the same prefix. The Rosenbluth products run over the selected suffix and give $r_{0,\rm regrow}=W_{\rm new}/W_{\rm old}$. Symmetric translation and rotation give $r_0=\exp[-\beta(U_0(Y)-U_0(X))]$.
+
+For all of these moves, the target ratio on the same augmented path is
+
+$$ r=r_0 r_R,\qquad r_R=\exp\{-\beta[(U(Y)-U_0(Y))-(U(X)-U_0(X))]\}. $$
+
+An insertion adds the selected molecular residual, a deletion removes it and a regrowth subtracts the old residual from the new one in the same environment. The implementation cancels guest–guest short-range terms shared by $U$ and $U_0$. The remaining terms include the exact framework correction and the reciprocal contribution, including whichever self and exclusion terms were omitted from the reference. Cached quantities follow the accepted state, so rejected trials leave those quantities unchanged.
+
+The single-stage acceptance is $\min(1,r_0r_R)$. The delayed acceptance is $\min(1,r_0)\min(1,r_R)$. Both forward-to-reverse acceptance ratios are $r$. Therefore detailed balance holds after averaging over the auxiliary trials for either rule. A surrogate or proposal must retain support for the target moves. Detailed balance imposes no lower bound on mixing speed.
+
+For the same trial path, $\min(1,r_0)\min(1,r_R)\leq\min(1,r_0r_R)$. The difference is positive when the reference and residual favour opposite decisions and neither ratio equals one. The delayed rule saves selected-configuration evaluations through the first-stage screen. Its cost advantage depends on those savings relative to the increase in correlation of the observable of interest. The `exact` path changes both candidate energies and acceptance and is a separate diagnostic comparison.
+
+The classical CPU pair kernels accept `potential.shifted: "force"` for
+$u(r)-u(r_c)-(r-r_c)u'(r_c)$ at $r<r_c$. Boolean shift settings continue to select cut or energy-shifted LJ.
 
 $$
 \alpha_1=\min(1,r_0),\qquad
@@ -83,6 +119,10 @@ $$
 The accepted state supplies $S_\mathbf{k}$. A rigid translation multiplies the cached molecular factor by $e^{i\mathbf{k}\cdot\Delta\mathbf r}$. The conjugate half spectrum retains the finite Ewald sum. PME uses its specified mesh Hamiltonian and native CPU FFTs.
 
 The native CUDA plug-in evaluates reciprocal candidates in FP64 for direct Ewald. With `reciprocal_backend="cuda-tensor"`, exact sampling batches candidate energies. Delayed sampling computes the selected molecular structure factor on the device, then applies the residual and commits the state on the CPU. The sampler's short-range work, proposals and accept/reject decisions run on the CPU. The CuPy short-range backend is a separate interface.
+
+Use `reciprocal_backend="cuda-resident"` with delayed direct Ewald to keep the accepted spectrum on the device. The device evaluates the reciprocal energy increment from the signed charges of the selected new and old molecular sites. It returns one FP64 energy and applies the staged increment after acceptance. The CPU retains its reference state for energy reporting and checkpoint validation. Checkpoints include the actual device spectrum. The host ABI test uses a CPU model of the CUDA interface.
+
+For the discrete PME Hamiltonian, `pme_refresh` controls how often accepted charge increments are merged into the FFT reference mesh. Until a refresh, every candidate includes the Green-operator cross term with all pending accepted increments. The pending state is saved with the last transformed mesh. Choose the refresh interval using the site support and acceptance rate of the workload.
 
 ```bash
 python native/build.py --cuda --cuda-arch sm_86

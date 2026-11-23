@@ -16,10 +16,12 @@ test = ["pytest>=7"]
 report = ["matplotlib>=3.7", "scipy>=1.10"]
 cuda = ["cupy-cuda12x>=13"]
 ml = ["torch>=2.2"]
+mcp = ["mcp>=1.10,<2"]
 [project.scripts]
 opengcmc = "poremc.cli:main"
 opengcmc-thermo = "poremc.thermo_cli:main"
 opengcmc-reactive = "poremc.reactive_cli:main"
+opengcmc-mcp = "poremc.mcp:main"
 poremc = "poremc.cli:main"
 poremc-thermo = "poremc.thermo_cli:main"
 poremc-reactive = "poremc.reactive_cli:main"

@@ -117,7 +117,7 @@ def quadrature(potential,temperature,n):
     return w@observable(x,potential.cell)
 
 
-def check_canonical_quadrature():
+def check_canonical_quadrature(mode='delayed'):
     molecule,potential,temperature=canonical_fixture()
     reference=quadrature(potential,temperature,56)
     refined=quadrature(potential,temperature,80)
@@ -125,7 +125,7 @@ def check_canonical_quadrature():
     assert quadrature_error.max()<.002
     samples=[]
     with FastGCMC(molecule,potential,potential.cell,temperature,[1e-5],seed=141069,trials=5,
-                  move_weights={'regrow':1.},sampling_mode='delayed',host_grid_mesh=8,
+                  move_weights={'regrow':1.},sampling_mode=mode,host_grid_mesh=8,
                   host_grid_cap=50.,grid_root_bias=.8) as sim:
         sim.add_particle(0,[[9.,10.,11.]])
         # Deliberately cap the proposal field at only 50 K.  The physical
@@ -151,6 +151,11 @@ def check_canonical_quadrature():
         surrogate=sim.trial_surrogate_molecule_energies(probe,exclude=0)
         residual=actual-surrogate
         assert np.ptp(residual)>1., 'coarse-grid fixture must have nonconstant residual'
+        profile=sim.acceleration_profile
+        if mode=='reference-mh':
+            assert profile['reference_proposals']==profile['proposals_reaching_exact']
+            assert profile['exact_evaluations']==2*profile['proposals_reaching_exact']
+            assert profile['accepted']==sim.counters['regrow']['accepted']
         return dict(observables=['cos(2pi*x/Lx)','sin(2pi*x/Lx)','cos(2pi*z/Lz)'],
                     quadrature=refined.tolist(),quadrature_refinement_difference=quadrature_error.tolist(),
                     uncorrected_surrogate_quadrature=uncorrected.tolist(),
@@ -222,5 +227,35 @@ def check_cache_identity():
 def test_prefix_and_residual():check_prefix_and_residual()
 def test_nonuniform_root_poisson():check_nonuniform_root_poisson()
 def test_canonical_quadrature():check_canonical_quadrature()
+def test_reference_mh_canonical_quadrature():check_canonical_quadrature('reference-mh')
 def test_all_moves_and_restart():check_all_moves_and_restart()
 def test_cache_identity():check_cache_identity()
+
+
+def test_linear_force_shift():
+    molecule=Molecule('site',[3.2],[84.])
+    cell=np.diag([27.,27.,27.])
+    cutoff=10.
+    rs=np.array([3.1, 6., 9.99, 9.999, 10., 10.01])
+    xyz=np.column_stack((rs,np.zeros((len(rs),2))))
+    def raw(r):
+        return 4*84.*((3.2/r)**12-(3.2/r)**6)
+    h=1e-4
+    slope=(raw(cutoff+h)-raw(cutoff-h))/(2*h)
+    expected=np.where(rs<cutoff,raw(rs)-raw(cutoff)-(rs-cutoff)*slope,0)
+    for backend,algorithm in (('reference','direct'),('native','cached'),('native','direct')):
+        pot=ClassicalPotential([molecule],cell,cutoff,host_positions=[[0,0,0]],
+                               host_sigma=[3.2],host_epsilon=[84.],backend=backend,
+                               algorithm=algorithm,shifted='force')
+        with FastGCMC(molecule,pot,cell,300.,[1e-6]) as sim:
+            actual=sim.trial_molecule_energies(xyz[:,None,:])
+            np.testing.assert_allclose(actual,expected,rtol=1e-10,atol=1e-8)
+            # Check the incremental guest-cell path as well as the host query.
+            sim.add_particle(0,[[0.,0.,-0.2]])
+            actual=sim.trial_molecule_energies(xyz[:,None,:])
+            rg=np.hypot(rs,.2)
+            guest=np.where(rg<cutoff,raw(rg)-raw(cutoff)-(rg-cutoff)*slope,0)
+            np.testing.assert_allclose(actual,expected+guest,rtol=1e-10,atol=1e-8)
+        with pot._new_evaluator([[0,0,0]],[3.2],[84.],[0.]) as env:
+            energy=env.energy(xyz[:,None,:],molecule.sigma,molecule.epsilon,molecule.charge)
+            np.testing.assert_allclose(energy,expected,rtol=1e-10,atol=1e-8)

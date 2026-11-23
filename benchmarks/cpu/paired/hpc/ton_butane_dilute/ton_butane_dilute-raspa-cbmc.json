@@ -1,0 +1,269 @@
+{
+  "checkpoints": [
+    {
+      "budget": 800,
+      "draws_per_chain": 100,
+      "batch_wall_s": 18.582949632313102,
+      "observables": {
+        "count_0": {
+          "mean": 4.2925,
+          "mcse": 0.20893870228641545,
+          "ci95": [
+            3.627563798877709,
+            4.957436201122292
+          ],
+          "rank_split_rhat": 1.0729878661328558,
+          "ess": 72.15189058014016,
+          "chains": 4,
+          "draws_per_chain": 100
+        },
+        "trans_fraction": {
+          "mean": 0.8159580663948748,
+          "mcse": 0.014467880304345626,
+          "ci95": [
+            0.7699148141750151,
+            0.8620013186147345
+          ],
+          "rank_split_rhat": 1.0048850232812503,
+          "ess": 180.11653952624246,
+          "chains": 4,
+          "draws_per_chain": 100
+        }
+      },
+      "met": false
+    },
+    {
+      "budget": 1600,
+      "draws_per_chain": 200,
+      "batch_wall_s": 26.784975223243237,
+      "observables": {
+        "count_0": {
+          "mean": 4.50375,
+          "mcse": 0.13336002337032396,
+          "ci95": [
+            4.07933888635249,
+            4.92816111364751
+          ],
+          "rank_split_rhat": 1.0173722353919372,
+          "ess": 172.6928919151104,
+          "chains": 4,
+          "draws_per_chain": 200
+        },
+        "trans_fraction": {
+          "mean": 0.8301415487094087,
+          "mcse": 0.01425637429339877,
+          "ci95": [
+            0.7847714030126323,
+            0.8755116944061851
+          ],
+          "rank_split_rhat": 1.014144005978518,
+          "ess": 164.27029862676645,
+          "chains": 4,
+          "draws_per_chain": 200
+        }
+      },
+      "met": false
+    },
+    {
+      "budget": 4000,
+      "draws_per_chain": 500,
+      "batch_wall_s": 51.146952082403004,
+      "observables": {
+        "count_0": {
+          "mean": 4.63,
+          "mcse": 0.13630358273598925,
+          "ci95": [
+            4.196221166724843,
+            5.0637788332751565
+          ],
+          "rank_split_rhat": 1.0219879236490488,
+          "ess": 169.20868931666922,
+          "chains": 4,
+          "draws_per_chain": 500
+        },
+        "trans_fraction": {
+          "mean": 0.84244060475162,
+          "mcse": 0.007150066194409761,
+          "ci95": [
+            0.8196859030086827,
+            0.8651953064945572
+          ],
+          "rank_split_rhat": 1.004629706258318,
+          "ess": 586.925174931024,
+          "chains": 4,
+          "draws_per_chain": 500
+        }
+      },
+      "met": false
+    },
+    {
+      "budget": 8000,
+      "draws_per_chain": 1000,
+      "batch_wall_s": 91.95315545937046,
+      "observables": {
+        "count_0": {
+          "mean": 4.6125,
+          "mcse": 0.06387292070979701,
+          "ci95": [
+            4.409227859479391,
+            4.815772140520608
+          ],
+          "rank_split_rhat": 1.00472852544954,
+          "ess": 744.6787856655292,
+          "chains": 4,
+          "draws_per_chain": 1000
+        },
+        "trans_fraction": {
+          "mean": 0.8428726287262873,
+          "mcse": 0.004457998040805541,
+          "ci95": [
+            0.8286852893323613,
+            0.8570599681202133
+          ],
+          "rank_split_rhat": 1.0013091404039405,
+          "ess": 1524.6896537343164,
+          "chains": 4,
+          "draws_per_chain": 1000
+        }
+      },
+      "met": true
+    }
+  ],
+  "qualified_wall_s": 91.95315545937046,
+  "start_group_final_means": {
+    "empty": [
+      4.666
+    ],
+    "preload": [
+      4.559
+    ]
+  },
+  "occupancy_distribution": [
+    [
+      0,
+      0.00275
+    ],
+    [
+      1,
+      0.026
+    ],
+    [
+      2,
+      0.077
+    ],
+    [
+      3,
+      0.16875
+    ],
+    [
+      4,
+      0.21225
+    ],
+    [
+      5,
+      0.213
+    ],
+    [
+      6,
+      0.15925
+    ],
+    [
+      7,
+      0.09125
+    ],
+    [
+      8,
+      0.0345
+    ],
+    [
+      9,
+      0.011
+    ],
+    [
+      10,
+      0.00375
+    ],
+    [
+      11,
+      0.0005
+    ]
+  ],
+  "precision_goals": {
+    "count_0": 0.15,
+    "trans_fraction": 0.025
+  },
+  "case": "ton_butane_dilute",
+  "engine": "RASPA3",
+  "mode": "cbmc",
+  "platform": "Linux-4.19.91-26.an8.x86_64-x86_64-with-glibc2.28",
+  "warmup_cycles": 1000,
+  "sample_every": 8,
+  "workers": 4,
+  "chains": [
+    {
+      "seed": 440713,
+      "start": "empty",
+      "initial_counts": [
+        0
+      ],
+      "elapsed_at_prefix_s": [
+        18.582949632313102,
+        26.784975223243237,
+        51.146952082403004,
+        91.95315545937046
+      ],
+      "subprocess_wall_s": 91.8696402576752,
+      "raspa_output": "ton_butane_dilute-raspa-cbmc/440713/output/output_298.15_2.s0.json",
+      "data": "ton_butane_dilute-raspa-cbmc_440713.npz"
+    },
+    {
+      "seed": 440731,
+      "start": "empty",
+      "initial_counts": [
+        0
+      ],
+      "elapsed_at_prefix_s": [
+        18.291134726256132,
+        26.18800370208919,
+        49.74602396134287,
+        89.94799619540572
+      ],
+      "subprocess_wall_s": 89.96542540891096,
+      "raspa_output": "ton_butane_dilute-raspa-cbmc/440731/output/output_298.15_2.s0.json",
+      "data": "ton_butane_dilute-raspa-cbmc_440731.npz"
+    },
+    {
+      "seed": 440747,
+      "start": "preloaded",
+      "initial_counts": [
+        6
+      ],
+      "elapsed_at_prefix_s": [
+        18.429931502323598,
+        26.317996540106833,
+        50.291088740341365,
+        90.40985280601308
+      ],
+      "subprocess_wall_s": 90.42364110890776,
+      "raspa_output": "ton_butane_dilute-raspa-cbmc/440747/output/output_298.15_2.s0.json",
+      "data": "ton_butane_dilute-raspa-cbmc_440747.npz"
+    },
+    {
+      "seed": 440753,
+      "start": "preloaded",
+      "initial_counts": [
+        6
+      ],
+      "elapsed_at_prefix_s": [
+        18.31809913320467,
+        26.403103863354772,
+        50.97996724024415,
+        91.29191771522164
+      ],
+      "subprocess_wall_s": 91.3070576521568,
+      "raspa_output": "ton_butane_dilute-raspa-cbmc/440753/output/output_298.15_2.s0.json",
+      "data": "ton_butane_dilute-raspa-cbmc_440753.npz"
+    }
+  ],
+  "production_cycle_cap": null
+}

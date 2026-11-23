@@ -1,0 +1,55 @@
+{
+  "schema": "poremc-v1",
+  "description": "Controlled binary CO2/CH4 adsorption in the idealized IZA siliceous MFI structure",
+  "temperature_K": 298.0,
+  "species": [
+    {
+      "name": "CO2",
+      "sigma": [2.80, 3.05, 3.05],
+      "epsilon": [27.0, 79.0, 79.0],
+      "charge": [0.70, -0.35, -0.35],
+      "rigid_positions": [[0, 0, 0], [1.16, 0, 0], [-1.16, 0, 0]],
+      "molar_mass": 44.0095
+    },
+    {
+      "name": "CH4",
+      "sigma": [3.73],
+      "epsilon": [148.0],
+      "charge": [0.0],
+      "rigid_positions": [[0, 0, 0]],
+      "molar_mass": 16.0425
+    }
+  ],
+  "host": {
+    "cif": "MFI.cif",
+    "replicas": [1, 1, 2],
+    "charge_source": "force_field",
+    "force_field": {
+      "Si": {"sigma": 3.408578, "epsilon": 202.294, "charge": 0, "mass": 28.0855},
+      "O": {"sigma": 3.118146, "epsilon": 30.193, "charge": 0, "mass": 15.9994}
+    }
+  },
+  "potential": {
+    "kind": "classical",
+    "backend": "native",
+    "algorithm": "cached",
+    "coulomb": "ewald",
+    "cutoff_A": 8.0,
+    "alpha": 0.30,
+    "kmax": [4, 4, 5],
+    "shifted": true
+  },
+  "reservoir": {"pressure_Pa": 100000, "mole_fractions": [0.5, 0.5], "fugacity_coefficients": [1, 1]},
+  "sampling": {
+    "driver": "cpp",
+    "sampling_mode": "delayed",
+    "host_grid_mesh": [32, 32, 32],
+    "guest_update": "incremental",
+    "grid_root_bias": 0.75,
+    "trials": 4,
+    "steps": 24000,
+    "burnin": 4000,
+    "sample_every": 20,
+    "record_energy": false
+  }
+}

@@ -1,0 +1,32 @@
+{
+    "TMMC_data": {
+        "contents": {
+            "N": "number of co2 particles",
+            "U(N)": "average potential energy of the N-particle macrostate",
+            "lnPi(N)": "particle number probability distribution"
+        },
+        "energy_units": "KiloJ-PER-MOL",
+        "file": "co2_zif8.300K.rX.csv"
+    },
+    "beta": 0.4009078501424201,
+    "beta_units": "MOL-PER-KiloJ",
+    "cell": [
+        34.02324,
+        34.02324,
+        34.02324
+    ],
+    "cell_units": "ANG",
+    "ewald_parameters": {
+        "alpha": "0.2346370178899813",
+        "alpha_units": "PER-ANG",
+        "kvectors": [
+            "7",
+            "7",
+            "7"
+        ]
+    },
+    "lnz": -6.5,
+    "temperature": 300.0,
+    "temperature_units": "K",
+    "z_units": "PER-ANG3"
+}

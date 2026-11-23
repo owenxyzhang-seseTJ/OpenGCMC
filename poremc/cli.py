@@ -2,7 +2,6 @@
 import argparse
 from concurrent.futures import ProcessPoolExecutor
 import copy
-import hashlib
 import json
 import math
 import multiprocessing
@@ -36,7 +35,7 @@ def write_json(path,data):
     temp.replace(path)
 
 
-def construct_case(config,base_directory='.'):
+def construct_case(config,base_directory='.',*,checkpoint=None):
     config=copy.deepcopy(config); base=Path(base_directory)
     permitted={'schema','description','temperature_K','cell_A','species','host','potential','reservoir',
                'sampling','surrogate','root_bias','initial_particles','metadata'}
@@ -145,49 +144,65 @@ def construct_case(config,base_directory='.'):
     run_args={k:sample.pop(k) for k in ('steps','burnin','sample_every','adapt','record_energy') if k in sample}
     run_args={'steps':10000,'burnin':1000,'sample_every':10,**run_args}
     allowed_sampling={'seed','trials','move_weights','species_probabilities','max_translation','max_rotation','max_particles'}
+    bias_spec=sample.pop('count_bias',None)
+    bias=None
+    if bias_spec is not None:
+        if driver!='python':
+            raise ValueError('count_bias requires the Python GCMC driver')
+        from .free_energy import HarmonicCountBias
+        bias=HarmonicCountBias(**bias_spec)
+        if len(bias.coefficients)!=len(species):
+            raise ValueError('count bias requires one coefficient per species')
     if driver=='cpp':
         allowed_sampling|={'reciprocal_method','pme_mesh','reciprocal_backend','cuda_library',
                            'sampling_mode','host_grid_mesh','host_grid_cap','host_grid_cache',
-                           'grid_root_bias','ewald_half_spectrum','ewald_k_cutoff','host_grid_steep'}
+                           'grid_root_bias','ewald_half_spectrum','ewald_k_cutoff','host_grid_steep',
+                           'guest_update','pme_refresh','partial_regrowth','host_field_cache'}
         if sample.get('cuda_library') is not None:sample['cuda_library']=str((base/sample['cuda_library']).resolve())
         if sample.get('host_grid_cache') is not None:sample['host_grid_cache']=str((base/sample['host_grid_cache']).resolve())
+        if sample.get('host_field_cache') is not None:sample['host_field_cache']=str((base/sample['host_field_cache']).resolve())
     if set(sample)-allowed_sampling: raise ValueError(f'unknown sampling options: {sorted(set(sample)-allowed_sampling)}')
-    if driver=='cpp':
+    if checkpoint is not None and driver=='cpp':
+        from .fast import FastGCMC
+        simulation=FastGCMC.from_checkpoint(checkpoint,proposal)
+    elif checkpoint is not None:
+        simulation=GCMC.from_checkpoint(checkpoint,proposal,exact if proposal is not exact else None)
+    elif driver=='cpp':
         from .fast import FastGCMC
         simulation=FastGCMC(species,proposal,cell,temperature,activities,target_potential=exact if proposal is not exact else None,root_proposal=root_proposal,**sample)
     else:
-        simulation=GCMC(species,proposal,cell,temperature,activities,target_potential=exact if proposal is not exact else None,root_proposal=root_proposal,**sample)
-    for particle in config.get('initial_particles',[]): simulation.add_particle(particle['species'],particle['positions_A'])
+        simulation=GCMC(species,proposal,cell,temperature,activities,
+                        target_potential=exact if proposal is not exact else None,
+                        root_proposal=root_proposal,count_bias=bias,**sample)
+    if checkpoint is None:
+        for particle in config.get('initial_particles',[]): simulation.add_particle(particle['species'],particle['positions_A'])
     physics={'cell':cell.tolist(),'species':[m.to_dict() for m in species],
              'host':{k:v for k,v in host.to_dict().items() if k not in ('source','labels')},
              'potential':config.get('potential'),'temperature_K':temperature,'activities':list(activities),
-             'surrogate':config.get('surrogate'),'root_bias':config.get('root_bias'),'execution_driver':driver}
+             'surrogate':config.get('surrogate'),'root_bias':config.get('root_bias'),
+             'count_bias':bias_spec,'execution_driver':driver}
     if driver=='cpp':
-        physics['long_range']={'method':simulation.reciprocal_method,
-                              'mesh':simulation.pme_mesh if simulation.reciprocal_method=='pme' else None,
-                              'k_cutoff':simulation.ewald_k_cutoff}
-    fingerprint=hashlib.sha256(json.dumps(clean_json(physics),sort_keys=True,allow_nan=False).encode()).hexdigest()
+        method=sample.get('reciprocal_method','direct')
+        mesh=tuple(map(int,np.broadcast_to(sample.get('pme_mesh',32),(3,)))) if method=='pme' else None
+        physics['long_range']={'method':method,'mesh':mesh,'k_cutoff':float(sample.get('ewald_k_cutoff',0.))}
+    from .cache import content_key
+    fingerprint=content_key(physics,{})
+    if checkpoint is not None and checkpoint.get('physics_id')!=fingerprint:
+        if hasattr(simulation,'close'):simulation.close()
+        raise ValueError('restart physics fingerprint differs from the input model and reservoir')
     return simulation,run_args,host,fingerprint,surrogate_info
 
 
 def run_configuration(config,output_directory,base_directory='.',restart=None):
     started=time.perf_counter()
-    sim,run_args,host,fingerprint,surrogate=construct_case(config,base_directory)
+    checkpoint=json.loads(Path(restart).read_text()) if restart else None
+    sim,run_args,host,fingerprint,surrogate=construct_case(config,base_directory,checkpoint=checkpoint)
     if restart:
-        checkpoint=json.loads(Path(restart).read_text())
-        if checkpoint.get('physics_sha256')!=fingerprint:
-            raise ValueError('restart physics fingerprint differs: restore the original Hamiltonian/reservoir first')
-        if config.get('sampling',{}).get('driver','python')=='cpp':
-            from .fast import FastGCMC
-            potential=sim.potential;sim.close()
-            sim=FastGCMC.from_checkpoint(restart,potential)
-        else:
-            sim=GCMC.from_checkpoint(restart,sim.potential,sim.target_potential)
         run_args['burnin']=0; run_args['adapt']=False
     result=sim.run(**run_args)
     result['metadata']={'poremc_version':__version__,'python':sys.version.split()[0],'platform':platform.platform(),
                         'driver':config.get('sampling',{}).get('driver','python'),'temperature_K':sim.temperature,'volume_A3':float(np.linalg.det(sim.cell)),'activities_A3_inverse':sim.activities.tolist(),
-                        'physics_sha256':fingerprint,'input_description':config.get('description'),
+                        'physics_id':fingerprint,'input_description':config.get('description'),
                         'surrogate':surrogate,'total_wall_seconds':time.perf_counter()-started,
                         'energy_unit':'U/kB in Kelvin','length_unit':'Angstrom','step_definition':'one attempted move'}
     if host.mass_amu:
@@ -195,7 +210,7 @@ def run_configuration(config,output_directory,base_directory='.',restart=None):
                                 for m in sim.species if m.name in result['species_statistics']}
     out=Path(output_directory); out.mkdir(parents=True,exist_ok=True)
     write_json(out/'result.json',result); write_json(out/'input.json',config)
-    checkpoint=sim.checkpoint(); checkpoint['physics_sha256']=fingerprint
+    checkpoint=sim.checkpoint(); checkpoint['physics_id']=fingerprint
     write_json(out/'checkpoint.json',checkpoint)
     write_xyz(out/'final.xyz',sim.entries(),sim.species)
     return result
@@ -220,14 +235,14 @@ def main(argv=None):
                 'multicomponent CBMC','two-stage target correction','native cell-list LJ/DSF/Ewald',
                 'native host-grid CBMC with exact residual correction',
                 'CPU harmonic reciprocal contraction','direct Ewald and PME',
-                'CIF explicit symmetry','exact checkpoint','CPU replica parallelism','native single-component sampler'],
+                'CIF explicit symmetry','exact checkpoint','CPU replica parallelism','native multicomponent sampler','incremental guest cells and deferred PME refresh'],
                 'python_api':['NPT bulk','Gibbs bulk','replica exchange','TMMC controller','TorchScript total-energy adapter'],
                 'thermodynamics':['chemical-potential response matrices','occupancy and charge free-energy landscapes',
                     'stoichiometric electrolyte GCMC','Gaussian constant-potential electrodes'],
                 'electrochemistry':['explicit SPC/E hydration','fixed-topology protonation, redox and PCET sampling',
                     'staged NCMC and multistate free-energy calibration','reaction networks and finite-volume diffusion currents'],
                 'entry_points':{'molecular':'opengcmc','thermodynamics':'opengcmc-thermo','electrochemistry':'opengcmc-reactive'},
-                'native_reciprocal_backends':['cpu','auto','cuda','cuda-tensor'],
+                'native_reciprocal_backends':['cpu','auto','cuda','cuda-tensor','cuda-resident'],
                 'gpu_status':'Direct Ewald CUDA candidate batches and optional FP64 tensor contraction for exact batches and selected delayed structures; delayed corrections support CPU or opted-in tensor CUDA',
                 'not_implemented':['ring-closure CBMC','flexible framework','CFCMC','molecular dynamics',
                     'arbitrary reactive topology changes','general bulk polarization/QEq',
@@ -240,7 +255,7 @@ def main(argv=None):
         if args.command=='validate':
             sim,runargs,host,fp,sm=construct_case(config,path.parent)
             print(json.dumps({'valid':True,'species':[m.name for m in sim.species],'activities_A3_inverse':sim.activities.tolist(),
-                              'host_atoms':len(host.positions),'run':runargs,'physics_sha256':fp},indent=2)); return 0
+                              'host_atoms':len(host.positions),'run':runargs,'physics_id':fp},indent=2)); return 0
         if args.command=='run':
             result=run_configuration(config,args.output,path.parent,args.restart)
             print(json.dumps(clean_json({'output':str(Path(args.output).resolve()),'statistics':result['species_statistics'],

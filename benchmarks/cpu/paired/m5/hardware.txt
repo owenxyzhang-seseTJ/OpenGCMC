@@ -1,0 +1,35 @@
+ProductName:		macOS
+ProductVersion:		26.5
+BuildVersion:		25F71
+machdep.cpu.brand_string: Apple M5
+hw.physicalcpu: 10
+hw.perflevel0.physicalcpu: 4
+hw.perflevel1.physicalcpu: 6
+3.13.13 | packaged by conda-forge | (main, Apr  8 2026, 02:29:07) [Clang 19.1.7 ]
+NumPy 2.5.2 SciPy 1.18.1
+206122c
+{
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-O3",
+    "-DNDEBUG",
+    "-fPIC",
+    "-shared",
+    "-fno-fast-math",
+    "-ffp-contract=off",
+    "native/kernels.cpp",
+    "native/fast_mc.cpp",
+    "native/ewald_state.cpp",
+    "native/host_grid.cpp",
+    "-o",
+    "poremc/libporemc.dylib"
+  ],
+  "compiler": "Apple clang version 21.0.0 (clang-2100.0.123.102)",
+  "platform": "macOS-26.5-arm64-arm-64bit-Mach-O",
+  "build_seconds": 3.658906708995346,
+  "fast_math": false,
+  "portable": true,
+  "openmp": false,
+  "library": "libporemc.dylib"
+}

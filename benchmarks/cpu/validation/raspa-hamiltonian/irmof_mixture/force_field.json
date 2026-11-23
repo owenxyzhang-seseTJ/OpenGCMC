@@ -1,0 +1,203 @@
+{
+  "PseudoAtoms": [
+    {
+      "name": "HAA",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": 1.275
+    },
+    {
+      "name": "HAB",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -1.5
+    },
+    {
+      "name": "HAC",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.6
+    },
+    {
+      "name": "HAD",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": 0.475
+    },
+    {
+      "name": "HAE",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": 0.125
+    },
+    {
+      "name": "HAF",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": -0.15
+    },
+    {
+      "name": "HAG",
+      "framework": true,
+      "print_to_output": false,
+      "element": "C",
+      "print_as": "C",
+      "mass": 12.0107,
+      "charge": 0.15
+    },
+    {
+      "name": "A000",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 14.666266666666667,
+      "charge": -0.3256
+    },
+    {
+      "name": "A001",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 14.666266666666667,
+      "charge": 0.6512
+    },
+    {
+      "name": "A002",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 14.666266666666667,
+      "charge": -0.3256
+    },
+    {
+      "name": "B000",
+      "framework": false,
+      "print_to_output": true,
+      "element": "C",
+      "print_as": "C",
+      "mass": 16.04246,
+      "charge": 0.0
+    }
+  ],
+  "SelfInteractions": [
+    {
+      "name": "HAA",
+      "type": "lennard-jones",
+      "parameters": [
+        0.42,
+        2.7
+      ]
+    },
+    {
+      "name": "HAB",
+      "type": "lennard-jones",
+      "parameters": [
+        700.0,
+        2.98
+      ]
+    },
+    {
+      "name": "HAC",
+      "type": "lennard-jones",
+      "parameters": [
+        70.5,
+        3.11
+      ]
+    },
+    {
+      "name": "HAD",
+      "type": "lennard-jones",
+      "parameters": [
+        47.0,
+        3.74
+      ]
+    },
+    {
+      "name": "HAE",
+      "type": "lennard-jones",
+      "parameters": [
+        47.86,
+        3.47
+      ]
+    },
+    {
+      "name": "HAF",
+      "type": "lennard-jones",
+      "parameters": [
+        47.86,
+        3.47
+      ]
+    },
+    {
+      "name": "HAG",
+      "type": "lennard-jones",
+      "parameters": [
+        10.9,
+        2.64
+      ]
+    },
+    {
+      "name": "A000",
+      "type": "lennard-jones",
+      "parameters": [
+        80.507,
+        3.033
+      ]
+    },
+    {
+      "name": "A001",
+      "type": "lennard-jones",
+      "parameters": [
+        28.129,
+        2.757
+      ]
+    },
+    {
+      "name": "A002",
+      "type": "lennard-jones",
+      "parameters": [
+        80.507,
+        3.033
+      ]
+    },
+    {
+      "name": "B000",
+      "type": "lennard-jones",
+      "parameters": [
+        158.5,
+        3.72
+      ]
+    }
+  ],
+  "MixingRule": "Lorentz-Berthelot",
+  "CutOff": 12.0,
+  "TruncationMethod": "shifted",
+  "TailCorrections": false,
+  "EwaldParameters": [
+    0.25,
+    7,
+    7,
+    7
+  ]
+}

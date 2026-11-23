@@ -1,0 +1,5 @@
+benchmark_precision.py benchmarks/cpu/paired/inputs/xylene_high.json --output benchmarks/cpu/paired/hpc/xylene_high/xylene_high-delayed.json --cache <scratch>/fields --mode delayed --budgets 40000 120000 240000 480000 --warmup 30000 --mesh 32 --guest-update incremental --workers 4
+xylene_high delayed total_s 1676.895 qualified_wall_s None
+benchmark_raspa3.py benchmarks/cpu/paired/inputs/xylene_high.json --binary <cluster-workspace>/raspa3_cpu --output benchmarks/cpu/paired/hpc/xylene_high/xylene_high-raspa-cbmc.json --mode cbmc --budgets 400 1000 2000 3600 --warmup 1000 --stride 8 --workers 4
+xylene_high: production is capped at 800 cycles
+xylene_high cbmc qualified_wall_s None

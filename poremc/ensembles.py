@@ -472,6 +472,96 @@ class ReplicaExchange:
         return True
 
 
+def activity_exchange_log_ratio(count_a,count_b,activity_a,activity_b):
+    """Log acceptance ratio for swapping two equal-T, equal-Hamiltonian labels."""
+    na,nb,za,zb=(np.asarray(a,dtype=float) for a in (count_a,count_b,activity_a,activity_b))
+    if na.ndim!=1 or any(x.shape!=na.shape for x in (nb,za,zb)):
+        raise ValueError('all four arrays must have one entry per component')
+    if any(not np.isfinite(x).all() or np.any(x<0) for x in (na,nb,za,zb)):
+        raise ValueError('finite nonnegative counts and activities are required')
+    if np.any((na>0)&(za==0)) or np.any((nb>0)&(zb==0)):
+        raise ValueError('current state lies outside a reservoir support')
+    if np.any((nb>0)&(za==0)) or np.any((na>0)&(zb==0)):
+        return -math.inf
+    active=(za>0)&(zb>0)
+    return float((nb[active]-na[active])@(np.log(za[active])-np.log(zb[active])))
+
+
+def osmotic_phase_probabilities(temperature,pressure_pa,host_free_energies_kelvin,volumes_a3,
+                                log_grand_partitions,degeneracies=None):
+    """Normalize fixed-phase osmotic weights from independently supplied host free energies."""
+    from scipy.special import logsumexp
+
+    temp=_positive(temperature,'temperature')
+    pressure=float(pressure_pa)
+    f,v,ln_xi=(np.asarray(x,float) for x in (host_free_energies_kelvin,volumes_a3,log_grand_partitions))
+    g=np.ones(f.shape) if degeneracies is None else np.asarray(degeneracies,float)
+    if (f.ndim!=1 or not f.size or any(x.shape!=f.shape or not np.isfinite(x).all() for x in (f,v,ln_xi,g))
+            or not math.isfinite(pressure) or pressure<0 or np.any(v<=0) or np.any(g<=0)):
+        raise ValueError('finite free energies and positive per-phase volumes and degeneracies are required')
+    log_weight=ln_xi+np.log(g)-(f+pressure*v*(1e-30/KB))/temp
+    return np.exp(log_weight-logsumexp(log_weight))
+
+
+class GrandCanonicalReplicaExchange:
+    """Independent fixed-cell walkers with neighbor exchanges of activity labels.
+
+    All walkers share one target instance, temperature and molecular measure.
+    A round saves samples under their pre-exchange label. Exchange rounds use a
+    fixed alternating schedule that depends on completed moves, never on time.
+    """
+    def __init__(self,walkers,seed=12345):
+        self.walkers=list(walkers)
+        if len(self.walkers)<2 or len({id(s) for s in self.walkers})!=len(self.walkers):
+            raise ValueError('provide at least two distinct walkers')
+        first=self.walkers[0]
+        definitions=[m.to_dict() for m in first.species]
+        for s in self.walkers:
+            if (type(s) is not type(first) or s.potential is not first.potential
+                    or s.target_potential is not first.target_potential
+                    or s.temperature!=first.temperature or not np.array_equal(s.cell,first.cell)
+                    or getattr(s,'count_bias',None) is not None
+                    or [m.to_dict() for m in s.species]!=definitions):
+                raise ValueError('activity exchange requires the same unbiased physical model')
+            if hasattr(s,'_fingerprint') and s._fingerprint()!=first._fingerprint():
+                raise ValueError('activity exchange requires identical native reciprocal Hamiltonians')
+            if np.any((s.activities==0)&(s.counts>0)):
+                raise ValueError('occupied zero-activity component')
+        self.activities=np.array([s.activities for s in self.walkers])
+        self.activities.flags.writeable=False
+        self.occupants=list(range(len(self.walkers)))
+        self.rng=np.random.default_rng(seed)
+        self.round=0
+        self.attempts=np.zeros(len(self.walkers)-1,dtype=int)
+        self.accepts=np.zeros_like(self.attempts)
+
+    @staticmethod
+    def _set_activity(sim,values):
+        if hasattr(sim,'set_activities'):
+            sim.set_activities(values)
+        else:
+            sim.activities=values.copy()
+
+    def advance(self,steps,sample_every=10,record_energy=False):
+        steps,sample_every=int(steps),int(sample_every)
+        if not 1<=sample_every<=steps or steps%sample_every:
+            raise ValueError('exchange steps must be a positive multiple of sample_every')
+        samples=[self.walkers[w].run(steps,sample_every=sample_every,record_energy=record_energy)
+                 for w in self.occupants]
+        for i in range(self.round%2,len(self.walkers)-1,2):
+            j=i+1
+            a,b=(self.walkers[self.occupants[label]] for label in (i,j))
+            ratio=activity_exchange_log_ratio(a.counts,b.counts,self.activities[i],self.activities[j])
+            self.attempts[i]+=1
+            if _accept(ratio,self.rng):
+                self._set_activity(a,self.activities[j])
+                self._set_activity(b,self.activities[i])
+                self.occupants[i],self.occupants[j]=self.occupants[j],self.occupants[i]
+                self.accepts[i]+=1
+        self.round+=1
+        return samples
+
+
 class TransitionMatrix:
     """Finite nearest-neighbour macrostate TMMC with explicit bias lifecycle.
 

@@ -1,0 +1,2255 @@
+Compiler and run-time data
+===============================================================================
+RASPA 3.1.0
+
+Random seed: 440731
+
+Compiled as a 64-bits application
+Compiler: gcc Clang 22.1.8
+Compile Date = Jun 22 2026, Compile Time = 17:19:09
+
+2026-11-23 11:50:05.539306
+Simulation started on Mon, Nov 23
+The start time was 11:50:00
+
+Cpu data:    arm64
+Cpu Model:   Mac17,3
+Host name:  XiaoyudeMacBook-Air.locals
+OS release:  25.5.0
+OS type:     Darwin
+OS version:  25F71
+
+
+
+Mutual consistent basic set of units:
+===============================================================================
+
+Unit of temperature: 1 [K]
+Unit of length:      1e-10 [m]
+Unit of time:        1e-12 [s]
+Unit of mass:        1.6605402e-27 [kg]
+Unit of charge:      1.60217733e-19 [C/particle]
+
+
+Boltzmann constant (internal units):          0.8314464919307584 [-]
+represents conversion from energy (internal units) to temperature (in Kelvin)
+
+Derived units and their conversion factors:
+===============================================================================
+
+Unit of energy:                           1.6605402000000002e-23 [J]
+Unit of energy:                           10.000008872307538 [J.mol⁻¹]
+Unit of velocity:                         100 [m.s⁻¹]
+Unit of force:                            1.6605402000000002e-13 [N]
+Unit of diffusion:                        1.0000000000000002e-08 [m².s⁻¹]
+Unit of acceleration:                     1.0000000000000002e-08 [m².s⁻¹]
+Unit of torque:                           1.6605402000000002e-23 [N.m]
+Unit of pressure:                         16605402 [Pa]
+Unit of volume:                           1e-30 [m³]
+Unit of density:                          1660.5402 [kg.m⁻³]
+Unit of dynamic viscosity:                1.6605401999999997e-05 [N.s.m⁻²]
+Unit of enthalpy:                         1.6605402000000002e-23 [J]
+Unit of polarizability:                   1.5458657349975198e-35 [-]
+Unit of Coulomb potential:                167101.08000665612 [K]
+Unit of dielectric constant:              1.5458657349975193e-05 [s².C².kg⁻¹.m⁻³]
+Unit of dipole moment:                    1.60217733e-29 [C.m]
+Unit of Debye:                            4.803206799099162 [C.m]
+Unit of electric potential:               0.00010364272224473431 [V]
+Unit of electric field:                   1036427.222447343 [V.m⁻¹]
+Unit of isothermal compressibility:       6.02213665167516e-08 [Pa⁻¹]
+Unit of heat capacity:                    10.000008872307538 [J.mol⁻¹.K⁻¹]
+Unit of volumetric expansion coefficient: 1 [K⁻¹]
+
+
+Internal conversion factors:
+===============================================================================
+
+Energy (internal units) to Kelvin:      1.202724284692786 [-]
+Kelvin to energy (internal units):      0.8314457542157567 [-]
+
+
+System definitions
+===============================================================================
+
+Temperature:          300 [K]
+Beta:                 0.004009077391850886 [-]
+Pressure:             2e+05 [Pa]
+Helium void fraction: 1 [-]
+
+Box:      25.83200   0.00000   0.00000
+           0.00000  25.83200   0.00000
+           0.00000   0.00000  25.83200
+Lengths:  25.83200  25.83200  25.83200
+Angles:   90.00000  90.00000  90.00000
+Rectangular boundary conditions
+Perpendicular widths:   25.83200  25.83200  25.83200
+
+
+
+
+Property measurement settings
+===============================================================================
+
+
+
+
+Pseudo-atoms
+===============================================================================
+
+  0 - HAA      framework-atom: true
+  1 - HAB      framework-atom: true
+  2 - HAC      framework-atom: true
+  3 - HAD      framework-atom: true
+  4 - HAE      framework-atom: true
+  5 - HAF      framework-atom: true
+  6 - HAG      framework-atom: true
+  7 - A000     framework-atom: false
+  8 - A001     framework-atom: false
+  9 - A002     framework-atom: false
+ 10 - B000     framework-atom: false
+
+  0 - HAA      mass: 12.01070, charge:  1.27500
+  1 - HAB      mass: 12.01070, charge: -1.50000
+  2 - HAC      mass: 12.01070, charge: -0.60000
+  3 - HAD      mass: 12.01070, charge:  0.47500
+  4 - HAE      mass: 12.01070, charge:  0.12500
+  5 - HAF      mass: 12.01070, charge: -0.15000
+  6 - HAG      mass: 12.01070, charge:  0.15000
+  7 - A000     mass: 14.66627, charge: -0.32560
+  8 - A001     mass: 14.66627, charge:  0.65120
+  9 - A002     mass: 14.66627, charge: -0.32560
+ 10 - B000     mass: 16.04246, charge:  0.00000
+
+  0 - HAA      polarizability:  0.00000
+  1 - HAB      polarizability:  0.00000
+  2 - HAC      polarizability:  0.00000
+  3 - HAD      polarizability:  0.00000
+  4 - HAE      polarizability:  0.00000
+  5 - HAF      polarizability:  0.00000
+  6 - HAG      polarizability:  0.00000
+  7 - A000     polarizability:  0.00000
+  8 - A001     polarizability:  0.00000
+  9 - A002     polarizability:  0.00000
+ 10 - B000     polarizability:  0.00000
+
+
+Force field status
+===============================================================================
+
+Cutoff Framework-Molecule VDW:  12.00000 [Å]
+Cutoff Molecule-Molecule VDW:   12.00000 [Å]
+Cutoff Coulomb:                 auto
+Overlap-criteria VDW:           1.000000e+06 [K]
+
+Mixing-rule: Lorentz-Berthelot
+HAA      - HAA      Lennard-Jones  p₀/kʙ:   0.42000 [K], p₁:  2.70000 [Å]
+                                   shift:  -0.00022 [K], tailcorrections: false
+HAA      - HAB      Lennard-Jones  p₀/kʙ:  17.14643 [K], p₁:  2.84000 [Å]
+                                   shift:  -0.01205 [K], tailcorrections: false
+HAA      - HAC      Lennard-Jones  p₀/kʙ:   5.44151 [K], p₁:  2.90500 [Å]
+                                   shift:  -0.00438 [K], tailcorrections: false
+HAA      - HAD      Lennard-Jones  p₀/kʙ:   4.44297 [K], p₁:  3.22000 [Å]
+                                   shift:  -0.00663 [K], tailcorrections: false
+HAA      - HAE      Lennard-Jones  p₀/kʙ:   4.48344 [K], p₁:  3.08500 [Å]
+                                   shift:  -0.00518 [K], tailcorrections: false
+HAA      - HAF      Lennard-Jones  p₀/kʙ:   4.48344 [K], p₁:  3.08500 [Å]
+                                   shift:  -0.00518 [K], tailcorrections: false
+HAA      - HAG      Lennard-Jones  p₀/kʙ:   2.13963 [K], p₁:  2.67000 [Å]
+                                   shift:  -0.00104 [K], tailcorrections: false
+HAA      - A000     Lennard-Jones  p₀/kʙ:   5.81489 [K], p₁:  2.86650 [Å]
+                                   shift:  -0.00432 [K], tailcorrections: false
+HAA      - A001     Lennard-Jones  p₀/kʙ:   3.43718 [K], p₁:  2.72850 [Å]
+                                   shift:  -0.00190 [K], tailcorrections: false
+HAA      - A002     Lennard-Jones  p₀/kʙ:   5.81489 [K], p₁:  2.86650 [Å]
+                                   shift:  -0.00432 [K], tailcorrections: false
+HAA      - B000     Lennard-Jones  p₀/kʙ:   8.15904 [K], p₁:  3.21000 [Å]
+                                   shift:  -0.01195 [K], tailcorrections: false
+HAB      - HAB      Lennard-Jones  p₀/kʙ: 700.00000 [K], p₁:  2.98000 [Å]
+                                   shift:  -0.65655 [K], tailcorrections: false
+HAB      - HAC      Lennard-Jones  p₀/kʙ: 222.14860 [K], p₁:  3.04500 [Å]
+                                   shift:  -0.23715 [K], tailcorrections: false
+HAB      - HAD      Lennard-Jones  p₀/kʙ: 181.38357 [K], p₁:  3.36000 [Å]
+                                   shift:  -0.34946 [K], tailcorrections: false
+HAB      - HAE      Lennard-Jones  p₀/kʙ: 183.03552 [K], p₁:  3.22500 [Å]
+                                   shift:  -0.27575 [K], tailcorrections: false
+HAB      - HAF      Lennard-Jones  p₀/kʙ: 183.03552 [K], p₁:  3.22500 [Å]
+                                   shift:  -0.27575 [K], tailcorrections: false
+HAB      - HAG      Lennard-Jones  p₀/kʙ:  87.34987 [K], p₁:  2.81000 [Å]
+                                   shift:  -0.05760 [K], tailcorrections: false
+HAB      - A000     Lennard-Jones  p₀/kʙ: 237.39187 [K], p₁:  3.00650 [Å]
+                                   shift:  -0.23480 [K], tailcorrections: false
+HAB      - A001     Lennard-Jones  p₀/kʙ: 140.32213 [K], p₁:  2.86850 [Å]
+                                   shift:  -0.10470 [K], tailcorrections: false
+HAB      - A002     Lennard-Jones  p₀/kʙ: 237.39187 [K], p₁:  3.00650 [Å]
+                                   shift:  -0.23480 [K], tailcorrections: false
+HAB      - B000     Lennard-Jones  p₀/kʙ: 333.09158 [K], p₁:  3.35000 [Å]
+                                   shift:  -0.63038 [K], tailcorrections: false
+HAC      - HAC      Lennard-Jones  p₀/kʙ:  70.50000 [K], p₁:  3.11000 [Å]
+                                   shift:  -0.08543 [K], tailcorrections: false
+HAC      - HAD      Lennard-Jones  p₀/kʙ:  57.56301 [K], p₁:  3.42500 [Å]
+                                   shift:  -0.12441 [K], tailcorrections: false
+HAC      - HAE      Lennard-Jones  p₀/kʙ:  58.08726 [K], p₁:  3.29000 [Å]
+                                   shift:  -0.09864 [K], tailcorrections: false
+HAC      - HAF      Lennard-Jones  p₀/kʙ:  58.08726 [K], p₁:  3.29000 [Å]
+                                   shift:  -0.09864 [K], tailcorrections: false
+HAC      - HAG      Lennard-Jones  p₀/kʙ:  27.72093 [K], p₁:  2.87500 [Å]
+                                   shift:  -0.02097 [K], tailcorrections: false
+HAC      - A000     Lennard-Jones  p₀/kʙ:  75.33753 [K], p₁:  3.07150 [Å]
+                                   shift:  -0.08472 [K], tailcorrections: false
+HAC      - A001     Lennard-Jones  p₀/kʙ:  44.53195 [K], p₁:  2.93350 [Å]
+                                   shift:  -0.03801 [K], tailcorrections: false
+HAC      - A002     Lennard-Jones  p₀/kʙ:  75.33753 [K], p₁:  3.07150 [Å]
+                                   shift:  -0.08472 [K], tailcorrections: false
+HAC      - B000     Lennard-Jones  p₀/kʙ: 105.70833 [K], p₁:  3.41500 [Å]
+                                   shift:  -0.22449 [K], tailcorrections: false
+HAD      - HAD      Lennard-Jones  p₀/kʙ:  47.00000 [K], p₁:  3.74000 [Å]
+                                   shift:  -0.17215 [K], tailcorrections: false
+HAD      - HAE      Lennard-Jones  p₀/kʙ:  47.42805 [K], p₁:  3.60500 [Å]
+                                   shift:  -0.13935 [K], tailcorrections: false
+HAD      - HAF      Lennard-Jones  p₀/kʙ:  47.42805 [K], p₁:  3.60500 [Å]
+                                   shift:  -0.13935 [K], tailcorrections: false
+HAD      - HAG      Lennard-Jones  p₀/kʙ:  22.63405 [K], p₁:  3.19000 [Å]
+                                   shift:  -0.03194 [K], tailcorrections: false
+HAD      - A000     Lennard-Jones  p₀/kʙ:  61.51284 [K], p₁:  3.38650 [Å]
+                                   shift:  -0.12423 [K], tailcorrections: false
+HAD      - A001     Lennard-Jones  p₀/kʙ:  36.36018 [K], p₁:  3.24850 [Å]
+                                   shift:  -0.05722 [K], tailcorrections: false
+HAD      - A002     Lennard-Jones  p₀/kʙ:  61.51284 [K], p₁:  3.38650 [Å]
+                                   shift:  -0.12423 [K], tailcorrections: false
+HAD      - B000     Lennard-Jones  p₀/kʙ:  86.31049 [K], p₁:  3.73000 [Å]
+                                   shift:  -0.31110 [K], tailcorrections: false
+HAE      - HAE      Lennard-Jones  p₀/kʙ:  47.86000 [K], p₁:  3.47000 [Å]
+                                   shift:  -0.11186 [K], tailcorrections: false
+HAE      - HAF      Lennard-Jones  p₀/kʙ:  47.86000 [K], p₁:  3.47000 [Å]
+                                   shift:  -0.11186 [K], tailcorrections: false
+HAE      - HAG      Lennard-Jones  p₀/kʙ:  22.84018 [K], p₁:  3.05500 [Å]
+                                   shift:  -0.02487 [K], tailcorrections: false
+HAE      - A000     Lennard-Jones  p₀/kʙ:  62.07306 [K], p₁:  3.25150 [Å]
+                                   shift:  -0.09822 [K], tailcorrections: false
+HAE      - A001     Lennard-Jones  p₀/kʙ:  36.69133 [K], p₁:  3.11350 [Å]
+                                   shift:  -0.04476 [K], tailcorrections: false
+HAE      - A002     Lennard-Jones  p₀/kʙ:  62.07306 [K], p₁:  3.25150 [Å]
+                                   shift:  -0.09822 [K], tailcorrections: false
+HAE      - B000     Lennard-Jones  p₀/kʙ:  87.09656 [K], p₁:  3.59500 [Å]
+                                   shift:  -0.25168 [K], tailcorrections: false
+HAF      - HAF      Lennard-Jones  p₀/kʙ:  47.86000 [K], p₁:  3.47000 [Å]
+                                   shift:  -0.11186 [K], tailcorrections: false
+HAF      - HAG      Lennard-Jones  p₀/kʙ:  22.84018 [K], p₁:  3.05500 [Å]
+                                   shift:  -0.02487 [K], tailcorrections: false
+HAF      - A000     Lennard-Jones  p₀/kʙ:  62.07306 [K], p₁:  3.25150 [Å]
+                                   shift:  -0.09822 [K], tailcorrections: false
+HAF      - A001     Lennard-Jones  p₀/kʙ:  36.69133 [K], p₁:  3.11350 [Å]
+                                   shift:  -0.04476 [K], tailcorrections: false
+HAF      - A002     Lennard-Jones  p₀/kʙ:  62.07306 [K], p₁:  3.25150 [Å]
+                                   shift:  -0.09822 [K], tailcorrections: false
+HAF      - B000     Lennard-Jones  p₀/kʙ:  87.09656 [K], p₁:  3.59500 [Å]
+                                   shift:  -0.25168 [K], tailcorrections: false
+HAG      - HAG      Lennard-Jones  p₀/kʙ:  10.90000 [K], p₁:  2.64000 [Å]
+                                   shift:  -0.00494 [K], tailcorrections: false
+HAG      - A000     Lennard-Jones  p₀/kʙ:  29.62307 [K], p₁:  2.83650 [Å]
+                                   shift:  -0.02066 [K], tailcorrections: false
+HAG      - A001     Lennard-Jones  p₀/kʙ:  17.51017 [K], p₁:  2.69850 [Å]
+                                   shift:  -0.00906 [K], tailcorrections: false
+HAG      - A002     Lennard-Jones  p₀/kʙ:  29.62307 [K], p₁:  2.83650 [Å]
+                                   shift:  -0.02066 [K], tailcorrections: false
+HAG      - B000     Lennard-Jones  p₀/kʙ:  41.56501 [K], p₁:  3.18000 [Å]
+                                   shift:  -0.05756 [K], tailcorrections: false
+A000     - A000     Lennard-Jones  p₀/kʙ:  80.50700 [K], p₁:  3.03300 [Å]
+                                   shift:  -0.08393 [K], tailcorrections: false
+A000     - A001     Lennard-Jones  p₀/kʙ:  47.58762 [K], p₁:  2.89500 [Å]
+                                   shift:  -0.03752 [K], tailcorrections: false
+A000     - A002     Lennard-Jones  p₀/kʙ:  80.50700 [K], p₁:  3.03300 [Å]
+                                   shift:  -0.08393 [K], tailcorrections: false
+A000     - B000     Lennard-Jones  p₀/kʙ: 112.96176 [K], p₁:  3.37650 [Å]
+                                   shift:  -0.22412 [K], tailcorrections: false
+A001     - A001     Lennard-Jones  p₀/kʙ:  28.12900 [K], p₁:  2.75700 [Å]
+                                   shift:  -0.01655 [K], tailcorrections: false
+A001     - A002     Lennard-Jones  p₀/kʙ:  47.58762 [K], p₁:  2.89500 [Å]
+                                   shift:  -0.03752 [K], tailcorrections: false
+A001     - B000     Lennard-Jones  p₀/kʙ:  66.77160 [K], p₁:  3.23850 [Å]
+                                   shift:  -0.10315 [K], tailcorrections: false
+A002     - A002     Lennard-Jones  p₀/kʙ:  80.50700 [K], p₁:  3.03300 [Å]
+                                   shift:  -0.08393 [K], tailcorrections: false
+A002     - B000     Lennard-Jones  p₀/kʙ: 112.96176 [K], p₁:  3.37650 [Å]
+                                   shift:  -0.22412 [K], tailcorrections: false
+B000     - B000     Lennard-Jones  p₀/kʙ: 158.50000 [K], p₁:  3.72000 [Å]
+                                   shift:  -0.56218 [K], tailcorrections: false
+
+Ewald alpha: 0.25
+Ewald k-vectors: 7 7 7
+
+
+Component definitions
+===============================================================================
+
+Framework 0 [framework]
+
+    Box:      25.83200   0.00000   0.00000
+               0.00000  25.83200   0.00000
+               0.00000   0.00000  25.83200
+    Lengths:  25.83200  25.83200  25.83200
+    Angles:   90.00000  90.00000  90.00000
+    Perpendicular widths:   25.83200  25.83200  25.83200
+
+    number Of Atoms:                   424 [-]
+    mass:                       5092.53680 [amu]
+      0: HAA    position  0.29340  0.20660  0.20660, charge  1.27500
+      1: HAA    position  0.70660  0.79340  0.20660, charge  1.27500
+      2: HAA    position  0.70660  0.20660  0.79340, charge  1.27500
+      3: HAA    position  0.29340  0.79340  0.79340, charge  1.27500
+      4: HAA    position  0.20660  0.29340  0.20660, charge  1.27500
+      5: HAA    position  0.20660  0.70660  0.79340, charge  1.27500
+      6: HAA    position  0.79340  0.70660  0.20660, charge  1.27500
+      7: HAA    position  0.79340  0.29340  0.79340, charge  1.27500
+      8: HAA    position  0.20660  0.20660  0.29340, charge  1.27500
+      9: HAA    position  0.79340  0.20660  0.70660, charge  1.27500
+     10: HAA    position  0.20660  0.79340  0.70660, charge  1.27500
+     11: HAA    position  0.79340  0.79340  0.29340, charge  1.27500
+     12: HAA    position  0.20660  0.29340  0.79340, charge  1.27500
+     13: HAA    position  0.79340  0.70660  0.79340, charge  1.27500
+     14: HAA    position  0.20660  0.70660  0.20660, charge  1.27500
+     15: HAA    position  0.79340  0.29340  0.20660, charge  1.27500
+     16: HAA    position  0.29340  0.20660  0.79340, charge  1.27500
+     17: HAA    position  0.70660  0.20660  0.20660, charge  1.27500
+     18: HAA    position  0.70660  0.79340  0.79340, charge  1.27500
+     19: HAA    position  0.29340  0.79340  0.20660, charge  1.27500
+     20: HAA    position  0.20660  0.20660  0.70660, charge  1.27500
+     21: HAA    position  0.20660  0.79340  0.29340, charge  1.27500
+     22: HAA    position  0.79340  0.20660  0.29340, charge  1.27500
+     23: HAA    position  0.79340  0.79340  0.70660, charge  1.27500
+     24: HAA    position  0.29340  0.70660  0.70660, charge  1.27500
+     25: HAA    position  0.70660  0.29340  0.70660, charge  1.27500
+     26: HAA    position  0.70660  0.70660  0.29340, charge  1.27500
+     27: HAA    position  0.29340  0.29340  0.29340, charge  1.27500
+     28: HAA    position  0.29340  0.70660  0.29340, charge  1.27500
+     29: HAA    position  0.70660  0.70660  0.70660, charge  1.27500
+     30: HAA    position  0.70660  0.29340  0.29340, charge  1.27500
+     31: HAA    position  0.29340  0.29340  0.70660, charge  1.27500
+     32: HAB    position  0.25000  0.25000  0.25000, charge -1.50000
+     33: HAB    position  0.75000  0.75000  0.25000, charge -1.50000
+     34: HAB    position  0.75000  0.25000  0.75000, charge -1.50000
+     35: HAB    position  0.25000  0.75000  0.75000, charge -1.50000
+     36: HAB    position  0.25000  0.25000  0.75000, charge -1.50000
+     37: HAB    position  0.75000  0.75000  0.75000, charge -1.50000
+     38: HAB    position  0.25000  0.75000  0.25000, charge -1.50000
+     39: HAB    position  0.75000  0.25000  0.25000, charge -1.50000
+     40: HAC    position  0.28190  0.21810  0.13400, charge -0.60000
+     41: HAC    position  0.71810  0.78190  0.13400, charge -0.60000
+     42: HAC    position  0.71810  0.21810  0.86600, charge -0.60000
+     43: HAC    position  0.28190  0.78190  0.86600, charge -0.60000
+     44: HAC    position  0.13400  0.28190  0.21810, charge -0.60000
+     45: HAC    position  0.13400  0.71810  0.78190, charge -0.60000
+     46: HAC    position  0.86600  0.71810  0.21810, charge -0.60000
+     47: HAC    position  0.86600  0.28190  0.78190, charge -0.60000
+     48: HAC    position  0.21810  0.13400  0.28190, charge -0.60000
+     49: HAC    position  0.78190  0.13400  0.71810, charge -0.60000
+     50: HAC    position  0.21810  0.86600  0.71810, charge -0.60000
+     51: HAC    position  0.78190  0.86600  0.28190, charge -0.60000
+     52: HAC    position  0.21810  0.28190  0.86600, charge -0.60000
+     53: HAC    position  0.78190  0.71810  0.86600, charge -0.60000
+     54: HAC    position  0.21810  0.71810  0.13400, charge -0.60000
+     55: HAC    position  0.78190  0.28190  0.13400, charge -0.60000
+     56: HAC    position  0.28190  0.13400  0.78190, charge -0.60000
+     57: HAC    position  0.71810  0.13400  0.21810, charge -0.60000
+     58: HAC    position  0.71810  0.86600  0.78190, charge -0.60000
+     59: HAC    position  0.28190  0.86600  0.21810, charge -0.60000
+     60: HAC    position  0.13400  0.21810  0.71810, charge -0.60000
+     61: HAC    position  0.13400  0.78190  0.28190, charge -0.60000
+     62: HAC    position  0.86600  0.21810  0.28190, charge -0.60000
+     63: HAC    position  0.86600  0.78190  0.71810, charge -0.60000
+     64: HAC    position  0.71810  0.78190  0.86600, charge -0.60000
+     65: HAC    position  0.28190  0.21810  0.86600, charge -0.60000
+     66: HAC    position  0.28190  0.78190  0.13400, charge -0.60000
+     67: HAC    position  0.71810  0.21810  0.13400, charge -0.60000
+     68: HAC    position  0.86600  0.71810  0.78190, charge -0.60000
+     69: HAC    position  0.86600  0.28190  0.21810, charge -0.60000
+     70: HAC    position  0.13400  0.28190  0.78190, charge -0.60000
+     71: HAC    position  0.13400  0.71810  0.21810, charge -0.60000
+     72: HAC    position  0.78190  0.86600  0.71810, charge -0.60000
+     73: HAC    position  0.21810  0.86600  0.28190, charge -0.60000
+     74: HAC    position  0.78190  0.13400  0.28190, charge -0.60000
+     75: HAC    position  0.21810  0.13400  0.71810, charge -0.60000
+     76: HAC    position  0.78190  0.71810  0.13400, charge -0.60000
+     77: HAC    position  0.21810  0.28190  0.13400, charge -0.60000
+     78: HAC    position  0.78190  0.28190  0.86600, charge -0.60000
+     79: HAC    position  0.21810  0.71810  0.86600, charge -0.60000
+     80: HAC    position  0.71810  0.86600  0.21810, charge -0.60000
+     81: HAC    position  0.28190  0.86600  0.78190, charge -0.60000
+     82: HAC    position  0.28190  0.13400  0.21810, charge -0.60000
+     83: HAC    position  0.71810  0.13400  0.78190, charge -0.60000
+     84: HAC    position  0.86600  0.78190  0.28190, charge -0.60000
+     85: HAC    position  0.86600  0.21810  0.71810, charge -0.60000
+     86: HAC    position  0.13400  0.78190  0.71810, charge -0.60000
+     87: HAC    position  0.13400  0.21810  0.28190, charge -0.60000
+     88: HAC    position  0.28190  0.71810  0.63400, charge -0.60000
+     89: HAC    position  0.71810  0.28190  0.63400, charge -0.60000
+     90: HAC    position  0.71810  0.71810  0.36600, charge -0.60000
+     91: HAC    position  0.28190  0.28190  0.36600, charge -0.60000
+     92: HAC    position  0.21810  0.63400  0.78190, charge -0.60000
+     93: HAC    position  0.78190  0.63400  0.21810, charge -0.60000
+     94: HAC    position  0.21810  0.36600  0.21810, charge -0.60000
+     95: HAC    position  0.78190  0.36600  0.78190, charge -0.60000
+     96: HAC    position  0.21810  0.78190  0.36600, charge -0.60000
+     97: HAC    position  0.78190  0.21810  0.36600, charge -0.60000
+     98: HAC    position  0.21810  0.21810  0.63400, charge -0.60000
+     99: HAC    position  0.78190  0.78190  0.63400, charge -0.60000
+    100: HAC    position  0.28190  0.63400  0.28190, charge -0.60000
+    101: HAC    position  0.71810  0.63400  0.71810, charge -0.60000
+    102: HAC    position  0.71810  0.36600  0.28190, charge -0.60000
+    103: HAC    position  0.28190  0.36600  0.71810, charge -0.60000
+    104: HAC    position  0.71810  0.28190  0.36600, charge -0.60000
+    105: HAC    position  0.28190  0.71810  0.36600, charge -0.60000
+    106: HAC    position  0.28190  0.28190  0.63400, charge -0.60000
+    107: HAC    position  0.71810  0.71810  0.63400, charge -0.60000
+    108: HAC    position  0.78190  0.36600  0.21810, charge -0.60000
+    109: HAC    position  0.21810  0.36600  0.78190, charge -0.60000
+    110: HAC    position  0.78190  0.63400  0.78190, charge -0.60000
+    111: HAC    position  0.21810  0.63400  0.21810, charge -0.60000
+    112: HAC    position  0.78190  0.21810  0.63400, charge -0.60000
+    113: HAC    position  0.21810  0.78190  0.63400, charge -0.60000
+    114: HAC    position  0.78190  0.78190  0.36600, charge -0.60000
+    115: HAC    position  0.21810  0.21810  0.36600, charge -0.60000
+    116: HAC    position  0.71810  0.36600  0.71810, charge -0.60000
+    117: HAC    position  0.28190  0.36600  0.28190, charge -0.60000
+    118: HAC    position  0.28190  0.63400  0.71810, charge -0.60000
+    119: HAC    position  0.71810  0.63400  0.28190, charge -0.60000
+    120: HAC    position  0.63400  0.28190  0.71810, charge -0.60000
+    121: HAC    position  0.63400  0.71810  0.28190, charge -0.60000
+    122: HAC    position  0.36600  0.71810  0.71810, charge -0.60000
+    123: HAC    position  0.36600  0.28190  0.28190, charge -0.60000
+    124: HAC    position  0.63400  0.21810  0.21810, charge -0.60000
+    125: HAC    position  0.63400  0.78190  0.78190, charge -0.60000
+    126: HAC    position  0.36600  0.21810  0.78190, charge -0.60000
+    127: HAC    position  0.36600  0.78190  0.21810, charge -0.60000
+    128: HAC    position  0.36600  0.71810  0.28190, charge -0.60000
+    129: HAC    position  0.36600  0.28190  0.71810, charge -0.60000
+    130: HAC    position  0.63400  0.28190  0.28190, charge -0.60000
+    131: HAC    position  0.63400  0.71810  0.71810, charge -0.60000
+    132: HAC    position  0.36600  0.78190  0.78190, charge -0.60000
+    133: HAC    position  0.36600  0.21810  0.21810, charge -0.60000
+    134: HAC    position  0.63400  0.78190  0.21810, charge -0.60000
+    135: HAC    position  0.63400  0.21810  0.78190, charge -0.60000
+    136: HAD    position  0.25000  0.25000  0.11130, charge  0.47500
+    137: HAD    position  0.75000  0.75000  0.11130, charge  0.47500
+    138: HAD    position  0.75000  0.25000  0.88870, charge  0.47500
+    139: HAD    position  0.25000  0.75000  0.88870, charge  0.47500
+    140: HAD    position  0.11130  0.25000  0.25000, charge  0.47500
+    141: HAD    position  0.11130  0.75000  0.75000, charge  0.47500
+    142: HAD    position  0.88870  0.75000  0.25000, charge  0.47500
+    143: HAD    position  0.88870  0.25000  0.75000, charge  0.47500
+    144: HAD    position  0.25000  0.11130  0.25000, charge  0.47500
+    145: HAD    position  0.75000  0.11130  0.75000, charge  0.47500
+    146: HAD    position  0.25000  0.88870  0.75000, charge  0.47500
+    147: HAD    position  0.75000  0.88870  0.25000, charge  0.47500
+    148: HAD    position  0.25000  0.25000  0.88870, charge  0.47500
+    149: HAD    position  0.75000  0.75000  0.88870, charge  0.47500
+    150: HAD    position  0.25000  0.75000  0.11130, charge  0.47500
+    151: HAD    position  0.75000  0.25000  0.11130, charge  0.47500
+    152: HAD    position  0.25000  0.11130  0.75000, charge  0.47500
+    153: HAD    position  0.75000  0.11130  0.25000, charge  0.47500
+    154: HAD    position  0.75000  0.88870  0.75000, charge  0.47500
+    155: HAD    position  0.25000  0.88870  0.25000, charge  0.47500
+    156: HAD    position  0.11130  0.25000  0.75000, charge  0.47500
+    157: HAD    position  0.11130  0.75000  0.25000, charge  0.47500
+    158: HAD    position  0.88870  0.25000  0.25000, charge  0.47500
+    159: HAD    position  0.88870  0.75000  0.75000, charge  0.47500
+    160: HAD    position  0.25000  0.75000  0.61130, charge  0.47500
+    161: HAD    position  0.75000  0.25000  0.61130, charge  0.47500
+    162: HAD    position  0.75000  0.75000  0.38870, charge  0.47500
+    163: HAD    position  0.25000  0.25000  0.38870, charge  0.47500
+    164: HAD    position  0.25000  0.61130  0.75000, charge  0.47500
+    165: HAD    position  0.75000  0.61130  0.25000, charge  0.47500
+    166: HAD    position  0.25000  0.38870  0.25000, charge  0.47500
+    167: HAD    position  0.75000  0.38870  0.75000, charge  0.47500
+    168: HAD    position  0.25000  0.75000  0.38870, charge  0.47500
+    169: HAD    position  0.75000  0.25000  0.38870, charge  0.47500
+    170: HAD    position  0.25000  0.25000  0.61130, charge  0.47500
+    171: HAD    position  0.75000  0.75000  0.61130, charge  0.47500
+    172: HAD    position  0.25000  0.61130  0.25000, charge  0.47500
+    173: HAD    position  0.75000  0.61130  0.75000, charge  0.47500
+    174: HAD    position  0.75000  0.38870  0.25000, charge  0.47500
+    175: HAD    position  0.25000  0.38870  0.75000, charge  0.47500
+    176: HAD    position  0.61130  0.25000  0.75000, charge  0.47500
+    177: HAD    position  0.61130  0.75000  0.25000, charge  0.47500
+    178: HAD    position  0.38870  0.75000  0.75000, charge  0.47500
+    179: HAD    position  0.38870  0.25000  0.25000, charge  0.47500
+    180: HAD    position  0.61130  0.25000  0.25000, charge  0.47500
+    181: HAD    position  0.61130  0.75000  0.75000, charge  0.47500
+    182: HAD    position  0.38870  0.25000  0.75000, charge  0.47500
+    183: HAD    position  0.38870  0.75000  0.25000, charge  0.47500
+    184: HAE    position  0.25000  0.25000  0.05380, charge  0.12500
+    185: HAE    position  0.75000  0.75000  0.05380, charge  0.12500
+    186: HAE    position  0.75000  0.25000  0.94620, charge  0.12500
+    187: HAE    position  0.25000  0.75000  0.94620, charge  0.12500
+    188: HAE    position  0.05380  0.25000  0.25000, charge  0.12500
+    189: HAE    position  0.05380  0.75000  0.75000, charge  0.12500
+    190: HAE    position  0.94620  0.75000  0.25000, charge  0.12500
+    191: HAE    position  0.94620  0.25000  0.75000, charge  0.12500
+    192: HAE    position  0.25000  0.05380  0.25000, charge  0.12500
+    193: HAE    position  0.75000  0.05380  0.75000, charge  0.12500
+    194: HAE    position  0.25000  0.94620  0.75000, charge  0.12500
+    195: HAE    position  0.75000  0.94620  0.25000, charge  0.12500
+    196: HAE    position  0.25000  0.25000  0.94620, charge  0.12500
+    197: HAE    position  0.75000  0.75000  0.94620, charge  0.12500
+    198: HAE    position  0.25000  0.75000  0.05380, charge  0.12500
+    199: HAE    position  0.75000  0.25000  0.05380, charge  0.12500
+    200: HAE    position  0.25000  0.05380  0.75000, charge  0.12500
+    201: HAE    position  0.75000  0.05380  0.25000, charge  0.12500
+    202: HAE    position  0.75000  0.94620  0.75000, charge  0.12500
+    203: HAE    position  0.25000  0.94620  0.25000, charge  0.12500
+    204: HAE    position  0.05380  0.25000  0.75000, charge  0.12500
+    205: HAE    position  0.05380  0.75000  0.25000, charge  0.12500
+    206: HAE    position  0.94620  0.25000  0.25000, charge  0.12500
+    207: HAE    position  0.94620  0.75000  0.75000, charge  0.12500
+    208: HAE    position  0.25000  0.75000  0.55380, charge  0.12500
+    209: HAE    position  0.75000  0.25000  0.55380, charge  0.12500
+    210: HAE    position  0.75000  0.75000  0.44620, charge  0.12500
+    211: HAE    position  0.25000  0.25000  0.44620, charge  0.12500
+    212: HAE    position  0.25000  0.55380  0.75000, charge  0.12500
+    213: HAE    position  0.75000  0.55380  0.25000, charge  0.12500
+    214: HAE    position  0.25000  0.44620  0.25000, charge  0.12500
+    215: HAE    position  0.75000  0.44620  0.75000, charge  0.12500
+    216: HAE    position  0.25000  0.75000  0.44620, charge  0.12500
+    217: HAE    position  0.75000  0.25000  0.44620, charge  0.12500
+    218: HAE    position  0.25000  0.25000  0.55380, charge  0.12500
+    219: HAE    position  0.75000  0.75000  0.55380, charge  0.12500
+    220: HAE    position  0.25000  0.55380  0.25000, charge  0.12500
+    221: HAE    position  0.75000  0.55380  0.75000, charge  0.12500
+    222: HAE    position  0.75000  0.44620  0.25000, charge  0.12500
+    223: HAE    position  0.25000  0.44620  0.75000, charge  0.12500
+    224: HAE    position  0.55380  0.25000  0.75000, charge  0.12500
+    225: HAE    position  0.55380  0.75000  0.25000, charge  0.12500
+    226: HAE    position  0.44620  0.75000  0.75000, charge  0.12500
+    227: HAE    position  0.44620  0.25000  0.25000, charge  0.12500
+    228: HAE    position  0.55380  0.25000  0.25000, charge  0.12500
+    229: HAE    position  0.55380  0.75000  0.75000, charge  0.12500
+    230: HAE    position  0.44620  0.25000  0.75000, charge  0.12500
+    231: HAE    position  0.44620  0.75000  0.25000, charge  0.12500
+    232: HAF    position  0.28290  0.21710  0.02690, charge -0.15000
+    233: HAF    position  0.71710  0.78290  0.02690, charge -0.15000
+    234: HAF    position  0.71710  0.21710  0.97310, charge -0.15000
+    235: HAF    position  0.28290  0.78290  0.97310, charge -0.15000
+    236: HAF    position  0.02690  0.28290  0.21710, charge -0.15000
+    237: HAF    position  0.02690  0.71710  0.78290, charge -0.15000
+    238: HAF    position  0.97310  0.71710  0.21710, charge -0.15000
+    239: HAF    position  0.97310  0.28290  0.78290, charge -0.15000
+    240: HAF    position  0.21710  0.02690  0.28290, charge -0.15000
+    241: HAF    position  0.78290  0.02690  0.71710, charge -0.15000
+    242: HAF    position  0.21710  0.97310  0.71710, charge -0.15000
+    243: HAF    position  0.78290  0.97310  0.28290, charge -0.15000
+    244: HAF    position  0.21710  0.28290  0.97310, charge -0.15000
+    245: HAF    position  0.78290  0.71710  0.97310, charge -0.15000
+    246: HAF    position  0.21710  0.71710  0.02690, charge -0.15000
+    247: HAF    position  0.78290  0.28290  0.02690, charge -0.15000
+    248: HAF    position  0.28290  0.02690  0.78290, charge -0.15000
+    249: HAF    position  0.71710  0.02690  0.21710, charge -0.15000
+    250: HAF    position  0.71710  0.97310  0.78290, charge -0.15000
+    251: HAF    position  0.28290  0.97310  0.21710, charge -0.15000
+    252: HAF    position  0.02690  0.21710  0.71710, charge -0.15000
+    253: HAF    position  0.02690  0.78290  0.28290, charge -0.15000
+    254: HAF    position  0.97310  0.21710  0.28290, charge -0.15000
+    255: HAF    position  0.97310  0.78290  0.71710, charge -0.15000
+    256: HAF    position  0.71710  0.78290  0.97310, charge -0.15000
+    257: HAF    position  0.28290  0.21710  0.97310, charge -0.15000
+    258: HAF    position  0.28290  0.78290  0.02690, charge -0.15000
+    259: HAF    position  0.71710  0.21710  0.02690, charge -0.15000
+    260: HAF    position  0.97310  0.71710  0.78290, charge -0.15000
+    261: HAF    position  0.97310  0.28290  0.21710, charge -0.15000
+    262: HAF    position  0.02690  0.28290  0.78290, charge -0.15000
+    263: HAF    position  0.02690  0.71710  0.21710, charge -0.15000
+    264: HAF    position  0.78290  0.97310  0.71710, charge -0.15000
+    265: HAF    position  0.21710  0.97310  0.28290, charge -0.15000
+    266: HAF    position  0.78290  0.02690  0.28290, charge -0.15000
+    267: HAF    position  0.21710  0.02690  0.71710, charge -0.15000
+    268: HAF    position  0.78290  0.71710  0.02690, charge -0.15000
+    269: HAF    position  0.21710  0.28290  0.02690, charge -0.15000
+    270: HAF    position  0.78290  0.28290  0.97310, charge -0.15000
+    271: HAF    position  0.21710  0.71710  0.97310, charge -0.15000
+    272: HAF    position  0.71710  0.97310  0.21710, charge -0.15000
+    273: HAF    position  0.28290  0.97310  0.78290, charge -0.15000
+    274: HAF    position  0.28290  0.02690  0.21710, charge -0.15000
+    275: HAF    position  0.71710  0.02690  0.78290, charge -0.15000
+    276: HAF    position  0.97310  0.78290  0.28290, charge -0.15000
+    277: HAF    position  0.97310  0.21710  0.71710, charge -0.15000
+    278: HAF    position  0.02690  0.78290  0.71710, charge -0.15000
+    279: HAF    position  0.02690  0.21710  0.28290, charge -0.15000
+    280: HAF    position  0.28290  0.71710  0.52690, charge -0.15000
+    281: HAF    position  0.71710  0.28290  0.52690, charge -0.15000
+    282: HAF    position  0.71710  0.71710  0.47310, charge -0.15000
+    283: HAF    position  0.28290  0.28290  0.47310, charge -0.15000
+    284: HAF    position  0.21710  0.52690  0.78290, charge -0.15000
+    285: HAF    position  0.78290  0.52690  0.21710, charge -0.15000
+    286: HAF    position  0.21710  0.47310  0.21710, charge -0.15000
+    287: HAF    position  0.78290  0.47310  0.78290, charge -0.15000
+    288: HAF    position  0.21710  0.78290  0.47310, charge -0.15000
+    289: HAF    position  0.78290  0.21710  0.47310, charge -0.15000
+    290: HAF    position  0.21710  0.21710  0.52690, charge -0.15000
+    291: HAF    position  0.78290  0.78290  0.52690, charge -0.15000
+    292: HAF    position  0.28290  0.52690  0.28290, charge -0.15000
+    293: HAF    position  0.71710  0.52690  0.71710, charge -0.15000
+    294: HAF    position  0.71710  0.47310  0.28290, charge -0.15000
+    295: HAF    position  0.28290  0.47310  0.71710, charge -0.15000
+    296: HAF    position  0.71710  0.28290  0.47310, charge -0.15000
+    297: HAF    position  0.28290  0.71710  0.47310, charge -0.15000
+    298: HAF    position  0.28290  0.28290  0.52690, charge -0.15000
+    299: HAF    position  0.71710  0.71710  0.52690, charge -0.15000
+    300: HAF    position  0.78290  0.47310  0.21710, charge -0.15000
+    301: HAF    position  0.21710  0.47310  0.78290, charge -0.15000
+    302: HAF    position  0.78290  0.52690  0.78290, charge -0.15000
+    303: HAF    position  0.21710  0.52690  0.21710, charge -0.15000
+    304: HAF    position  0.78290  0.21710  0.52690, charge -0.15000
+    305: HAF    position  0.21710  0.78290  0.52690, charge -0.15000
+    306: HAF    position  0.78290  0.78290  0.47310, charge -0.15000
+    307: HAF    position  0.21710  0.21710  0.47310, charge -0.15000
+    308: HAF    position  0.71710  0.47310  0.71710, charge -0.15000
+    309: HAF    position  0.28290  0.47310  0.28290, charge -0.15000
+    310: HAF    position  0.28290  0.52690  0.71710, charge -0.15000
+    311: HAF    position  0.71710  0.52690  0.28290, charge -0.15000
+    312: HAF    position  0.52690  0.28290  0.71710, charge -0.15000
+    313: HAF    position  0.52690  0.71710  0.28290, charge -0.15000
+    314: HAF    position  0.47310  0.71710  0.71710, charge -0.15000
+    315: HAF    position  0.47310  0.28290  0.28290, charge -0.15000
+    316: HAF    position  0.52690  0.21710  0.21710, charge -0.15000
+    317: HAF    position  0.52690  0.78290  0.78290, charge -0.15000
+    318: HAF    position  0.47310  0.21710  0.78290, charge -0.15000
+    319: HAF    position  0.47310  0.78290  0.21710, charge -0.15000
+    320: HAF    position  0.47310  0.71710  0.28290, charge -0.15000
+    321: HAF    position  0.47310  0.28290  0.71710, charge -0.15000
+    322: HAF    position  0.52690  0.28290  0.28290, charge -0.15000
+    323: HAF    position  0.52690  0.71710  0.71710, charge -0.15000
+    324: HAF    position  0.47310  0.78290  0.78290, charge -0.15000
+    325: HAF    position  0.47310  0.21710  0.21710, charge -0.15000
+    326: HAF    position  0.52690  0.78290  0.21710, charge -0.15000
+    327: HAF    position  0.52690  0.21710  0.78290, charge -0.15000
+    328: HAG    position  0.30490  0.19510  0.04480, charge  0.15000
+    329: HAG    position  0.69510  0.80490  0.04480, charge  0.15000
+    330: HAG    position  0.69510  0.19510  0.95520, charge  0.15000
+    331: HAG    position  0.30490  0.80490  0.95520, charge  0.15000
+    332: HAG    position  0.04480  0.30490  0.19510, charge  0.15000
+    333: HAG    position  0.04480  0.69510  0.80490, charge  0.15000
+    334: HAG    position  0.95520  0.69510  0.19510, charge  0.15000
+    335: HAG    position  0.95520  0.30490  0.80490, charge  0.15000
+    336: HAG    position  0.19510  0.04480  0.30490, charge  0.15000
+    337: HAG    position  0.80490  0.04480  0.69510, charge  0.15000
+    338: HAG    position  0.19510  0.95520  0.69510, charge  0.15000
+    339: HAG    position  0.80490  0.95520  0.30490, charge  0.15000
+    340: HAG    position  0.19510  0.30490  0.95520, charge  0.15000
+    341: HAG    position  0.80490  0.69510  0.95520, charge  0.15000
+    342: HAG    position  0.19510  0.69510  0.04480, charge  0.15000
+    343: HAG    position  0.80490  0.30490  0.04480, charge  0.15000
+    344: HAG    position  0.30490  0.04480  0.80490, charge  0.15000
+    345: HAG    position  0.69510  0.04480  0.19510, charge  0.15000
+    346: HAG    position  0.69510  0.95520  0.80490, charge  0.15000
+    347: HAG    position  0.30490  0.95520  0.19510, charge  0.15000
+    348: HAG    position  0.04480  0.19510  0.69510, charge  0.15000
+    349: HAG    position  0.04480  0.80490  0.30490, charge  0.15000
+    350: HAG    position  0.95520  0.19510  0.30490, charge  0.15000
+    351: HAG    position  0.95520  0.80490  0.69510, charge  0.15000
+    352: HAG    position  0.69510  0.80490  0.95520, charge  0.15000
+    353: HAG    position  0.30490  0.19510  0.95520, charge  0.15000
+    354: HAG    position  0.30490  0.80490  0.04480, charge  0.15000
+    355: HAG    position  0.69510  0.19510  0.04480, charge  0.15000
+    356: HAG    position  0.95520  0.69510  0.80490, charge  0.15000
+    357: HAG    position  0.95520  0.30490  0.19510, charge  0.15000
+    358: HAG    position  0.04480  0.30490  0.80490, charge  0.15000
+    359: HAG    position  0.04480  0.69510  0.19510, charge  0.15000
+    360: HAG    position  0.80490  0.95520  0.69510, charge  0.15000
+    361: HAG    position  0.19510  0.95520  0.30490, charge  0.15000
+    362: HAG    position  0.80490  0.04480  0.30490, charge  0.15000
+    363: HAG    position  0.19510  0.04480  0.69510, charge  0.15000
+    364: HAG    position  0.80490  0.69510  0.04480, charge  0.15000
+    365: HAG    position  0.19510  0.30490  0.04480, charge  0.15000
+    366: HAG    position  0.80490  0.30490  0.95520, charge  0.15000
+    367: HAG    position  0.19510  0.69510  0.95520, charge  0.15000
+    368: HAG    position  0.69510  0.95520  0.19510, charge  0.15000
+    369: HAG    position  0.30490  0.95520  0.80490, charge  0.15000
+    370: HAG    position  0.30490  0.04480  0.19510, charge  0.15000
+    371: HAG    position  0.69510  0.04480  0.80490, charge  0.15000
+    372: HAG    position  0.95520  0.80490  0.30490, charge  0.15000
+    373: HAG    position  0.95520  0.19510  0.69510, charge  0.15000
+    374: HAG    position  0.04480  0.80490  0.69510, charge  0.15000
+    375: HAG    position  0.04480  0.19510  0.30490, charge  0.15000
+    376: HAG    position  0.30490  0.69510  0.54480, charge  0.15000
+    377: HAG    position  0.69510  0.30490  0.54480, charge  0.15000
+    378: HAG    position  0.69510  0.69510  0.45520, charge  0.15000
+    379: HAG    position  0.30490  0.30490  0.45520, charge  0.15000
+    380: HAG    position  0.19510  0.54480  0.80490, charge  0.15000
+    381: HAG    position  0.80490  0.54480  0.19510, charge  0.15000
+    382: HAG    position  0.19510  0.45520  0.19510, charge  0.15000
+    383: HAG    position  0.80490  0.45520  0.80490, charge  0.15000
+    384: HAG    position  0.19510  0.80490  0.45520, charge  0.15000
+    385: HAG    position  0.80490  0.19510  0.45520, charge  0.15000
+    386: HAG    position  0.19510  0.19510  0.54480, charge  0.15000
+    387: HAG    position  0.80490  0.80490  0.54480, charge  0.15000
+    388: HAG    position  0.30490  0.54480  0.30490, charge  0.15000
+    389: HAG    position  0.69510  0.54480  0.69510, charge  0.15000
+    390: HAG    position  0.69510  0.45520  0.30490, charge  0.15000
+    391: HAG    position  0.30490  0.45520  0.69510, charge  0.15000
+    392: HAG    position  0.69510  0.30490  0.45520, charge  0.15000
+    393: HAG    position  0.30490  0.69510  0.45520, charge  0.15000
+    394: HAG    position  0.30490  0.30490  0.54480, charge  0.15000
+    395: HAG    position  0.69510  0.69510  0.54480, charge  0.15000
+    396: HAG    position  0.80490  0.45520  0.19510, charge  0.15000
+    397: HAG    position  0.19510  0.45520  0.80490, charge  0.15000
+    398: HAG    position  0.80490  0.54480  0.80490, charge  0.15000
+    399: HAG    position  0.19510  0.54480  0.19510, charge  0.15000
+    400: HAG    position  0.80490  0.19510  0.54480, charge  0.15000
+    401: HAG    position  0.19510  0.80490  0.54480, charge  0.15000
+    402: HAG    position  0.80490  0.80490  0.45520, charge  0.15000
+    403: HAG    position  0.19510  0.19510  0.45520, charge  0.15000
+    404: HAG    position  0.69510  0.45520  0.69510, charge  0.15000
+    405: HAG    position  0.30490  0.45520  0.30490, charge  0.15000
+    406: HAG    position  0.30490  0.54480  0.69510, charge  0.15000
+    407: HAG    position  0.69510  0.54480  0.30490, charge  0.15000
+    408: HAG    position  0.54480  0.30490  0.69510, charge  0.15000
+    409: HAG    position  0.54480  0.69510  0.30490, charge  0.15000
+    410: HAG    position  0.45520  0.69510  0.69510, charge  0.15000
+    411: HAG    position  0.45520  0.30490  0.30490, charge  0.15000
+    412: HAG    position  0.54480  0.19510  0.19510, charge  0.15000
+    413: HAG    position  0.54480  0.80490  0.80490, charge  0.15000
+    414: HAG    position  0.45520  0.19510  0.80490, charge  0.15000
+    415: HAG    position  0.45520  0.80490  0.19510, charge  0.15000
+    416: HAG    position  0.45520  0.69510  0.30490, charge  0.15000
+    417: HAG    position  0.45520  0.30490  0.69510, charge  0.15000
+    418: HAG    position  0.54480  0.30490  0.30490, charge  0.15000
+    419: HAG    position  0.54480  0.69510  0.69510, charge  0.15000
+    420: HAG    position  0.45520  0.80490  0.80490, charge  0.15000
+    421: HAG    position  0.45520  0.19510  0.19510, charge  0.15000
+    422: HAG    position  0.54480  0.80490  0.19510, charge  0.15000
+    423: HAG    position  0.54480  0.19510  0.80490, charge  0.15000
+    net charge:                     -0.00000 [e]
+    smallest charge:                -1.50000 [e]
+    largest charge:                  1.27500 [e]
+    number of bonds: 0
+
+Component 0 [CO2]
+
+    Type: Adsorbate
+
+    Critical temperature:  400 [K]
+    Critical pressure:     5e+06 [Pa]
+    Acentric factor:       0.2 [-]
+
+    Mol-fraction:                 0.25 [-]
+    Swappable:                   true
+
+    Mass:                         43.9988 [-]
+    Fugacity:                     50000 [Pa]
+    Fugacity coefficient:         1 [-]
+    Bulk fluid density:           0.9143334189175678 [-]
+    Compressibility:              0.964607607605105 [-]
+    Excess molecules:             0.21571922385881923 [-]
+
+    Number Of Atoms:              3
+    CBMC starting bead:           0
+    Ideal gas Rosenbluth weight:  1.00000000
+      0: A000   position  0.00000 -0.00000  1.14900, charge -0.32560
+      1: A001   position  0.00000 -0.00000  0.00000, charge  0.65120
+      2: A002   position  0.00000 -0.00000 -1.14900, charge -0.32560
+    Diagonalized inertia-vector:      38.72483984 38.72483984 0.00000000
+    Translational degrees of freedom: 3
+    Rotational degrees of freedom:    2
+    Shape of the molecule is: 'Linear'
+    Net-charge:        0.00000000 [e]
+
+    Move probabilities:
+    Translation:                   0.200000 [-]
+    Random translation:            0.000000 [-]
+    Rotation:                      0.100000 [-]
+    Random rotation:               0.000000 [-]
+    Volume change:                 0.000000 [-]
+    Reinsertion (CBMC):            0.200000 [-]
+    Partial reinsertion (CBMC):    0.000000 [-]
+    Identity change (CBMC):        0.000000 [-]
+    Swap:                          0.000000 [-]
+    Swap (CBMC):                   0.000000 [-]
+    Swap (CFCMC):                  0.000000 [-]
+    Swap (CB/CFCMC):               0.500000 [-]
+    Gibbs volume:                  0.000000 [-]
+    Gibbs swap (CBMC):             0.000000 [-]
+    Gibbs swap (CFCMC):            0.000000 [-]
+    Widom:                         0.000000 [-]
+    Widom (CFCMC):                 0.000000 [-]
+    Widom (CB/CFCMC):              0.000000 [-]
+    Parallel tempering:            0.000000 [-]
+    Hybrid MC:                     0.000000 [-]
+
+    number of blocking-pockets: 0
+
+    molecule is modelled as 'rigid'
+
+Component 1 [methane]
+
+    Type: Adsorbate
+
+    Critical temperature:  400 [K]
+    Critical pressure:     5e+06 [Pa]
+    Acentric factor:       0.2 [-]
+
+    Mol-fraction:                 0.75 [-]
+    Swappable:                   true
+
+    Mass:                         16.04246 [-]
+    Fugacity:                     150000 [Pa]
+    Fugacity coefficient:         1 [-]
+    Bulk fluid density:           1.0001289103099396 [-]
+    Compressibility:              0.964607607605105 [-]
+    Excess molecules:             0.6471576715764576 [-]
+
+    Number Of Atoms:              1
+    CBMC starting bead:           0
+    Ideal gas Rosenbluth weight:  1.00000000
+      0: B000   position  0.00000 -0.00000  0.00000, charge  0.00000
+    Diagonalized inertia-vector:      0.00000000 0.00000000 0.00000000
+    Translational degrees of freedom: 3
+    Rotational degrees of freedom:    0
+    Net-charge:        0.00000000 [e]
+
+    Move probabilities:
+    Translation:                   0.200000 [-]
+    Random translation:            0.000000 [-]
+    Rotation:                      0.100000 [-]
+    Random rotation:               0.000000 [-]
+    Volume change:                 0.000000 [-]
+    Reinsertion (CBMC):            0.200000 [-]
+    Partial reinsertion (CBMC):    0.000000 [-]
+    Identity change (CBMC):        0.000000 [-]
+    Swap:                          0.000000 [-]
+    Swap (CBMC):                   0.000000 [-]
+    Swap (CFCMC):                  0.000000 [-]
+    Swap (CB/CFCMC):               0.500000 [-]
+    Gibbs volume:                  0.000000 [-]
+    Gibbs swap (CBMC):             0.000000 [-]
+    Gibbs swap (CFCMC):            0.000000 [-]
+    Widom:                         0.000000 [-]
+    Widom (CFCMC):                 0.000000 [-]
+    Widom (CB/CFCMC):              0.000000 [-]
+    Parallel tempering:            0.000000 [-]
+    Hybrid MC:                     0.000000 [-]
+
+    number of blocking-pockets: 0
+
+    molecule is modelled as 'rigid'
+
+
+
+
+
+Number of pseudo-atoms
+===============================================================================
+
+Component   0 (CO2)
+-------------------------------------------------------------------------------
+    index   0 (HAA): 0 atoms
+    index   1 (HAB): 0 atoms
+    index   2 (HAC): 0 atoms
+    index   3 (HAD): 0 atoms
+    index   4 (HAE): 0 atoms
+    index   5 (HAF): 0 atoms
+    index   6 (HAG): 0 atoms
+    index   7 (A000): 0 atoms
+    index   8 (A001): 0 atoms
+    index   9 (A002): 0 atoms
+    index  10 (B000): 0 atoms
+
+Component   1 (methane)
+-------------------------------------------------------------------------------
+    index   0 (HAA): 0 atoms
+    index   1 (HAB): 0 atoms
+    index   2 (HAC): 0 atoms
+    index   3 (HAD): 0 atoms
+    index   4 (HAE): 0 atoms
+    index   5 (HAF): 0 atoms
+    index   6 (HAG): 0 atoms
+    index   7 (A000): 0 atoms
+    index   8 (A001): 0 atoms
+    index   9 (A002): 0 atoms
+    index  10 (B000): 0 atoms
+
+Total number of pseudo-atoms:
+-------------------------------------------------------------------------------
+    index   0 (HAA): 0 atoms
+    index   1 (HAB): 0 atoms
+    index   2 (HAC): 0 atoms
+    index   3 (HAD): 0 atoms
+    index   4 (HAE): 0 atoms
+    index   5 (HAF): 0 atoms
+    index   6 (HAG): 0 atoms
+    index   7 (A000): 0 atoms
+    index   8 (A001): 0 atoms
+    index   9 (A002): 0 atoms
+    index  10 (B000): 0 atoms
+
+
+
+
+Energy status Recomputed from scratch
+===============================================================================
+
+Total potential energy/kʙ        1.401373e-15 [K]
+    external field VDW/kʙ        0.000000e+00 [K]
+    external field Real/kʙ       0.000000e+00 [K]
+    framework-molecule VDW/kʙ    0.000000e+00 [K]
+    framework-molecule Real/kʙ   0.000000e+00 [K]
+    molecule-molecule VDW/kʙ     0.000000e+00 [K]
+    molecule-molecule Real/kʙ    0.000000e+00 [K]
+    Van der Waals (Tail)/kʙ      0.000000e+00 [K]
+    Ewald Fourier/kʙ             1.401373e-15 [K]
+    Ewald self/kʙ                0.000000e+00 [K]
+    Ewald exclusion/kʙ           0.000000e+00 [K]
+    bond/kʙ                      0.000000e+00 [K]
+    Urey-Bradley/kʙ              0.000000e+00 [K]
+    bend/kʙ                      0.000000e+00 [K]
+    inversion bend/kʙ            0.000000e+00 [K]
+    out-of-plane bend/kʙ         0.000000e+00 [K]
+    torsion/kʙ                   0.000000e+00 [K]
+    improper torsion/kʙ          0.000000e+00 [K]
+    bond-bond/kʙ                 0.000000e+00 [K]
+    bond-bend/kʙ                 0.000000e+00 [K]
+    bond-torsion/kʙ              0.000000e+00 [K]
+    bend-bend/kʙ                 0.000000e+00 [K]
+    bend-torsion/kʙ              0.000000e+00 [K]
+    intra VDW/kʙ                 0.000000e+00 [K]
+    intra Coulombic/kʙ           0.000000e+00 [K]
+    polarization/kʙ              0.000000e+00 [K]
+    dU/dlambda VDW/kʙ            0.000000e+00 [K]
+    dU/dlambda Real/kʙ           0.000000e+00 [K]
+    dU/dlambda Ewald/kʙ          0.000000e+00 [K]
+
+
+
+
+
+Initialization: Current cycle: 0 out of 5000
+===============================================================================
+
+Box:      25.83200   0.00000   0.00000
+           0.00000  25.83200   0.00000
+           0.00000   0.00000  25.83200
+Lengths:  25.83200  25.83200  25.83200
+Angles:   90.00000  90.00000  90.00000
+Rectangular boundary conditions
+Perpendicular widths:   25.83200  25.83200  25.83200
+
+
+Net charge:  -0.00000000
+Cutoff Coulomb:  12.00000 [Å]
+Ewald alpha: 0.25
+Ewald k-vectors: 7 7 7
+
+
+component   0 (CO2) lambda:  0 occupancy:  1 (1.000000)
+    net charge:   0.00000000 [e]
+component   1 (methane) lambda:  0 occupancy:  1 (1.000000)
+    net charge:   0.00000000 [e]
+
+Amount of molecules per component:
+-------------------------------------------------------------------------------
+Component 0 (CO2)
+    absolute adsorption:  1.000000e+00 molecules
+                          1.000000e+00 molecules/uc
+                          1.963658e-01 mol/kg-framework
+                          8.639859e+00 mg/g-framework
+    excess adsorption:    7.842808e-01 molecules
+                          7.842808e-01 molecules/uc
+                          1.540059e-01 mol/kg-framework
+                          6.776075e+00 mg/g-framework
+Component 1 (methane)
+    absolute adsorption:  4.000000e+00 molecules
+                          4.000000e+00 molecules/uc
+                          7.854632e-01 mol/kg-framework
+                          1.260076e+01 mg/g-framework
+    excess adsorption:    3.352842e+00 molecules
+                          3.352842e+00 molecules/uc
+                          6.583835e-01 mol/kg-framework
+                          1.056209e+01 mg/g-framework
+
+Total potential energy/kʙ       -4.168224e+03 [K]
+-------------------------------------------------------------------------------
+    external field VDW/kʙ        0.000000e+00 [K]
+    external field Real/kʙ       0.000000e+00 [K]
+    framework-molecule VDW/kʙ   -4.098642e+03 [K]
+    framework-molecule Real/kʙ   4.486580e+01 [K]
+    molecule-molecule VDW/kʙ    -8.598534e+01 [K]
+    molecule-molecule Real/kʙ    0.000000e+00 [K]
+    Van der Waals (Tail)/kʙ      0.000000e+00 [K]
+    Ewald Fourier/kʙ             8.611422e+00 [K]
+    Ewald self/kʙ               -1.499217e+04 [K]
+    Ewald exclusion/kʙ           1.495509e+04 [K]
+    polarization/kʙ              0.000000e+00 [K]
+    dU/dlambda VDW/kʙ            0.000000e+00 [K]
+    dU/dlambda Real/kʙ           0.000000e+00 [K]
+    dU/dlambda Ewald/kʙ          0.000000e+00 [K]
+
+
+Equilibration: Current cycle: 0 out of 10000
+===============================================================================
+
+Box:      25.83200   0.00000   0.00000
+           0.00000  25.83200   0.00000
+           0.00000   0.00000  25.83200
+Lengths:  25.83200  25.83200  25.83200
+Angles:   90.00000  90.00000  90.00000
+Rectangular boundary conditions
+Perpendicular widths:   25.83200  25.83200  25.83200
+
+
+Net charge:  -0.00000000
+Cutoff Coulomb:  12.00000 [Å]
+Ewald alpha: 0.25
+Ewald k-vectors: 7 7 7
+
+
+component 0 (CO2) lambda:  0.9 occupancy:  1 (1.000000)
+    net charge:   0.00000000 [e]
+component 1 (methane) lambda:  0.45 occupancy:  1 (1.000000)
+    net charge:   0.00000000 [e]
+
+Amount of molecules per component:
+-------------------------------------------------------------------------------
+Component 0 (CO2)
+    absolute adsorption:  3.000000e+00 molecules
+                          3.000000e+00 molecules/uc
+                          5.890974e-01 mol/kg-framework
+                          2.591958e+01 mg/g-framework
+    excess adsorption:    2.784281e+00 molecules
+                          2.784281e+00 molecules/uc
+                          5.467375e-01 mol/kg-framework
+                          2.405579e+01 mg/g-framework
+Component 1 (methane)
+    absolute adsorption:  2.000000e+00 molecules
+                          2.000000e+00 molecules/uc
+                          3.927316e-01 mol/kg-framework
+                          6.300381e+00 mg/g-framework
+    excess adsorption:    1.352842e+00 molecules
+                          1.352842e+00 molecules/uc
+                          2.656519e-01 mol/kg-framework
+                          4.261711e+00 mg/g-framework
+
+Total potential energy/kʙ       -9.371348e+03 [K]
+-------------------------------------------------------------------------------
+    external field VDW/kʙ        0.000000e+00 [K]
+    external field Real/kʙ       0.000000e+00 [K]
+    framework-molecule VDW/kʙ   -8.617914e+03 [K]
+    framework-molecule Real/kʙ  -5.812627e+02 [K]
+    molecule-molecule VDW/kʙ    -5.389586e+01 [K]
+    molecule-molecule Real/kʙ    7.294514e+00 [K]
+    Van der Waals (Tail)/kʙ      0.000000e+00 [K]
+    Ewald Fourier/kʙ             1.849415e+01 [K]
+    Ewald self/kʙ               -5.825675e+04 [K]
+    Ewald exclusion/kʙ           5.811269e+04 [K]
+    polarization/kʙ              0.000000e+00 [K]
+    dU/dlambda VDW/kʙ            0.000000e+00 [K]
+    dU/dlambda Real/kʙ           0.000000e+00 [K]
+    dU/dlambda Ewald/kʙ          0.000000e+00 [K]
+
+
+Equilibration: Current cycle: 7500 out of 10000
+===============================================================================
+
+Box:      25.83200   0.00000   0.00000
+           0.00000  25.83200   0.00000
+           0.00000   0.00000  25.83200
+Lengths:  25.83200  25.83200  25.83200
+Angles:   90.00000  90.00000  90.00000
+Rectangular boundary conditions
+Perpendicular widths:   25.83200  25.83200  25.83200
+
+
+Net charge:  -0.00000000
+Cutoff Coulomb:  12.00000 [Å]
+Ewald alpha: 0.25
+Ewald k-vectors: 7 7 7
+
+
+component 0 (CO2) lambda:  0.1 occupancy:  1 (1.000000)
+    net charge:   0.00000000 [e]
+component 1 (methane) lambda:  0.6 occupancy:  1 (1.000000)
+    net charge:   0.00000000 [e]
+
+Amount of molecules per component:
+-------------------------------------------------------------------------------
+Component 0 (CO2)
+    absolute adsorption:  4.000000e+00 molecules
+                          4.000000e+00 molecules/uc
+                          7.854632e-01 mol/kg-framework
+                          3.455944e+01 mg/g-framework
+    excess adsorption:    3.784281e+00 molecules
+                          3.784281e+00 molecules/uc
+                          7.431033e-01 mol/kg-framework
+                          3.269565e+01 mg/g-framework
+Component 1 (methane)
+    absolute adsorption:  4.000000e+00 molecules
+                          4.000000e+00 molecules/uc
+                          7.854632e-01 mol/kg-framework
+                          1.260076e+01 mg/g-framework
+    excess adsorption:    3.352842e+00 molecules
+                          3.352842e+00 molecules/uc
+                          6.583835e-01 mol/kg-framework
+                          1.056209e+01 mg/g-framework
+
+Total potential energy/kʙ       -1.106684e+04 [K]
+-------------------------------------------------------------------------------
+    external field VDW/kʙ        0.000000e+00 [K]
+    external field Real/kʙ       0.000000e+00 [K]
+    framework-molecule VDW/kʙ   -1.098257e+04 [K]
+    framework-molecule Real/kʙ   2.793204e+02 [K]
+    molecule-molecule VDW/kʙ    -2.718852e+02 [K]
+    molecule-molecule Real/kʙ    6.736740e-02 [K]
+    Van der Waals (Tail)/kʙ      0.000000e+00 [K]
+    Ewald Fourier/kʙ             5.652160e+01 [K]
+    Ewald self/kʙ               -5.996866e+04 [K]
+    Ewald exclusion/kʙ           5.982037e+04 [K]
+    polarization/kʙ              0.000000e+00 [K]
+    dU/dlambda VDW/kʙ            0.000000e+00 [K]
+    dU/dlambda Real/kʙ           0.000000e+00 [K]
+    dU/dlambda Ewald/kʙ          0.000000e+00 [K]
+
+
+Current cycle: 0 out of 15001
+===============================================================================
+
+Box:      25.83200   0.00000   0.00000  Average:  25.83200   0.00000   0.00000
+           0.00000  25.83200   0.00000             0.00000  25.83200   0.00000
+           0.00000   0.00000  25.83200             0.00000   0.00000  25.83200
+Lengths:  25.83200  25.83200  25.83200  Average:  25.83200  25.83200  25.83200
+Angles:   90.00000  90.00000  90.00000  Average:  90.00000  90.00000  90.00000
+Rectangular boundary conditions
+
+Net charge:  -0.00000000
+Cutoff Coulomb:  12.00000 [Å]
+Ewald alpha: 0.25
+Ewald k-vectors: 7 7 7
+
+
+component 0 (CO2) lambda:  0.425 occupancy:  1 (1.000000)
+    net charge:   0.00000000 [e]
+component 1 (methane) lambda:  0.05 occupancy:  1 (1.000000)
+    net charge:   0.00000000 [e]
+
+Amount of molecules per component:
+-------------------------------------------------------------------------------
+Component 0 (CO2)
+    absolute adsorption: 0.000000e+00 molecules (0.000000e+00 +/- 0.000000e+00)
+                         0.000000e+00 molec./uc (0.000000e+00 +/- 0.000000e+00)
+                         0.000000e+00 mol/kg    (0.000000e+00 +/- 0.000000e+00)
+                         0.000000e+00 mg/g      (0.000000e+00 +/- 0.000000e+00)
+    excess adsorption:   -2.157192e-01 molecules (-2.157192e-01 +/- 0.000000e+00)
+                         -2.157192e-01 molec./uc (-2.157192e-01 +/- 0.000000e+00)
+                         -4.235988e-02 mol/kg    (-4.235988e-02 +/- 0.000000e+00)
+                         -1.863784e+00 mg/g      (-1.863784e+00 +/- 0.000000e+00)
+Component 1 (methane)
+    absolute adsorption: 2.000000e+00 molecules (2.000000e+00 +/- 0.000000e+00)
+                         2.000000e+00 molec./uc (2.000000e+00 +/- 0.000000e+00)
+                         3.927316e-01 mol/kg    (3.927316e-01 +/- 0.000000e+00)
+                         6.300381e+00 mg/g      (6.300381e+00 +/- 0.000000e+00)
+    excess adsorption:   1.352842e+00 molecules (1.352842e+00 +/- 0.000000e+00)
+                         1.352842e+00 molec./uc (1.352842e+00 +/- 0.000000e+00)
+                         2.656519e-01 mol/kg    (2.656519e-01 +/- 0.000000e+00)
+                         4.261711e+00 mg/g      (4.261711e+00 +/- 0.000000e+00)
+
+Total potential energy/kʙ  -3.240421e+03 (-3.240421e+03 +/- 0.000000e+00) [K]
+-------------------------------------------------------------------------------
+ExternalField-molecule
+    Van der Waals/kʙ        0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+Framework-molecule
+    Van der Waals/kʙ       -3.237509e+03 (-3.237509e+03 +/- 0.000000e+00) [K]
+    Van der Waals (Tail)/kʙ 0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Real/kʙ       0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Fourier/kʙ    0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+Molecule-molecule
+    Van der Waals/kʙ       -2.912508e+00 (-2.912508e+00 +/- 0.000000e+00) [K]
+    Van der Waals (Tail)/kʙ 0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Real/kʙ       0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Fourier/kʙ    0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Molecule Intra/kʙ       0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+Polarization energy/kʙ      0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+
+Current cycle: 7500 out of 15001
+===============================================================================
+
+Box:      25.83200   0.00000   0.00000  Average:  25.83200   0.00000   0.00000
+           0.00000  25.83200   0.00000             0.00000  25.83200   0.00000
+           0.00000   0.00000  25.83200             0.00000   0.00000  25.83200
+Lengths:  25.83200  25.83200  25.83200  Average:  25.83200  25.83200  25.83200
+Angles:   90.00000  90.00000  90.00000  Average:  90.00000  90.00000  90.00000
+Rectangular boundary conditions
+
+Net charge:  -0.00000000
+Cutoff Coulomb:  12.00000 [Å]
+Ewald alpha: 0.25
+Ewald k-vectors: 7 7 7
+
+
+component 0 (CO2) lambda:  0.85 occupancy:  1 (1.000000)
+    net charge:   0.00000000 [e]
+component 1 (methane) lambda:  0.1 occupancy:  1 (1.000000)
+    net charge:   0.00000000 [e]
+
+Amount of molecules per component:
+-------------------------------------------------------------------------------
+Component 0 (CO2)
+    absolute adsorption: 1.000000e+00 molecules (2.748307e+00 +/- 0.000000e+00)
+                         1.000000e+00 molec./uc (2.748307e+00 +/- 0.000000e+00)
+                         1.963658e-01 mol/kg    (5.396736e-01 +/- 0.000000e+00)
+                         8.639859e+00 mg/g      (2.374499e+01 +/- 0.000000e+00)
+    excess adsorption:   7.842808e-01 molecules (2.532588e+00 +/- 0.000000e+00)
+                         7.842808e-01 molec./uc (2.532588e+00 +/- 0.000000e+00)
+                         1.540059e-01 mol/kg    (4.973137e-01 +/- 0.000000e+00)
+                         6.776075e+00 mg/g      (2.188121e+01 +/- 0.000000e+00)
+Component 1 (methane)
+    absolute adsorption: 9.000000e+00 molecules (3.905971e+00 +/- 0.000000e+00)
+                         9.000000e+00 molec./uc (3.905971e+00 +/- 0.000000e+00)
+                         1.767292e+00 mol/kg    (7.669992e-01 +/- 0.000000e+00)
+                         2.835171e+01 mg/g      (1.230455e+01 +/- 0.000000e+00)
+    excess adsorption:   8.352842e+00 molecules (3.258814e+00 +/- 0.000000e+00)
+                         8.352842e+00 molec./uc (3.258814e+00 +/- 0.000000e+00)
+                         1.640212e+00 mol/kg    (6.399195e-01 +/- 0.000000e+00)
+                         2.631304e+01 mg/g      (1.026588e+01 +/- 0.000000e+00)
+
+Total potential energy/kʙ  -1.021343e+04 (-9.502962e+03 +/- 6.124935e+02) [K]
+-------------------------------------------------------------------------------
+ExternalField-molecule
+    Van der Waals/kʙ        0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+Framework-molecule
+    Van der Waals/kʙ       -9.674244e+03 (-9.045615e+03 +/- 4.867455e+02) [K]
+    Van der Waals (Tail)/kʙ 0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Real/kʙ      -1.143358e+01 (-1.838261e+02 +/- 7.904734e+01) [K]
+    Coulombic Fourier/kʙ   -3.903946e+01 (-3.410173e+01 +/- 1.081395e+01) [K]
+Molecule-molecule
+    Van der Waals/kʙ       -4.886284e+02 (-2.327034e+02 +/- 4.935431e+01) [K]
+    Van der Waals (Tail)/kʙ 0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Real/kʙ       0.000000e+00 (-6.542706e+00 +/- 9.965301e+00) [K]
+    Coulombic Fourier/kʙ   -8.789497e-02 (-1.738271e-01 +/- 2.621442e+00) [K]
+    Molecule Intra/kʙ       0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+Polarization energy/kʙ      0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+
+Current cycle: 15000 out of 15001
+===============================================================================
+
+Box:      25.83200   0.00000   0.00000  Average:  25.83200   0.00000   0.00000
+           0.00000  25.83200   0.00000             0.00000  25.83200   0.00000
+           0.00000   0.00000  25.83200             0.00000   0.00000  25.83200
+Lengths:  25.83200  25.83200  25.83200  Average:  25.83200  25.83200  25.83200
+Angles:   90.00000  90.00000  90.00000  Average:  90.00000  90.00000  90.00000
+Rectangular boundary conditions
+
+Net charge:  -0.00000000
+Cutoff Coulomb:  12.00000 [Å]
+Ewald alpha: 0.25
+Ewald k-vectors: 7 7 7
+
+
+component 0 (CO2) lambda:  0.75 occupancy:  1 (1.000000)
+    net charge:   0.00000000 [e]
+component 1 (methane) lambda:  0.825 occupancy:  1 (1.000000)
+    net charge:   0.00000000 [e]
+
+Amount of molecules per component:
+-------------------------------------------------------------------------------
+Component 0 (CO2)
+    absolute adsorption: 1.000000e+00 molecules (2.730077e+00 +/- 1.217699e-01)
+                         1.000000e+00 molec./uc (2.730077e+00 +/- 1.217699e-01)
+                         1.963658e-01 mol/kg    (5.360938e-01 +/- 2.391144e-02)
+                         8.639859e+00 mg/g      (2.358748e+01 +/- 1.052075e+00)
+    excess adsorption:   7.842808e-01 molecules (2.514358e+00 +/- 1.217699e-01)
+                         7.842808e-01 molec./uc (2.514358e+00 +/- 1.217699e-01)
+                         1.540059e-01 mol/kg    (4.937339e-01 +/- 2.391144e-02)
+                         6.776075e+00 mg/g      (2.172370e+01 +/- 1.052075e+00)
+Component 1 (methane)
+    absolute adsorption: 3.000000e+00 molecules (4.117884e+00 +/- 3.699274e-01)
+                         3.000000e+00 molec./uc (4.117884e+00 +/- 3.699274e-01)
+                         5.890974e-01 mol/kg    (8.086116e-01 +/- 7.264108e-02)
+                         9.450571e+00 mg/g      (1.297212e+01 +/- 1.165342e+00)
+    excess adsorption:   2.352842e+00 molecules (3.470727e+00 +/- 3.699274e-01)
+                         2.352842e+00 molec./uc (3.470727e+00 +/- 3.699274e-01)
+                         4.620177e-01 mol/kg    (6.815320e-01 +/- 7.264108e-02)
+                         7.411901e+00 mg/g      (1.093345e+01 +/- 1.165342e+00)
+
+Total potential energy/kʙ  -4.960079e+03 (-9.681504e+03 +/- 3.702532e+02) [K]
+-------------------------------------------------------------------------------
+ExternalField-molecule
+    Van der Waals/kʙ        0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+Framework-molecule
+    Van der Waals/kʙ       -4.892873e+03 (-9.214524e+03 +/- 3.335774e+02) [K]
+    Van der Waals (Tail)/kʙ 0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Real/kʙ       5.378048e+01 (-1.847958e+02 +/- 2.776201e+01) [K]
+    Coulombic Fourier/kʙ   -4.588230e+01 (-3.447733e+01 +/- 3.751406e+00) [K]
+Molecule-molecule
+    Van der Waals/kʙ       -7.570988e+01 (-2.394244e+02 +/- 2.322739e+01) [K]
+    Van der Waals (Tail)/kʙ 0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Real/kʙ       3.637368e-02 (-8.078152e+00 +/- 3.661778e+00) [K]
+    Coulombic Fourier/kʙ    5.698620e-01 (-2.052658e-01 +/- 8.206351e-01) [K]
+    Molecule Intra/kʙ       0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+Polarization energy/kʙ      0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+
+
+===============================================================================
+                             Simulation finished!
+===============================================================================
+
+Final state after 15001 cycles
+===============================================================================
+
+Box:      25.83200   0.00000   0.00000  Average:  25.83200   0.00000   0.00000
+           0.00000  25.83200   0.00000             0.00000  25.83200   0.00000
+           0.00000   0.00000  25.83200             0.00000   0.00000  25.83200
+Lengths:  25.83200  25.83200  25.83200  Average:  25.83200  25.83200  25.83200
+Angles:   90.00000  90.00000  90.00000  Average:  90.00000  90.00000  90.00000
+Rectangular boundary conditions
+
+Net charge:  -0.00000000
+Cutoff Coulomb:  12.00000 [Å]
+Ewald alpha: 0.25
+Ewald k-vectors: 7 7 7
+
+
+component 0 (CO2) lambda:  0.75 occupancy:  1 (1.000000)
+    net charge:   0.00000000 [e]
+component 1 (methane) lambda:  0.825 occupancy:  1 (1.000000)
+    net charge:   0.00000000 [e]
+
+Amount of molecules per component:
+-------------------------------------------------------------------------------
+Component 0 (CO2)
+    absolute adsorption: 1.000000e+00 molecules (2.730077e+00 +/- 1.217699e-01)
+                         1.000000e+00 molec./uc (2.730077e+00 +/- 1.217699e-01)
+                         1.963658e-01 mol/kg    (5.360938e-01 +/- 2.391144e-02)
+                         8.639859e+00 mg/g      (2.358748e+01 +/- 1.052075e+00)
+    excess adsorption:   7.842808e-01 molecules (2.514358e+00 +/- 1.217699e-01)
+                         7.842808e-01 molec./uc (2.514358e+00 +/- 1.217699e-01)
+                         1.540059e-01 mol/kg    (4.937339e-01 +/- 2.391144e-02)
+                         6.776075e+00 mg/g      (2.172370e+01 +/- 1.052075e+00)
+Component 1 (methane)
+    absolute adsorption: 3.000000e+00 molecules (4.117884e+00 +/- 3.699274e-01)
+                         3.000000e+00 molec./uc (4.117884e+00 +/- 3.699274e-01)
+                         5.890974e-01 mol/kg    (8.086116e-01 +/- 7.264108e-02)
+                         9.450571e+00 mg/g      (1.297212e+01 +/- 1.165342e+00)
+    excess adsorption:   2.352842e+00 molecules (3.470727e+00 +/- 3.699274e-01)
+                         2.352842e+00 molec./uc (3.470727e+00 +/- 3.699274e-01)
+                         4.620177e-01 mol/kg    (6.815320e-01 +/- 7.264108e-02)
+                         7.411901e+00 mg/g      (1.093345e+01 +/- 1.165342e+00)
+
+Total potential energy/kʙ  -4.960079e+03 (-9.681504e+03 +/- 3.702532e+02) [K]
+-------------------------------------------------------------------------------
+ExternalField-molecule
+    Van der Waals/kʙ        0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+Framework-molecule
+    Van der Waals/kʙ       -4.892873e+03 (-9.214524e+03 +/- 3.335774e+02) [K]
+    Van der Waals (Tail)/kʙ 0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Real/kʙ       5.378048e+01 (-1.847958e+02 +/- 2.776201e+01) [K]
+    Coulombic Fourier/kʙ   -4.588230e+01 (-3.447733e+01 +/- 3.751406e+00) [K]
+Molecule-molecule
+    Van der Waals/kʙ       -7.570988e+01 (-2.394244e+02 +/- 2.322739e+01) [K]
+    Van der Waals (Tail)/kʙ 0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+    Coulombic Real/kʙ       3.637368e-02 (-8.078152e+00 +/- 3.661778e+00) [K]
+    Coulombic Fourier/kʙ    5.698620e-01 (-2.052658e-01 +/- 8.206351e-01) [K]
+    Molecule Intra/kʙ       0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+Polarization energy/kʙ      0.000000e+00 ( 0.000000e+00 +/- 0.000000e+00) [K]
+
+
+Energy statistics             |  Energy [K]   | Recomputed [K]|  Drift [K]    |
+===============================================================================
+Total potential energy/kʙ     | -4.960079e+03 | -4.960079e+03 | -9.744097e-09 |
+    external field VDW/kʙ     |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    external field Real/kʙ    |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    framework-molecule VDW/kʙ | -4.892873e+03 | -4.892873e+03 | -1.371715e-09 |
+    framework-molecule Real/kʙ|  5.378048e+01 |  5.378048e+01 |  2.916620e-10 |
+    molecule-molecule VDW/kʙ  | -7.570988e+01 | -7.570988e+01 |  3.008146e-12 |
+    molecule-molecule Real/kʙ |  3.637368e-02 |  3.637368e-02 | -7.271884e-12 |
+    Van der Waals (Tail)/kʙ   |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    Ewald Fourier/kʙ          |  1.030298e+00 |  1.030298e+00 |  4.087196e-11 |
+    Ewald self/kʙ             | -1.874021e+04 | -1.874021e+04 | -4.550505e-09 |
+    Ewald exclusion/kʙ        |  1.869386e+04 |  1.869386e+04 | -4.150148e-09 |
+    bond/kʙ                   |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    Urey-Bradley/kʙ           |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    bend/kʙ                   |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    inversion bend/kʙ         |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    out-of-plane bend/kʙ      |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    torsion/kʙ                |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    improper torsion/kʙ       |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    bond-bond/kʙ              |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    bond-bend/kʙ              |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    bond-torsion/kʙ           |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    bend-bend/kʙ              |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    bend-torsion/kʙ           |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    intra VDW/kʙ              |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    intra Coulombic/kʙ        |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    polarization/kʙ           |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    dU/dlambda VDW/kʙ         |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    dU/dlambda Real/kʙ        |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+    dU/dlambda Ewald/kʙ       |  0.000000e+00 |  0.000000e+00 |  0.000000e+00 |
+-------------------------------------------------------------------------------
+
+
+Monte-Carlo moves statistics
+===============================================================================
+
+Component 0 [CO2]
+    Translation          all:               60193
+    Translation          total:             20033      20155      20005
+    Translation          constructed:       20024      20150      20002
+    Translation          accepted:          11614      11629      11685
+    Translation          fraction:       0.579743   0.576978   0.584104
+    Translation          max-change:     1.500000   1.500000   1.500000
+
+    Rotation             all:               29927
+    Rotation             total:             10164       9914       9849
+    Rotation             constructed:       10164       9914       9848
+    Rotation             accepted:           6873       7124       6586
+    Rotation             fraction:       0.676210   0.718580   0.668697
+    Rotation             max-change:     1.500000   1.500000   1.500000
+
+    Reinsertion (CBMC)   all:               60110
+    Reinsertion (CBMC)   total:             60110
+    Reinsertion (CBMC)   constructed:       60109
+    Reinsertion (CBMC)   accepted:          29207
+    Reinsertion (CBMC)   fraction:       0.485893
+    Reinsertion (CBMC)   max-change:     0.000000
+
+    Swap (CB/CFCMC)      all:              150153
+    Swap (CB/CFCMC)      total:             21299      21761     107093
+    Swap (CB/CFCMC)      constructed:       21299      20449     105803
+    Swap (CB/CFCMC)      accepted:          14606      14605      80426
+    Swap (CB/CFCMC)      fraction:       0.685760   0.671155   0.750992
+    Swap (CB/CFCMC)      max-change:     0.350960   0.253309   1.000000
+
+    Lambda histogram and bias:
+    ---------------------------------------------------------------------------
+     0-0.000000 (lambda) P:  7.32485e-01 +/- 1.23860e-01 bias:  2.54000e+00 [-]
+     1-0.025000 (lambda) P:  1.07140e+00 +/- 1.52029e-01 bias:  2.77500e+00 [-]
+     2-0.050000 (lambda) P:  1.48683e+00 +/- 1.84059e-01 bias:  3.16500e+00 [-]
+     3-0.075000 (lambda) P:  1.01127e+00 +/- 5.36498e-02 bias:  2.78500e+00 [-]
+     4-0.100000 (lambda) P:  8.50010e-01 +/- 2.00883e-01 bias:  2.62500e+00 [-]
+     5-0.125000 (lambda) P:  8.74608e-01 +/- 1.96391e-01 bias:  2.70000e+00 [-]
+     6-0.150000 (lambda) P:  1.05773e+00 +/- 1.44257e-01 bias:  2.92500e+00 [-]
+     7-0.175000 (lambda) P:  1.06866e+00 +/- 2.38244e-01 bias:  2.87000e+00 [-]
+     8-0.200000 (lambda) P:  7.73482e-01 +/- 1.58062e-01 bias:  2.32500e+00 [-]
+     9-0.225000 (lambda) P:  1.18892e+00 +/- 1.30866e-01 bias:  2.58000e+00 [-]
+    10-0.250000 (lambda) P:  1.21352e+00 +/- 1.34339e-01 bias:  2.29000e+00 [-]
+    11-0.275000 (lambda) P:  8.17212e-01 +/- 8.60072e-02 bias:  1.58500e+00 [-]
+    12-0.300000 (lambda) P:  9.83934e-01 +/- 1.52690e-01 bias:  1.50500e+00 [-]
+    13-0.325000 (lambda) P:  9.67535e-01 +/- 6.82850e-02 bias:  1.10000e+00 [-]
+    14-0.350000 (lambda) P:  1.03313e+00 +/- 1.77369e-01 bias:  9.30000e-01 [-]
+    15-0.375000 (lambda) P:  9.62069e-01 +/- 1.10992e-01 bias:  6.55000e-01 [-]
+    16-0.400000 (lambda) P:  8.25412e-01 +/- 6.41558e-02 bias:  4.55000e-01 [-]
+    17-0.425000 (lambda) P:  8.85541e-01 +/- 1.28871e-01 bias:  2.90000e-01 [-]
+    18-0.450000 (lambda) P:  1.03586e+00 +/- 1.14061e-01 bias:  4.45000e-01 [-]
+    19-0.475000 (lambda) P:  7.78948e-01 +/- 1.22340e-01 bias:  1.05000e-01 [-]
+    20-0.500000 (lambda) P:  9.97600e-01 +/- 5.49747e-02 bias:  2.20000e-01 [-]
+    21-0.525000 (lambda) P:  1.05226e+00 +/- 2.00380e-01 bias:  2.80000e-01 [-]
+    22-0.550000 (lambda) P:  9.29271e-01 +/- 1.15066e-01 bias:  2.75000e-01 [-]
+    23-0.575000 (lambda) P:  1.18345e+00 +/- 1.20921e-01 bias:  4.95000e-01 [-]
+    24-0.600000 (lambda) P:  1.22718e+00 +/- 9.55208e-02 bias:  4.75000e-01 [-]
+    25-0.625000 (lambda) P:  9.97600e-01 +/- 1.59603e-01 bias:  3.00000e-01 [-]
+    26-0.650000 (lambda) P:  9.18339e-01 +/- 1.32722e-01 bias:  1.80000e-01 [-]
+    27-0.675000 (lambda) P:  8.74608e-01 +/- 1.01084e-01 bias:  1.00000e-01 [-]
+    28-0.700000 (lambda) P:  7.65282e-01 +/- 1.59603e-01 bias:  1.25000e-01 [-]
+    29-0.725000 (lambda) P:  9.45670e-01 +/- 1.94698e-01 bias:  2.65000e-01 [-]
+    30-0.750000 (lambda) P:  1.11239e+00 +/- 1.43757e-01 bias:  3.55000e-01 [-]
+    31-0.775000 (lambda) P:  1.01127e+00 +/- 1.04583e-01 bias:  3.55000e-01 [-]
+    32-0.800000 (lambda) P:  1.10146e+00 +/- 1.56690e-01 bias:  3.10000e-01 [-]
+    33-0.825000 (lambda) P:  9.45670e-01 +/- 1.09556e-01 bias:  1.40000e-01 [-]
+    34-0.850000 (lambda) P:  1.11786e+00 +/- 1.18395e-01 bias:  3.00000e-01 [-]
+    35-0.875000 (lambda) P:  1.15339e+00 +/- 2.15469e-01 bias:  2.95000e-01 [-]
+    36-0.900000 (lambda) P:  9.29271e-01 +/- 1.95656e-01 bias:  1.55000e-01 [-]
+    37-0.925000 (lambda) P:  1.10966e+00 +/- 9.92159e-02 bias:  2.40000e-01 [-]
+    38-0.950000 (lambda) P:  9.56603e-01 +/- 1.62285e-01 bias:  1.20000e-01 [-]
+    39-0.975000 (lambda) P:  8.91007e-01 +/- 6.16389e-02 bias:  0.00000e+00 [-]
+    40-1.000000 (lambda) P:  1.16159e+00 +/- 1.32505e-01 bias:  2.60000e-01 [-]
+
+
+    Lambda statistics:
+    ---------------------------------------------------------------------------
+     0-0.000000 (lambda) Free energy: 2.123889e+02 +/- 5.233567e+01 [K]
+     1-0.025000 (lambda) Free energy: 9.830631e+01 +/- 4.298685e+01 [K]
+     2-0.050000 (lambda) Free energy: 7.139970e-14 +/- 3.594381e+01 [K]
+     3-0.075000 (lambda) Free energy: 1.156340e+02 +/- 1.593380e+01 [K]
+     4-0.100000 (lambda) Free energy: 1.677470e+02 +/- 6.913150e+01 [K]
+     5-0.125000 (lambda) Free energy: 1.591886e+02 +/- 7.506318e+01 [K]
+     6-0.150000 (lambda) Free energy: 1.021575e+02 +/- 4.272060e+01 [K]
+     7-0.175000 (lambda) Free energy: 9.907259e+01 +/- 7.604219e+01 [K]
+     8-0.200000 (lambda) Free energy: 1.960509e+02 +/- 6.283117e+01 [K]
+     9-0.225000 (lambda) Free energy: 6.708102e+01 +/- 3.181378e+01 [K]
+    10-0.250000 (lambda) Free energy: 6.093746e+01 +/- 3.409248e+01 [K]
+    11-0.275000 (lambda) Free energy: 1.795519e+02 +/- 3.067958e+01 [K]
+    12-0.300000 (lambda) Free energy: 1.238537e+02 +/- 4.603484e+01 [K]
+    13-0.325000 (lambda) Free energy: 1.288958e+02 +/- 2.136735e+01 [K]
+    14-0.350000 (lambda) Free energy: 1.092166e+02 +/- 5.142721e+01 [K]
+    15-0.375000 (lambda) Free energy: 1.305955e+02 +/- 3.526549e+01 [K]
+    16-0.400000 (lambda) Free energy: 1.765568e+02 +/- 2.372164e+01 [K]
+    17-0.425000 (lambda) Free energy: 1.554619e+02 +/- 4.292626e+01 [K]
+    18-0.450000 (lambda) Free energy: 1.084240e+02 +/- 3.351537e+01 [K]
+    19-0.475000 (lambda) Free energy: 1.939382e+02 +/- 4.657766e+01 [K]
+    20-0.500000 (lambda) Free energy: 1.197157e+02 +/- 1.639887e+01 [K]
+    21-0.525000 (lambda) Free energy: 1.037119e+02 +/- 5.915940e+01 [K]
+    22-0.550000 (lambda) Free energy: 1.410012e+02 +/- 3.677812e+01 [K]
+    23-0.575000 (lambda) Free energy: 6.846352e+01 +/- 3.006114e+01 [K]
+    24-0.600000 (lambda) Free energy: 5.757796e+01 +/- 2.329751e+01 [K]
+    25-0.625000 (lambda) Free energy: 1.197157e+02 +/- 4.911198e+01 [K]
+    26-0.650000 (lambda) Free energy: 1.445516e+02 +/- 4.642686e+01 [K]
+    27-0.675000 (lambda) Free energy: 1.591886e+02 +/- 3.447738e+01 [K]
+    28-0.700000 (lambda) Free energy: 1.992481e+02 +/- 6.455024e+01 [K]
+    29-0.725000 (lambda) Free energy: 1.357533e+02 +/- 6.159948e+01 [K]
+    30-0.750000 (lambda) Free energy: 8.704090e+01 +/- 4.051965e+01 [K]
+    31-0.775000 (lambda) Free energy: 1.156340e+02 +/- 3.110507e+01 [K]
+    32-0.800000 (lambda) Free energy: 9.000389e+01 +/- 4.227019e+01 [K]
+    33-0.825000 (lambda) Free energy: 1.357533e+02 +/- 3.516284e+01 [K]
+    34-0.850000 (lambda) Free energy: 8.557030e+01 +/- 3.148950e+01 [K]
+    35-0.875000 (lambda) Free energy: 7.618325e+01 +/- 5.514525e+01 [K]
+    36-0.900000 (lambda) Free energy: 1.410012e+02 +/- 6.662197e+01 [K]
+    37-0.925000 (lambda) Free energy: 8.777890e+01 +/- 2.703519e+01 [K]
+    38-0.950000 (lambda) Free energy: 1.323049e+02 +/- 5.169168e+01 [K]
+    39-0.975000 (lambda) Free energy: 1.536157e+02 +/- 2.045040e+01 [K]
+    40-1.000000 (lambda) Free energy: 7.405809e+01 +/- 3.488481e+01 [K]
+    ---------------------------------------------------------------------------
+    Excess chemical potential: (ln(P(lambda=1))-ln(P(lambda=0)))/Beta
+        Block[  0] -851.8854922292974
+        Block[  1] -810.6823872178805
+        Block[  2] -821.8604280219552
+        Block[  3] -832.9318049258574
+        Block[  4] -800.6814522641039
+    ---------------------------------------------------------------------------
+    Excess chemical potential:    -8.223314e+02 +/-  2.475512e+01 [K]
+    Ideal gas chemical potential: -2.625156e+03 +/-  1.319980e+01 [K]
+    Total chemical potential:     -3.447487e+03 +/-  2.089576e+01 [K]
+    Imposed chemical potential:   -3.397399e+03 [K]
+    ---------------------------------------------------------------------------
+    Excess chemical potential:    -6.837245e+00 +/-  2.058256e-01 [kJ/mol]
+    Ideal gas chemical potential: -2.182677e+01 +/-  1.097493e-01 [kJ/mol]
+    Total chemical potential:     -2.866401e+01 +/-  1.737371e-01 [kJ/mol]
+    Imposed chemical potential:   -2.824756e+01 [kJ/mol]
+    ---------------------------------------------------------------------------
+    Imposed fugacity:              5.000000e+04 [Pa]
+    Measured fugacity:             4.231168e+04 +/-  2.964827e+03 [Pa]
+
+
+Component 1 [methane]
+    Translation          all:               59584
+    Translation          total:             19995      19841      19748
+    Translation          constructed:       19995      19840      19748
+    Translation          accepted:          13382      13314      14673
+    Translation          fraction:       0.669267   0.671035   0.743012
+    Translation          max-change:     1.500000   1.500000   1.500000
+
+    Rotation             all:               29917
+    Rotation             total:              9942      10006       9969
+    Rotation             constructed:        9942      10006       9969
+    Rotation             accepted:           9942      10006       9969
+    Rotation             fraction:       1.000000   1.000000   1.000000
+    Rotation             max-change:     1.500000   1.500000   1.500000
+
+    Reinsertion (CBMC)   all:               59897
+    Reinsertion (CBMC)   total:             59897
+    Reinsertion (CBMC)   constructed:       59894
+    Reinsertion (CBMC)   accepted:          44753
+    Reinsertion (CBMC)   fraction:       0.747166
+    Reinsertion (CBMC)   max-change:     0.000000
+
+    Swap (CB/CFCMC)      all:              150259
+    Swap (CB/CFCMC)      total:             27243      27480      95536
+    Swap (CB/CFCMC)      constructed:       27206      26999      94226
+    Swap (CB/CFCMC)      accepted:          19851      19851      75434
+    Swap (CB/CFCMC)      fraction:       0.728664   0.722380   0.789587
+    Swap (CB/CFCMC)      max-change:     0.306898   0.303581   1.000000
+
+    Lambda histogram and bias:
+    ---------------------------------------------------------------------------
+     0-0.000000 (lambda) P:  1.11786e+00 +/- 1.27185e-01 bias:  2.35500e+00 [-]
+     1-0.025000 (lambda) P:  1.01673e+00 +/- 1.39180e-01 bias:  2.19500e+00 [-]
+     2-0.050000 (lambda) P:  1.29825e+00 +/- 1.42954e-01 bias:  2.47500e+00 [-]
+     3-0.075000 (lambda) P:  1.00033e+00 +/- 1.97632e-01 bias:  2.30000e+00 [-]
+     4-0.100000 (lambda) P:  9.37471e-01 +/- 1.28983e-01 bias:  2.25500e+00 [-]
+     5-0.125000 (lambda) P:  9.34738e-01 +/- 1.51079e-01 bias:  2.35000e+00 [-]
+     6-0.150000 (lambda) P:  8.63676e-01 +/- 1.19604e-01 bias:  2.26500e+00 [-]
+     7-0.175000 (lambda) P:  9.59336e-01 +/- 2.09647e-01 bias:  2.27000e+00 [-]
+     8-0.200000 (lambda) P:  1.10146e+00 +/- 1.93660e-01 bias:  2.20000e+00 [-]
+     9-0.225000 (lambda) P:  9.75735e-01 +/- 1.76556e-01 bias:  1.91500e+00 [-]
+    10-0.250000 (lambda) P:  1.21625e+00 +/- 1.71344e-01 bias:  1.87500e+00 [-]
+    11-0.275000 (lambda) P:  9.86668e-01 +/- 9.00933e-02 bias:  1.53000e+00 [-]
+    12-0.300000 (lambda) P:  9.62069e-01 +/- 1.17908e-01 bias:  1.21500e+00 [-]
+    13-0.325000 (lambda) P:  1.05500e+00 +/- 2.07577e-01 bias:  1.12000e+00 [-]
+    14-0.350000 (lambda) P:  9.23805e-01 +/- 8.36318e-02 bias:  7.40000e-01 [-]
+    15-0.375000 (lambda) P:  8.96474e-01 +/- 5.44486e-02 bias:  6.35000e-01 [-]
+    16-0.400000 (lambda) P:  8.96474e-01 +/- 1.40722e-01 bias:  4.70000e-01 [-]
+    17-0.425000 (lambda) P:  8.69142e-01 +/- 2.62993e-01 bias:  4.00000e-01 [-]
+    18-0.450000 (lambda) P:  9.59336e-01 +/- 1.47610e-01 bias:  3.75000e-01 [-]
+    19-0.475000 (lambda) P:  9.78468e-01 +/- 1.60770e-01 bias:  2.65000e-01 [-]
+    20-0.500000 (lambda) P:  9.40204e-01 +/- 1.54284e-01 bias:  3.50000e-01 [-]
+    21-0.525000 (lambda) P:  1.01400e+00 +/- 1.10211e-01 bias:  3.20000e-01 [-]
+    22-0.550000 (lambda) P:  1.18619e+00 +/- 7.71886e-02 bias:  5.20000e-01 [-]
+    23-0.575000 (lambda) P:  9.56603e-01 +/- 7.86660e-02 bias:  3.05000e-01 [-]
+    24-0.600000 (lambda) P:  9.70269e-01 +/- 1.04583e-01 bias:  2.90000e-01 [-]
+    25-0.625000 (lambda) P:  1.19712e+00 +/- 2.23018e-01 bias:  4.80000e-01 [-]
+    26-0.650000 (lambda) P:  1.03586e+00 +/- 8.60072e-02 bias:  3.55000e-01 [-]
+    27-0.675000 (lambda) P:  1.04953e+00 +/- 1.34339e-01 bias:  4.50000e-01 [-]
+    28-0.700000 (lambda) P:  9.56603e-01 +/- 1.93809e-01 bias:  2.90000e-01 [-]
+    29-0.725000 (lambda) P:  1.04953e+00 +/- 1.18395e-01 bias:  3.40000e-01 [-]
+    30-0.750000 (lambda) P:  7.62549e-01 +/- 2.30881e-01 bias:  1.35000e-01 [-]
+    31-0.775000 (lambda) P:  8.52743e-01 +/- 1.44755e-01 bias:  2.35000e-01 [-]
+    32-0.800000 (lambda) P:  8.63676e-01 +/- 9.84879e-02 bias:  2.05000e-01 [-]
+    33-0.825000 (lambda) P:  1.12059e+00 +/- 9.89253e-02 bias:  4.65000e-01 [-]
+    34-0.850000 (lambda) P:  1.01673e+00 +/- 2.26539e-01 bias:  3.95000e-01 [-]
+    35-0.875000 (lambda) P:  8.85541e-01 +/- 1.45647e-01 bias:  3.00000e-01 [-]
+    36-0.900000 (lambda) P:  8.69142e-01 +/- 1.10341e-01 bias:  3.10000e-01 [-]
+    37-0.925000 (lambda) P:  9.78468e-01 +/- 1.55769e-01 bias:  3.80000e-01 [-]
+    38-0.950000 (lambda) P:  1.09053e+00 +/- 1.84839e-01 bias:  4.25000e-01 [-]
+    39-0.975000 (lambda) P:  1.22445e+00 +/- 5.70305e-02 bias:  4.95000e-01 [-]
+    40-1.000000 (lambda) P:  1.03040e+00 +/- 1.08367e-01 bias:  3.75000e-01 [-]
+
+
+    Lambda statistics:
+    ---------------------------------------------------------------------------
+     0-0.000000 (lambda) Free energy: 4.487993e+01 +/- 3.533473e+01 [K]
+     1-0.025000 (lambda) Free energy: 7.332635e+01 +/- 4.288994e+01 [K]
+     2-0.050000 (lambda) Free energy: -6.702215e-14 +/- 3.259627e+01 [K]
+     3-0.075000 (lambda) Free energy: 7.820451e+01 +/- 5.700887e+01 [K]
+     4-0.100000 (lambda) Free energy: 9.767539e+01 +/- 4.389615e+01 [K]
+     5-0.125000 (lambda) Free energy: 9.855131e+01 +/- 4.833327e+01 [K]
+     6-0.150000 (lambda) Free energy: 1.222719e+02 +/- 4.261516e+01 [K]
+     7-0.175000 (lambda) Free energy: 9.075865e+01 +/- 6.119247e+01 [K]
+     8-0.200000 (lambda) Free energy: 4.931352e+01 +/- 5.135887e+01 [K]
+     9-0.225000 (lambda) Free energy: 8.567378e+01 +/- 5.594302e+01 [K]
+    10-0.250000 (lambda) Free energy: 1.957217e+01 +/- 4.512408e+01 [K]
+    11-0.275000 (lambda) Free energy: 8.233113e+01 +/- 2.747886e+01 [K]
+    12-0.300000 (lambda) Free energy: 8.990517e+01 +/- 3.744453e+01 [K]
+    13-0.325000 (lambda) Free energy: 6.224329e+01 +/- 6.026614e+01 [K]
+    14-0.350000 (lambda) Free energy: 1.020808e+02 +/- 2.669075e+01 [K]
+    15-0.375000 (lambda) Free energy: 1.110905e+02 +/- 1.804155e+01 [K]
+    16-0.400000 (lambda) Free energy: 1.110905e+02 +/- 4.708380e+01 [K]
+    17-0.425000 (lambda) Free energy: 1.203791e+02 +/- 9.429699e+01 [K]
+    18-0.450000 (lambda) Free energy: 9.075865e+01 +/- 4.456358e+01 [K]
+    19-0.475000 (lambda) Free energy: 8.483462e+01 +/- 5.183308e+01 [K]
+    20-0.500000 (lambda) Free energy: 9.680203e+01 +/- 4.780305e+01 [K]
+    21-0.525000 (lambda) Free energy: 7.413389e+01 +/- 3.245531e+01 [K]
+    22-0.550000 (lambda) Free energy: 2.708111e+01 +/- 1.937148e+01 [K]
+    23-0.575000 (lambda) Free energy: 9.161458e+01 +/- 2.470609e+01 [K]
+    24-0.600000 (lambda) Free energy: 8.735918e+01 +/- 3.186801e+01 [K]
+    25-0.625000 (lambda) Free energy: 2.432879e+01 +/- 5.552213e+01 [K]
+    26-0.650000 (lambda) Free energy: 6.773364e+01 +/- 2.526731e+01 [K]
+    27-0.675000 (lambda) Free energy: 6.380173e+01 +/- 3.894525e+01 [K]
+    28-0.700000 (lambda) Free energy: 9.161458e+01 +/- 5.762745e+01 [K]
+    29-0.725000 (lambda) Free energy: 6.380173e+01 +/- 3.352841e+01 [K]
+    30-0.750000 (lambda) Free energy: 1.596310e+02 +/- 1.029982e+02 [K]
+    31-0.775000 (lambda) Free energy: 1.260936e+02 +/- 5.105766e+01 [K]
+    32-0.800000 (lambda) Free energy: 1.222719e+02 +/- 3.565135e+01 [K]
+    33-0.825000 (lambda) Free energy: 4.414733e+01 +/- 2.621596e+01 [K]
+    34-0.850000 (lambda) Free energy: 7.332635e+01 +/- 6.997681e+01 [K]
+    35-0.875000 (lambda) Free energy: 1.147715e+02 +/- 4.844678e+01 [K]
+    36-0.900000 (lambda) Free energy: 1.203791e+02 +/- 3.942594e+01 [K]
+    37-0.925000 (lambda) Free energy: 8.483462e+01 +/- 4.786539e+01 [K]
+    38-0.950000 (lambda) Free energy: 5.230606e+01 +/- 5.391769e+01 [K]
+    39-0.975000 (lambda) Free energy: 1.755649e+01 +/- 1.424087e+01 [K]
+    40-1.000000 (lambda) Free energy: 6.932095e+01 +/- 3.081579e+01 [K]
+    ---------------------------------------------------------------------------
+    Excess chemical potential: (ln(P(lambda=1))-ln(P(lambda=0)))/Beta
+        Block[  0] -522.8615259300882
+        Block[  1] -582.819098675977
+        Block[  2] -536.5002502543049
+        Block[  3] -598.2559213093161
+        Block[  4] -608.4611704118729
+    ---------------------------------------------------------------------------
+    Excess chemical potential:    -5.695595e+02 +/-  4.721753e+01 [K]
+    Ideal gas chemical potential: -2.501853e+03 +/-  2.681083e+01 [K]
+    Total chemical potential:     -3.071413e+03 +/-  3.584620e+01 [K]
+    Imposed chemical potential:   -3.067815e+03 [K]
+    ---------------------------------------------------------------------------
+    Excess chemical potential:    -4.735583e+00 +/-  3.925885e-01 [kJ/mol]
+    Ideal gas chemical potential: -2.080157e+01 +/-  2.229177e-01 [kJ/mol]
+    Total chemical potential:     -2.553715e+01 +/-  2.980420e-01 [kJ/mol]
+    Imposed chemical potential:   -2.550724e+01 [kJ/mol]
+    ---------------------------------------------------------------------------
+    Imposed fugacity:              1.500000e+05 [Pa]
+    Measured fugacity:             1.482122e+05 +/-  1.765134e+04 [Pa]
+
+
+
+
+Production run counting of the MC moves summed over systems and components
+===============================================================================
+
+Translation                          119777 (19.9615 [%])
+Rotation                              59844 (9.9733 [%])
+Reinsertion (CBMC)                   120007 (19.9998 [%])
+Swap (CB/CFCMC)                      300412 (50.0653 [%])
+
+Production count MC-steps:           600040 [-]
+               All summed:           600040 [-]
+               difference:                0 [-]
+
+
+Production run CPU timings of the MC moves
+===============================================================================
+
+Component 0 CO2
+
+Rotation                              3.332358 [s]
+    Ewald                             1.260764 [s]
+    ExternalField-Molecule            0.001198 [s]
+    Framework-Molecule                1.935487 [s]
+    Molecule-Molecule                 0.044079 [s]
+    Overhead                          0.090830 [s]
+
+Reinsertion (CBMC)                   31.632564 [s]
+    Ewald                             2.547466 [s]
+    NonEwald                         28.956834 [s]
+    Overhead                          0.128264 [s]
+
+Swap (CB/CFCMC)                      30.254618 [s]
+    Deletion-Ewald                    1.475419 [s]
+    Deletion-ExternalField            0.000688 [s]
+    Deletion-Framework                1.322806 [s]
+    Deletion-Molecule                 0.030739 [s]
+    Deletion-NonEwald                 5.813256 [s]
+    Deletion-Tail                     0.175605 [s]
+    Insertion-Ewald                   1.517120 [s]
+    Insertion-ExternalField           0.000705 [s]
+    Insertion-Framework               1.282790 [s]
+    Insertion-Molecule                0.029194 [s]
+    Insertion-NonEwald                6.291450 [s]
+    Insertion-Tail                    0.180253 [s]
+    Lambda-Ewald                      4.472459 [s]
+    Lambda-ExternalField              0.003822 [s]
+    Lambda-Framework                  6.540289 [s]
+    Lambda-Molecule                   0.145477 [s]
+    Lambda-NonEwald                   0.000000 [s]
+    Lambda-Tail                       0.595968 [s]
+    Overhead                          0.376578 [s]
+
+Translation                           6.714149 [s]
+    Ewald                             2.529416 [s]
+    ExternalField-Molecule            0.002147 [s]
+    Framework-Molecule                3.929796 [s]
+    Molecule-Molecule                 0.089486 [s]
+    Overhead                          0.163304 [s]
+
+
+Component 1 methane
+
+Rotation                              1.775020 [s]
+    Ewald                             0.775755 [s]
+    ExternalField-Molecule            0.001070 [s]
+    Framework-Molecule                0.857787 [s]
+    Molecule-Molecule                 0.020887 [s]
+    Overhead                          0.119521 [s]
+
+Reinsertion (CBMC)                    8.100083 [s]
+    Ewald                             1.583850 [s]
+    NonEwald                          6.333288 [s]
+    Overhead                          0.182945 [s]
+
+Swap (CB/CFCMC)                      15.634227 [s]
+    Deletion-Ewald                    1.301290 [s]
+    Deletion-ExternalField            0.000911 [s]
+    Deletion-Framework                0.778950 [s]
+    Deletion-Molecule                 0.018423 [s]
+    Deletion-NonEwald                 2.799826 [s]
+    Deletion-Tail                     0.084104 [s]
+    Insertion-Ewald                   1.284517 [s]
+    Insertion-ExternalField           0.000954 [s]
+    Insertion-Framework               0.732756 [s]
+    Insertion-Molecule                0.016913 [s]
+    Insertion-NonEwald                2.829802 [s]
+    Insertion-Tail                    0.082336 [s]
+    Lambda-Ewald                      2.469509 [s]
+    Lambda-ExternalField              0.003409 [s]
+    Lambda-Framework                  2.589237 [s]
+    Lambda-Molecule                   0.057674 [s]
+    Lambda-NonEwald                   0.000000 [s]
+    Lambda-Tail                       0.185793 [s]
+    Overhead                          0.397823 [s]
+
+Translation                           3.490083 [s]
+    Ewald                             1.548264 [s]
+    ExternalField-Molecule            0.002112 [s]
+    Framework-Molecule                1.720878 [s]
+    Molecule-Molecule                 0.040999 [s]
+    Overhead                          0.177830 [s]
+
+
+
+Property sampling                     0.533842 [s]
+Energy/pressure sampling:             0.842470 [s]
+
+
+Production run CPU timings of the MC moves summed over systems and components
+===============================================================================
+
+
+Translation                          10.204232 [s]
+    Ewald                             4.077680 [s]
+    ExternalField-Molecule            0.004259 [s]
+    Framework-Molecule                5.650674 [s]
+    Molecule-Molecule                 0.130485 [s]
+    Overhead                          0.341134 [s]
+
+Rotation                              5.107378 [s]
+    Ewald                             2.036519 [s]
+    ExternalField-Molecule            0.002268 [s]
+    Framework-Molecule                2.793274 [s]
+    Molecule-Molecule                 0.064966 [s]
+    Overhead                          0.210351 [s]
+
+Reinsertion (CBMC)                   39.732647 [s]
+    Ewald                             4.131316 [s]
+    NonEwald                         35.290122 [s]
+    Overhead                          0.311209 [s]
+
+Swap (CB/CFCMC)                      45.888845 [s]
+    Deletion-Ewald                    2.776709 [s]
+    Deletion-ExternalField            0.001599 [s]
+    Deletion-Framework                2.101756 [s]
+    Deletion-Molecule                 0.049162 [s]
+    Deletion-NonEwald                 8.613082 [s]
+    Deletion-Tail                     0.259709 [s]
+    Insertion-Ewald                   2.801637 [s]
+    Insertion-ExternalField           0.001659 [s]
+    Insertion-Framework               2.015546 [s]
+    Insertion-Molecule                0.046107 [s]
+    Insertion-NonEwald                9.121252 [s]
+    Insertion-Tail                    0.262589 [s]
+    Lambda-Ewald                      6.941968 [s]
+    Lambda-ExternalField              0.007231 [s]
+    Lambda-Framework                  9.129526 [s]
+    Lambda-Molecule                   0.203151 [s]
+    Lambda-NonEwald                   0.000000 [s]
+    Lambda-Tail                       0.781761 [s]
+    Overhead                          0.774401 [s]
+
+Property sampling:                    0.533842 [s]
+Energy/pressure sampling:             0.842470 [s]
+
+Production simulation time:         102.541852 [s]
+                All summed:         102.309414 [s]
+                  Overhead:           0.232438 [s]
+
+
+Initalization simulation time:       39.890091 [s]
+Equilibration simulation time:       66.799802 [s]
+Production simulation time:         102.541852 [s]
+Total simulation time:              209.231745 [s]
+
+
+Energy averages and statistics:
+===============================================================================
+
+Framework-molecule energy:
+-------------------------------------------------------------------------------
+
+    Framework-molecule energy/kʙ 0-0 [CO2]:
+    ---------------------------------------------------------------------------
+        Block[  0] -5.041158e+03
+        Block[  1] -4.703079e+03
+        Block[  2] -4.672531e+03
+        Block[  3] -4.710765e+03
+        Block[  4] -4.787223e+03
+        -----------------------------------------------------------------------
+        Average  -4.783194e+03 +/-  1.867077e+02 [K]
+
+    Framework-molecule energy/kʙ 0-1 [methane]:
+    ---------------------------------------------------------------------------
+        Block[  0] -4.457730e+03
+        Block[  1] -4.341807e+03
+        Block[  2] -4.622375e+03
+        Block[  3] -5.077568e+03
+        Block[  4] -4.752233e+03
+        -----------------------------------------------------------------------
+        Average  -4.650603e+03 +/-  3.544044e+02 [K]
+
+
+
+Framework-molecule energy contributions per energy type:
+-------------------------------------------------------------------------------
+
+    Van der Waals energy/kʙ 0-0 [CO2]:
+    ---------------------------------------------------------------------------
+        Block[  0] -4.786124e+03
+        Block[  1] -4.510485e+03
+        Block[  2] -4.464631e+03
+        Block[  3] -4.499352e+03
+        Block[  4] -4.557833e+03
+        -----------------------------------------------------------------------
+        Average  -4.563921e+03 +/-  1.598244e+02 [K]
+
+    Van der Waals energy/kʙ 0-1 [methane]:
+    ---------------------------------------------------------------------------
+        Block[  0] -4.457730e+03
+        Block[  1] -4.341807e+03
+        Block[  2] -4.622375e+03
+        Block[  3] -5.077568e+03
+        Block[  4] -4.752233e+03
+        -----------------------------------------------------------------------
+        Average  -4.650603e+03 +/-  3.544044e+02 [K]
+
+    VDW Tail-Correction energy/kʙ 0-0 [CO2]:
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+    VDW Tail-Correction energy/kʙ 0-1 [methane]:
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+    Coulomb Real energy/kʙ 0-0 [CO2]:
+    ---------------------------------------------------------------------------
+        Block[  0] -2.170290e+02
+        Block[  1] -1.601579e+02
+        Block[  2] -1.757554e+02
+        Block[  3] -1.738848e+02
+        Block[  4] -1.971856e+02
+        -----------------------------------------------------------------------
+        Average  -1.847958e+02 +/-  2.776201e+01 [K]
+
+    Coulomb Real energy/kʙ 0-1 [methane]:
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+    Coulomb Fourier energy/kʙ 0-0 [CO2]:
+    ---------------------------------------------------------------------------
+        Block[  0] -3.800445e+01
+        Block[  1] -3.243592e+01
+        Block[  2] -3.214447e+01
+        Block[  3] -3.752825e+01
+        Block[  4] -3.220450e+01
+        -----------------------------------------------------------------------
+        Average  -3.447733e+01 +/-  3.751406e+00 [K]
+
+    Coulomb Fourier energy/kʙ 0-1 [methane]:
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+
+
+Inter-molecular energy:
+-------------------------------------------------------------------------------
+
+    Inter-molecular energy/kʙ 0-0 [CO2-CO2]:
+    ---------------------------------------------------------------------------
+        Block[  0] -6.196543e+01
+        Block[  1] -5.282398e+01
+        Block[  2] -5.561495e+01
+        Block[  3] -6.508086e+01
+        Block[  4] -6.021512e+01
+        -----------------------------------------------------------------------
+        Average  -5.915321e+01 +/-  6.105678e+00 [K]
+
+    Inter-molecular energy/kʙ 0-1 + 1-0 [CO2-methane]:
+    ---------------------------------------------------------------------------
+        Block[  0] -1.309459e+02
+        Block[  1] -1.134639e+02
+        Block[  2] -1.287403e+02
+        Block[  3] -1.346766e+02
+        Block[  4] -1.190277e+02
+        -----------------------------------------------------------------------
+        Average  -1.253842e+02 +/-  1.094750e+01 [K]
+
+    Inter-molecular energy/kʙ 1-1 [methane-methane]:
+    ---------------------------------------------------------------------------
+        Block[  0] -6.323479e+01
+        Block[  1] -5.223109e+01
+        Block[  2] -6.025840e+01
+        Block[  3] -7.382682e+01
+        Block[  4] -6.624174e+01
+        -----------------------------------------------------------------------
+        Average  -6.317038e+01 +/-  9.837088e+00 [K]
+
+
+
+Inter-molecular energy contributions per energy type:
+-------------------------------------------------------------------------------
+
+    Van der Waals energy/kʙ 0-0 [CO2-CO2]:
+    ---------------------------------------------------------------------------
+        Block[  0] -5.165278e+01
+        Block[  1] -4.669308e+01
+        Block[  2] -5.177546e+01
+        Block[  3] -5.537346e+01
+        Block[  4] -4.882388e+01
+        -----------------------------------------------------------------------
+        Average  -5.086979e+01 +/-  4.086806e+00 [K]
+
+    Van der Waals energy/kʙ 0-1 + 1-0 [CO2-methane]:
+    ---------------------------------------------------------------------------
+        Block[  0] -1.309459e+02
+        Block[  1] -1.134639e+02
+        Block[  2] -1.287403e+02
+        Block[  3] -1.346766e+02
+        Block[  4] -1.190277e+02
+        -----------------------------------------------------------------------
+        Average  -1.253842e+02 +/-  1.094750e+01 [K]
+
+    Van der Waals energy/kʙ 1-1 [methane-methane]:
+    ---------------------------------------------------------------------------
+        Block[  0] -6.323479e+01
+        Block[  1] -5.223109e+01
+        Block[  2] -6.025840e+01
+        Block[  3] -7.382682e+01
+        Block[  4] -6.624174e+01
+        -----------------------------------------------------------------------
+        Average  -6.317038e+01 +/-  9.837088e+00 [K]
+
+    VDW Tail-Correction energy/kʙ 0-0 [CO2-CO2]:
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+    VDW Tail-Correction energy/kʙ 0-1 + 1-0 [CO2-methane]:
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+    VDW Tail-Correction energy/kʙ 1-1 [methane-methane]:
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+    Coulomb Real energy/kʙ 0-0 [CO2-CO2]:
+    ---------------------------------------------------------------------------
+        Block[  0] -9.121213e+00
+        Block[  1] -6.499825e+00
+        Block[  2] -3.711132e+00
+        Block[  3] -1.010638e+01
+        Block[  4] -1.091294e+01
+        -----------------------------------------------------------------------
+        Average  -8.078152e+00 +/-  3.661778e+00 [K]
+
+    Coulomb Real energy/kʙ 0-1 + 1-0 [CO2-methane]:
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+    Coulomb Real energy/kʙ 1-1 [methane-methane]:
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+    Coulomb Fourier energy/kʙ 0-0 [CO2-CO2]:
+    ---------------------------------------------------------------------------
+        Block[  0] -1.191436e+00
+        Block[  1]  3.689258e-01
+        Block[  2] -1.283641e-01
+        Block[  3]  3.989714e-01
+        Block[  4] -4.783106e-01
+        -----------------------------------------------------------------------
+        Average  -2.052658e-01 +/-  8.206351e-01 [K]
+
+    Coulomb Fourier energy/kʙ 0-1 + 1-0 [CO2-methane]:
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+    Coulomb Fourier energy/kʙ 1-1 [methane-methane]:
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+Intra-molecular energies per energy type:
+-------------------------------------------------------------------------------
+
+
+Kinetic Energies:
+-------------------------------------------------------------------------------
+
+    Translational Kinetic energy/kʙ
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+    Rotational Kinetic energy/kʙ
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+    Nose Hoover energy/kʙ
+    ---------------------------------------------------------------------------
+        Block[  0]  0.000000e+00
+        Block[  1]  0.000000e+00
+        Block[  2]  0.000000e+00
+        Block[  3]  0.000000e+00
+        Block[  4]  0.000000e+00
+        -----------------------------------------------------------------------
+        Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+Polarization energy/kʙ
+-------------------------------------------------------------------------------
+    Block[  0]  0.000000e+00
+    Block[  1]  0.000000e+00
+    Block[  2]  0.000000e+00
+    Block[  3]  0.000000e+00
+    Block[  4]  0.000000e+00
+    ---------------------------------------------------------------------------
+    Average   0.000000e+00 +/-  0.000000e+00 [K]
+
+Total energy/kʙ
+-------------------------------------------------------------------------------
+    Block[  0] -9.755034e+03
+    Block[  1] -9.263406e+03
+    Block[  2] -9.539519e+03
+    Block[  3] -1.006192e+04
+    Block[  4] -9.784940e+03
+    ---------------------------------------------------------------------------
+    Average  -9.681504e+03 +/-  3.702532e+02 [K]
+
+Enthalpy of adsorption
+===============================================================================
+
+Component 0 [CO2]
+-------------------------------------------------------------------------------
+    Block[  0] -1.725662e+03
+    Block[  1] -1.738378e+03
+    Block[  2] -1.734302e+03
+    Block[  3] -1.729039e+03
+    Block[  4] -1.740390e+03
+    ---------------------------------------------------------------------------
+    Enthalpy of adsorption: -1.733554e+03 +/-  7.683751e+00 [K]
+                            -1.441358e+01 +/-  6.388628e-02 [kJ/mol]
+    Note: need to subtract the ideal-gas energy.
+
+Component 1 [methane]
+-------------------------------------------------------------------------------
+    Block[  0] -1.362545e+03
+    Block[  1] -1.288952e+03
+    Block[  2] -1.299254e+03
+    Block[  3] -1.325222e+03
+    Block[  4] -1.293778e+03
+    ---------------------------------------------------------------------------
+    Enthalpy of adsorption: -1.313950e+03 +/-  3.794254e+01 [K]
+                            -1.092479e+01 +/-  3.154719e-01 [kJ/mol]
+    Note: need to subtract the ideal-gas energy.
+
+Total enthalpy of adsorption
+-------------------------------------------------------------------------------
+    Block[  0] -1453.32415537276
+    Block[  1] -1401.308731293902
+    Block[  2] -1408.0159654834044
+    Block[  3] -1426.176372481278
+    Block[  4] -1405.4306422658449
+    ---------------------------------------------------------------------------
+    Enthalpy of adsorption: -1.418851e+03 +/-  2.667918e+01 [K]
+                            -1.179699e+01 +/-  2.218231e-01 [kJ/mol]
+    Note: Recompute value of the total enthalpy of adsorption by hand.
+          Need to subtract the ideal-gas energy of component 0.
+    Note: Recompute value of the total enthalpy of adsorption by hand.
+          Need to subtract the ideal-gas energy of component 1.
+
+
+LoadingData
+===============================================================================
+
+Component 0 (CO2)
+    Block[  0]  2.890820e+00
+    Block[  1]  2.722685e+00
+    Block[  2]  2.634001e+00
+    Block[  3]  2.672117e+00
+    Block[  4]  2.729579e+00
+    ---------------------------------------------------------------------------
+    Abs. loading average   2.730077e+00 +/-  1.217699e-01 [molecules/cell]
+    Abs. loading average   2.730077e+00 +/-  1.217699e-01 [molecules/uc]
+    Abs. loading average   5.360938e-01 +/-  2.391144e-02 [mol/kg-framework]
+    Abs. loading average   2.358748e+01 +/-  1.052075e+00 [mg/g-framework]
+
+    Block[  0]  2.675101e+00
+    Block[  1]  2.506965e+00
+    Block[  2]  2.418282e+00
+    Block[  3]  2.456398e+00
+    Block[  4]  2.513859e+00
+    ---------------------------------------------------------------------------
+    Excess loading average   2.514358e+00 +/-  1.217699e-01 [molecules/cell]
+    Excess loading average   2.514358e+00 +/-  1.217699e-01 [molecules/uc]
+    Excess loading average   4.937339e-01 +/-  2.391144e-02 [mol/kg-framework]
+    Excess loading average   2.172370e+01 +/-  1.052075e+00 [mg/g-framework]
+
+
+Component 1 (methane)
+    Block[  0]  3.876699e+00
+    Block[  1]  3.813290e+00
+    Block[  2]  4.042577e+00
+    Block[  3]  4.481968e+00
+    Block[  4]  4.374758e+00
+    ---------------------------------------------------------------------------
+    Abs. loading average   4.117884e+00 +/-  3.699274e-01 [molecules/cell]
+    Abs. loading average   4.117884e+00 +/-  3.699274e-01 [molecules/uc]
+    Abs. loading average   8.086116e-01 +/-  7.264108e-02 [mol/kg-framework]
+    Abs. loading average   1.297212e+01 +/-  1.165342e+00 [mg/g-framework]
+
+    Block[  0]  3.229541e+00
+    Block[  1]  3.166133e+00
+    Block[  2]  3.395419e+00
+    Block[  3]  3.834811e+00
+    Block[  4]  3.727600e+00
+    ---------------------------------------------------------------------------
+    Excess loading average   3.470727e+00 +/-  3.699274e-01 [molecules/cell]
+    Excess loading average   3.470727e+00 +/-  3.699274e-01 [molecules/uc]
+    Excess loading average   6.815320e-01 +/-  7.264108e-02 [mol/kg-framework]
+    Excess loading average   1.093345e+01 +/-  1.165342e+00 [mg/g-framework]
+
+
+

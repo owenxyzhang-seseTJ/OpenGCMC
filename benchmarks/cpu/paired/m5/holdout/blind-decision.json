@@ -1,0 +1,28 @@
+{
+  "utc": "2026-11-23T10:50:14.476293+00:00",
+  "predicted_choice": "delayed",
+  "pilot": {
+    "exact": {
+      "predicted_s": 140.17540396402677,
+      "fixed_wall_s": 22.28537029202562,
+      "max_prepare_s": 0.1406918749853503,
+      "seconds_per_attempt_batch": 0.0011483517624990781,
+      "worst_rhat": 1.0277832527336757,
+      "ESS_penalty": {
+        "count_0": 5.711016970655534
+      },
+      "fraction_of_valid_candidates_reaching_exact": null
+    },
+    "delayed": {
+      "predicted_s": 20.799793618750197,
+      "fixed_wall_s": 4.335247915994842,
+      "max_prepare_s": 1.9416879999917,
+      "seconds_per_attempt_batch": 0.00014093023960012942,
+      "worst_rhat": 1.0770145228824195,
+      "ESS_penalty": {
+        "count_0": 7.427037103150874
+      },
+      "fraction_of_valid_candidates_reaching_exact": 0.5377875
+    }
+  }
+}

@@ -11,7 +11,7 @@
 namespace poremc {
 // All electrostatic energies are U/k_B (kelvin); coordinates angstrom; q in e.
 // Cell lattice vectors are rows. 0=direct Ewald, 1=cubic B-spline PME.
-// Backend: 0=CPU, 1=auto (CUDA if available for direct), 2=required CUDA, 3=required FP64 lattice tensor CUDA.
+// Backend: 0=CPU, 1=auto, 2=required CUDA, 3=FP64 tensor, 4=resident FP64 tensor.
 struct ReciprocalConfig {
   std::array<double,9> cell{};
   double alpha=0.25;
@@ -23,6 +23,8 @@ struct ReciprocalConfig {
   // Optional physical wave-number cutoff (angstrom^-1), inside kmax box.
   // Zero retains every original rectangular mode. Applies to direct only.
   double k_cutoff=0.0;
+  // Accepted changes between full PME transforms. 1 refreshes immediately.
+  std::size_t pme_refresh=1;
   std::string cuda_library;
 };
 struct ChargeContribution {
@@ -37,6 +39,8 @@ struct ReciprocalStats {
   std::uint64_t modes=0, mesh_points=0;
   std::uint64_t gpu_selected_structures=0;
   std::uint64_t full_modes=0, host_grid_builds=0, host_field_evaluations=0;
+  std::uint64_t pme_pending_nodes=0;
+  std::uint64_t resident_trials=0, resident_commits=0;
 };
 class EwaldState {
  public:
@@ -48,6 +52,9 @@ class EwaldState {
   ChargeContribution contribution(std::size_t atoms,const double* positions,const double* charge) const;
   // FP64 device tensor for a selected delayed trial, CPU unless explicitly requested.
   ChargeContribution selected_contribution(std::size_t atoms,const double* positions,const double* charge) const;
+  bool resident() const;
+  double resident_trial(std::size_t atoms,const double* added,const double* removed,const double* charge);
+  void discard_resident_trial();
   // Direct Ewald rigid translation: S_new(k)=S_old(k) exp(i k.d).
   // No atom traversal; preserves charge and charge-square invariants.
   ChargeContribution translated_contribution(const ChargeContribution& old,
