@@ -157,7 +157,8 @@ def construct_case(config,base_directory='.',*,checkpoint=None):
         allowed_sampling|={'reciprocal_method','pme_mesh','reciprocal_backend','cuda_library',
                            'sampling_mode','host_grid_mesh','host_grid_cap','host_grid_cache',
                            'grid_root_bias','ewald_half_spectrum','ewald_k_cutoff','host_grid_steep',
-                           'guest_update','pme_refresh','partial_regrowth','host_field_cache'}
+                           'guest_update','pme_refresh','partial_regrowth','host_field_cache',
+                           'short_range_backend','short_range_min_batch'}
         if sample.get('cuda_library') is not None:sample['cuda_library']=str((base/sample['cuda_library']).resolve())
         if sample.get('host_grid_cache') is not None:sample['host_grid_cache']=str((base/sample['host_grid_cache']).resolve())
         if sample.get('host_field_cache') is not None:sample['host_field_cache']=str((base/sample['host_field_cache']).resolve())

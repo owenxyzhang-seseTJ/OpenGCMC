@@ -13,6 +13,7 @@ import ctypes as C
 import hashlib
 import json
 import math
+import operator
 from pathlib import Path
 import weakref
 import numpy as np
@@ -102,6 +103,11 @@ def _bind(lib):
     lib.poremc_fast_probe_molecules.argtypes = [C.c_void_p, C.c_size_t, C.c_size_t, C.c_size_t,
                                                _DOUBLE, C.c_int, _DOUBLE]
     lib.poremc_fast_probe_molecules.restype = C.c_int
+    if hasattr(lib,'poremc_fast_short_range_enable'):
+        lib.poremc_fast_short_range_enable.argtypes=[C.c_void_p,C.c_char_p,C.c_size_t]
+        lib.poremc_fast_short_range_enable.restype=C.c_int
+        lib.poremc_fast_short_range_info.argtypes=[C.c_void_p,C.c_void_p,C.c_size_t]
+        lib.poremc_fast_short_range_info.restype=C.c_size_t
     return lib
 
 
@@ -120,7 +126,8 @@ class FastGCMC:
                  reciprocal_method='direct',pme_mesh=32,reciprocal_backend='cpu',cuda_library=None,
                  sampling_mode='exact',host_grid_mesh=32,host_grid_cap=1e5,host_grid_cache=None,
                  grid_root_bias=0.,ewald_half_spectrum=True,ewald_k_cutoff=0.,host_grid_steep='boltzmann',
-                 guest_update='auto',pme_refresh=1,partial_regrowth=False,host_field_cache=None):
+                 guest_update='auto',pme_refresh=1,partial_regrowth=False,host_field_cache=None,
+                 short_range_backend='cpu',short_range_min_batch=16):
         self.species=[species] if isinstance(species,Molecule) else list(species)
         if not self.species or len({m.name for m in self.species})!=len(self.species):
             raise ValueError('provide one or more uniquely named molecule definitions')
@@ -235,7 +242,19 @@ class FastGCMC:
         if potential.algorithm not in ('cell','direct','cached'):raise ValueError('FastGCMC uses native CPU cell/direct kernels')
         if not 0<=int(seed)<2**64:raise ValueError('seed must fit an unsigned 64-bit integer')
         self.cell.flags.writeable=False;self.activities.flags.writeable=False
+        if short_range_backend not in ('cpu','cuda'):
+            raise ValueError('short_range_backend must be cpu or cuda')
+        try:
+            short_range_min_batch=operator.index(short_range_min_batch)
+        except TypeError as exc:
+            raise ValueError('short_range_min_batch must be a positive integer') from exc
+        if not 0<short_range_min_batch<=C.c_size_t(-1).value:
+            raise ValueError('short_range_min_batch must be a positive integer')
+        self.short_range_backend=short_range_backend
+        self.short_range_min_batch=short_range_min_batch
         self._lib=_bind(_load_native());self._closed=False
+        if short_range_backend=='cuda' and not hasattr(self._lib,'poremc_fast_short_range_enable'):
+            raise RuntimeError('rebuild with python native/build.py --cuda to enable CUDA short-range')
         self._owns_host=not isinstance(potential.host_evaluator,NativeEnvironment)
         if not self._owns_host:
             if potential.host_evaluator._closed:raise RuntimeError('potential host environment is closed')
@@ -266,6 +285,13 @@ class FastGCMC:
             if self._owns_host:self._host.close()
             raise RuntimeError(self._lib.poremc_fast_last_error().decode())
         self._finalizer=weakref.finalize(self,self._lib.poremc_fast_destroy,self._handle)
+        if self.short_range_backend=='cuda':
+            try:
+                self._check(self._lib.poremc_fast_short_range_enable(
+                    self._handle,self.cuda_library.encode(),self.short_range_min_batch))
+            except Exception:
+                self.close()
+                raise
         self.root_proposal=root_proposal
         if root_proposal is not None:
             if not np.array_equal(root_proposal.cell,self.cell):raise ValueError('root proposal cell differs')
@@ -276,7 +302,10 @@ class FastGCMC:
             'algorithm':potential.algorithm,'threads':potential.threads,
             'library_id':self._binary_id(self._lib._name),
             'reciprocal_backend':self.long_range_profile.get('backend','none')}
-        if 'cuda' in self._backend_signature['reciprocal_backend']:
+        if self.short_range_backend=='cuda':
+            self._backend_signature.update(short_range_backend=self.short_range_backend,
+                                           short_range_min_batch=self.short_range_min_batch)
+        if self.short_range_backend=='cuda' or 'cuda' in self._backend_signature['reciprocal_backend']:
             self._backend_signature['cuda_library_id']=self._binary_id(self.cuda_library)
         self._frozen_metadata=self._metadata()
 
@@ -344,12 +373,15 @@ class FastGCMC:
            'reciprocal_method':self.reciprocal_method,'pme_mesh':self.pme_mesh,'reciprocal_backend':self.reciprocal_backend,'cuda_library':self.cuda_library,
            'acceleration':self._acceleration_options()},sort_keys=True)
     def _acceleration_options(self):
-        return dict(sampling_mode=self.sampling_mode,host_grid_mesh=self.host_grid_mesh,
+        options=dict(sampling_mode=self.sampling_mode,host_grid_mesh=self.host_grid_mesh,
                     host_grid_cap=self.host_grid_cap,host_grid_cache=self.host_grid_cache,
                     grid_root_bias=self.grid_root_bias,ewald_half_spectrum=self.ewald_half_spectrum,
                     ewald_k_cutoff=self.ewald_k_cutoff,host_grid_steep=self.host_grid_steep,
                     guest_update=self.guest_update,pme_refresh=self.pme_refresh,
                     partial_regrowth=self.partial_regrowth,host_field_cache=self.host_field_cache)
+        if self.short_range_backend=='cuda':
+            options.update(short_range_backend=self.short_range_backend,short_range_min_batch=self.short_range_min_batch)
+        return options
 
     def _field_paths(self):
         if self.sampling_mode=='exact' or self.host_field_cache is None:
@@ -465,6 +497,13 @@ class FastGCMC:
         """Actual reciprocal method/backend and native cache/work counters."""
         return json.loads(self._native_string('poremc_fast_longrange_info'))
     @property
+    def short_range_profile(self):
+        """Actual short-range backend, framework/guest batch counts and guest refreshes."""
+        self._ensure()
+        if self.short_range_backend=='cpu':
+            return {'backend':'cpu'}
+        return json.loads(self._native_string('poremc_fast_short_range_info'))
+    @property
     def acceleration_profile(self):
         """Native stage counters, fixed-host grid reuse and interpolation costs."""
         return json.loads(self._native_string('poremc_fast_acceleration_info'))
@@ -524,7 +563,7 @@ class FastGCMC:
         trace=count.tolist();energy=energies.tolist();sample_steps=(before+burnin+sample_every*np.arange(1,len(count)+1)).tolist()
         self.count_trace.extend(trace);self.energy_trace.extend(energy);self.sample_steps.extend(sample_steps)
         sec=float(timing[0]);counters=self.counters
-        return {'engine':'FastGCMC C++17','steps':steps,'burnin':burnin,'sample_every':sample_every,
+        output={'engine':'FastGCMC C++17','steps':steps,'burnin':burnin,'sample_every':sample_every,
              'production_seconds':sec,'elapsed_seconds':float(timing.sum()),'attempted_moves_per_second':steps/sec if sec>0 else 0,
              'counts':trace,'energies_kelvin':energy,'sample_steps':sample_steps,'final_counts':self.counts.tolist(),
              'acceptance':{m:dict(c,rate=c['accepted']/c['attempted'] if c['attempted'] else 0.) for m,c in counters.items()},
@@ -532,14 +571,20 @@ class FastGCMC:
              'energy_statistics':summarize(energies,sec) if len(energies) else {},
              'adaptation_frozen':True,'delayed_acceptance':self.sampling_mode=='delayed','regrowth':'flexible suffix' if self.partial_regrowth else 'full molecule','rng':'std::mt19937_64',
              'long_range':self.long_range_profile,'acceleration':self.acceleration_profile}
+        if self.short_range_backend=='cuda':
+            output['short_range']=self.short_range_profile
+        return output
     @property
     def profile(self):
         self._ensure();out=np.empty(3,dtype=np.uint64)
         self._check(self._lib.poremc_fast_profile(self._handle,out.ctypes.data_as(_U64)))
-        return {**dict(zip(('guest_environment_builds','guest_environment_reuses','attempted_moves'),map(int,out))),
+        output={**dict(zip(('guest_environment_builds','guest_environment_reuses','attempted_moves'),map(int,out))),
                 'guest_update':'incremental' if self._incremental else 'rebuild',
                 'guest_local_updates':int(self._lib.poremc_fast_guest_updates(self._handle)),
                 'host':self._host.profile,'long_range':self.long_range_profile,'acceleration':self.acceleration_profile}
+        if self.short_range_backend=='cuda':
+            output['short_range']=self.short_range_profile
+        return output
     def _fingerprint(self):
         if hasattr(self,'_frozen_fingerprint'):return self._frozen_fingerprint
         p=self.potential

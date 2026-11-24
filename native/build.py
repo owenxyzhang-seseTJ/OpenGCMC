@@ -16,7 +16,7 @@ def main():
     p.add_argument('--compiler', default=os.environ.get('CXX', 'g++'))
     p.add_argument('--portable', action='store_true', help='Omit -march=native for a portable binary')
     p.add_argument('--no-openmp', action='store_true')
-    p.add_argument('--cuda', action='store_true', help='Also build the native CUDA reciprocal-candidate plugin')
+    p.add_argument('--cuda', action='store_true', help='Also build the native CUDA energy plugin')
     p.add_argument('--nvcc', default=os.environ.get('NVCC', 'nvcc'))
     p.add_argument('--cuda-arch', default='sm_86', help='CUDA target; default sm_86 for RTX 30-series')
     args = p.parse_args()
@@ -40,7 +40,7 @@ def main():
     if args.cuda:
         cuda_output=output.with_name('libporemc_ewald_cuda'+extension)
         cuda_command=shlex.split(args.nvcc)+['-std=c++17','-O3','--fmad=false','-arch='+args.cuda_arch,
-                        '-Xcompiler','-fPIC','-shared',str(root/'ewald_cuda.cu'),'-o',str(cuda_output)]
+                        '-Xcompiler','-fPIC','-shared',str(root/'ewald_cuda.cu'),str(root/'short_range_cuda.cu'),'-o',str(cuda_output)]
         print(' '.join(shlex.quote(x) for x in cuda_command))
         cuda_t0=time.perf_counter();subprocess.run(cuda_command,check=True)
         metadata['cuda']={'command':cuda_command,'build_seconds':time.perf_counter()-cuda_t0,

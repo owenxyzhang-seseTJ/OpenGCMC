@@ -70,6 +70,8 @@ int poremc_fast_surrogate_site_energies(void* handle,size_t exclude,size_t prefi
                                       const double* prefix,size_t batches,const double* trials,double* energies);
 int poremc_fast_surrogate_molecule_energies(void* handle,size_t exclude,size_t batches,
                                           const double* trials,double* energies);
+int poremc_fast_short_range_enable(void* p,const char* library,size_t min_batch);
+size_t poremc_fast_short_range_info(void* p,char* buffer,size_t capacity);
 int poremc_fast_probe_sites(void* handle,size_t species,size_t exclude,size_t prefix_atoms,
                            const double* prefix,size_t batches,const double* trials,
                            int reference,double* energies);

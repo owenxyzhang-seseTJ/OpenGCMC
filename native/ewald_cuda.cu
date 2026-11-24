@@ -3,7 +3,7 @@
 //   native/ewald_cuda.cu -o poremc/libporemc_ewald_cuda.so
 // No Python callback is used by the native FastGCMC sampling loop.
 #include "ewald_cuda.h"
-#include <cuda_runtime.h>
+#include "cuda_buffers.h"
 #include "ewald_cuda_tensor.h"
 #include <limits>
 #include <algorithm>
@@ -16,12 +16,8 @@
 namespace {
 using namespace poremc_cuda_tensor;
 thread_local std::string last_error;
-void check(cudaError_t status,const char*operation){if(status!=cudaSuccess)throw std::runtime_error(std::string(operation)+": "+cudaGetErrorString(status));}
-template<typename T> struct Buffer {
- T* data=nullptr;size_t capacity=0;
- ~Buffer(){if(data)cudaFree(data);}
- void reserve(size_t count){if(count<=capacity)return;if(count>std::numeric_limits<size_t>::max()/sizeof(T))throw std::overflow_error("CUDA buffer too large");T*next=nullptr;check(cudaMalloc(reinterpret_cast<void**>(&next),count*sizeof(T)),"cudaMalloc");if(data)cudaFree(data);data=next;capacity=count;}
-};
+using poremc_cuda::Buffer;
+using poremc_cuda::check;
 struct GPU {
  int device=0;size_t modes=0;cudaStream_t stream=nullptr;
  Buffer<double> k,weight,xyz,q,base,delta,partial,result;

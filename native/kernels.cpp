@@ -1,12 +1,14 @@
 // PoreMC: independently implemented pair-energy kernels. MIT license.
 // Cell vectors are rows. Energies U/k_B are in K; lengths are in Angstrom.
 #include "guest_cells.h"
+#include "short_range_cuda.h"
 #include <algorithm>
 #include <atomic>
 #include <array>
 #include <cmath>
 #include <cstddef>
 #include <cstdint>
+#include <cstdlib>
 #include <exception>
 #include <limits>
 #include <numeric>
@@ -16,6 +18,9 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#if defined(__unix__) || defined(__APPLE__)
+#include <dlfcn.h>
+#endif
 #ifdef _OPENMP
 #include <omp.h>
 #endif
@@ -406,4 +411,92 @@ extern "C" int poremc_query_energy(void*p,size_t batches,const double*xyz,double
    double total=0;for(size_t a=0;a<q.atoms;++a)total+=env.atom_energy(xyz+(size_t(b)*q.atoms+a)*3,q.sigma[a],q.epsilon[a],q.charge[a],0,0,q.tables[a].get());out[b]=total;
   }return 0;
  }catch(const std::exception&e){last_error=e.what();return -1;}
+}
+
+namespace {
+struct ShortRangeCuda {
+ void* library=nullptr;
+ void* handle=nullptr;
+ decltype(&poremc_pair_cuda_destroy) destroy=nullptr;
+ decltype(&poremc_pair_cuda_error) error=nullptr;
+ decltype(&poremc_pair_cuda_device) device=nullptr;
+ decltype(&poremc_pair_cuda_upload_guests) upload=nullptr;
+ decltype(&poremc_pair_cuda_energy) energy=nullptr;
+
+ ~ShortRangeCuda(){
+  if(handle)destroy(handle);
+#if defined(__unix__) || defined(__APPLE__)
+  if(library)dlclose(library);
+#endif
+ }
+
+ void open(const Environment& env,const char* path){
+#if defined(__unix__) || defined(__APPLE__)
+  library=dlopen(path,RTLD_NOW|RTLD_LOCAL);
+  if(!library)throw std::runtime_error(dlerror());
+  auto create=reinterpret_cast<decltype(&poremc_pair_cuda_create)>(dlsym(library,"poremc_pair_cuda_create"));
+  destroy=reinterpret_cast<decltype(destroy)>(dlsym(library,"poremc_pair_cuda_destroy"));
+  error=reinterpret_cast<decltype(error)>(dlsym(library,"poremc_pair_cuda_error"));
+  device=reinterpret_cast<decltype(device)>(dlsym(library,"poremc_pair_cuda_device"));
+  upload=reinterpret_cast<decltype(upload)>(dlsym(library,"poremc_pair_cuda_upload_guests"));
+  energy=reinterpret_cast<decltype(energy)>(dlsym(library,"poremc_pair_cuda_energy"));
+  if(!create||!destroy||!error||!device||!upload||!energy)
+   throw std::runtime_error("CUDA short-range plug-in symbols are missing; rebuild with python native/build.py --cuda");
+  int selected=0;
+  if(const char* configured=std::getenv("POREMC_CUDA_DEVICE"))selected=std::stoi(configured);
+  std::vector<PoreMCCudaPairSite> sites(env.m);
+  for(size_t j=0;j<env.m;++j)
+   sites[j]={{env.sx[j],env.sy[j],env.sz[j]},env.sigma[j],env.sqrt_epsilon[j],env.charge[j]};
+  PoreMCCudaPairHost host{};
+  std::copy(env.cell.begin(),env.cell.end(),host.cell);
+  std::copy(env.inv.begin(),env.inv.end(),host.inverse);
+  std::copy(env.bins.begin(),env.bins.end(),host.bins);
+  host.cutoff=env.cutoff;host.alpha=env.alpha;
+  host.dsf_value=env.dsf_value;host.dsf_slope=env.dsf_slope;
+  host.diagonal=env.diagonal;host.shifted=env.shifted;host.coulomb=env.coulomb;
+  host.sites=env.m;host.coordinates=sites.data();
+  if(env.expanded){
+   host.query_cells=env.adj_start.size()-1;host.neighbour_entries=env.adj.size();
+   host.offsets=env.adj_start.data();host.neighbours=env.adj.data();
+  }
+  handle=create(&host,selected);
+  if(!handle)throw std::runtime_error(error());
+#else
+  (void)env;(void)path;
+  throw std::runtime_error("dynamic CUDA short-range loading requires POSIX");
+#endif
+ }
+
+ int checked(int status) const {
+  if(status)last_error=error();
+  return status;
+ }
+};
+}
+
+extern "C" {
+void* poremc_short_cuda_create(void* environment,const char* path){
+ try{
+  if(!environment||!path||!*path)throw std::invalid_argument("CUDA short-range requires a host and a plug-in path");
+  auto context=std::make_unique<ShortRangeCuda>();
+  context->open(*static_cast<Environment*>(environment),path);
+  return context.release();
+ }catch(const std::exception& error){last_error=error.what();return nullptr;}
+}
+void poremc_short_cuda_destroy(void* context){delete static_cast<ShortRangeCuda*>(context);}
+const char* poremc_short_cuda_device(void* context){
+ const auto& gpu=*static_cast<ShortRangeCuda*>(context);
+ return gpu.device(gpu.handle);
+}
+int poremc_short_cuda_upload_guests(void* context,size_t sites,const PoreMCCudaPairSite* guests){
+ const auto& gpu=*static_cast<ShortRangeCuda*>(context);
+ return gpu.checked(gpu.upload(gpu.handle,sites,guests));
+}
+int poremc_short_cuda_energy(void* context,size_t batches,size_t atoms,const double* xyz,
+                            const double* sigma,const double* epsilon,const double* charge,
+                            size_t exclude_begin,size_t exclude_end,int parts,double* out){
+ const auto& gpu=*static_cast<ShortRangeCuda*>(context);
+ return gpu.checked(gpu.energy(gpu.handle,batches,atoms,xyz,sigma,epsilon,charge,
+                               exclude_begin,exclude_end,parts,out));
+}
 }

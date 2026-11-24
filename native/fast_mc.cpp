@@ -3,6 +3,7 @@
 #include "ewald_state.h"
 #include "host_grid.h"
 #include "guest_cells.h"
+#include "short_range_cuda.h"
 #include <algorithm>
 #include <array>
 #include <chrono>
@@ -104,6 +105,13 @@ struct Fast {
  std::array<uint64_t,10> counters{};
  uint64_t steps=0;
  void* host;
+ size_t framework_site_count;
+ Env short_range_cuda{nullptr,poremc_short_cuda_destroy};
+ size_t short_range_min_batch=1;
+ bool short_range_guests_dirty=true;
+ std::vector<PoreMCCudaPairSite> short_range_guest_sites;
+ std::vector<size_t> short_range_guest_offsets;
+ uint64_t cuda_framework_batches=0,cuda_guest_batches=0,cuda_guest_uploads=0;
  Env guest_cache{nullptr,poremc_environment_destroy};
  std::unique_ptr<poremc::GuestCells> guest_cells;
  bool guest_dirty=true;
@@ -120,7 +128,7 @@ struct Fast {
      :max_particles(configs[0].max_particles),T(configs[0].temperature),rc(configs[0].cutoff),
       alpha(configs[0].alpha),max_translation(configs[0].max_translation),max_rotation(configs[0].max_rotation),
       shifted(configs[0].shifted),coulomb(configs[0].coulomb),algorithm(configs[0].algorithm),
-      threads(configs[0].threads),members(components),partial_regrowth(partial),rng(configs[0].seed),host(configs[0].host) {
+      threads(configs[0].threads),members(components),partial_regrowth(partial),rng(configs[0].seed),host(configs[0].host),framework_site_count(configs[0].host_atoms) {
   const auto& c=configs[0];
   dsf_value=std::erfc(alpha*rc)/rc;dsf_slope=std::erfc(alpha*rc)/(rc*rc)+2*alpha/std::sqrt(PI)*std::exp(-alpha*alpha*rc*rc)/rc;
   if(max_particles==0||!host||!(T>0)||!std::isfinite(T))throw std::invalid_argument("invalid FastGCMC thermodynamics/configuration");
@@ -293,12 +301,63 @@ struct Fast {
   void* handle=poremc_environment_create(s.size(),p.data(),s.data(),e.data(),q.data(),H.data(),rc,std::min(coulomb,2),alpha,shifted,algorithm==2?1:algorithm,threads);
   if(!handle)throw std::runtime_error(poremc_last_error());return Env(handle,poremc_environment_destroy);
  }
+ bool use_cuda_short_range(size_t batches) const {
+  return short_range_cuda && batches>=short_range_min_batch;
+ }
+ void upload_cuda_guests(){
+  if(!short_range_guests_dirty)return;
+  short_range_guest_sites.clear();
+  short_range_guest_offsets.clear();
+  short_range_guest_offsets.push_back(0);
+  for(size_t i=0;i<particles.size();++i){
+   const auto& plan=molecules[particle_type[i]];
+   for(size_t a=0;a<plan.A;++a){
+    const auto f=row(get(particles[i],a),inv);
+    short_range_guest_sites.push_back({{f.x-std::floor(f.x),f.y-std::floor(f.y),f.z-std::floor(f.z)},
+                                      plan.sigma[a],std::sqrt(plan.epsilon[a]),plan.charge[a]});
+   }
+   short_range_guest_offsets.push_back(short_range_guest_sites.size());
+  }
+  if(poremc_short_cuda_upload_guests(short_range_cuda.get(),short_range_guest_sites.size(),
+                                    short_range_guest_sites.data()))
+   throw std::runtime_error(poremc_last_error());
+  short_range_guests_dirty=false;
+  ++cuda_guest_uploads;
+ }
+ void cuda_pairs(size_t batches,size_t atoms,const double* positions,
+                 const double* sigma,const double* epsilon,const double* charge,int parts,double* out){
+  size_t begin=0,end=0;
+  if(parts&POREMC_PAIR_GUESTS){
+   upload_cuda_guests();
+   if(excluded_particle<particles.size()){
+    begin=short_range_guest_offsets[excluded_particle];
+    end=short_range_guest_offsets[excluded_particle+1];
+   }
+  }
+  if(poremc_short_cuda_energy(short_range_cuda.get(),batches,atoms,positions,sigma,epsilon,charge,begin,end,parts,out))
+   throw std::runtime_error(poremc_last_error());
+  if(parts&POREMC_PAIR_FRAMEWORK)++cuda_framework_batches;
+  if(parts&POREMC_PAIR_GUESTS)++cuda_guest_batches;
+ }
  void external(void* env,const double* positions,size_t batches,size_t atoms,const double*s,const double*e,const double*q,std::vector<double>&out,bool reference=false){
-  out.resize(batches);scratch_other.resize(batches);auto&other=scratch_other;
+  out.resize(batches);
+  const bool grid=reference&&mol->host_grid;
+  // Arbitrary partial environments (energy reconstruction) keep their own
+  // CPU path. The device snapshot mirrors the complete accepted guest state.
+  const bool gpu=use_cuda_short_range(batches)&&(!env||env==guest_cache.get());
+  if(gpu&&!grid&&(framework_site_count||!particles.empty())){
+   const int sides=(framework_site_count?POREMC_PAIR_FRAMEWORK:0)
+                   | (particles.empty()?0:POREMC_PAIR_GUESTS);
+   cuda_pairs(batches,atoms,positions,s,e,q,sides,out.data());
+   return;
+  }
   void* binding=atoms==mol->A?mol->host_query.get():mol->host_sites[size_t(s-mol->sigma.data())].get();
-  if(reference&&mol->host_grid)mol->host_grid->batch_energy(batches,atoms,positions,size_t(s-mol->sigma.data()),out.data());
+  if(grid)mol->host_grid->batch_energy(batches,atoms,positions,size_t(s-mol->sigma.data()),out.data());
   else if(poremc_query_energy(binding,batches,positions,out.data()))throw std::runtime_error(poremc_last_error());
-  if(!env){
+  scratch_other.resize(batches);auto&other=scratch_other;
+  if(gpu&&!particles.empty()){
+   cuda_pairs(batches,atoms,positions,s,e,q,POREMC_PAIR_GUESTS,other.data());
+  }else if(!env){
    const size_t end=excluded_particle<particles.size()?excluded_particle+1:excluded_particle;
    guest_cells->batch(batches,atoms,positions,s,e,q,excluded_particle,end,other.data());
   }else{
@@ -382,8 +441,12 @@ struct Fast {
  double surrogate_molecule_energy(void*env,const std::vector<double>&x){
   surrogate_molecule_energies(env,x.data(),1,scratch_values);return scratch_values[0];
  }
- double host_internal_energy(const std::vector<double>&x){
-  double u=0;if(poremc_query_energy(mol->host_query.get(),1,x.data(),&u))throw std::runtime_error(poremc_last_error());
+ double host_internal_energy(const std::vector<double>&x,bool allow_cuda=true){
+  double u=0;
+  if(allow_cuda&&use_cuda_short_range(1)&&framework_site_count)
+   cuda_pairs(1,mol->A,x.data(),mol->sigma.data(),mol->epsilon.data(),mol->charge.data(),POREMC_PAIR_FRAMEWORK,&u);
+  else if(poremc_query_energy(mol->host_query.get(),1,x.data(),&u))
+   throw std::runtime_error(poremc_last_error());
   if(!mol->rigid||longrange)for(size_t i=0;i<mol->A;++i)u+=internal(x,get(x,i),i);
   return u;
  }
@@ -476,7 +539,7 @@ struct Fast {
   if(reference_cbmc){particle_host_internal.push_back(local);particle_reference_local.push_back(reference);}
   group.push_back(particles.size());
   particle_type.push_back(component());
-  particles.push_back(std::move(x));guest_dirty=true;
+  particles.push_back(std::move(x));guest_dirty=short_range_guests_dirty=true;
  }
  template<class V> static void swap_erase(V& v,size_t i){
   if(i+1!=v.size())v[i]=std::move(v.back());
@@ -503,7 +566,7 @@ struct Fast {
    other.insert(std::lower_bound(other.begin(),other.end(),index),index);
   }
   swap_erase(particle_type,index);swap_erase(particles,index);
-  guest_dirty=true;
+  guest_dirty=short_range_guests_dirty=true;
  }
  void commit_replace(size_t index,std::vector<double> x,poremc::ChargeContribution*prepared=nullptr,const double*prepared_local=nullptr,const double*prepared_reference=nullptr){
   const double local=reference_cbmc?(prepared_local?*prepared_local:host_internal_energy(x)):0.;
@@ -515,7 +578,7 @@ struct Fast {
   }
   if(guest_cells){guest_cells->erase(index,mol->A,particles[index].data());insert_cells(index,*mol,x);}
   if(reference_cbmc){particle_host_internal[index]=local;particle_reference_local[index]=reference;}
-  particles[index]=std::move(x);guest_dirty=true;
+  particles[index]=std::move(x);guest_dirty=short_range_guests_dirty=true;
  }
  void add_particle(size_t species,const double* coordinates,bool raw){
   select(species);
@@ -676,7 +739,7 @@ struct Fast {
     double previous=0.;
     guest_cells->batch(1,mol->A,x.data(),mol->sigma.data(),mol->epsilon.data(),mol->charge.data(),
                        i,particles.size(),&previous);
-    result+=host_internal_energy(x)+previous;
+    result+=host_internal_energy(x,false)+previous;
    }else{
     auto env=environment(std::numeric_limits<size_t>::max(),i);
     result+=molecule_energy(env.get(),x,false);
@@ -826,6 +889,36 @@ size_t poremc_fast_longrange_info(void*p,char*buffer,size_t capacity){
   }
   std::string info=out.str();if(buffer&&capacity>=info.size()+1)std::memcpy(buffer,info.c_str(),info.size()+1);return info.size()+1;
  }catch(const std::exception&e){fast_error=e.what();return 0;}
+}
+int poremc_fast_short_range_enable(void* p,const char* library,size_t min_batch){
+ try{
+  if(!p||!min_batch)throw std::invalid_argument("CUDA short-range requires a positive minimum batch");
+  auto& sim=*static_cast<Fast*>(p);
+  if(sim.short_range_cuda||sim.steps||!sim.particles.empty())
+   throw std::invalid_argument("select CUDA short-range before starting a simulation");
+  auto* context=poremc_short_cuda_create(sim.host,library);
+  if(!context)throw std::runtime_error(poremc_last_error());
+  sim.short_range_cuda.reset(context);
+  sim.short_range_min_batch=min_batch;
+  return 0;
+ }catch(const std::exception& error){fast_error=error.what();return -1;}
+}
+size_t poremc_fast_short_range_info(void* p,char* buffer,size_t capacity){
+ try{
+  if(!p)throw std::invalid_argument("closed FastGCMC instance");
+  const auto& sim=*static_cast<Fast*>(p);
+  std::ostringstream out;
+  if(sim.short_range_cuda){
+   out<<"{\"backend\":\"cuda\",\"device\":"<<std::quoted(poremc_short_cuda_device(sim.short_range_cuda.get()))
+      <<",\"min_batch\":"<<sim.short_range_min_batch
+      <<",\"framework_batches\":"<<sim.cuda_framework_batches
+      <<",\"guest_batches\":"<<sim.cuda_guest_batches
+      <<",\"guest_uploads\":"<<sim.cuda_guest_uploads<<'}';
+  }else out<<"{\"backend\":\"cpu\"}";
+  auto info=out.str();
+  if(buffer&&capacity>=info.size()+1)std::memcpy(buffer,info.c_str(),info.size()+1);
+  return info.size()+1;
+ }catch(const std::exception& error){fast_error=error.what();return 0;}
 }
 int poremc_fast_probe_sites(void* p,size_t species,size_t exclude,size_t i,const double* prefix,
                             size_t batches,const double* trials,int reference,double* out){

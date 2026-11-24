@@ -1,6 +1,38 @@
 // FP64 cached-neighbour kernels. MIT.
 // One block per trial atom; immutable host and query tables stay device-resident.
 #include <math.h>
+namespace poremc_cuda {
+__device__ inline double fractional_component(const double* x,const double* inv,int axis) {
+ const double value=x[0]*inv[axis]+x[1]*inv[3+axis]+x[2]*inv[6+axis];
+ return value-floor(value);
+}
+
+__device__ inline double periodic_r2(double u,double v,double w,const double* h,int diagonal) {
+ u-=nearbyint(u);v-=nearbyint(v);w-=nearbyint(w);
+ double dx,dy,dz;
+ if(diagonal){dx=u*h[0];dy=v*h[4];dz=w*h[8];}
+ else{dx=u*h[0]+v*h[3]+w*h[6];dy=u*h[1]+v*h[4]+w*h[7];dz=u*h[2]+v*h[5]+w*h[8];}
+ return dx*dx+dy*dy+dz*dz;
+}
+
+__device__ inline double pair_value(double r2,double s2,double e4,double qq,
+                                    double shift,double force_coefficient,int coulomb,
+                                    double rc,double alpha,double vcut,double slope) {
+ double value=0;
+ if(s2>0&&e4>0) {
+  if(r2==0)return INFINITY;
+  const double t=s2/r2,t3=t*t*t;
+  value=e4*t3*(t3-1)-shift;
+  if(force_coefficient!=0.)value-=force_coefficient*(sqrt(r2)-rc)/rc;
+ }
+ if(coulomb&&qq!=0&&!isinf(value)) {
+  if(r2==0)return copysign(INFINITY,qq);
+  const double r=sqrt(r2),radial=erfc(alpha*r)/r;
+  value+=qq*(coulomb==1?radial-vcut+slope*(r-rc):radial);
+ }
+ return value;
+}
+}
 extern "C" __global__ void poremc_cached_atoms(
  const long long Q,const int A,const long long M,const double* xyz,
  const double* fs,const double* H,const double* inv,const int* bins,
@@ -10,9 +42,9 @@ extern "C" __global__ void poremc_cached_atoms(
  const double vcut,const double slope,double* atom_out) {
  const long long query=blockIdx.x;if(query>=Q)return;
  const int tid=threadIdx.x,a=int(query%A);const double*x=xyz+3*query;
- double fx=x[0]*inv[0]+x[1]*inv[3]+x[2]*inv[6];fx-=floor(fx);
- double fy=x[0]*inv[1]+x[1]*inv[4]+x[2]*inv[7];fy-=floor(fy);
- double fz=x[0]*inv[2]+x[1]*inv[5]+x[2]*inv[8];fz-=floor(fz);
+ const double fx=poremc_cuda::fractional_component(x,inv,0);
+ const double fy=poremc_cuda::fractional_component(x,inv,1);
+ const double fz=poremc_cuda::fractional_component(x,inv,2);
  unsigned long long begin=0,end=M;
  if(indexed) {
   int ix=int(fx*bins[0]),iy=int(fy*bins[1]),iz=int(fz*bins[2]);
@@ -24,24 +56,9 @@ extern "C" __global__ void poremc_cached_atoms(
  double sum=0.0;
  for(unsigned long long k=begin+tid;k<end;k+=blockDim.x) {
   const unsigned long long j=indexed?neighbours[k]:k;
-  double u=fx-fs[j],v=fy-fs[M+j],w=fz-fs[2*M+j];
-  u-=nearbyint(u);v-=nearbyint(v);w-=nearbyint(w);
-  double dx,dy,dz;
-  if(diagonal){dx=u*H[0];dy=v*H[4];dz=w*H[8];}
-  else{dx=u*H[0]+v*H[3]+w*H[6];dy=u*H[1]+v*H[4]+w*H[7];dz=u*H[2]+v*H[5]+w*H[8];}
-  const double r2=dx*dx+dy*dy+dz*dz;
-  if(r2<rc2) {
-   const double s2=table[j],e4=table[M+j],qq=table[3*M+j];double value=0;
-   if(s2>0&&e4>0) {
-    if(r2==0)value=INFINITY;
-    else{double t=s2/r2,t3=t*t*t;value=e4*t3*(t3-1)-table[2*M+j];}
-   }
-   if(coulomb&&qq!=0&&!isinf(value)) {
-    if(r2==0)value=copysign(INFINITY,qq);
-    else{double r=sqrt(r2),radial=erfc(alpha*r)/r;value+=qq*(coulomb==1?radial-vcut+slope*(r-rc):radial);}
-   }
-   sum+=value;
-  }
+  const double r2=poremc_cuda::periodic_r2(fx-fs[j],fy-fs[M+j],fz-fs[2*M+j],H,diagonal);
+  if(r2<rc2)sum+=poremc_cuda::pair_value(r2,table[j],table[M+j],table[3*M+j],
+                                      table[2*M+j],0.,coulomb,rc,alpha,vcut,slope);
  }
  __shared__ double values[128];values[tid]=sum;__syncthreads();
  for(int stride=blockDim.x/2;stride>0;stride/=2){if(tid<stride)values[tid]+=values[tid+stride];__syncthreads();}

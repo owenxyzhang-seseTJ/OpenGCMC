@@ -118,7 +118,7 @@ $$
 
 The accepted state supplies $S_\mathbf{k}$. A rigid translation multiplies the cached molecular factor by $e^{i\mathbf{k}\cdot\Delta\mathbf r}$. The conjugate half spectrum retains the finite Ewald sum. PME uses its specified mesh Hamiltonian and native CPU FFTs.
 
-The native CUDA plug-in evaluates reciprocal candidates in FP64 for direct Ewald. With `reciprocal_backend="cuda-tensor"`, exact sampling batches candidate energies. Delayed sampling computes the selected molecular structure factor on the device, then applies the residual and commits the state on the CPU. The sampler's short-range work, proposals and accept/reject decisions run on the CPU. The CuPy short-range backend is a separate interface.
+The native CUDA plug-in evaluates reciprocal candidates in FP64 for direct Ewald. With `reciprocal_backend="cuda-tensor"`, exact sampling batches candidate energies. Delayed sampling computes the selected molecular structure factor on the device, then applies the residual and commits the state on the CPU. The CPU runs proposals and accept/reject decisions. The native short-range backend is selected independently.
 
 Use `reciprocal_backend="cuda-resident"` with delayed direct Ewald to keep the accepted spectrum on the device. The device evaluates the reciprocal energy increment from the signed charges of the selected new and old molecular sites. It returns one FP64 energy and applies the staged increment after acceptance. The CPU retains its reference state for energy reporting and checkpoint validation. Checkpoints include the actual device spectrum. The host ABI test uses a CPU model of the CUDA interface.
 
@@ -130,6 +130,22 @@ python tools/longrange/validate_tensor_gpu.py --input system.json --output outpu
 ```
 
 Set the architecture to match the installed GPU. The device validator requires a compatible NVIDIA driver and CUDA toolkit. `long_range_profile` reports the resolved backend, mode counts, device and candidate batches. `acceleration_profile` reports grid reuse and acceptance-stage counters.
+
+## Native CUDA short-range batches
+
+Enable the FP64 real-space path in the C++ sampler with these `sampling` options.
+
+```json
+{
+  "driver": "cpp",
+  "short_range_backend": "cuda",
+  "short_range_min_batch": 16
+}
+```
+
+The CUDA plug-in produced by `native/build.py --cuda` contains the real-space and reciprocal kernels. `cuda_library` can select a particular build. The real-space path supports Lennard-Jones interactions, potential and force shifting, damped shifted-force Coulomb and the real term of Ewald. It uses the same cutoff, periodic geometry and molecular exclusions as the native CPU path. The framework and, when available, its cached neighbour plan stay on the device. Accepted guest positions are uploaded on the next eligible query after an accepted change.
+
+The minimum batch size counts candidate configurations. Calls below that size use the native CPU pair evaluator. In delayed sampling, a threshold of 1 also offloads single-candidate exact framework corrections. In grid-based sampling the reference framework field is still interpolated on the CPU, while eligible guest pair batches use CUDA. `short_range_profile` reports actual framework batches, guest batches and guest uploads. Choose the batch threshold for the workload and device using blocking-call latency and sampling throughput measurements.
 
 ## Reproduction and source
 
