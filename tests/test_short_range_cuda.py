@@ -104,3 +104,47 @@ def test_device_pairs_across_guest_changes(cuda_plugin, coulomb, shifted, guest_
             np.testing.assert_allclose(restarted.trial_molecule_energies(trials, species=0),
                                        gpu.trial_molecule_energies(trials, species=0),
                                        rtol=5e-11, atol=5e-8)
+
+
+def test_zero_charge_trials_and_batched_translations(cuda_plugin):
+    species, potential, body = fixture("ewald", True)
+    args = (species, potential, potential.cell, 400., [2e-4, 1e-4])
+    moves = dict(insert=0., delete=0., translate=1., rotate=0., regrow=0.)
+    options = dict(seed=77, trials=8, move_weights=moves, guest_update="incremental")
+    starts = [(0, body+[3., 4., 8.]), (1, np.array([[8., 5., 9.]]))]
+    neutral_trials = np.array([[[8., 5., 9.]], [[11., 6., 4.]]])
+    charged_trials = np.array([body+[3., 4., 8.], body+[9., 9., 9.]])
+    with FastGCMC(*args, **options) as cpu, FastGCMC(
+        *args, **options, short_range_backend="cuda", short_range_min_batch=1,
+        reciprocal_backend="cuda-tensor", cuda_library=cuda_plugin
+    ) as gpu:
+        for sid, xyz in starts:
+            cpu.add_particle(sid, xyz)
+            gpu.add_particle(sid, xyz)
+        initial_reciprocal = gpu.long_range_profile["gpu_batches"]
+        np.testing.assert_allclose(
+            gpu.trial_molecule_energies(neutral_trials, exclude=1, species=1),
+            cpu.trial_molecule_energies(neutral_trials, exclude=1, species=1),
+            rtol=5e-11, atol=5e-8,
+        )
+        assert gpu.long_range_profile["gpu_batches"] == initial_reciprocal
+
+        # Zero net charge is distinct from zero partial charges on every site.
+        np.testing.assert_allclose(
+            gpu.trial_molecule_energies(charged_trials, exclude=0, species=0),
+            cpu.trial_molecule_energies(charged_trials, exclude=0, species=0),
+            rtol=5e-11, atol=5e-8,
+        )
+        assert gpu.long_range_profile["gpu_batches"] == initial_reciprocal+1
+
+        initial_short = gpu.short_range_profile["framework_batches"]
+        steps = 80
+        gpu.run(steps, sample_every=8, record_energy=False)
+        cpu.run(steps, sample_every=8, record_energy=False)
+        assert gpu.short_range_profile["framework_batches"]-initial_short == steps
+        assert 0 < gpu.long_range_profile["gpu_batches"]-initial_reciprocal-1 < steps
+        assert gpu.counters == cpu.counters
+        for (cpu_sid, cpu_xyz), (gpu_sid, gpu_xyz) in zip(cpu.entries(), gpu.entries(), strict=True):
+            assert cpu_sid == gpu_sid
+            np.testing.assert_array_equal(cpu_xyz, gpu_xyz)
+        np.testing.assert_allclose(gpu.total_energy(), cpu.total_energy(), rtol=5e-11, atol=5e-8)

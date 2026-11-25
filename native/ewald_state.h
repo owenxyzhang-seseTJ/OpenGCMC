@@ -52,6 +52,7 @@ class EwaldState {
   ChargeContribution contribution(std::size_t atoms,const double* positions,const double* charge) const;
   // FP64 device tensor for a selected delayed trial, CPU unless explicitly requested.
   ChargeContribution selected_contribution(std::size_t atoms,const double* positions,const double* charge) const;
+  bool uses_cuda_batches() const;
   bool resident() const;
   double resident_trial(std::size_t atoms,const double* added,const double* removed,const double* charge);
   void discard_resident_trial();

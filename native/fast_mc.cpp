@@ -48,7 +48,7 @@ struct Growth {std::vector<double> x;double logw=0,energy=0;bool valid=true;};
 struct MoleculePlan {
  size_t A,ntors;
  double z,scale14lj,scale14q;
- bool rigid;
+ bool rigid,has_partial_charge;
  std::vector<double> sigma,epsilon,charge,bond,angle,body,brange,arange,bk,ak,tk,tp;
  std::vector<int32_t> parent,aref,dref,K,excluded,tidx,tn,graph;
  Env host_query{nullptr,poremc_query_destroy};
@@ -65,6 +65,7 @@ struct MoleculePlan {
   if(!A||z<0||!std::isfinite(z))throw std::invalid_argument("invalid molecule size or activity");
   auto dv=[&](const double*p,size_t n){return n ? std::vector<double>(p,p+n) : std::vector<double>{};};auto iv=[&](const int32_t*p,size_t n){return n ? std::vector<int32_t>(p,p+n) : std::vector<int32_t>{};};
   sigma=dv(c.sigma,A);epsilon=dv(c.epsilon,A);charge=dv(c.charge,A);bond=dv(c.bond_lengths,A);angle=dv(c.angles,A);body=dv(c.rigid_positions,3*A);
+  has_partial_charge=std::any_of(charge.begin(),charge.end(),[](double value){return value!=0.0;});
   brange=dv(c.bond_ranges,2*A);arange=dv(c.angle_ranges,2*A);bk=dv(c.bond_constants,A);ak=dv(c.angle_constants,A);
   parent=iv(c.parents,A);aref=iv(c.angle_refs,A);dref=iv(c.dihedral_refs,A);K=iv(c.trials,A);excluded=iv(c.exclusions,A*A);
   tidx=iv(c.torsion_indices,4*ntors);tn=iv(c.torsion_periodicity,ntors);tk=dv(c.torsion_k,ntors);tp=dv(c.torsion_phase,ntors);
@@ -119,7 +120,7 @@ struct Fast {
  size_t excluded_site_begin=0, excluded_site_end=0;
  std::vector<size_t> guest_offsets;
  std::uint64_t guest_builds=0,guest_reuses=0,guest_updates=0;
- std::vector<double> scratch_other,scratch_trial,scratch_energy,scratch_values,scratch_weights;
+ std::vector<double> scratch_other,scratch_trial,scratch_energy,scratch_values,scratch_weights,scratch_local_pair;
  double dsf_value=0,dsf_slope=0;
 
  Fast(const PoreMCFastConfig* configs,size_t components,const double* weights,int local,
@@ -422,7 +423,7 @@ struct Fast {
  }
  void molecule_energies(void*env,const double*xyz,size_t batches,std::vector<double>&energies,bool include_longrange=true){
   external(env,xyz,batches,mol->A,mol->sigma.data(),mol->epsilon.data(),mol->charge.data(),energies);
-  if(!mol->rigid||longrange){
+  if(!mol->rigid||(longrange&&mol->has_partial_charge)){
    std::vector<double>x(3*mol->A);
    for(size_t b=0;b<batches;++b){std::copy(xyz+3*mol->A*b,xyz+3*mol->A*(b+1),x.begin());for(size_t i=0;i<mol->A;++i)energies[b]+=internal(x,get(x,i),i);}
   }
@@ -722,7 +723,19 @@ struct Fast {
       accepted=accept(-difference/T);
       if(accepted)commit_replace(index,std::move(candidate),&prepared);
     }else{
-      const double old_u=molecule_energy(env,old), new_u=molecule_energy(env,candidate);
+      double old_u,new_u;
+      const bool short_cuda=use_cuda_short_range(1);
+      const bool reciprocal_cuda=longrange&&mol->has_partial_charge&&longrange->uses_cuda_batches();
+      // Both poses use the same bath and excluded particle. Keep the original
+      // short-range backend when dispatch would change at batch size two.
+      if((short_cuda||reciprocal_cuda)&&short_cuda==use_cuda_short_range(2)){
+       scratch_local_pair.assign(old.begin(),old.end());
+       scratch_local_pair.insert(scratch_local_pair.end(),candidate.begin(),candidate.end());
+       molecule_energies(env,scratch_local_pair.data(),2,scratch_values);
+       old_u=scratch_values[0];new_u=scratch_values[1];
+      }else{
+       old_u=molecule_energy(env,old);new_u=molecule_energy(env,candidate);
+      }
       if(!std::isfinite(old_u))throw std::runtime_error("invalid current molecule energy");
       accepted=accept(-(new_u-old_u)/T);
       if(accepted){wrap(candidate);commit_replace(index,std::move(candidate));}

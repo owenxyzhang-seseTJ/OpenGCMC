@@ -241,9 +241,14 @@ struct EwaldState::Impl {
  }
  ChargeContribution make(std::size_t atoms,const double*xyz,const double*q)const{
   ChargeContribution r;
-  for(std::size_t a=0;a<atoms;++a){r.charge+=q[a];r.squared_charge+=q[a]*q[a];}
+  bool charged=false;
+  for(std::size_t a=0;a<atoms;++a){
+   r.charge+=q[a];r.squared_charge+=q[a]*q[a];
+   charged|=q[a]!=0.0;
+  }
   if(c.method==0){
    r.modes.assign(coefficient.size(),Cx(0,0));
+   if(!charged)return r;
    // Keep the output slab resident while an atom tile accumulates. Most
    // production guests fit in a single tile, while large hosts stay bounded.
    constexpr std::size_t tile_capacity=16;
@@ -274,7 +279,7 @@ struct EwaldState::Impl {
     }
    }
   }
-  else{
+  else if(charged){
    std::vector<std::pair<std::size_t,double>> terms;terms.reserve(atoms*64);
    for(std::size_t a=0;a<atoms;++a)if(q[a]){
     int nodes[3][4];double weights[3][4];
@@ -409,6 +414,7 @@ struct EwaldState::Impl {
 };
 EwaldState::EwaldState(const ReciprocalConfig&c,std::size_t n,const double*x,const double*q):p_(new Impl(c,n,x,q)){}
 EwaldState::~EwaldState()=default;
+bool EwaldState::uses_cuda_batches()const{return p_->cuda&&!resident();}
 bool EwaldState::resident()const{return p_->c.backend==4;}
 double EwaldState::resident_trial(std::size_t atoms,const double* added,const double* removed,const double* q){
  if(!resident())throw std::logic_error("resident_trial requires a resident CUDA state");
@@ -435,6 +441,8 @@ void EwaldState::discard_resident_trial(){p_->resident_pending=false;}
 ChargeContribution EwaldState::contribution(std::size_t n,const double*x,const double*q)const{++p_->counters.contributions;return p_->make(n,x,q);}
 ChargeContribution EwaldState::selected_contribution(std::size_t atoms,const double* xyz,const double* q)const{
  if(!p_->cuda || !p_->cuda->structure)return contribution(atoms,xyz,q);
+ if(!atoms||std::none_of(q,q+atoms,[](double value){return value!=0.0;}))
+  return contribution(atoms,xyz,q);
  ChargeContribution selected;
  selected.modes.resize(p_->coefficient.size());
  for(std::size_t i=0;i<atoms;++i){selected.charge+=q[i];selected.squared_charge+=q[i]*q[i];}
@@ -535,7 +543,13 @@ std::vector<double>EwaldState::host_potential_grid(const std::array<int,3>&m)con
 void EwaldState::batch_insertion(std::size_t B,std::size_t A,const double*x,const double*q,const ChargeContribution*ex,const ChargeContribution*pre,double*out)const{
  ++p_->counters.candidate_batches;p_->counters.candidates+=B;
  if(!B)return;
- if(p_->cuda && !resident()){
+ // With no partial charges the new sites change neither the structure
+ // factor nor the self/background terms, even with an excluded molecule.
+ if(!A||std::none_of(q,q+A,[](double value){return value!=0.0;})){
+  std::fill_n(out,B,0.0);
+  return;
+ }
+ if(uses_cuda_batches()){
   std::vector<double> base(2*p_->current.size());for(std::size_t i=0;i<p_->current.size();++i){Cx s=p_->current[i];if(ex&&!ex->modes.empty())s-=ex->modes[i];if(pre&&!pre->modes.empty())s+=pre->modes[i];base[2*i]=s.real();base[2*i+1]=s.imag();}
   double baseq=p_->total_q-(ex?ex->charge:0)+(pre?pre->charge:0);
   if(p_->cuda->batch(p_->cuda->handle,B,A,x,q,base.data(),baseq,p_->self,p_->bg,out))throw std::runtime_error(p_->cuda->error());

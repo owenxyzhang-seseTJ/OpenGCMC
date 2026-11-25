@@ -105,7 +105,7 @@ __global__ void pair_atoms(Geometry geometry,size_t queries,size_t atoms,const d
                           const Parameters* parameters,size_t frameworks,const PoreMCCudaPairSite* framework,
                           const size_t* offsets,const uint32_t* neighbours,
                           size_t guests,const PoreMCCudaPairSite* mobile,size_t exclude_begin,size_t exclude_end,
-                          PairEnergy* partial) {
+                          PairEnergy* partial,double* energies) {
     __shared__ double host_sum[block_size],guest_sum[block_size];
     const unsigned tid=threadIdx.x;
     for(size_t i=blockIdx.x;i<queries;i+=gridDim.x) {
@@ -137,7 +137,12 @@ __global__ void pair_atoms(Geometry geometry,size_t queries,size_t atoms,const d
             }
             __syncthreads();
         }
-        if(!tid)partial[i]={host_sum[0],guest_sum[0]};
+        if(!tid) {
+            // One atom is the whole candidate. Combine the two reduced
+            // terms directly and avoid a second kernel launch.
+            if(atoms==1)energies[i]=(0.0+host_sum[0])+(0.0+guest_sum[0]);
+            else partial[i]={host_sum[0],guest_sum[0]};
+        }
         __syncthreads();
     }
 }
@@ -209,16 +214,18 @@ int poremc_pair_cuda_energy(void* context,size_t batches,size_t atoms,const doub
         for(size_t a=0;a<atoms;++a)g.host_parameters[a]={sigma[a],std::sqrt(epsilon[a]),charge[a]};
         upload(g.xyz,xyz,product(3,queries),g.stream,"upload short-range trial coordinates");
         upload(g.parameters,g.host_parameters.data(),atoms,g.stream,"upload short-range trial parameters");
-        g.atom_energy.reserve(queries);
+        if(atoms>1)g.atom_energy.reserve(queries);
         g.result.reserve(batches);
         const size_t* offsets=hosts&&g.indexed?g.offsets.data:nullptr;
         pair_atoms<<<static_cast<unsigned>(std::min(queries,g.grid_limit)),block_size,0,g.stream>>>(
             g.geometry,queries,atoms,g.xyz.data,g.parameters.data,hosts,g.framework.data,offsets,g.neighbours.data,
-            guests,g.guests.data,exclude_begin,exclude_end,g.atom_energy.data);
+            guests,g.guests.data,exclude_begin,exclude_end,g.atom_energy.data,g.result.data);
         check(cudaGetLastError(),"launch CUDA short-range pairs");
-        const auto blocks=static_cast<unsigned>(std::min((batches-1)/block_size+1,g.grid_limit));
-        sum_pairs<<<blocks,block_size,0,g.stream>>>(batches,atoms,g.atom_energy.data,g.result.data);
-        check(cudaGetLastError(),"launch CUDA short-range reduction");
+        if(atoms>1) {
+            const auto blocks=static_cast<unsigned>(std::min((batches-1)/block_size+1,g.grid_limit));
+            sum_pairs<<<blocks,block_size,0,g.stream>>>(batches,atoms,g.atom_energy.data,g.result.data);
+            check(cudaGetLastError(),"launch CUDA short-range reduction");
+        }
         check(cudaMemcpyAsync(out,g.result.data,batches*sizeof(double),cudaMemcpyDeviceToHost,g.stream),
               "download short-range energies");
         check(cudaStreamSynchronize(g.stream),"finish CUDA short-range batch");
