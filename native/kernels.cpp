@@ -422,6 +422,9 @@ struct ShortRangeCuda {
  decltype(&poremc_pair_cuda_device) device=nullptr;
  decltype(&poremc_pair_cuda_upload_guests) upload=nullptr;
  decltype(&poremc_pair_cuda_energy) energy=nullptr;
+ decltype(&poremc_pair_cuda_update_guests) update=nullptr;
+ decltype(&poremc_pair_cuda_add_grid) add_grid=nullptr;
+ decltype(&poremc_pair_cuda_grid_energy) grid_energy=nullptr;
 
  ~ShortRangeCuda(){
   if(handle)destroy(handle);
@@ -440,6 +443,9 @@ struct ShortRangeCuda {
   device=reinterpret_cast<decltype(device)>(dlsym(library,"poremc_pair_cuda_device"));
   upload=reinterpret_cast<decltype(upload)>(dlsym(library,"poremc_pair_cuda_upload_guests"));
   energy=reinterpret_cast<decltype(energy)>(dlsym(library,"poremc_pair_cuda_energy"));
+  update=reinterpret_cast<decltype(update)>(dlsym(library,"poremc_pair_cuda_update_guests"));
+  add_grid=reinterpret_cast<decltype(add_grid)>(dlsym(library,"poremc_pair_cuda_add_grid"));
+  grid_energy=reinterpret_cast<decltype(grid_energy)>(dlsym(library,"poremc_pair_cuda_grid_energy"));
   if(!create||!destroy||!error||!device||!upload||!energy)
    throw std::runtime_error("CUDA short-range plug-in symbols are missing; rebuild with python native/build.py --cuda");
   int selected=0;
@@ -491,6 +497,28 @@ const char* poremc_short_cuda_device(void* context){
 int poremc_short_cuda_upload_guests(void* context,size_t sites,const PoreMCCudaPairSite* guests){
  const auto& gpu=*static_cast<ShortRangeCuda*>(context);
  return gpu.checked(gpu.upload(gpu.handle,sites,guests));
+}
+int poremc_short_cuda_update_guests(void* context,size_t sites,const PoreMCCudaPairSite* guests,
+                                   size_t begin,size_t end,size_t* uploaded){
+ const auto& gpu=*static_cast<ShortRangeCuda*>(context);
+ if(gpu.update)return gpu.checked(gpu.update(gpu.handle,sites,guests,begin,end,uploaded));
+ *uploaded=sites;
+ return gpu.checked(gpu.upload(gpu.handle,sites,guests));
+}
+int poremc_short_cuda_has_grid(void* context){
+ const auto& gpu=*static_cast<ShortRangeCuda*>(context);
+ return gpu.add_grid&&gpu.grid_energy;
+}
+int poremc_short_cuda_add_grid(void* context,const PoreMCCudaHostGrid* grid,size_t* index){
+ const auto& gpu=*static_cast<ShortRangeCuda*>(context);
+ return gpu.checked(gpu.add_grid(gpu.handle,grid,index));
+}
+int poremc_short_cuda_grid_energy(void* context,size_t grid,size_t first,size_t batches,size_t atoms,
+                                 const double* xyz,const double* sigma,const double* epsilon,const double* charge,
+                                 size_t exclude_begin,size_t exclude_end,int parts,double* out){
+ const auto& gpu=*static_cast<ShortRangeCuda*>(context);
+ return gpu.checked(gpu.grid_energy(gpu.handle,grid,first,batches,atoms,xyz,sigma,epsilon,charge,
+                                    exclude_begin,exclude_end,parts,out));
 }
 int poremc_short_cuda_energy(void* context,size_t batches,size_t atoms,const double* xyz,
                             const double* sigma,const double* epsilon,const double* charge,

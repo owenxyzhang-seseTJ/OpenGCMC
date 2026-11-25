@@ -179,12 +179,14 @@ class FastGCMC:
             Path(self.host_grid_cache).parent.mkdir(parents=True,exist_ok=True)
         if reciprocal_method not in ('direct','pme'):
             raise ValueError('reciprocal_method must be direct or pme')
-        if reciprocal_backend not in ('cpu','auto','cuda','cuda-tensor','cuda-resident'):
+        if reciprocal_backend not in ('cpu','auto','cuda','cuda-tensor','cuda-resident','cuda-pme'):
             raise ValueError('unknown reciprocal_backend')
         if reciprocal_backend=='cuda-resident' and (sampling_mode!='delayed' or reciprocal_method!='direct'):
             raise ValueError('cuda-resident requires delayed sampling with direct Ewald')
-        backend_code={'cpu':0,'auto':1,'cuda':2,'cuda-tensor':3,'cuda-resident':4}[reciprocal_backend]
-        if reference_cbmc and reciprocal_backend!='cuda-resident':
+        if reciprocal_backend=='cuda-pme' and reciprocal_method!='pme':
+            raise ValueError('cuda-pme requires reciprocal_method=pme')
+        backend_code={'cpu':0,'auto':1,'cuda':2,'cuda-tensor':3,'cuda-resident':4,'cuda-pme':5}[reciprocal_backend]
+        if reference_cbmc and reciprocal_backend not in ('cuda-resident','cuda-pme'):
             backend_code=3 if reciprocal_backend in ('cuda','cuda-tensor') else 0
         if potential.coulomb!='ewald' and (reciprocal_method!='direct' or reciprocal_backend!='cpu'):
             raise ValueError('reciprocal options require coulomb=ewald')
@@ -498,7 +500,7 @@ class FastGCMC:
         return json.loads(self._native_string('poremc_fast_longrange_info'))
     @property
     def short_range_profile(self):
-        """Actual short-range backend, framework/guest batch counts and guest refreshes."""
+        """Actual pair and reference-grid batches, guest refreshes and device upload volume."""
         self._ensure()
         if self.short_range_backend=='cpu':
             return {'backend':'cpu'}

@@ -1,6 +1,7 @@
 // Immutable periodic host fields for reference-potential CBMC.
 // The physical target is corrected separately; no physical energy is capped.
 #include "host_grid.h"
+#include "host_grid_interp.h"
 #include <algorithm>
 #include <array>
 #include <cerrno>
@@ -43,11 +44,6 @@ Query make_query(void* env,double s,double e,double q) {
   Query result(poremc_query_create(env,1,&s,&e,&q),poremc_query_destroy);
   if(!result)throw std::runtime_error(poremc_last_error());
   return result;
-}
-std::array<double,4> cubic(double t) {
-  // Cardinal cubic with central finite-difference tangents (Catmull-Rom).
-  const double t2=t*t,t3=t2*t;
-  return {{-.5*t+t2-.5*t3,1-2.5*t2+1.5*t3,.5*t+2*t2-1.5*t3,-.5*t2+.5*t3}};
 }
 std::uint64_t checksum(const void* ptr,std::size_t bytes,std::uint64_t h=14695981039346656037ull) {
   const auto* p=static_cast<const unsigned char*>(ptr);
@@ -459,21 +455,19 @@ struct HostGrid::Impl {
       if(type.charge!=0.&&reciprocal_exact)u+=reciprocal_exact(1,xyz,&type.charge);
       return u;
     }
+    if(!type.packed_energy.empty()){
+      if(!steep)++statistics.cubic_lookups;
+      else if(cfg.steep_interpolation==1)++statistics.boltzmann_lookups;
+      else ++statistics.linear_lookups;
+      const std::size_t ny=std::size_t(cfg.mesh[1])+3,nz=std::size_t(cfg.mesh[2])+3;
+      const std::size_t start=(std::size_t(base[0])*ny+base[1])*nz+base[2];
+      return packed_grid_value(type.packed_energy.data()+start,
+          type.packed_weight.empty()?nullptr:type.packed_weight.data()+start,
+          ny,nz,t,steep,cfg.steep_interpolation==1,cfg.temperature);
+    }
     double result=0.;
     if(steep&&cfg.steep_interpolation==1){
       ++statistics.boltzmann_lookups;
-      if(!type.packed_weight.empty()){
-        // cap/T <= 500 keeps every tabulated weight normal in FP64.
-        const std::size_t ny=std::size_t(cfg.mesh[1])+3,nz=std::size_t(cfg.mesh[2])+3;
-        const std::size_t lower=((std::size_t(base[0])+1)*ny+base[1]+1)*nz+base[2]+1;
-        if(t[0]==0. && t[1]==0. && t[2]==0.)return type.packed_energy[lower];
-        double partition=0.;
-        for(int a=0;a<2;++a)for(int b=0;b<2;++b){
-          const auto* row=type.packed_weight.data()+lower+(a*ny+b)*nz;
-          partition+=(a?t[0]:1.-t[0])*(b?t[1]:1.-t[1])*((1.-t[2])*row[0]+t[2]*row[1]);
-        }
-        return -cfg.temperature*std::log(partition);
-      }
       std::array<double,8> weights{},energies{};
       double minimum=std::numeric_limits<double>::infinity();int n=0;
       for(int a=0;a<2;++a)for(int b=0;b<2;++b)for(int c=0;c<2;++c){
@@ -495,20 +489,8 @@ struct HostGrid::Impl {
       }
     }else{
       ++statistics.cubic_lookups;
-      const auto wx=cubic(t[0]),wy=cubic(t[1]),wz=cubic(t[2]);
-      if(!type.packed_energy.empty()){
-        const std::size_t ny=std::size_t(cfg.mesh[1])+3,nz=std::size_t(cfg.mesh[2])+3;
-        const double* start=type.packed_energy.data()+(std::size_t(base[0])*ny+base[1])*nz+base[2];
-        for(int a=0;a<4;++a){
-          double uy=0.;
-          for(int b=0;b<4;++b){
-            const double* row=start+(a*ny+b)*nz;
-            uy+=wy[b]*(wz[0]*row[0]+wz[1]*row[1]+wz[2]*row[2]+wz[3]*row[3]);
-          }
-          result+=wx[a]*uy;
-        }
-        return result;
-      }
+      double wx[4],wy[4],wz[4];
+      cubic_weights(t[0],wx);cubic_weights(t[1],wy);cubic_weights(t[2],wz);
       int ix[4],iy[4],iz[4];
       for(int a=0;a<4;++a){ix[a]=periodic(base[0]+a-1,0);iy[a]=periodic(base[1]+a-1,1);iz[a]=periodic(base[2]+a-1,2);}
       for(int a=0;a<4;++a){double uy=0.;for(int b=0;b<4;++b){double uz=0.;
@@ -589,4 +571,17 @@ void HostGrid::batch_energy(std::size_t batches,std::size_t atoms,const double* 
 }
 HostGridStats HostGrid::stats() const{return p_->statistics;}
 const HostGridConfig& HostGrid::config() const{return p_->cfg;}
+bool HostGrid::cuda_view(PoreMCCudaHostGrid& grid,std::vector<PoreMCCudaGridField>& fields) const {
+  if(p_->cfg.surrogate_cap==0.||p_->types.front().packed_energy.empty())return false;
+  fields.clear();fields.reserve(p_->types.size());
+  for(const auto& type:p_->types)
+    fields.push_back({type.packed_energy.data(),type.packed_weight.empty()?nullptr:type.packed_weight.data(),type.steep.data()});
+  std::copy(p_->cfg.mesh.begin(),p_->cfg.mesh.end(),grid.mesh);
+  std::copy(p_->inv.begin(),p_->inv.end(),grid.inverse);
+  grid.boltzmann=p_->cfg.steep_interpolation;
+  grid.temperature=p_->cfg.temperature;
+  grid.sites=p_->site_type.size();grid.types=fields.size();
+  grid.site_type=p_->site_type.data();grid.fields=fields.data();
+  return true;
+}
 }

@@ -1,6 +1,7 @@
 // Independently derived incrementally maintained Ewald / cubic PME state.
 #include "ewald_state.h"
 #include "ewald_cuda.h"
+#include "pme_cuda.h"
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
@@ -163,6 +164,51 @@ struct CudaPlugin {
 #endif
  }
 };
+
+struct PmeCudaPlugin {
+ void* library=nullptr;
+ void* handle=nullptr;
+ decltype(&poremc_pme_cuda_destroy) destroy=nullptr;
+ decltype(&poremc_pme_cuda_error) error=nullptr;
+ decltype(&poremc_pme_cuda_refresh) refresh=nullptr;
+ decltype(&poremc_pme_cuda_batch) batch=nullptr;
+ std::string device_name;
+
+ ~PmeCudaPlugin(){
+  if(handle)destroy(handle);
+#if defined(__unix__) || defined(__APPLE__)
+  if(library)dlclose(library);
+#endif
+ }
+ void open(const std::string& path,const ReciprocalConfig& c,const std::array<double,9>& inverse,
+           const std::vector<double>& influence,const std::vector<double>& green){
+#if defined(__unix__) || defined(__APPLE__)
+  library=dlopen(path.c_str(),RTLD_NOW|RTLD_LOCAL);
+  if(!library)throw std::runtime_error(dlerror());
+  auto create=reinterpret_cast<decltype(&poremc_pme_cuda_create)>(dlsym(library,"poremc_pme_cuda_create"));
+  auto name=reinterpret_cast<decltype(&poremc_pme_cuda_device)>(dlsym(library,"poremc_pme_cuda_device"));
+  destroy=reinterpret_cast<decltype(destroy)>(dlsym(library,"poremc_pme_cuda_destroy"));
+  error=reinterpret_cast<decltype(error)>(dlsym(library,"poremc_pme_cuda_error"));
+  refresh=reinterpret_cast<decltype(refresh)>(dlsym(library,"poremc_pme_cuda_refresh"));
+  batch=reinterpret_cast<decltype(batch)>(dlsym(library,"poremc_pme_cuda_batch"));
+  if(!create||!name||!destroy||!error||!refresh||!batch)
+   throw std::runtime_error("CUDA PME plug-in symbols are missing; rebuild with python native/build.py --cuda");
+  int device=0;if(const char* value=std::getenv("POREMC_CUDA_DEVICE"))device=std::stoi(value);
+  handle=create(c.mesh.data(),inverse.data(),influence.data(),green.data(),device);
+  if(!handle)throw std::runtime_error(error());
+  device_name=name(handle);
+#else
+  (void)path;(void)c;(void)inverse;(void)influence;(void)green;
+  throw std::runtime_error("dynamic CUDA PME loading requires POSIX");
+#endif
+ }
+};
+
+std::string cuda_path(const ReciprocalConfig& config){
+ if(!config.cuda_library.empty())return config.cuda_library;
+ const char* environment=std::getenv("POREMC_EWALD_CUDA_LIBRARY");
+ return environment?environment:"libporemc_ewald_cuda.so";
+}
 }
 struct EwaldState::Impl {
  ReciprocalConfig c;double volume=0, self=0,bg=0;
@@ -175,12 +221,16 @@ struct EwaldState::Impl {
  double total_q=0,total_q2=0,host_reciprocal=0,mesh_reciprocal=0,weight_sum=0;
  mutable ReciprocalStats counters;
  std::unique_ptr<CudaPlugin> cuda;
+ std::unique_ptr<PmeCudaPlugin> pme_cuda;
+ mutable std::vector<PoreMCPmeTerm> pme_batch_corrections;
  bool resident_pending=false;
  std::vector<double> staged_positions, staged_charges;
  std::string backend="cpu";
  Impl(const ReciprocalConfig&config,std::size_t n,const double*xyz,const double*q):c(config){
   if(!(c.alpha>0)||!std::isfinite(c.alpha))throw std::invalid_argument("positive finite Ewald alpha required");
-  if(c.method<0||c.method>1||c.backend<0||c.backend>4)throw std::invalid_argument("unknown reciprocal method/backend");
+  if(c.method<0||c.method>1||c.backend<0||c.backend>5)throw std::invalid_argument("unknown reciprocal method/backend");
+  if(c.backend==5&&c.method!=1)throw std::invalid_argument("cuda-pme requires the PME reciprocal method");
+  if(c.method==1&&c.backend>=2&&c.backend!=5)throw std::invalid_argument("use cuda-pme for the CUDA PME reciprocal backend");
   if(c.k_cutoff<0||!std::isfinite(c.k_cutoff))throw std::invalid_argument("reciprocal k_cutoff must be finite and nonnegative");
   if(c.method==1&&c.k_cutoff!=0)throw std::invalid_argument("radial reciprocal cutoff applies to direct Ewald only");
   inverse=invert(c.cell,volume);self=-CK*c.alpha/std::sqrt(PI);bg=c.background?-CK*PI/(2*c.alpha*c.alpha*volume):0;
@@ -211,7 +261,7 @@ struct EwaldState::Impl {
   }else{
    if(!c.pme_refresh)throw std::invalid_argument("PME refresh interval must be positive");
    for(int m:c.mesh)if(!power_two(m))throw std::invalid_argument("PME mesh dimensions must be powers of two >= 8");
-   const std::size_t count=std::size_t(c.mesh[0])*c.mesh[1]*c.mesh[2];coefficient.resize(count);mesh_charge.assign(count,0);mesh_phi.assign(count,0);mesh_work.resize(count);counters.mesh_points=count;
+   const std::size_t count=std::size_t(c.mesh[0])*c.mesh[1]*c.mesh[2];coefficient.resize(count);mesh_charge.assign(count,0);mesh_phi.assign(count,0);counters.mesh_points=count;
    std::vector<Cx> kernel(count);
    for(int i=0;i<c.mesh[0];++i)for(int j=0;j<c.mesh[1];++j)for(int l=0;l<c.mesh[2];++l){
     int ni=i<=c.mesh[0]/2?i:i-c.mesh[0],nj=j<=c.mesh[1]/2?j:j-c.mesh[1],nl=l<=c.mesh[2]/2?l:l-c.mesh[2];
@@ -224,20 +274,24 @@ struct EwaldState::Impl {
     coefficient[index]=CK*2*PI/volume*std::exp(-k2/(4*c.alpha*c.alpha))/k2/(b*b);kernel[index]=coefficient[index];
    }
    fft3(kernel,c.mesh,true);++counters.fft_transforms;green.resize(count);for(std::size_t i=0;i<count;++i)green[i]=count*kernel[i].real();
+   if(c.backend==5){
+    pme_cuda=std::make_unique<PmeCudaPlugin>();
+    pme_cuda->open(cuda_path(c),c,inverse,coefficient,green);
+    backend="cuda-pme";
+   }else mesh_work.resize(count);
   }
   host=make(n,xyz,q);total_q=host.charge;total_q2=host.squared_charge;
   if(c.method==0){current=host.modes;host_reciprocal=reciprocal(current);}else{for(std::size_t i=0;i<host.indices.size();++i)mesh_charge[host.indices[i]]+=host.values[i];refresh_mesh();host_mesh_phi=mesh_phi;host_reciprocal=mesh_reciprocal;}
   counters.host_builds=1;
   if(c.backend && c.method==0){
-   cuda=std::make_unique<CudaPlugin>();std::string reason,path=c.cuda_library;
-   if(path.empty()){const char*env=std::getenv("POREMC_EWALD_CUDA_LIBRARY");path=env?env:"libporemc_ewald_cuda.so";}
-   if(cuda->open(path,k,coefficient,inverse,c.kmax,integer_modes,c.backend,reason)){
+   cuda=std::make_unique<CudaPlugin>();std::string reason;
+   if(cuda->open(cuda_path(c),k,coefficient,inverse,c.kmax,integer_modes,c.backend,reason)){
     backend=cuda->backend_name;
     if(c.backend==4&&cuda->resident_import(cuda->handle,reinterpret_cast<const double*>(current.data())))
      throw std::runtime_error(cuda->error());
    }
    else{cuda.reset();if(c.backend>=2)throw std::runtime_error("required CUDA reciprocal backend unavailable: "+reason);backend="cpu (CUDA unavailable)";}
-  }else if(c.backend>=2&&c.method==1)throw std::invalid_argument("PME currently uses native CPU FFT; CUDA reciprocal batching is available for direct Ewald");
+  }
  }
  ChargeContribution make(std::size_t atoms,const double*xyz,const double*q)const{
   ChargeContribution r;
@@ -405,16 +459,42 @@ struct EwaldState::Impl {
   return result;
  }
  void refresh_mesh(){
-  auto& work=mesh_work;
-  std::copy(mesh_charge.begin(),mesh_charge.end(),work.begin());fft3(work,c.mesh,false);++counters.fft_transforms;
-  for(std::size_t i=0;i<work.size();++i)work[i]*=coefficient[i];
-  fft3(work,c.mesh,true);++counters.fft_transforms;
-  mesh_reciprocal=0;for(std::size_t i=0;i<work.size();++i){mesh_phi[i]=2*work.size()*work[i].real();mesh_reciprocal+=.5*mesh_charge[i]*mesh_phi[i];}
+  if(pme_cuda){
+   if(pme_cuda->refresh(pme_cuda->handle,mesh_charge.data(),mesh_phi.data()))throw std::runtime_error(pme_cuda->error());
+  }else{
+   auto& work=mesh_work;
+   std::copy(mesh_charge.begin(),mesh_charge.end(),work.begin());fft3(work,c.mesh,false);
+   for(std::size_t i=0;i<work.size();++i)work[i]*=coefficient[i];
+   fft3(work,c.mesh,true);
+   for(std::size_t i=0;i<work.size();++i)mesh_phi[i]=2*work.size()*work[i].real();
+  }
+  counters.fft_transforms+=2;
+  mesh_reciprocal=0;
+  for(std::size_t i=0;i<mesh_charge.size();++i)mesh_reciprocal+=.5*mesh_charge[i]*mesh_phi[i];
+ }
+ void device_mesh_batch(std::size_t batches,std::size_t atoms,const double* x,const double* q,
+                        const ChargeContribution* excluded,const ChargeContribution* prefix,double* out)const{
+  auto& extra=pme_batch_corrections;
+  extra.clear();
+  auto append=[&](const ChargeContribution& contribution,double sign){
+   for(std::size_t i=0;i<contribution.indices.size();++i)
+    extra.push_back({contribution.indices[i],sign*contribution.values[i]});
+  };
+  append(pending_mesh,1.);
+  if(excluded)append(*excluded,-1.);
+  if(prefix)append(*prefix,1.);
+  double charge=0.,square=0.;
+  for(std::size_t i=0;i<atoms;++i){charge+=q[i];square+=q[i]*q[i];}
+  const double baseq=total_q-(excluded?excluded->charge:0)+(prefix?prefix->charge:0);
+  const double constant=self*square+bg*(2*baseq*charge+charge*charge);
+  if(pme_cuda->batch(pme_cuda->handle,batches,atoms,x,q,extra.size(),extra.data(),constant,out))
+    throw std::runtime_error(pme_cuda->error());
+  ++counters.gpu_batches;
  }
 };
 EwaldState::EwaldState(const ReciprocalConfig&c,std::size_t n,const double*x,const double*q):p_(new Impl(c,n,x,q)){}
 EwaldState::~EwaldState()=default;
-bool EwaldState::uses_cuda_batches()const{return p_->cuda&&!resident();}
+bool EwaldState::uses_cuda_batches()const{return (p_->cuda&&!resident())||p_->pme_cuda;}
 bool EwaldState::resident()const{return p_->c.backend==4;}
 double EwaldState::resident_trial(std::size_t atoms,const double* added,const double* removed,const double* q){
  if(!resident())throw std::logic_error("resident_trial requires a resident CUDA state");
@@ -549,7 +629,9 @@ void EwaldState::batch_insertion(std::size_t B,std::size_t A,const double*x,cons
   std::fill_n(out,B,0.0);
   return;
  }
- if(uses_cuda_batches()){
+ if(p_->pme_cuda&&(B>=2||A>=3)){
+  p_->device_mesh_batch(B,A,x,q,ex,pre,out);
+ }else if(p_->cuda&&!resident()){
   std::vector<double> base(2*p_->current.size());for(std::size_t i=0;i<p_->current.size();++i){Cx s=p_->current[i];if(ex&&!ex->modes.empty())s-=ex->modes[i];if(pre&&!pre->modes.empty())s+=pre->modes[i];base[2*i]=s.real();base[2*i+1]=s.imag();}
   double baseq=p_->total_q-(ex?ex->charge:0)+(pre?pre->charge:0);
   if(p_->cuda->batch(p_->cuda->handle,B,A,x,q,base.data(),baseq,p_->self,p_->bg,out))throw std::runtime_error(p_->cuda->error());
@@ -577,7 +659,7 @@ void EwaldState::commit(const ChargeContribution*a,const ChargeContribution*r){
      p_->cuda->resident_import(p_->cuda->handle,reinterpret_cast<const double*>(p_->current.data())))
    throw std::runtime_error(p_->cuda->error());
  }
- else if(p_->c.pme_refresh==1){
+ else if(p_->c.pme_refresh==1&&((a&&!a->indices.empty())||(r&&!r->indices.empty()))){
   if(r)for(std::size_t i=0;i<r->indices.size();++i)p_->mesh_charge[r->indices[i]]-=r->values[i];
   if(a)for(std::size_t i=0;i<a->indices.size();++i)p_->mesh_charge[a->indices[i]]+=a->values[i];
   p_->refresh_mesh();
@@ -669,8 +751,17 @@ void EwaldState::restore(const std::string&data){
  p_->total_q=q;p_->total_q2=q2;if(method==0)p_->current.swap(modes);else{p_->mesh_charge.swap(mesh);p_->refresh_mesh();}p_->counters=counts;
  p_->pending_mesh=std::move(pending);p_->pending_commits=pending_commits;p_->pending_energy=pending_energy;
 }
-ReciprocalStats EwaldState::stats()const{auto c=p_->counters;c.pme_pending_nodes=p_->pending_mesh.indices.size();return c;}
+ReciprocalStats EwaldState::stats()const{
+ auto c=p_->counters;
+ c.pme_pending_nodes=p_->pending_mesh.indices.size();
+ // One initial CPU inverse FFT constructs the immutable PME Green function.
+ if(p_->pme_cuda&&c.fft_transforms>0)c.gpu_fft_transforms=c.fft_transforms-1;
+ return c;
+}
 const char*EwaldState::backend_name()const{return p_->backend.c_str();}
-const char*EwaldState::device_name()const{return p_->cuda ? p_->cuda->device_name.c_str() : "";}
+const char*EwaldState::device_name()const{
+ if(p_->pme_cuda)return p_->pme_cuda->device_name.c_str();
+ return p_->cuda?p_->cuda->device_name.c_str():"";
+}
 const ReciprocalConfig&EwaldState::config()const{return p_->c;}
 }

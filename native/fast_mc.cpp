@@ -59,6 +59,7 @@ struct MoleculePlan {
  std::vector<size_t> root_alias;
  std::array<int,3> root_shape{};
  std::unique_ptr<poremc::HostGrid> host_grid;
+ size_t cuda_grid=std::numeric_limits<size_t>::max();
  explicit MoleculePlan(const PoreMCFastConfig& c)
      :A(c.atoms),ntors(c.torsions),z(c.activity),scale14lj(c.scale14_lj),
       scale14q(c.scale14_coulomb),rigid(c.rigid) {
@@ -109,10 +110,11 @@ struct Fast {
  size_t framework_site_count;
  Env short_range_cuda{nullptr,poremc_short_cuda_destroy};
  size_t short_range_min_batch=1;
- bool short_range_guests_dirty=true;
+ size_t cuda_dirty_first=0,cuda_dirty_end=std::numeric_limits<size_t>::max();
  std::vector<PoreMCCudaPairSite> short_range_guest_sites;
- std::vector<size_t> short_range_guest_offsets;
- uint64_t cuda_framework_batches=0,cuda_guest_batches=0,cuda_guest_uploads=0;
+ std::vector<size_t> short_range_guest_offsets{0};
+ uint64_t cuda_framework_batches=0,cuda_guest_batches=0,cuda_guest_uploads=0,cuda_guest_upload_bytes=0;
+ uint64_t cuda_grid_batches=0,cuda_grid_site_lookups=0;
  Env guest_cache{nullptr,poremc_environment_destroy};
  std::unique_ptr<poremc::GuestCells> guest_cells;
  bool guest_dirty=true;
@@ -305,28 +307,41 @@ struct Fast {
  bool use_cuda_short_range(size_t batches) const {
   return short_range_cuda && batches>=short_range_min_batch;
  }
+ void mark_cuda_guests(size_t first,size_t end){
+  if(short_range_cuda){cuda_dirty_first=std::min(cuda_dirty_first,first);cuda_dirty_end=std::max(cuda_dirty_end,end);}
+ }
  void upload_cuda_guests(){
-  if(!short_range_guests_dirty)return;
-  short_range_guest_sites.clear();
-  short_range_guest_offsets.clear();
-  short_range_guest_offsets.push_back(0);
-  for(size_t i=0;i<particles.size();++i){
+  constexpr size_t clean=std::numeric_limits<size_t>::max();
+  if(cuda_dirty_first==clean)return;
+  const size_t first=std::min(cuda_dirty_first,particles.size());
+  const size_t end=std::min(cuda_dirty_end,particles.size());
+  short_range_guest_offsets.resize(particles.size()+1);
+  const size_t begin_site=short_range_guest_offsets[first];
+  size_t end_site=begin_site;
+  for(size_t i=first;i<end;++i){
+   end_site+=molecules[particle_type[i]].A;
+   short_range_guest_offsets[i+1]=end_site;
+  }
+  if(end==particles.size())short_range_guest_sites.resize(end_site);
+  size_t at=begin_site;
+  for(size_t i=first;i<end;++i){
    const auto& plan=molecules[particle_type[i]];
    for(size_t a=0;a<plan.A;++a){
     const auto f=row(get(particles[i],a),inv);
-    short_range_guest_sites.push_back({{f.x-std::floor(f.x),f.y-std::floor(f.y),f.z-std::floor(f.z)},
-                                      plan.sigma[a],std::sqrt(plan.epsilon[a]),plan.charge[a]});
+    short_range_guest_sites[at++]={{f.x-std::floor(f.x),f.y-std::floor(f.y),f.z-std::floor(f.z)},
+                                  plan.sigma[a],std::sqrt(plan.epsilon[a]),plan.charge[a]};
    }
-   short_range_guest_offsets.push_back(short_range_guest_sites.size());
   }
-  if(poremc_short_cuda_upload_guests(short_range_cuda.get(),short_range_guest_sites.size(),
-                                    short_range_guest_sites.data()))
+  size_t uploaded=0;
+  if(poremc_short_cuda_update_guests(short_range_cuda.get(),short_range_guest_sites.size(),
+                                    short_range_guest_sites.data(),begin_site,end_site,&uploaded))
    throw std::runtime_error(poremc_last_error());
-  short_range_guests_dirty=false;
+  cuda_dirty_first=clean;cuda_dirty_end=0;
   ++cuda_guest_uploads;
+  cuda_guest_upload_bytes+=uploaded*sizeof(PoreMCCudaPairSite);
  }
  void cuda_pairs(size_t batches,size_t atoms,const double* positions,
-                 const double* sigma,const double* epsilon,const double* charge,int parts,double* out){
+                 const double* sigma,const double* epsilon,const double* charge,int parts,double* out,bool grid=false){
   size_t begin=0,end=0;
   if(parts&POREMC_PAIR_GUESTS){
    upload_cuda_guests();
@@ -335,8 +350,12 @@ struct Fast {
     end=short_range_guest_offsets[excluded_particle+1];
    }
   }
-  if(poremc_short_cuda_energy(short_range_cuda.get(),batches,atoms,positions,sigma,epsilon,charge,begin,end,parts,out))
+  const int status=grid?poremc_short_cuda_grid_energy(short_range_cuda.get(),mol->cuda_grid,size_t(sigma-mol->sigma.data()),
+                      batches,atoms,positions,sigma,epsilon,charge,begin,end,parts,out):
+                      poremc_short_cuda_energy(short_range_cuda.get(),batches,atoms,positions,sigma,epsilon,charge,begin,end,parts,out);
+  if(status)
    throw std::runtime_error(poremc_last_error());
+  if(grid){++cuda_grid_batches;cuda_grid_site_lookups+=batches*atoms;}
   if(parts&POREMC_PAIR_FRAMEWORK)++cuda_framework_batches;
   if(parts&POREMC_PAIR_GUESTS)++cuda_guest_batches;
  }
@@ -346,6 +365,12 @@ struct Fast {
   // Arbitrary partial environments (energy reconstruction) keep their own
   // CPU path. The device snapshot mirrors the complete accepted guest state.
   const bool gpu=use_cuda_short_range(batches)&&(!env||env==guest_cache.get());
+  if(gpu&&grid&&mol->cuda_grid!=std::numeric_limits<size_t>::max()&&
+     (!particles.empty()||batches>=(63/atoms+1))){
+   const int sides=particles.empty()?0:POREMC_PAIR_GUESTS;
+   cuda_pairs(batches,atoms,positions,s,e,q,sides,out.data(),true);
+   return;
+  }
   if(gpu&&!grid&&(framework_site_count||!particles.empty())){
    const int sides=(framework_site_count?POREMC_PAIR_FRAMEWORK:0)
                    | (particles.empty()?0:POREMC_PAIR_GUESTS);
@@ -540,7 +565,8 @@ struct Fast {
   if(reference_cbmc){particle_host_internal.push_back(local);particle_reference_local.push_back(reference);}
   group.push_back(particles.size());
   particle_type.push_back(component());
-  particles.push_back(std::move(x));guest_dirty=short_range_guests_dirty=true;
+  particles.push_back(std::move(x));guest_dirty=true;
+  mark_cuda_guests(particles.size()-1,particles.size());
  }
  template<class V> static void swap_erase(V& v,size_t i){
   if(i+1!=v.size())v[i]=std::move(v.back());
@@ -567,7 +593,9 @@ struct Fast {
    other.insert(std::lower_bound(other.begin(),other.end(),index),index);
   }
   swap_erase(particle_type,index);swap_erase(particles,index);
-  guest_dirty=short_range_guests_dirty=true;
+  guest_dirty=true;
+  // Swap-deleting can change the site offsets of all the remaining guests.
+  mark_cuda_guests(index,std::numeric_limits<size_t>::max());
  }
  void commit_replace(size_t index,std::vector<double> x,poremc::ChargeContribution*prepared=nullptr,const double*prepared_local=nullptr,const double*prepared_reference=nullptr){
   const double local=reference_cbmc?(prepared_local?*prepared_local:host_internal_energy(x)):0.;
@@ -579,7 +607,8 @@ struct Fast {
   }
   if(guest_cells){guest_cells->erase(index,mol->A,particles[index].data());insert_cells(index,*mol,x);}
   if(reference_cbmc){particle_host_internal[index]=local;particle_reference_local[index]=reference;}
-  particles[index]=std::move(x);guest_dirty=short_range_guests_dirty=true;
+  particles[index]=std::move(x);guest_dirty=true;
+  mark_cuda_guests(index,index+1);
  }
  void add_particle(size_t species,const double* coordinates,bool raw){
   select(species);
@@ -893,6 +922,7 @@ size_t poremc_fast_longrange_info(void*p,char*buffer,size_t capacity){
     <<",\"host_builds\":"<<st.host_builds<<",\"contributions\":"<<st.contributions
     <<",\"candidate_batches\":"<<st.candidate_batches<<",\"candidates\":"<<st.candidates
     <<",\"accepted_commits\":"<<st.accepted_commits<<",\"fft_transforms\":"<<st.fft_transforms
+    <<",\"gpu_fft_transforms\":"<<st.gpu_fft_transforms
     <<",\"gpu_batches\":"<<st.gpu_batches<<",\"gpu_selected_structures\":"<<st.gpu_selected_structures<<",\"device\":"<<std::quoted(s.longrange->device_name())<<",\"modes\":"<<st.modes<<",\"full_modes\":"<<st.full_modes
     <<",\"half_spectrum\":"<<(s.longrange->config().half_spectrum?"true":"false")
     <<",\"pme_refresh\":"<<s.longrange->config().pme_refresh<<",\"pme_pending_nodes\":"<<st.pme_pending_nodes
@@ -913,6 +943,14 @@ int poremc_fast_short_range_enable(void* p,const char* library,size_t min_batch)
   if(!context)throw std::runtime_error(poremc_last_error());
   sim.short_range_cuda.reset(context);
   sim.short_range_min_batch=min_batch;
+  if(poremc_short_cuda_has_grid(context)){
+   std::vector<PoreMCCudaGridField> fields;
+   for(auto& plan:sim.molecules){
+    PoreMCCudaHostGrid grid{};
+    if(plan.host_grid&&plan.host_grid->cuda_view(grid,fields)&&poremc_short_cuda_add_grid(context,&grid,&plan.cuda_grid))
+     throw std::runtime_error(poremc_last_error());
+   }
+  }
   return 0;
  }catch(const std::exception& error){fast_error=error.what();return -1;}
 }
@@ -926,7 +964,10 @@ size_t poremc_fast_short_range_info(void* p,char* buffer,size_t capacity){
       <<",\"min_batch\":"<<sim.short_range_min_batch
       <<",\"framework_batches\":"<<sim.cuda_framework_batches
       <<",\"guest_batches\":"<<sim.cuda_guest_batches
-      <<",\"guest_uploads\":"<<sim.cuda_guest_uploads<<'}';
+      <<",\"guest_uploads\":"<<sim.cuda_guest_uploads
+      <<",\"guest_upload_bytes\":"<<sim.cuda_guest_upload_bytes
+      <<",\"reference_grid_batches\":"<<sim.cuda_grid_batches
+      <<",\"reference_grid_site_lookups\":"<<sim.cuda_grid_site_lookups<<'}';
   }else out<<"{\"backend\":\"cpu\"}";
   auto info=out.str();
   if(buffer&&capacity>=info.size()+1)std::memcpy(buffer,info.c_str(),info.size()+1);

@@ -148,3 +148,93 @@ def test_zero_charge_trials_and_batched_translations(cuda_plugin):
             assert cpu_sid == gpu_sid
             np.testing.assert_array_equal(cpu_xyz, gpu_xyz)
         np.testing.assert_allclose(gpu.total_energy(), cpu.total_energy(), rtol=5e-11, atol=5e-8)
+
+
+@pytest.mark.parametrize(("steep", "cap"), [
+    ("linear", 1e5), ("boltzmann", 1e5), ("boltzmann", 3e5), ("linear", 0.),
+])
+def test_cuda_reference_grid_matches_cpu(cuda_plugin, steep, cap):
+    species, potential, body = fixture("ewald", True)
+    args = (species, potential, potential.cell, 400., [2e-4, 1e-4])
+    options = dict(sampling_mode="delayed", trials=8, host_grid_mesh=(8, 16, 8),
+                   host_grid_cap=cap, host_grid_steep=steep, seed=49, guest_update="incremental")
+    shifts = np.random.default_rng(380).uniform(0.0, 1.0, (48, 3)) @ potential.cell
+    trials = body[None, :, :] + shifts[:, None, :]
+    trials[0] = body + potential.cell[1]
+    with FastGCMC(*args, **options) as cpu, FastGCMC(
+        *args, **options, short_range_backend="cuda", short_range_min_batch=4, cuda_library=cuda_plugin,
+    ) as gpu:
+        for sim in (cpu, gpu):
+            sim.add_particle(0, body+[3., 4., 8.])
+            sim.add_particle(1, [[9., 6., 7.]])
+        np.testing.assert_allclose(
+            gpu.trial_surrogate_molecule_energies(trials, exclude=0, species=0),
+            cpu.trial_surrogate_molecule_energies(trials, exclude=0, species=0),
+            atol=5e-8, rtol=5e-11,
+        )
+        np.testing.assert_allclose(
+            gpu.trial_surrogate_site_energies(trials[0, :1], trials[:, 1], exclude=0, species=0),
+            cpu.trial_surrogate_site_energies(trials[0, :1], trials[:, 1], exclude=0, species=0),
+            atol=5e-8, rtol=5e-11,
+        )
+        profile = gpu.short_range_profile
+        assert profile["reference_grid_batches"] == (2 if cap else 0)
+        assert profile["reference_grid_site_lookups"] == (3*len(trials) if cap else 0)
+        a = cpu.run(300, sample_every=10)
+        b = gpu.run(300, sample_every=10)
+        assert a["counts"] == b["counts"] and cpu.counters == gpu.counters
+        np.testing.assert_allclose(a["energies_kelvin"], b["energies_kelvin"], atol=5e-8, rtol=5e-11)
+
+
+def test_cuda_guest_uploads_only_the_translated_site(cuda_plugin):
+    all_species, fixture_potential, _ = fixture("none", False)
+    species = [all_species[1]]
+    cell = fixture_potential.cell
+    potential = ClassicalPotential(species, cell, 8., coulomb="none")
+    moves = dict(insert=0., delete=0., translate=1., rotate=0., regrow=0.)
+    with FastGCMC(species, potential, cell, 400., [1e-4], seed=474, move_weights=moves,
+                  short_range_backend="cuda", short_range_min_batch=1, cuda_library=cuda_plugin) as gpu:
+        for xyz in ([[3., 3., 3.]], [[11., 11., 11.]], [[18., 18., 18.]]):
+            gpu.add_particle(0, xyz)
+        gpu.trial_molecule_energies([[[8., 11., 19.]]])
+        before = gpu.short_range_profile["guest_upload_bytes"]
+        gpu.run(60, record_energy=False)
+        gpu.trial_molecule_energies([[[8., 11., 19.]]])
+        accepted = gpu.counters["translate"]["accepted"]
+        assert accepted > 0
+        assert gpu.short_range_profile["guest_upload_bytes"]-before == 48*accepted
+
+
+@pytest.mark.parametrize(("mode", "refresh"), [("exact", 1), ("exact", 5), ("delayed", 5), ("reference-mh", 5)])
+def test_cuda_pme_preserves_mesh_energy_and_restart(cuda_plugin, mode, refresh):
+    species, potential, body = fixture("ewald", True)
+    args = (species, potential, potential.cell, 400., [2e-4, 1e-4])
+    options = dict(sampling_mode=mode, reciprocal_method="pme", pme_mesh=(8, 16, 8),
+                   pme_refresh=refresh, trials=6, host_grid_mesh=8, seed=173, guest_update="incremental")
+    trials = body[None, :, :]+np.array([[[3., 4., 8.]], [[9., 9., 9.]], [[12., 8., 7.]],
+                                        [[3., 4., 8.]]+potential.cell[1]])
+    with FastGCMC(*args, **options) as cpu, FastGCMC(
+        *args, **options, reciprocal_backend="cuda-pme", cuda_library=cuda_plugin,
+    ) as gpu:
+        for sim in (cpu, gpu):
+            sim.add_particle(0, trials[0])
+            sim.add_particle(1, [[8., 5., 9.]])
+        if refresh>1:
+            assert gpu.long_range_profile["pme_pending_nodes"]>0
+        np.testing.assert_allclose(gpu.total_energy(), cpu.total_energy(), atol=5e-8, rtol=5e-11)
+        np.testing.assert_allclose(gpu.trial_molecule_energies(trials, exclude=0, species=0),
+                                   cpu.trial_molecule_energies(trials, exclude=0, species=0), atol=5e-8, rtol=5e-11)
+        np.testing.assert_allclose(gpu.trial_site_energies(trials[0, :1], trials[:, 1], exclude=0, species=0),
+                                   cpu.trial_site_energies(trials[0, :1], trials[:, 1], exclude=0, species=0),
+                                   atol=5e-8, rtol=5e-11)
+        assert gpu.long_range_profile["gpu_batches"]>=2
+        assert gpu.long_range_profile["gpu_fft_transforms"]>=2
+        checkpoint = gpu.checkpoint()
+        a = cpu.run(180, sample_every=10)
+        b = gpu.run(180, sample_every=10)
+        assert a["counts"] == b["counts"] and cpu.counters == gpu.counters
+        np.testing.assert_allclose(a["energies_kelvin"], b["energies_kelvin"], atol=5e-8, rtol=5e-11)
+        with FastGCMC.from_checkpoint(checkpoint, potential) as resumed:
+            c = resumed.run(180, sample_every=10)
+        assert b["counts"] == c["counts"]
+        np.testing.assert_array_equal(b["energies_kelvin"], c["energies_kelvin"])

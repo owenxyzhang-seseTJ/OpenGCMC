@@ -40,7 +40,8 @@ def main():
     if args.cuda:
         cuda_output=output.with_name('libporemc_ewald_cuda'+extension)
         cuda_command=shlex.split(args.nvcc)+['-std=c++17','-O3','--fmad=false','-arch='+args.cuda_arch,
-                        '-Xcompiler','-fPIC','-shared',str(root/'ewald_cuda.cu'),str(root/'short_range_cuda.cu'),'-o',str(cuda_output)]
+                        '-Xcompiler','-fPIC','-shared',str(root/'ewald_cuda.cu'),str(root/'short_range_cuda.cu'),
+                        str(root/'pme_cuda.cu'),'-lcufft','-o',str(cuda_output)]
         print(' '.join(shlex.quote(x) for x in cuda_command))
         cuda_t0=time.perf_counter();subprocess.run(cuda_command,check=True)
         metadata['cuda']={'command':cuda_command,'build_seconds':time.perf_counter()-cuda_t0,

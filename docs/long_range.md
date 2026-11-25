@@ -116,13 +116,15 @@ $$
 \left(2\,\mathrm{Re}[\overline{S_\mathbf{k}}D_\mathbf{k}]+|D_\mathbf{k}|^2\right).
 $$
 
-The accepted state supplies $S_\mathbf{k}$. A rigid translation multiplies the cached molecular factor by $e^{i\mathbf{k}\cdot\Delta\mathbf r}$. The conjugate half spectrum retains the finite Ewald sum. PME uses its specified mesh Hamiltonian and native CPU FFTs.
+The accepted state supplies $S_\mathbf{k}$. A rigid translation multiplies the cached molecular factor by $e^{i\mathbf{k}\cdot\Delta\mathbf r}$. The conjugate half spectrum retains the finite Ewald sum. PME uses its specified mesh Hamiltonian with either the native CPU or the CUDA PME backend.
 
 The native CUDA plug-in evaluates reciprocal candidates in FP64 for direct Ewald. With `reciprocal_backend="cuda-tensor"`, exact sampling batches candidate energies. Delayed sampling computes the selected molecular structure factor on the device, then applies the residual and commits the state on the CPU. The CPU runs proposals and accept/reject decisions. The native short-range backend is selected independently.
 
 Use `reciprocal_backend="cuda-resident"` with delayed direct Ewald to keep the accepted spectrum on the device. The device evaluates the reciprocal energy increment from the signed charges of the selected new and old molecular sites. It returns one FP64 energy and applies the staged increment after acceptance. The CPU retains its reference state for energy reporting and checkpoint validation. Checkpoints include the actual device spectrum. The host ABI test uses a CPU model of the CUDA interface.
 
 For the discrete PME Hamiltonian, `pme_refresh` controls how often accepted charge increments are merged into the FFT reference mesh. Until a refresh, every candidate includes the Green-operator cross term with all pending accepted increments. The pending state is saved with the last transformed mesh. Choose the refresh interval using the site support and acceptance rate of the workload.
+
+Select `reciprocal_method="pme"` and `reciprocal_backend="cuda-pme"` to run the FP64 mesh refresh in cuFFT and evaluate batched cubic B-spline candidates on CUDA. The GPU retains the refreshed potential mesh and the periodic Green function. The host retains the accepted charge mesh and the sparse corrections required by exclusions, partial regrowth and deferred refresh. Single trials of at most two sites use the host energy path. Exact, delayed and reference-MH modes share the same PME Hamiltonian and checkpoint state. `gpu_fft_transforms` and `gpu_batches` report actual device work. The CUDA build requires the cuFFT library from the CUDA toolkit.
 
 ```bash
 python native/build.py --cuda --cuda-arch sm_86
@@ -145,7 +147,7 @@ Enable the FP64 real-space path in the C++ sampler with these `sampling` options
 
 The CUDA plug-in produced by `native/build.py --cuda` contains the real-space and reciprocal kernels. `cuda_library` can select a particular build. The real-space path supports Lennard-Jones interactions, potential and force shifting, damped shifted-force Coulomb and the real term of Ewald. It uses the same cutoff, periodic geometry and molecular exclusions as the native CPU path. The framework and, when available, its cached neighbour plan stay on the device. Accepted guest positions are uploaded on the next eligible query after an accepted change.
 
-The minimum batch size counts candidate configurations. Calls below that size use the native CPU pair evaluator. In delayed sampling, a threshold of 1 also offloads single-candidate exact framework corrections. In grid-based sampling the reference framework field is still interpolated on the CPU, while eligible guest pair batches use CUDA. `short_range_profile` reports actual framework batches, guest batches and guest uploads. Choose the batch threshold for the workload and device using blocking-call latency and sampling throughput measurements.
+The minimum batch size counts candidate configurations. Calls below that size use the native CPU pair evaluator. In delayed sampling, a threshold of 1 also offloads single-candidate exact framework corrections. Capped packed reference grids stay on CUDA and share a kernel with eligible guest pair batches, using the same cubic, linear or Boltzmann interpolation as the CPU. Uncapped grids with exact fallback and grids above the packed-field cache budget use CPU interpolation. With an empty guest environment, CUDA interpolates batches of at least 64 trial sites that meet the configuration threshold. Accepted guest changes refresh the affected range of the resident snapshot. `short_range_profile` reports framework and guest batches, reference-grid lookups and guest upload bytes. Choose the batch threshold using blocking-call latency and sampling throughput on the intended workload and device.
 
 ## Reproduction and source
 

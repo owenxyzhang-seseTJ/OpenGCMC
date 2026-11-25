@@ -11,7 +11,7 @@
 namespace poremc {
 // All electrostatic energies are U/k_B (kelvin); coordinates angstrom; q in e.
 // Cell lattice vectors are rows. 0=direct Ewald, 1=cubic B-spline PME.
-// Backend: 0=CPU, 1=auto, 2=required CUDA, 3=FP64 tensor, 4=resident FP64 tensor.
+// Backend: 0=CPU, 1=auto, 2=required CUDA, 3=FP64 tensor, 4=resident tensor, 5=CUDA PME.
 struct ReciprocalConfig {
   std::array<double,9> cell{};
   double alpha=0.25;
@@ -37,6 +37,7 @@ struct ReciprocalStats {
   std::uint64_t host_builds=0, contributions=0, candidate_batches=0, candidates=0;
   std::uint64_t accepted_commits=0, fft_transforms=0, gpu_batches=0;
   std::uint64_t modes=0, mesh_points=0;
+  std::uint64_t gpu_fft_transforms=0;
   std::uint64_t gpu_selected_structures=0;
   std::uint64_t full_modes=0, host_grid_builds=0, host_field_evaluations=0;
   std::uint64_t pme_pending_nodes=0;

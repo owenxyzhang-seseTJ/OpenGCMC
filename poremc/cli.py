@@ -243,7 +243,7 @@ def main(argv=None):
                 'electrochemistry':['explicit SPC/E hydration','fixed-topology protonation, redox and PCET sampling',
                     'staged NCMC and multistate free-energy calibration','reaction networks and finite-volume diffusion currents'],
                 'entry_points':{'molecular':'opengcmc','thermodynamics':'opengcmc-thermo','electrochemistry':'opengcmc-reactive'},
-                'native_reciprocal_backends':['cpu','auto','cuda','cuda-tensor','cuda-resident'],
+                'native_reciprocal_backends':['cpu','auto','cuda','cuda-tensor','cuda-resident','cuda-pme'],
                 'gpu_status':'Direct Ewald CUDA candidate batches and optional FP64 tensor contraction for exact batches and selected delayed structures; delayed corrections support CPU or opted-in tensor CUDA',
                 'not_implemented':['ring-closure CBMC','flexible framework','CFCMC','molecular dynamics',
                     'arbitrary reactive topology changes','general bulk polarization/QEq',

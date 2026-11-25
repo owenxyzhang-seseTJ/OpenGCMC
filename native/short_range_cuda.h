@@ -27,11 +27,33 @@ typedef struct {
 
 enum { POREMC_PAIR_FRAMEWORK = 1, POREMC_PAIR_GUESTS = 2 };
 
+typedef struct {
+    const double* energy;
+    const double* weight;
+    const uint8_t* steep;
+} PoreMCCudaGridField;
+
+// Borrowed packed reference fields, copied to the device when registered.
+typedef struct {
+    int mesh[3], boltzmann;
+    double inverse[9], temperature;
+    size_t sites, types;
+    const size_t* site_type;
+    const PoreMCCudaGridField* fields;
+} PoreMCCudaHostGrid;
+
 void* poremc_pair_cuda_create(const PoreMCCudaPairHost* host, int device);
 void poremc_pair_cuda_destroy(void* context);
 const char* poremc_pair_cuda_error(void);
 const char* poremc_pair_cuda_device(void* context);
 int poremc_pair_cuda_upload_guests(void* context, size_t sites, const PoreMCCudaPairSite* guests);
+int poremc_pair_cuda_update_guests(void* context, size_t sites, const PoreMCCudaPairSite* guests,
+                                  size_t begin, size_t end, size_t* uploaded);
+int poremc_pair_cuda_add_grid(void* context, const PoreMCCudaHostGrid* grid, size_t* index);
+int poremc_pair_cuda_grid_energy(void* context, size_t grid, size_t first,
+                                size_t batches, size_t atoms, const double* xyz,
+                                const double* sigma, const double* epsilon, const double* charge,
+                                size_t exclude_begin, size_t exclude_end, int parts, double* out);
 int poremc_pair_cuda_energy(void* context, size_t batches, size_t atoms, const double* xyz,
                            const double* sigma, const double* epsilon, const double* charge,
                            size_t exclude_begin, size_t exclude_end, int parts, double* out);
@@ -42,6 +64,14 @@ void* poremc_short_cuda_create(void* environment, const char* library);
 void poremc_short_cuda_destroy(void* context);
 const char* poremc_short_cuda_device(void* context);
 int poremc_short_cuda_upload_guests(void* context, size_t sites, const PoreMCCudaPairSite* guests);
+int poremc_short_cuda_update_guests(void* context, size_t sites, const PoreMCCudaPairSite* guests,
+                                   size_t begin, size_t end, size_t* uploaded);
+int poremc_short_cuda_has_grid(void* context);
+int poremc_short_cuda_add_grid(void* context, const PoreMCCudaHostGrid* grid, size_t* index);
+int poremc_short_cuda_grid_energy(void* context, size_t grid, size_t first,
+                                 size_t batches, size_t atoms, const double* xyz,
+                                 const double* sigma, const double* epsilon, const double* charge,
+                                 size_t exclude_begin, size_t exclude_end, int parts, double* out);
 int poremc_short_cuda_energy(void* context, size_t batches, size_t atoms, const double* xyz,
                             const double* sigma, const double* epsilon, const double* charge,
                             size_t exclude_begin, size_t exclude_end, int parts, double* out);

@@ -8,6 +8,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "short_range_cuda.h"
 
 namespace poremc {
 
@@ -61,6 +62,7 @@ class HostGrid {
   void batch_energy(std::size_t batches,std::size_t atoms,const double* xyz,
                     std::size_t first_site,double* output) const;
   double site_energy(std::size_t site,const double* xyz) const;
+  bool cuda_view(PoreMCCudaHostGrid&,std::vector<PoreMCCudaGridField>&) const;
   HostGridStats stats() const;
   const HostGridConfig& config() const;
 
